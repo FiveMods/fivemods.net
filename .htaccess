@@ -1,0 +1,291 @@
+# ErrorDocument 404
+
+ErrorDocument 401 /error/400/401.html
+ErrorDocument 403 /error/400/403.html
+ErrorDocument 404 /error/400/404.html
+ErrorDocument 408 /error/400/408.html
+ErrorDocument 429 /error/400/429.html
+ErrorDocument 500 /error/500/500.html
+ErrorDocument 502 /error/500/502.html
+ErrorDocument 503 /error/500/503.html
+
+php_value upload_max_filesize 100M
+php_value post_max_size 200M
+php_value memory_limit 512M
+
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME}.php !-f
+
+# Account rdc. 
+RewriteRule ^(account*/)$ ./index.php?page=$1 [L,QSA]
+
+# Account - Edit rdc. 
+RewriteRule ^(account/edit*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/edit*)$ ./index.php?page=$1 [L,QSA]
+
+# Account Product Delete rdc.
+RewriteRule ^(account/delete/([a-zA-Z0-9-/]+)/)$ ./account/?delete=$2 [L,QSA]
+RewriteRule ^(account/delete/([a-zA-Z0-9-/]+))$ ./account/?delete=$2 [L,QSA]
+
+# Account Logout rdc.
+RewriteRule ^(account/logout*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/logout*)$ ./index.php?page=$1 [L,QSA]
+
+# Account - Sign In / Login rdc. 
+RewriteRule ^(account/sign-in*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/sign-in*)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/login*/)$ ./account/sign-in/ [L,QSA]
+RewriteRule ^(account/login*)$ ./account/sign-in [L,QSA]
+RewriteRule ^(sign-in*/)$ ./account/sign-in/ [L,QSA]
+RewriteRule ^(sign-in*)$ ./account/sign-in [L,QSA]
+RewriteRule ^(login*/)$ ./account/sign-in/ [L,QSA]
+RewriteRule ^(login*)$ ./account/sign-in [L,QSA]
+
+# Account - Sign Up / Register rdc. 
+RewriteRule ^(account/sign-up*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/sign-up*)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/register*/)$ ./account/sign-up/ [L,QSA]
+RewriteRule ^(account/register*)$ ./account/sign-up [L,QSA]
+RewriteRule ^(sign-up*/)$ ./account/sign-up/ [L,QSA]
+RewriteRule ^(sign-up*)$ ./account/sign-up [L,QSA]
+RewriteRule ^(register*/)$ ./account/sign-up/ [L,QSA]
+RewriteRule ^(register*)$ ./account/sign-up [L,QSA]
+
+# Discord rdc. 
+RewriteRule ^(discord*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(discord*)$ ./index.php?page=$1 [L,QSA]
+
+# Account - Settings rdc. 
+RewriteRule ^(account/settings*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/settings*)$ ./index.php?page=$1 [L,QSA]
+
+# Account - Delete rdc. 
+RewriteRule ^(account/delete*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/delete*)$ ./index.php?page=$1 [L,QSA]
+
+# Account - 2FA rdc. 
+RewriteRule ^(account/two-factor-authentication*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/two-factor-authentication*)$ ./index.php?page=$1 [L,QSA]
+
+# Language rdc. 
+RewriteRule ^(language*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(language*)$ ./index.php?page=$1 [L,QSA]
+
+# Impressum rdc. 
+RewriteRule ^(impressum*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(impressum*)$ ./index.php?page=$1 [L,QSA]
+
+# About rdc. 
+RewriteRule ^(about-us*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(about-us*)$ ./index.php?page=$1 [L,QSA]
+
+# Invite rdc. 
+RewriteRule ^(invite*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(invite*)$ ./index.php?page=$1 [L,QSA]
+
+# Logout rdc. 
+RewriteRule ^(logout*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(logout*)$ ./index.php?page=$1 [L,QSA]
+
+# Contact rdc. 
+RewriteRule ^(contact*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(contact*)$ ./index.php?page=$1 [L,QSA]
+
+# Cookie Consent rdc. 
+RewriteRule ^(cookie-consent*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(cookie-consent*)$ ./index.php?page=$1 [L,QSA]
+
+# Famous Creator rdc. 
+RewriteRule ^(famous-creator*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(famous-creator*)$ ./index.php?page=$1 [L,QSA]
+
+# Help Center rdc. 
+RewriteRule ^(help-center*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(help-center*)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Notice rdc. 
+RewriteRule ^(legal-notice*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal-notice*)$ ./index.php?page=$1 [L,QSA]
+
+# Partner Program rdc. 
+RewriteRule ^(partner-program*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(partner-program*)$ ./index.php?page=$1 [L,QSA]
+
+# Privacy Policy rdc. 
+RewriteRule ^(privacy-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(privacy-policy*)$ ./index.php?page=$1 [L,QSA]
+
+# Upload Policy rdc. 
+RewriteRule ^(upload-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(upload-policy*)$ ./index.php?page=$1 [L,QSA]
+
+# Account Policy rdc. 
+RewriteRule ^(account-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account-policy*)$ ./index.php?page=$1 [L,QSA]
+
+# Product rdc.
+RewriteRule ^(product*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(product*)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(product*/([a-zA-Z0-9-/]+)/)$ ./index.php?page=$1&id=$2 [L,QSA]
+RewriteRule ^(product*/([a-zA-Z0-9-/]+))$ ./index.php?page=$1&id=$2 [L,QSA]
+
+# Ref rdc. 
+RewriteRule ^(ref*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(ref*)$ ./index.php?page=$1 [L,QSA]
+
+# Search rdc. 
+RewriteRule ^(search*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(search*)$ ./index.php?page=$1 [L,QSA]
+
+RewriteRule ^(search*/([a-zA-Z0-9-/]+)/site*/([a-zA-Z0-9-/]+)/)$ ./index.php?page=$1&query=$2&site=$3&submit-search=$4 [L,QSA]
+RewriteRule ^(search*/([a-zA-Z0-9-/]+)/site*/([a-zA-Z0-9-/]+))$ ./index.php?page=$1&query=$2&site=$3&submit-search=$4 [L,QSA]
+
+# Status rdc. 
+RewriteRule ^(status*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(status*)$ ./index.php?page=$1 [L,QSA]
+
+# Terms Of Service rdc. 
+RewriteRule ^(terms-of-service*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(terms-of-service*)$ ./index.php?page=$1 [L,QSA]
+
+# Upload rdc. 
+RewriteRule ^(upload*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(upload*)$ ./index.php?page=$1 [L,QSA]
+
+# Advertisement rdc. 
+RewriteRule ^(advertisement*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(advertisement*)$ ./index.php?page=$1 [L,QSA]
+
+# User rdc.
+RewriteRule ^(user*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(user*)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(user*/([a-zA-Z0-9-_/]+)/)$ ./index.php?page=$1&uname=$2 [L,QSA]
+RewriteRule ^(user*/([a-zA-Z0-9-_/]+))$ ./index.php?page=$1&uname=$2 [L,QSA]
+
+#Botblocking
+
+RewriteCond %{HTTP_USER_AGENT} ^BlackWidow [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Bot\ mailto:craftbot@yahoo.com [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ChinaClaw [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Custo [OR]
+RewriteCond %{HTTP_USER_AGENT} ^DISCo [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Download\ Demon [OR]
+RewriteCond %{HTTP_USER_AGENT} ^eCatch [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EirGrabber [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EmailSiphon [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EmailWolf [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Express\ WebPictures [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ExtractorPro [OR]
+RewriteCond %{HTTP_USER_AGENT} ^EyeNetIE [OR]
+RewriteCond %{HTTP_USER_AGENT} ^FlashGet [OR]
+RewriteCond %{HTTP_USER_AGENT} ^GetRight [OR]
+RewriteCond %{HTTP_USER_AGENT} ^GetWeb! [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Go!Zilla [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Go-Ahead-Got-It [OR]
+RewriteCond %{HTTP_USER_AGENT} ^GrabNet [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Grafula [OR]
+RewriteCond %{HTTP_USER_AGENT} ^HMView [OR]
+RewriteCond %{HTTP_USER_AGENT} HTTrack [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^Image\ Stripper [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Image\ Sucker [OR]
+RewriteCond %{HTTP_USER_AGENT} Indy\ Library [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^InterGET [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Internet\ Ninja [OR]
+RewriteCond %{HTTP_USER_AGENT} ^JetCar [OR]
+RewriteCond %{HTTP_USER_AGENT} ^JOC\ Web\ Spider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^larbin [OR]
+RewriteCond %{HTTP_USER_AGENT} ^LeechFTP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mass\ Downloader [OR]
+RewriteCond %{HTTP_USER_AGENT} ^MIDown\ tool [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Mister\ PiX [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Navroad [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NearSite [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NetAnts [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NetSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Net\ Vampire [OR]
+RewriteCond %{HTTP_USER_AGENT} ^NetZIP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Octopus [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Offline\ Explorer [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Offline\ Navigator [OR]
+RewriteCond %{HTTP_USER_AGENT} ^PageGrabber [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Papa\ Foto [OR]
+RewriteCond %{HTTP_USER_AGENT} ^pavuk [OR]
+RewriteCond %{HTTP_USER_AGENT} ^pcBrowser [OR]
+RewriteCond %{HTTP_USER_AGENT} ^RealDownload [OR]
+RewriteCond %{HTTP_USER_AGENT} ^ReGet [OR]
+
+#Prevent viewing of .htaccess file
+<Files .htaccess>
+	order allow,deny
+	deny from all
+</Files>
+
+#Prevent directory listings
+RewriteCond %{HTTP_USER_AGENT} ^SiteSnagger [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SmartDownload [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SuperBot [OR]
+RewriteCond %{HTTP_USER_AGENT} ^SuperHTTP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Surfbot [OR]
+RewriteCond %{HTTP_USER_AGENT} ^tAkeOut [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Teleport\ Pro [OR]
+RewriteCond %{HTTP_USER_AGENT} ^VoidEYE [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Web\ Image\ Collector [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Web\ Sucker [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebAuto [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebCopier [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebFetch [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebGo\ IS [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebLeacher [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebReaper [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebSauger [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Website\ eXtractor [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Website\ Quester [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebStripper [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebWhacker [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WebZIP [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Wget [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Widow [OR]
+RewriteCond %{HTTP_USER_AGENT} ^WWWOFFLE [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
+RewriteCond %{HTTP_USER_AGENT} ^Zeus
+RewriteRule ^.* - [F,L]
+
+# Deflate Compression by FileType
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/plain
+	AddOutputFilterByType DEFLATE text/html
+	AddOutputFilterByType DEFLATE text/xml
+	AddOutputFilterByType DEFLATE text/css
+	AddOutputFilterByType DEFLATE text/javascript
+	AddOutputFilterByType DEFLATE application/xml
+	AddOutputFilterByType DEFLATE application/xhtml+xml
+	AddOutputFilterByType DEFLATE application/rss+xml
+	AddOutputFilterByType DEFLATE application/atom_xml
+	AddOutputFilterByType DEFLATE application/javascript
+	AddOutputFilterByType DEFLATE application/x-javascript
+	AddOutputFilterByType DEFLATE application/x-shockwave-flash
+</IfModule>
+
+<ifModule mod_gzip.c>
+  mod_gzip_on Yes
+  mod_gzip_dechunk Yes
+  mod_gzip_item_include file \.(html?|txt|css|js|php|pl)$
+  mod_gzip_item_include handler ^cgi-script$
+  mod_gzip_item_include mime ^text/.*
+  mod_gzip_item_include mime ^application/x-javascript.*
+  mod_gzip_item_exclude mime ^image/.*
+  mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</ifModule>
+
+<IfModule mod_headers.c>
+	<FilesMatch "\.(gif|ico|jpeg|jpg|png|css|js)$">
+	Header set Cache-Control "max-age=31536000, public"
+	</FilesMatch>
+</IfModule>
+
+php_flag display_startup_errors off
+php_flag display_errors off
+
+Options All -Indexes

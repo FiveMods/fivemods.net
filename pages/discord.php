@@ -1,0 +1,1 @@
+<?php header('location: https://discord.com/invite/AGvh9HX'); ?>
