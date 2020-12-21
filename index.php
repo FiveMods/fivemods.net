@@ -31,7 +31,7 @@ function minifier($code)
    return $code;
 }
 
-include('./helper/lang-config.php');
+include('./helper/lang-confg.php');
 
 if (empty($_GET['fm_design']) == "orange") {
    $css_banner  = '/static-assets/img/banner.png';
