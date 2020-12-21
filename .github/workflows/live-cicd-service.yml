@@ -42,7 +42,7 @@ jobs:
       - name: SSH connect
         uses: garygrossgarten/github-action-ssh@v0.5.0
         with:
-          command: cd /var/www/ && pwd && cd fivemods/ && rm -rfv html/ && git clone https://${{ secrets.UNAME }}:${{ secrets.UPW }}@github.com/FiveMods/fivemods.net.git && ls -l && pwd && mv main html/ && chmod 755 html && echo "Done, moved to master checkout on https://www.fivemods.net/." && exit
+          command: cd /var/www/ && pwd && cd fivemods/ && rm -rfv html/ && git clone https://${{ secrets.UNAME }}:${{ secrets.UPW }}@github.com/FiveMods/fivemods.net.git && ls -l && pwd && mv fivemods.net html/ && chmod 755 html && echo "Done, moved to master checkout on https://www.fivemods.net/." && exit
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}

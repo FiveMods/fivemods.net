@@ -42,7 +42,7 @@ jobs:
       - name: SSH connect
         uses: garygrossgarten/github-action-ssh@v0.5.0
         with:
-          command: echo "Starttime:" && date +"%T" && cd /var/www/ && pwd && cd fivemods/ && rm -rfv dev-html/ && git clone -b awesomecore https://${{ secrets.UNAME }}:${{ secrets.UPW }}@github.com/FiveMods/fivemods.net.git && ls -l && pwd && mv main dev-html/ && chmod 755 dev-html && echo "Done, moved to dev checkout on https://dev.fivemods.net/." && echo "Stoptime:" && date +"%T" && exit
+          command: echo "Starttime:" && date +"%T" && cd /var/www/ && pwd && cd fivemods/ && rm -rfv dev-html/ && git clone -b awesomecore https://${{ secrets.UNAME }}:${{ secrets.UPW }}@github.com/FiveMods/fivemods.net.git && ls -l && pwd && mv fivemods.net dev-html/ && chmod 755 dev-html && echo "Done, moved to dev checkout on https://dev.fivemods.net/." && echo "Stoptime:" && date +"%T" && exit
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
