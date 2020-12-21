@@ -22,10 +22,17 @@ if(isset($_POST['uploadMod'])) {
    $predescription = htmlspecialchars(substr($description, 0, 150) . "...");
    $category = htmlspecialchars($_POST['category']);
    $tags = htmlspecialchars($_POST['tags']);
+
    if(empty(htmlspecialchars($_POST['requiredMod']))){
    $requiredMod = "0";
    } else {
    $requiredMod = htmlspecialchars($_POST['requiredMod']);
+   }
+
+   if(empty(htmlspecialchars($_POST['price']))){
+      $price = NULL;
+   } else {
+      $price = htmlspecialchars($_POST['price']);
    }
 
    if (!is_dir($path.'/'.$userid)) mkdir($path.'/'.$userid);
@@ -51,8 +58,8 @@ if(isset($_POST['uploadMod'])) {
    
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download)");
-   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download));
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_prices) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price)");
+   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price));
 
    $_SESSION['upload'] = 1;
    
@@ -63,17 +70,7 @@ if(isset($_POST['uploadMod'])) {
 function randomChars($length) {
    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
    return substr(str_shuffle($permitted_chars), 0, $length);
-}
-if(isset($_SESSION['upload'])):
-   unset($_SESSION['upload']);
-?> 
-<div class="alert alert-success alert-dismissible fade show center" role="alert">
-  <strong>Success!</strong> You successfully uploaded a modification!
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<?php endif; ?>
+}?>
 <style>
    .submitFinal {
       padding-left: 10%;
@@ -106,6 +103,17 @@ if(isset($_SESSION['upload'])):
             <form autocomplete="off" class="was-validated" method="post" action="/upload" enctype="multipart/form-data">
                <div class="row d-flex justify-content-center">
                   <div class="col-sm-12 col-12">
+                     <?php
+                     if(isset($_SESSION['upload'])):
+                        unset($_SESSION['upload']);
+                     ?> 
+                     <div class="alert alert-success alert-dismissible fade show center" role="alert">
+                     <strong>Success!</strong> You successfully uploaded a modification!
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+                     </div>
+                     <?php endif; ?>
                      <div class="card-header pills-regular d-flex justify-content-center">
                         <ul class="nav nav-pills card-header-pills" role="tablist">
                            <li class="nav-item">
@@ -208,7 +216,14 @@ if(isset($_SESSION['upload'])):
                                  <div class="valid-feedback">Looks good!</div>
                                  <div class="invalid-feedback">You have to use an URL</div>
                               </div>
-                              <br><br>
+                              <br>
+                              <!-- Price suggestion -->
+                              <div>
+                                 <label for="price">Price suggestion</label>
+                                 <input type="number" class="form-control" id="price" name="price" value="" placeholder="Use this if you want your mod to be sold on FiveMods. Payment Policy applies." max="5">
+                                 <div class="valid-feedback">Looks good!</div>
+                                 <div class="invalid-feedback">You have to use a number between 0 and 5</div>
+                              </div>
                            </div>
                            <div class="tab-pane fade" id="card-pill-3" role="tabpanel" aria-labelledby="card-tab-3">
                               <!-- Header -->
