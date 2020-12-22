@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0";
+   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
    $result = $conn->query($sql);
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
@@ -358,7 +358,7 @@ if ($_GET['id']) {
          <div class="row text-center">
             <div class="col">
                <?php
-               $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 ORDER BY m_downloads ASC";
+               $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC";
                $result = $conn->query($sql);
                if ($result->num_rows > 0) {
                   echo '<h4>' . $lang['other-mods'] . '</h4>';
@@ -416,7 +416,7 @@ if ($_GET['id']) {
                }
             }
          } else {
-            $sql = "SELECT * FROM mods WHERE m_approved=0 ORDER BY m_downloads ASC LIMIT 9";
+            $sql = "SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC LIMIT 9";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
