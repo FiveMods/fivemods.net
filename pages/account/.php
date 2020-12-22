@@ -387,59 +387,70 @@ if (empty($_SESSION['user_username']) == TRUE) {
 					<div class="tab-pane fade" id="billing">
 						<h6>BILLING SETTINGS</h6>
 						<hr>
-						<form>
-							<div class="form-group">
-								<label class="d-block mb-0" style="font-size:29px;"><b>$<?php echo ""; ?></b></label>
-								<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
-							</div>
-							<div class="form-group">
-								<label class="d-block mb-0">Payment Method</label>
-								<div class="small text-muted mb-3">You have not added a payment method</div>
-								<button class="btn btn-info" type="button">Request payout</button>
-							</div>
-							<div class="form-group mb-0">
-								<label class="d-block">Income History</label>
-								<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
+						<?php
+							$ch = curl_init();
+							$token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+							$userid = $_SESSION['user_id'];
 
-									<div class="container">
-										
-												<?php
+							curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+							curl_setopt($ch, CURLOPT_POST, 1);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
+							curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+							$response = curl_exec($ch);
+							curl_close($ch);
+						?>
+						<div class="form-group">
+							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
+							<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
+						</div>
+						<div class="form-group">
+							<label class="d-block mb-0">Payment Method</label>
+							<div class="small text-muted mb-3">You have not added a payment method</div>
+							<button class="btn btn-info" type="button">Request payout</button>
+						</div>
+						<div class="form-group mb-0">
+							<label class="d-block">Income History</label>
+							<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
 
-												$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
-												$result = $conn->query($sql);
+								<div class="container">
+									
+											<?php
 
-												if ($result->num_rows > 0) {
+											$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
+											$result = $conn->query($sql);
 
-													echo '<table class="table">
-													<thead>
-														<tr>
-															<th scope="col">Mod-ID</th>
-															<th scope="col">Estimated Income</th>
-														</tr>
-													</thead>
-													<tbody>';
+											if ($result->num_rows > 0) {
 
-													// output data of each row
-													while ($row = $result->fetch_assoc()) {
+												echo '<table class="table">
+												<thead>
+													<tr>
+														<th scope="col">Mod-ID</th>
+														<th scope="col">Estimated Income</th>
+													</tr>
+												</thead>
+												<tbody>';
 
-														echo '<tr>
-															<th scope="row">' . $row['m_id'] . '</th>
-															<td>$'.($row['m_downloads']/1000).' </td>
-														</tr>';
-													}
-												} else {
-													echo 'There is no current income.';
+												// output data of each row
+												while ($row = $result->fetch_assoc()) {
+
+													echo '<tr>
+														<th scope="row">' . $row['m_id'] . '</th>
+														<td>$'.($row['m_downloads']/1000).' </td>
+													</tr>';
 												}
+											} else {
+												echo 'There is no current income.';
+											}
 
-												?>
+											?>
 
-											</tbody>
-										</table>
-									</div>
-
+										</tbody>
+									</table>
 								</div>
+
 							</div>
-						</form>
+						</div>
 					</div>
 					<div class="tab-pane fade" id="uploads">
 						<h6>MY UPLOADS</h6>
