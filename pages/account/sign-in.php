@@ -74,7 +74,7 @@ if ($_GET['rdC'] == "main") {
 
                                         // Redirect the user to Discord's authorization page
                                         
-                                        header('Location: https://discord.com/api/oauth2/authorize?client_id=752568669061513327&redirect_uri=http%3A%2F%2Flocalhost%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=identify%20email');
+                                        header('Location: https://discord.com/api/oauth2/authorize?client_id=790673684301873161&redirect_uri=http%3A%2F%2Flocalhost%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=email%20identify');
 
                                         die();
                                     }
