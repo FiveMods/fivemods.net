@@ -425,7 +425,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                $donwloads = $article['m_downloads'];
             }
 
-            if ($article['m_approved'] != "0") {
+            if ($article['m_approved'] != "0" || $article['m_blocked'] != "0") {
                continue;
             }
 
