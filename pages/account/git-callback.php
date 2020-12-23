@@ -67,6 +67,7 @@ if($_SESSION['access_token']) {
         
         $userFetch = $userDB->fetch();
 
+        $_SESSION['user_id'] = $userFetch['oauth_uid'];
         $_SESSION['user_username'] = $userFetch['name'];
         $_SESSION['user_firstname'] = $userFetch['first_name'];
         $_SESSION['user_lastname'] = $userFetch['last_name'];
