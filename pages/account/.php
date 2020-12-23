@@ -82,6 +82,10 @@ if (empty($_SESSION['user_username']) == TRUE) {
 	}
 }
 
+if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
+	header('location: /account/two-factor-authentication/');
+}
+
 ?>
 <meta http-equiv="refresh" content="1440;url=./logout/?url=timeout" />
 <div class="container mt-5 mb-5">
@@ -481,12 +485,15 @@ if (empty($_SESSION['user_username']) == TRUE) {
 										// output data of each row
 										while ($row = $result->fetch_assoc()) {
 
-											if ($row['m_approved'] == 0) {
+											if ($row['m_approved'] == 0 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
-											} elseif ($row['m_approved'] == 1) {
+											} elseif ($row['m_approved'] == 1 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text text-warning"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+											} elseif ($row['m_blocked'] == 1) {
+												$status = '
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>';
 											} else {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
