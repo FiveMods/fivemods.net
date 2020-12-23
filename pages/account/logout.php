@@ -9,6 +9,7 @@ if (!empty($_POST['currentPage'])) {
 		unset($_SESSION['dc_access_token']);
 		unset($_SESSION['user_username']);
 		unset($_SESSION['user_id']);
+		unset($_SESSION['control_2FA']);
 		session_destroy();
 		session_start();
 		$_SESSION['logoutsuccess'] = '<span class="text-warning">No activity within 1440 seconds; please log in again.</span>';
@@ -19,6 +20,7 @@ if (!empty($_POST['currentPage'])) {
 		unset($_SESSION['dc_access_token']);
 		unset($_SESSION['user_username']);
 		unset($_SESSION['user_id']);
+		unset($_SESSION['control_2FA']);
 		session_destroy();
 		session_start();
 		$_SESSION['logoutsuccess'] = '<span class="text-danger">Your account has been successfully deleted.</span>';
@@ -29,6 +31,7 @@ if (!empty($_POST['currentPage'])) {
 		unset($_SESSION['dc_access_token']);
 		unset($_SESSION['user_username']);
 		unset($_SESSION['user_id']);
+		unset($_SESSION['control_2FA']);
 		session_destroy();
 		session_start();
 		$_SESSION['logoutsuccess'] = '<span class="text-danger">Your account has been banned by '.$_SESSION['user_blocked_by'].' for the reason: '.$_SESSION['user_blocked_reason'].'.
@@ -40,6 +43,7 @@ if (!empty($_POST['currentPage'])) {
 		unset($_SESSION['dc_access_token']);
 		unset($_SESSION['user_username']);
 		unset($_SESSION['user_id']);
+		unset($_SESSION['control_2FA']);
 		session_destroy();
 		session_start();
 		$_SESSION['logoutsuccess'] = '<span class="text-danger">An error occured. You got logged out.</span>';
@@ -50,6 +54,7 @@ if (!empty($_POST['currentPage'])) {
 		unset($_SESSION['dc_access_token']);
 		unset($_SESSION['user_username']);
 		unset($_SESSION['user_id']);
+		unset($_SESSION['control_2FA']);
 		session_destroy();
 		session_start();
 		$_SESSION['logoutsuccess'] = '<span class="text-success">You have been successfully logged out.</span>';
