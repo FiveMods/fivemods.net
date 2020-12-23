@@ -20,7 +20,7 @@ $_SESSION['state'] = hash('sha256', microtime(TRUE).rand().$_SERVER['REMOTE_ADDR
 $params = array(
   'client_id' => '48abb0467b4aa1c0fa9f',
   'redirect_uri' => 'http://localhost/pages/account/git-callback.php',
-  'scope' => 'user:email,user:location',
+  'scope' => 'user:email',
   'response_type' => 'code',
   'state' => $_SESSION['state'],
 );

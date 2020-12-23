@@ -388,6 +388,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							</div>
 						</form>
 					</div> -->
+					<!-- @Oetkher -->
 					<div class="tab-pane fade" id="billing">
 						<h6>BILLING SETTINGS</h6>
 						<hr>
@@ -408,11 +409,10 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
 							<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
 						</div>
-						<div class="form-group">
-							<label class="d-block mb-0">Payment Method</label>
-							<div class="small text-muted mb-3">You have not added a payment method</div>
-							<button class="btn btn-info" type="button">Request payout</button>
-						</div>
+						<label class="d-block mb-0">Payments</label>
+						<button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</button><br>
+						<button class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  Request payout</button>
+						
 						<div class="form-group mb-0">
 							<label class="d-block">Income History</label>
 							<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
