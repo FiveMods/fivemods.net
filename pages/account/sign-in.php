@@ -15,6 +15,16 @@ if ($_GET['rdC'] == "main") {
     echo '<meta http-equiv="refresh" content="2;url=/" />';
 }
 
+$_SESSION['state'] = hash('sha256', microtime(TRUE).rand().$_SERVER['REMOTE_ADDR']);
+
+$params = array(
+  'client_id' => '48abb0467b4aa1c0fa9f',
+  'redirect_uri' => 'http://localhost/pages/account/git-callback.php',
+  'scope' => 'user:email,user:location',
+  'response_type' => 'code',
+  'state' => $_SESSION['state'],
+);
+
 ?>
 <style>
     .btn-discord {
@@ -90,6 +100,9 @@ if ($_GET['rdC'] == "main") {
                                     ?>
                                     <a href="<?php echo $loginURL ?>" class="btn btn-block btn-danger">
                                         <i class="fab fa-google"></i> &nbsp; <?php echo $lang['login-google']; ?>
+                                    </a>
+                                    <a href="https://github.com/login/oauth/authorize?<?php echo http_build_query($params);?>" class="btn btn-block btn-secondary">
+                                        <i class="fab fa-github"></i> &nbsp;Login with GitHub
                                     </a>
                                 </div>
                             </div>
