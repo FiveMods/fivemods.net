@@ -5,7 +5,7 @@ require_once('./config.php');
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
     header('location: /account/logout/?url=error');
-    exit;
+    exit();
 } else {
 
     if ($_SESSION['user_id'] != htmlspecialchars($_POST['uid'])) {

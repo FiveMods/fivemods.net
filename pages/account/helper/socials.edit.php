@@ -3,7 +3,7 @@
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
     header('location: /');
-    exit;
+    exit();
   } else {
 
 
