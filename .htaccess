@@ -81,6 +81,13 @@ RewriteRule ^(impressum*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*)$ ./index.php?page=$1 [L,QSA]
 
+# Payment rdc. 
+RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
+
+# Payment Missing Information rdc.
+RewriteRule ^(payment/missing-information*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/missing-information*)$ ./index.php?page=$1 [L,QSA]
+
 # Invite rdc. 
 RewriteRule ^(invite*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(invite*)$ ./index.php?page=$1 [L,QSA]
