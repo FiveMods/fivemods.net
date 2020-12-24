@@ -99,7 +99,7 @@ if($_SESSION['access_token']) {
         $email = apiRequest($apiURLBase . 'user/emails');
 
         if(empty($user->bio)) $description = "No description set."; else $description = $user->bio;
-        if(empty($user->twitter_username)) $twitter = NULL; else $twitter = "https://twitter.com/".$user->twitter_username;
+        if(empty($user->twitter_username)) $twitter = NULL; else $twitter = $user->twitter_username;
         if(empty($geoplugin->countryCode)) $location = '-'; else $location = $geoplugin->countryCode;
 
         $v5uuid = UUID::v4();
