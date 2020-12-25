@@ -160,6 +160,15 @@ if($_SESSION['access_token']) {
         $insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, name, email, picture, locale, description, twitter, github, main_ip) VALUES (:sid, '$v5uuid', :id, 'GitHub', :username, :email, :picture, :locale, :description, :twitter, :github, :mainip)");
         $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => $description, 'twitter' => $twitter, 'github' => $user->login, 'mainip' => $main_ip, 'id' => $user->id, 'username' => $user->login, 'locale' => $location));
 
+        $servernameP = $mysqlPayment['servername'];
+        $usernameP = $mysqlPayment['username'];
+        $passwordP = $mysqlPayment['password'];
+        $dbnameP = $mysqlPayment['dbname'];
+
+        $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
+        $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
+        $insertUser->execute(array('provider' => "GitHub", 'id' => $user->id, 'uuid' => $v5uuid, 'username' => $user->login, 'email' => $email, 'country' => $location));
+
         
         $select = $pdo->prepare("SELECT id, created-at, updated-at FROM user WHERE uuid = :uuid");
         $select->execute(array('uuid' => $v5uuid));
