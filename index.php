@@ -6,6 +6,11 @@ ini_set("session.cookie_domain", ".fivemods.net");
 
 session_start();
 
+if (empty($_SESSION['language'])) {
+   $_SESSION['language'] = "Auto-EN";
+}
+
+
 if (isset($_GET['kill'])) {
    if ($_GET['kill'] == "session") {
       session_destroy();

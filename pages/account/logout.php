@@ -34,8 +34,8 @@ if (!empty($_POST['currentPage'])) {
 		unset($_SESSION['control_2FA']);
 		session_destroy();
 		session_start();
-		$_SESSION['logoutsuccess'] = '<span class="text-danger">Your account has been banned by '.$_SESSION['user_blocked_by'].' for the reason: '.$_SESSION['user_blocked_reason'].'.
-		You can create an ban appeal in our <a href="/discord/">discord</a>.</span>';
+		$_SESSION['logoutsuccess'] = '<span class="text-danger">Your account has been banned.
+		You can create a ban appeal in our <a href="/discord/">discord</a>.<br>Your current payment income and outcome is frozen.</span>';
 		header('Location: /account/sign-in/'.$directPage);
 		exit();
 	} elseif ($_GET['url'] == "error") {
