@@ -87,7 +87,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 }
 
 ?>
-<meta http-equiv="refresh" content="1440;url=./logout/?url=timeout" />
+<meta http-equiv="refresh" content="1440;url=/account/logout/?url=timeout" />
 <div class="container mt-5 mb-5">
 	<?php echo $_SESSION['success'];
 	unset($_SESSION['success']); ?>
