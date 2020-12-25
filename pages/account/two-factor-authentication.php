@@ -71,7 +71,7 @@ if($_GET['rq'] == 1) {
    } elseif ($_SESSION['user_oauth_provider'] == "Discord Inc." || $_SESSION['user_oauth_provider'] == "Discord Inc") {
       $pl = "Please enter your email address";
       $btn = "Request mail";
-      $pattern = "\b[A-Z0-9a-z]+@[A-Z0-9.-]+\.[A-Z]{2,}\b";
+      $pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
       $type = "text";
       $action = "?rq=1";
    } 
