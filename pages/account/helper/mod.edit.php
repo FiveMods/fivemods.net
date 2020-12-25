@@ -2,8 +2,8 @@
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
-    header('location: /');
-    exit;
+    // header('location: /account/logout/?url=error');
+    exit();
   } else {
 
 
@@ -15,17 +15,19 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
       $password = $mysql['password'];
       $dbname = $mysql['dbname'];
 
-        $username2 = htmlspecialchars($_POST['username']);
-        $banner = htmlspecialchars($_POST['gbanner']);
-        $tochange = htmlspecialchars($_POST['id']);
-
+        $modName = htmlspecialchars($_POST['modName']);
+        $modDesc = htmlspecialchars($_POST['modDesc']);
+        $modCategory = htmlspecialchars($_POST['modCategory']);
+        $tags = htmlspecialchars($_POST['tags']);
+        $requiredMod = htmlspecialchars($_POST['requiredMod']);
+        $mid = htmlspecialchars($_POST['id']);
 
         try {
-          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+          $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET name='$username2', banner='$banner' WHERE oauth_uid = $tochange";
+          $sql = "UPDATE mods SET m_name='$modName', m_category='$modCategory', m_description='$modDesc', m_tags='$tags', m_requiredmod='$requiredMod' WHERE m_authorid = '$mid' AND m_id='$_SESSION[mmid]'";
         
           // Prepare statement
           $stmt = $conn->prepare($sql);
@@ -34,15 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           $stmt->execute();
         
           // echo a message to say the UPDATE succeeded
-          echo $stmt->rowCount() . " records UPDATED successfully";
+          echo $stmt->rowCount() . " records UPDATED successfull";
           session_start();
-          $_SESSION['user_username'] = $username2;
-          $_SESSION['user_banner'] = $banner;
           $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
           <button type="button" class="close" data-dismiss="alert">x</button>
           <strong>Successfully changed! </strong> Your profile got successfully updated. Click <a href="/user/'.$_SESSION['user_username'].'">here</a> to see your changes.
-        </div>
-        ';
+        </div>';
         header('location: /account/');
         } catch(PDOException $e) {
           echo "X";
@@ -60,5 +59,3 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     }
 
   }
-
-?>

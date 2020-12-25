@@ -15,7 +15,7 @@ if (!isset($_SESSION['auth_secret'])) {
 }
 
 
-$qrCodeUrl = $Authenticator->getQR('FiveMods', $_SESSION['auth_secret']);
+$qrCodeUrl = $Authenticator->getQR($_SESSION['user_email'], $_SESSION['auth_secret'], "FiveMods.net");
 
 
 if (!isset($_SESSION['failed'])) {
