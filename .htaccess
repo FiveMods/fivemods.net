@@ -33,6 +33,10 @@ RewriteRule ^(account/delete/([a-zA-Z0-9-/]+))$ ./account/?delete=$2 [L,QSA]
 RewriteRule ^(account/logout*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/logout*)$ ./index.php?page=$1 [L,QSA]
 
+# Account check
+RewriteRule ^(account/check*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/check*)$ ./index.php?page=$1 [L,QSA]
+
 # Account - Sign In / Login rdc. 
 RewriteRule ^(account/sign-in*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/sign-in*)$ ./index.php?page=$1 [L,QSA]
