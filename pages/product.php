@@ -251,7 +251,7 @@ if ($_GET['id']) {
          <div class="col-md-6 mt-5 mt-md-2 text-center text-md-left">
             <h2 class="mt-0 text-left"><?php echo $name; ?></h2>
             <small class="text-muted">Downloads: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($_SESSION['user_permission'] == "-1") {
-               echo " | <u title='Not seeable for everyone.'>Estimated earnings: ".($downloads/1000).'€</u>';
+               echo " | <u title='Not seeable for everyone.'>Estimated income: ".($downloads/1000).'€</u>';
             } ?> </small>
             <p class="lead mt-2 mb-3 primary-color text-left">
             <?php if($_SESSION['user_iid']):?>

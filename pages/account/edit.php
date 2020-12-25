@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
         if (isset($_POST['id'])) {
             $modid = htmlspecialchars($_POST['id']);
+            $_SESSION['mmid'] = $modid;
         } else {
             exit();
             die();
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 ?>
-<meta http-equiv="refresh" content="1440;url=./logout/?url=timeout" />
+<meta http-equiv="refresh" content="1440;url=/logout/?url=timeout" />
 <style>
     textarea {
         resize: none;
@@ -235,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                             <div class="form-group">
                                 <div>
                                     <label for="tags">Change your tags <span class="text text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="tags" name="tags" minlength="3" value="" required placeholder="You can add multiple tags, just seperate them with a comma.">
+                                    <input type="text" class="form-control" id="tags" name="tags" minlength="3" value="<?php echo $m_tags; ?>" required placeholder="You can add multiple tags, just seperate them with a comma.">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -248,27 +249,18 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                                                                                                                         }; ?>" placeholder="URL">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label>Change your pictures here <span class="text text-danger">*</span></label>
                                 <div class="custom-file mb-3">
                                     <input type="file" class="custom-file-input" name="picupload[]" id="picupload" accept=".jpg, .png, .jpeg, .webp" multiple required>
                                     <label class="custom-file-label" for="picupload">Choose file...</label>
-                                </div>
-                            </div>
-                            <!-- <div class="form-group">
-                                <label>Upload a recent version of your Mod here <span class="text text-danger">*</span></label>
-                                <div class="custom-file mb-3">
-                                    <input type="file" class="custom-file-input" name="modupload" id="modupload" accept=".zip, .7z, .rar, .tar, .tar.gz" required>
-                                    <label class="custom-file-label" for="modupload">Choose file...</label>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">You have to upload a .zip, .7z, .rar, .tar or .tar.gz file</div>
                                 </div>
                             </div> -->
                             <div class="form-group small text-muted" id="info">
                                 Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
                             </div>
                             <input type="text" name="call" value="callFunc" hidden>
-                            <input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
+                            <input type="text" name="id" value="<?php echo $_SESSION['user_iid']; ?>" hidden>
                             <button type="submit" class="btn btn-primary">Save & Update</button>
                             <a href="?del=<?php echo $m_id; ?>" class="btn btn-danger">Delete mod</a>
                         </form>

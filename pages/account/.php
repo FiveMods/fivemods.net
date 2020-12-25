@@ -365,29 +365,6 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							</div>
 						</form>
 					</div>
-					<!-- <div class="tab-pane fade" id="notification">
-						<h6>NOTIFICATION SETTINGS</h6>
-						<hr>
-						<form action="" method="post">
-							<div class="form-group">
-								<label class="d-block mb-0">Security Alerts</label>
-								<div class="small text-muted mb-3">Receive security alert notifications via email</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-									<label class="custom-control-label" for="customCheck1">Email each time an account security issue is found</label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-									<label class="custom-control-label" for="customCheck1">Send email when a new ip attempts to login</label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
-									<label class="custom-control-label" for="customCheck2">Email a digest summary of vulnerability</label>
-								</div>
-								<button type="submit" class="btn btn-primary mt-3">Save & Update</button>
-							</div>
-						</form>
-					</div> -->
 					<!-- @Oetkher -->
 					<div class="tab-pane fade" id="billing">
 						<h6>BILLING SETTINGS</h6>
@@ -444,7 +421,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 
 													echo '<tr>
 														<th scope="row">' . $row['m_id'] . '</th>
-														<td>$'.($row['m_downloads']/1000).' </td>
+														<td>'.($row['m_downloads']/1000).'€ </td>
 													</tr>';
 												}
 											} else {
@@ -492,15 +469,27 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 											if ($row['m_approved'] == 0 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+												</form>';
 											} elseif ($row['m_approved'] == 1 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text text-warning"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>'
+												;
 											} elseif ($row['m_blocked'] == 1) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>';
+												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>'
+												;
 											} else {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+												</form>';
 											}
 
 											echo '<tr>
@@ -508,10 +497,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 													<td><a href="/product/' . $row['m_id'] . '/" class="text text-info">' . $row['m_name'] . '</a></td>
 													<td>' . $status . '</td>
 													<td>' . $row['m_downloads'] . '</td>
-													<td>
-													<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
-													<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-													</form></td>
+													<td>' . $edit . '</td>
 												</tr>';
 										}
 									} else {

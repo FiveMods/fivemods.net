@@ -90,9 +90,9 @@
                         <li>
                            <a href="/login/"><?php echo $lang['log-in']; ?></a>
                         </li>
-                        <li>
+                        <!-- <li>
                            <a href="/register/"><?php echo $lang['register']; ?></a>
-                        </li>
+                        </li> -->
                         <?php
 
                         if (!empty($_SESSION['g_id']) || !empty($_SESSION['dc_id'])) {
