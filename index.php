@@ -74,6 +74,8 @@ if (isset($_GET['page'])) {
 
 <head>
 
+   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="2f5c0aa1-25c4-4dab-86d7-f9c320bd6722" data-blockingmode="auto" type="text/javascript"></script>
+
    <!-- Global site tag (gtag.js) - Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
    <script>
@@ -384,6 +386,8 @@ if (isset($_GET['page'])) {
       }
    ?>
    <!-- ========== END MAIN CONTENT ========== -->
+
+   <script id="CookieDeclaration" src="https://consent.cookiebot.com/2f5c0aa1-25c4-4dab-86d7-f9c320bd6722/cd.js" type="text/javascript" async></script>
 
    <!-- ========== FOOTER ========== -->
    <?php include('./include/footer-normal.php'); ?>
