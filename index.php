@@ -70,9 +70,11 @@ if (isset($_GET['page'])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo $_SESSION['language']; ?>" dir="ltr">
 
 <head>
+
+   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="2f5c0aa1-25c4-4dab-86d7-f9c320bd6722" data-blockingmode="auto" type="text/javascript"></script>
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
@@ -149,6 +151,28 @@ if (isset($_GET['page'])) {
    <meta name="DC.Publisher" content="FiveMods" />
    <meta name="DC.Rights" content="FiveMods" />
    <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
+
+   <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
+
+   <!-- <meta name="msapplication-config" content="none">
+   <meta name="theme-color" content="#FF8637">
+   <meta name="msapplication-navbutton-color" content="#FF8637">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+
+   <meta property="og:url" content="">
+   <meta property="og:title" content="">
+   <meta property="og:description" content="">
+   <meta property="og:site_name" content="FiveMods.net">
+   <meta property="og:image" content="">
+
+   <meta name="twitter:card" content="summary_large_image">
+   <meta name="twitter:site" content="@five_mods">
+   <meta name="twitter:title" content="">
+   <meta name="twitter:description" content="">
+   <meta name="twitter:image" content=""> -->
+
+   <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
 
    <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
 
@@ -305,8 +329,7 @@ if (isset($_GET['page'])) {
             echo "background-color: #1B1B2F;";
          } else {
             echo "background-color: #fff;";
-         } ?>
-         display: flex;
+         } ?>display: flex;
          justify-content: center;
          align-items: center;
       }
@@ -320,8 +343,7 @@ if (isset($_GET['page'])) {
             echo "border: 4px solid #1B1B2F;";
          } else {
             echo "border: 4px solid #fff;";
-         } ?>
-         animation: loader 2s infinite ease;
+         } ?>animation: loader 2s infinite ease;
       }
 
       .space-16 {
@@ -330,7 +352,7 @@ if (isset($_GET['page'])) {
 
       .center {
          text-align: center;
-      } 
+      }
    </style>
 </head>
 
@@ -365,25 +387,27 @@ if (isset($_GET['page'])) {
 
    <!-- ========== MAIN CONTENT ========== -->
    <?php
-      if (isset($_GET['page'])) {
-         $page_names = explode('/', $_GET["page"]);
-         if (file_exists("pages/" . $page_names[0] . ".php")) {
-            include("pages/" . $page_names[0] . ".php");
-         } else if ($page_names[0] == "error-pages" and isset($page_names[1])) {
-            if (file_exists("error/400/" . $page_names[1] . ".html")) {
-               http_response_code($page_names[1]);
-               include("error/400/" . $page_names[1] . ".html");
-            } else {
-               include("error/400/404.html");
-            }
+   if (isset($_GET['page'])) {
+      $page_names = explode('/', $_GET["page"]);
+      if (file_exists("pages/" . $page_names[0] . ".php")) {
+         include("pages/" . $page_names[0] . ".php");
+      } else if ($page_names[0] == "error-pages" and isset($page_names[1])) {
+         if (file_exists("error/400/" . $page_names[1] . ".html")) {
+            http_response_code($page_names[1]);
+            include("error/400/" . $page_names[1] . ".html");
          } else {
             include("error/400/404.html");
          }
       } else {
-         include("pages/.php");
+         include("error/400/404.html");
       }
+   } else {
+      include("pages/.php");
+   }
    ?>
    <!-- ========== END MAIN CONTENT ========== -->
+
+   <script id="CookieDeclaration" src="https://consent.cookiebot.com/2f5c0aa1-25c4-4dab-86d7-f9c320bd6722/cd.js" type="text/javascript" async></script>
 
    <!-- ========== FOOTER ========== -->
    <?php include('./include/footer-normal.php'); ?>
