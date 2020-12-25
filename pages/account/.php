@@ -388,12 +388,17 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						</div>
 						<label class="d-block mb-0">Payments</label>
 						<button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</button>
-                        
+                        <hr>
 						<label class="d-block mb-0">Payout</label>
 						<small class="text-danger">IMPORTANT: Minimum payout amount: 10.00€</small>
 						<br>
-						<button class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  Request payout</button>
-						
+						<?php 
+						if(floatval($response) > 10.00) 
+							echo '<a href="/payment/payout" class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  Request payout</a>';
+						else 
+							echo '<button class="btn btn-info" disabled><i class="fab fa-paypal"></i>  Request payout</button>';
+						?>
+						<hr>
 						<div class="form-group mb-0">
 							<label class="d-block">Income History</label>
 							<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">

@@ -212,6 +212,16 @@ try {
     $main_ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
     $stmt->execute();
 
+    $servernameP = $mysqlPayment['servername'];
+    $usernameP = $mysqlPayment['username'];
+    $passwordP = $mysqlPayment['password'];
+    $dbnameP = $mysqlPayment['dbname'];
+
+    $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
+    $pdoPayment->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
+    $insertUser->execute(array('provider' => $oauth_provider, 'id' => $oauth_uid, 'uuid' => $v5uuid, 'username' => $first_name, 'email' => $email, 'country' => $locale));
+
     echo "New records created successfully";
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();

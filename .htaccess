@@ -88,6 +88,14 @@ RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/missing-information*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/missing-information*)$ ./index.php?page=$1 [L,QSA]
 
+# Payment Payout rdc.
+RewriteRule ^(payment/payout*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/payout*)$ ./index.php?page=$1 [L,QSA]
+
+# Payment Deposit rdc.
+RewriteRule ^(payment/deposit*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/deposit*)$ ./index.php?page=$1 [L,QSA]
+
 # Invite rdc. 
 RewriteRule ^(invite*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(invite*)$ ./index.php?page=$1 [L,QSA]
