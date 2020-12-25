@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
     function enable2FA() {
         session_start();
-        require_once('./config.php');
+        require_once('../../../config.php');
 
         $servername = $mysql['servername'];
         $username = $mysql['username'];

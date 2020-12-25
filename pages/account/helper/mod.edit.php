@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
     function editMod() {
-      require_once('./config.php');
+      require_once('../../../config.php');
 
       $servername = $mysql['servername'];
       $username = $mysql['username'];
