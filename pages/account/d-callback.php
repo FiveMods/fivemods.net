@@ -44,7 +44,7 @@ if (get('action') == 'login') {
     );
 
     // Redirect the user to Discord's authorization page
-    header('Location: https://discord.com/api/oauth2/authorize?client_id=752568669061513327&redirect_uri=http%3A%2F%2Flocalhost%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=identify%20email');
+    header('Location: '.$dcCallback);
     die();
 }
 
