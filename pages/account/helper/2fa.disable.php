@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   } else {
 
 
-    function enable2FA() {
+    function disable2FA() {
         session_start();
         require_once('../../../config.php');
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET 2fa='1' WHERE oauth_uid = $id";
+          $sql = "UPDATE user SET 2fa='0' WHERE oauth_uid = $id";
         
           // Prepare statement
           $stmt = $conn->prepare($sql);
@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
         $_SESSION['user_2fa'] = "1";
-        $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
+        $_SESSION['success'] = '<div class="alert alert-warning" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Successfully changed! </strong> Your profile is now secured via 2FA.
+        <strong>Successfully changed! </strong> Your profile is no longer secured via 2FA! Your profile will be adjusted accordingly.
       </div>
       ';
         header('location: /account/');
@@ -55,12 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
       echo $_SESSION['2facode'];
       echo "<br>".$_POST['value'];
       if($_SESSION['2facode'] == $_POST['value']) {
-        enable2FA();
+        disable2FA();
       } else {
         
         $_SESSION['success'] = '<div class="alert alert-danger" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>An Error occured! </strong> The token you provided was invalid or the time ran out.
+        <strong>An Error occured! </strong> Something went wrong.
       </div>
       ';
       header("Location: /account/");

@@ -341,13 +341,30 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 					<div class="tab-pane fade" id="security">
 						<h6>SECURITY SETTINGS</h6>
 						<hr>
-						<form>
+						<?php
+						
+						if (empty($_SESSION['user_2fa']) || $_SESSION['user_2fa'] == "0") {
+							echo '<form>
 							<div class="form-group">
 								<label class="d-block">Two Factor Authentication</label>
 								<a href="/account/two-factor-authentication/" class="btn btn-info">Enable Two-Factor Authentication</a>
 								<p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
 							</div>
-						</form>
+						</form>';
+						} else {
+							echo '<form action="/pages/account/helper/2fa.disable.php" method="post">
+							<div class="form-group">
+							<label class="d-block">Two Factor Authentication</label>
+							<p class="small text-muted mt-2">Two-factor authentication is currenly enabled. this allows you to participate in our partner program and secures your account.</p>
+							<input type="text" name="call" value="callFunc" hidden>
+							<button type="submit" class="btn btn-danger">Disable Two Factor Authentication</button>
+							<p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
+						</div>
+						</form>';
+						}
+
+						?>
+						
 						<hr>
 						<form action="" method="post">
 							<div class="form-group mb-0">
