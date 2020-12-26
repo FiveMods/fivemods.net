@@ -1,5 +1,10 @@
 <?php 
 session_start();
+
+if (empty($_SESSION['user_id'])) {
+  header('location: /logout');
+}
+
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
     header('location: /');

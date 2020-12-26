@@ -1,5 +1,10 @@
 <?php 
 session_start();
+
+if (empty($_SESSION['user_id'])) {
+  header('location: /logout');
+}
+
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
     header('location: /');
@@ -34,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
-        $_SESSION['user_2fa'] = "1";
+        $_SESSION['user_2fa'] = "0";
         $_SESSION['success'] = '<div class="alert alert-warning" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully changed! </strong> Your profile is no longer secured via 2FA! Your profile will be adjusted accordingly.
