@@ -9,9 +9,9 @@ if (empty($_SESSION['user_id'])) {
 session_start();
 require "Authenticator.php";
 
-if ($_SESSION['user_2fa'] == "1") {
-   header('location: /account/');
-}
+// if ($_SESSION['user_2fa'] == "1") {
+//    header('location: /account/');
+// }
 
 $sql = "SELECT 2fa_acc FROM user WHERE oauth_uid LIKE $_SESSION[user_id]";
 $result = $conn->query($sql);
@@ -82,7 +82,14 @@ if (!isset($_SESSION['failed'])) {
                            ?>
                         <?php endif ?>
 
-                        <img style="text-align: center;;" class="img-fluid" src="<?php echo $qrCodeUrl ?>" alt="Verify this Google Authenticator"><br><br>
+                        <?php 
+                        
+                        if ($_SESSION['user_2fa'] == "0") {
+                           echo '<img style="text-align: center;;" class="img-fluid" src="'.$qrCodeUrl.'" alt="Verify this Google Authenticator"><br><br>';
+                        }
+
+                        ?>
+                        
                         <input type="text" class="form-control" name="code" minlength="6" maxlength="6" placeholder="******" autofocus style="font-size: xx-large;width:200px;border-radius: 0px;text-align: center;display: inline;color: #17141F;letter-spacing: 7px;"><br> <br>
                         <button type="submit" class="btn btn-md btn-primary" style="width: 200px;border-radius: 0px;">Verify & enable</button>
 

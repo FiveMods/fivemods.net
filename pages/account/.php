@@ -21,7 +21,7 @@ if (empty($_SESSION['user_username']) == TRUE) {
 	if (strpos($a, $b) !== false) {
 		$_SESSION['user_username'] = $_SESSION['dc_name'];
 		
-		require_once('./config.php');
+		require_once('../../config.php');
 
 		$servername = $mysql['servername'];
 		$username = $mysql['username'];
@@ -50,9 +50,9 @@ if (empty($_SESSION['user_username']) == TRUE) {
 
 		$conn->close();
 	} elseif (strpos($a, $c) !== false) {
-		$_SESSION['user_username'] = $_SESSION['g_givenName'] . rand();
+		$_SESSION['user_username'] = $_SESSION['g_givenName'] . "1234";
 		
-		require_once('./config.php');
+		require_once('../../config.php');
 
 		$servername = $mysql['servername'];
 		$username = $mysql['username'];
@@ -261,6 +261,19 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<button type="submit" class="btn btn-primary">Save & Update</button>
 							</div>
 						</form>
+						<?php
+						
+						if ($_SESSION['user_premium'] == "1") {
+							echo '<hr>
+							<form>
+								<div class="form-group mb-0">
+									<label class="d-block">Premium Partner</label>
+									<p class="font-size-sm text-muted">You are part of our partner program. Make sure to have 2FA always enabled! Partner benefits & conditions apply.</p>
+								</div>
+							</form>';
+						}
+
+						?>
 						<hr>
 						<form>
 							<div class="form-group mb-0">

@@ -1,24 +1,24 @@
 <?php
 include('./include/header-banner.php');
 
-// session_start();
+session_start();
 
-// require "Authenticator.php";
-// if ($_SERVER['REQUEST_METHOD'] != "POST") {
-//     header("location: /account/logout/?url=error");
-//     die();
-// }
-// $Authenticator = new Authenticator();
+require "Authenticator.php";
+if ($_SERVER['REQUEST_METHOD'] != "POST") {
+    header("location: /account/logout/?url=error");
+    die();
+}
+$Authenticator = new Authenticator();
 
-// $checkResult = $Authenticator->verifyCode($_SESSION['auth_secret'], $_POST['code'], 2);    // 2 = 2*30sec clock tolerance
+$checkResult = $Authenticator->verifyCode($_SESSION['auth_secret'], $_POST['code'], 2);    // 2 = 2*30sec clock tolerance
 
-// if (!$checkResult) {
-//     $_SESSION['failed'] = true;
-//     header("location: /account/logout/?url=error");
-//     die();
-// }
+if (!$checkResult) {
+    $_SESSION['failed'] = true;
+    header("location: /account/logout/?url=error");
+    die();
+}
 
-// $_SESSION['control_2FA'] = "1";
+$_SESSION['control_2FA'] = "1";
 
 ?>
 <div class="container">
@@ -30,11 +30,20 @@ include('./include/header-banner.php');
                 <p>Thanks for using our Time-based Two Factor Authentication</p>
             </div>
             <hr>
-            <form action="/pages/account/helper/2fa.enable.php" method="post">
-                <input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
+            <?php
+            
+            if ($_SESSION['user_2fa'] == "0") {
+                echo '<form action="/pages/account/helper/2fa.enable.php" method="post">
                 <input type="text" name="call" value="callFunc" hidden>
                 <button type="submit" class="btn btn-block btn-success" style="text-align: center;">Continue</button>
-            </form>
+            </form>';
+            } else {
+                echo '<meta http-equiv="refresh" content="2;url=/account/" />';
+            }
+            
+
+            ?>
+            
         </div>
     </div>
 </div>
