@@ -2397,15 +2397,15 @@ textarea.form-control {
 
 .custom-select.is-invalid,
 .form-control.is-invalid,
-.was-validated .custom-select:invalid,
-.was-validated .form-control:invalid {
+.was-validated .custom-select,
+.was-validated .form-control {
     border-color: #fc3939
 }
 
 .custom-select.is-invalid:focus,
 .form-control.is-invalid:focus,
-.was-validated .custom-select:invalid:focus,
-.was-validated .form-control:invalid:focus {
+.was-validated .custom-select:focus,
+.was-validated .form-control:focus {
     border-color: #fc3939;
     -webkit-box-shadow: 0 0 0 .2rem rgba(252, 57, 57, .25);
     box-shadow: 0 0 0 .2rem rgba(252, 57, 57, .25)
@@ -2415,10 +2415,10 @@ textarea.form-control {
 .custom-select.is-invalid~.invalid-tooltip,
 .form-control.is-invalid~.invalid-feedback,
 .form-control.is-invalid~.invalid-tooltip,
-.was-validated .custom-select:invalid~.invalid-feedback,
-.was-validated .custom-select:invalid~.invalid-tooltip,
-.was-validated .form-control:invalid~.invalid-feedback,
-.was-validated .form-control:invalid~.invalid-tooltip {
+.was-validated .custom-select~.invalid-feedback,
+.was-validated .custom-select~.invalid-tooltip,
+.was-validated .form-control~.invalid-feedback,
+.was-validated .form-control~.invalid-tooltip {
     display: block
 }
 

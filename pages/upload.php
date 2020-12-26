@@ -178,8 +178,8 @@ function randomChars($length) {
                               <!-- Category -->
                               <div>
                                  <label for="category">Select a category <span class="text text-danger">*</span></label>
-                                 <select class="custom-select" id="category" name="category" required>
-                                    <option value="Choose" disabled selected>Choose category...</option>
+                                 <select class="custom-select" id="category" name="category" onChange="outputValue(this)" required>
+                                    <option value="" disabled selected>Choose category...</option>
                                     <option value="Scripts">Scripts</option>
                                     <option value="Vehicles">Vehicles</option>
                                     <option value="Weapons">Weapons</option>
@@ -188,11 +188,10 @@ function randomChars($length) {
                                     <option value="Liveries">Liveries</option>
                                     <option value="Misc">Misc</option>
                                  </select>
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to select a category</div>
+                                 <div id="categoryfeedback" class="invalid-feedback">You have to select a category</div>
                               </div>
                               <br>
-                              <!-- Title -->
+                              <!-- Tags -->
                               <div>
                                  <label for="tags">Set some tags <span class="text text-danger">*</span></label>
                                  <input type="text" class="form-control" id="tags" name="tags" minlength="3" value="" required placeholder="You can add multiple tags, just seperate them with a comma.">
@@ -260,23 +259,29 @@ function randomChars($length) {
    });
 
 
-   var modupload = document.getElementById('modupload');
-   modupload.onchange = function() {
-      if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
-         modupload.value = '';
-      }
-   };
-   var picupload = document.getElementById('picupload');
-   picupload.onchange = function() {
-      if (picupload.files.length <= 10) {
-         for (let v = 0; v < picupload.files.length; v++) {
+    function outputValue(item) {
+        document.getElementById('categoryfeedback').className = "valid-feedback";
+        document.getElementById('categoryfeedback').innerHTML = "Looks good!";
+    };
+
+
+    var modupload = document.getElementById('modupload');
+    modupload.onchange = function() {
+        if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
+            modupload.value = '';
+        }
+    };
+    var picupload = document.getElementById('picupload');
+    picupload.onchange = function() {
+        if (picupload.files.length <= 10) {
+            for (let v = 0; v < picupload.files.length; v++) {
             if (!picupload.files[v].name.endsWith(".png") && !picupload.files[v].name.endsWith(".jpg") && !picupload.files[v].name.endsWith(".jpeg") && !picupload.files[v].name.endsWith(".webp")) {
-               picupload.value = '';
-               break;
+                picupload.value = '';
+                break;
             }
-         }
-      } else {
-         picupload.value = '';
-      }
-   };
+            }
+        } else {
+            picupload.value = '';
+        }
+    };
 </script>
