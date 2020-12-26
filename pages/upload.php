@@ -179,8 +179,8 @@ function randomChars($length)
                               <!-- Category -->
                               <div>
                                  <label for="category">Select a category <span class="text text-danger">*</span></label>
-                                 <select class="custom-select" id="category" name="category" required>
-                                    <option value="Choose" disabled selected>Choose category...</option>
+                                 <select class="custom-select" id="category" name="category" onChange="outputValue(this)" required>
+                                    <option value="" disabled selected>Choose category...</option>
                                     <option value="Scripts">Scripts</option>
                                     <option value="Vehicles">Vehicles</option>
                                     <option value="Weapons">Weapons</option>
@@ -189,11 +189,10 @@ function randomChars($length)
                                     <option value="Liveries">Liveries</option>
                                     <option value="Misc">Misc</option>
                                  </select>
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to select a category</div>
+                                 <div id="categoryfeedback" class="invalid-feedback">You have to select a category</div>
                               </div>
                               <br>
-                              <!-- Title -->
+                              <!-- Tags -->
                               <div>
                                  <label for="tags">Set some tags <span class="text text-danger">*</span></label>
                                  <input type="text" class="form-control" id="tags" name="tags" minlength="3" value="" required placeholder="You can add multiple tags, just seperate them with a comma.">
@@ -260,6 +259,10 @@ function randomChars($length)
       console.log("Site loaded!");
    });
 
+   function outputValue(item) {
+      document.getElementById('categoryfeedback').className = "valid-feedback";
+      document.getElementById('categoryfeedback').innerHTML = "Looks good!";
+   };
 
    var modupload = document.getElementById('modupload');
    modupload.onchange = function() {
