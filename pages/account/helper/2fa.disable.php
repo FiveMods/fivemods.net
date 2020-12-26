@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET 2fa='0' AND premium='0' WHERE oauth_uid = $id";
+          $sql = "UPDATE user SET 2fa='0', premium='0' WHERE oauth_uid = $id";
         
           // Prepare statement
           $stmt = $conn->prepare($sql);
