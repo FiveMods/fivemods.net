@@ -1,11 +1,9 @@
 <?php
 
 
-class Authenticator
-{
+class Authenticator {
     protected $length = 6;
-    public function generateRandomSecret($secretLength = 16)
-    {
+    public function generateRandomSecret($secretLength = 16) {
         $secret = '';
         $validChars = array(
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 
