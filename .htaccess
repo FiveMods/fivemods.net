@@ -9,8 +9,8 @@ ErrorDocument 500 /error/500/500.html
 ErrorDocument 502 /error/500/502.html
 ErrorDocument 503 /error/500/503.html
 
-php_value upload_max_filesize 100M
-php_value post_max_size 200M
+php_value upload_max_filesize 250M
+php_value post_max_size 250M
 php_value memory_limit 512M
 
 RewriteEngine On

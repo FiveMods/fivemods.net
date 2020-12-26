@@ -79,8 +79,8 @@ if (!isset($_SESSION['failed'])) {
                         <?php endif ?>
 
                         <img style="text-align: center;;" class="img-fluid" src="<?php echo $qrCodeUrl ?>" alt="Verify this Google Authenticator"><br><br>
-                        <input type="text" class="form-control" name="code" minlength="6" maxlength="6" placeholder="******" style="font-size: xx-large;width:200px;border-radius: 0px;text-align: center;display: inline;color: #17141F;letter-spacing: 2px;"><br> <br>
-                        <button type="submit" class="btn btn-md btn-primary" style="width: 200px;border-radius: 0px;">Verify</button>
+                        <input type="text" class="form-control" name="code" minlength="6" maxlength="6" placeholder="******" style="font-size: xx-large;width:200px;border-radius: 0px;text-align: center;display: inline;color: #17141F;letter-spacing: 7px;"><br> <br>
+                        <button type="submit" class="btn btn-md btn-primary" style="width: 200px;border-radius: 0px;">Verify & enable</button>
 
                      </div>
 
