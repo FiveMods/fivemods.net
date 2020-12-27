@@ -118,7 +118,7 @@ if($_SESSION['access_token']) {
     
         //The path and filename that you want to save the file to.
         // Change to storage.fivemods.net later on!
-        $fileName = '../../localstorage/google/' . $user->id . '.png';
+        $fileName = '../../localstorage/github/' . $user->id . '.png';
         echo $fileName;
     
         //Save the data using file_put_contents.
