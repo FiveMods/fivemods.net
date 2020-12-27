@@ -284,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                             }
 
                             ?>
-                            <p class="font-size-sm text-muted">There are curretnly <b><?php echo count($rateArray); ?></b> ratings on your mod.</p>
+                            <p class="font-size-sm text-muted">There are currently <b><?php echo count($rateArray); ?></b> ratings on your mod.</p>
                         </div>
                         <hr>
                         <div class="form-group mb-0">
