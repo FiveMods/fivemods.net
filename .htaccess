@@ -9,8 +9,8 @@ ErrorDocument 500 /error/500/500.html
 ErrorDocument 502 /error/500/502.html
 ErrorDocument 503 /error/500/503.html
 
-php_value upload_max_filesize 100M
-php_value post_max_size 200M
+php_value upload_max_filesize 250M
+php_value post_max_size 250M
 php_value memory_limit 512M
 
 RewriteEngine On
@@ -32,6 +32,14 @@ RewriteRule ^(account/delete/([a-zA-Z0-9-/]+))$ ./account/?delete=$2 [L,QSA]
 # Account Logout rdc.
 RewriteRule ^(account/logout*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/logout*)$ ./index.php?page=$1 [L,QSA]
+
+# Account check
+RewriteRule ^(account/check*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/check*)$ ./index.php?page=$1 [L,QSA]
+
+# Account 2FA Control
+RewriteRule ^(account/factor-control*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(account/factor-control*)$ ./index.php?page=$1 [L,QSA]
 
 # Account - Sign In / Login rdc. 
 RewriteRule ^(account/sign-in*/)$ ./index.php?page=$1 [L,QSA]
@@ -80,6 +88,21 @@ RewriteRule ^(impressum*)$ ./index.php?page=$1 [L,QSA]
 # About rdc. 
 RewriteRule ^(about-us*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*)$ ./index.php?page=$1 [L,QSA]
+
+# Payment rdc. 
+RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
+
+# Payment Missing Information rdc.
+RewriteRule ^(payment/missing-information*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/missing-information*)$ ./index.php?page=$1 [L,QSA]
+
+# Payment Payout rdc.
+RewriteRule ^(payment/payout*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/payout*)$ ./index.php?page=$1 [L,QSA]
+
+# Payment Deposit rdc.
+RewriteRule ^(payment/deposit*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/deposit*)$ ./index.php?page=$1 [L,QSA]
 
 # Invite rdc. 
 RewriteRule ^(invite*/)$ ./index.php?page=$1 [L,QSA]

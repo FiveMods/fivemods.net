@@ -9487,8 +9487,8 @@ a.text-dark:hover {
 
 @media print {
     *,
-    ::after,
-    ::before {
+     ::after,
+     ::before {
         text-shadow: none!important;
         -webkit-box-shadow: none!important;
         box-shadow: none!important

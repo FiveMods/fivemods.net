@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 include('./include/header-banner.php');
 if (empty($_SESSION['user_id'])) {
-  header('location: /account/sign-in/');
+   header('location: /account/sign-in/');
 }
 
-if(isset($_POST['uploadMod'])) {
+if (isset($_POST['uploadMod'])) {
 
    require_once('./config.php');
 
@@ -23,54 +23,55 @@ if(isset($_POST['uploadMod'])) {
    $category = htmlspecialchars($_POST['category']);
    $tags = htmlspecialchars($_POST['tags']);
 
-   if(empty(htmlspecialchars($_POST['requiredMod']))){
-   $requiredMod = "0";
+   if (empty(htmlspecialchars($_POST['requiredMod']))) {
+      $requiredMod = "0";
    } else {
-   $requiredMod = htmlspecialchars($_POST['requiredMod']);
+      $requiredMod = htmlspecialchars($_POST['requiredMod']);
    }
 
-   if(empty(htmlspecialchars($_POST['price']))){
+   if (empty(htmlspecialchars($_POST['price']))) {
       $price = NULL;
    } else {
       $price = htmlspecialchars($_POST['price']);
    }
 
-   if (!is_dir($path.'/'.$userid)) mkdir($path.'/'.$userid);
+   if (!is_dir($path . '/' . $userid)) mkdir($path . '/' . $userid);
    if (!is_dir($path)) mkdir($path);
-   
-   mkdir($path.'/'.$userid.'/'.$modid);
-   mkdir($path.'/'.$userid.'/'.$modid.'/img');
 
-   move_uploaded_file($_FILES["modupload"]["tmp_name"], $path.'/'.$userid.'/'.$modid.'/'.basename($_FILES["modupload"]["name"]));
-   rename($path.'/'.$userid.'/'.$modid.'/'.basename($_FILES["modupload"]["name"]), $path.'/'.$userid.'/'.$modid.'/'.str_replace(" ","_",strtolower($title)).'-'.$modid.'.zip');
-   $download = $downloadWebsite.'/'.$userid.'/'.$modid.'/'.str_replace(" ","_",strtolower($title)).'-'.$modid.'.zip';
+   mkdir($path . '/' . $userid . '/' . $modid);
+   mkdir($path . '/' . $userid . '/' . $modid . '/img');
+
+   move_uploaded_file($_FILES["modupload"]["tmp_name"], $path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]));
+   rename($path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]), $path . '/' . $userid . '/' . $modid . '/' . str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip');
+   $download = $downloadWebsite . '/' . $userid . '/' . $modid . '/' . str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip';
    $pictures = [];
    foreach ($_FILES["picupload"]["error"] as $key => $error) {
-   if ($error == "UPLOAD_ERR_OK") {
-       move_uploaded_file($_FILES["picupload"]["tmp_name"][$key], $path.'/'.$userid.'/'.$modid.'/'.'img/'.basename($_FILES["picupload"]["name"][$key]));
-       $fileEnding = substr($_FILES["picupload"]["name"][$key], -5);
-       $fileName = randomChars(20);
-       rename($path.'/'.$userid.'/'.$modid.'/'.'img/'.basename($_FILES["picupload"]["name"][$key]), $path.'/'.$userid.'/'.$modid.'/'.'img/'.$fileName.$fileEnding);
-       array_push($pictures, $downloadWebsite.'/'.$userid.'/'.$modid.'/'.'img/'.$fileName.$fileEnding);
-   }
+      if ($error == "UPLOAD_ERR_OK") {
+         move_uploaded_file($_FILES["picupload"]["tmp_name"][$key], $path . '/' . $userid . '/' . $modid . '/' . 'img/' . basename($_FILES["picupload"]["name"][$key]));
+         $fileEnding = substr($_FILES["picupload"]["name"][$key], -5);
+         $fileName = randomChars(20);
+         rename($path . '/' . $userid . '/' . $modid . '/' . 'img/' . basename($_FILES["picupload"]["name"][$key]), $path . '/' . $userid . '/' . $modid . '/' . 'img/' . $fileName . $fileEnding);
+         array_push($pictures, $downloadWebsite . '/' . $userid . '/' . $modid . '/' . 'img/' . $fileName . $fileEnding);
+      }
    }
    $pictures = implode(" ", $pictures);
-   
+
 
 
    $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_prices) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price)");
    $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price));
 
    $_SESSION['upload'] = 1;
-   
+
    header("Location: /helper/manage.php?upload=1");
    exit();
    die();
 }
-function randomChars($length) {
+function randomChars($length)
+{
    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
    return substr(str_shuffle($permitted_chars), 0, $length);
-}?>
+} ?>
 <style>
    .submitFinal {
       padding-left: 10%;
@@ -104,15 +105,15 @@ function randomChars($length) {
                <div class="row d-flex justify-content-center">
                   <div class="col-sm-12 col-12">
                      <?php
-                     if(isset($_SESSION['upload'])):
+                     if (isset($_SESSION['upload'])) :
                         unset($_SESSION['upload']);
-                     ?> 
-                     <div class="alert alert-success alert-dismissible fade show center" role="alert">
-                     <strong>Success!</strong> You successfully uploaded a modification!
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                     </div>
+                     ?>
+                        <div class="alert alert-success alert-dismissible fade show center" role="alert">
+                           <strong>Success!</strong> You successfully uploaded a modification!
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                        </div>
                      <?php endif; ?>
                      <div class="card-header pills-regular d-flex justify-content-center">
                         <ul class="nav nav-pills card-header-pills" role="tablist">
@@ -136,7 +137,7 @@ function randomChars($length) {
                                     <h4 class="alert-heading"><?php echo $lang['welcome'] . $_SESSION['user_username']; ?>!</h4>
                                     <p><?php echo $lang['upload-start-msg']; ?></p>
                                     <hr>
-                                    <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days'];?></b></p>
+                                    <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days']; ?></b></p>
                                  </div>
                               </div>
                            </div>
@@ -258,6 +259,10 @@ function randomChars($length) {
       console.log("Site loaded!");
    });
 
+   function outputValue(item) {
+      document.getElementById('categoryfeedback').className = "valid-feedback";
+      document.getElementById('categoryfeedback').innerHTML = "Looks good!";
+   };
 
     function outputValue(item) {
         document.getElementById('categoryfeedback').className = "valid-feedback";

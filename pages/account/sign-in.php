@@ -15,6 +15,16 @@ if ($_GET['rdC'] == "main") {
     echo '<meta http-equiv="refresh" content="2;url=/" />';
 }
 
+$_SESSION['state'] = hash('sha256', microtime(TRUE).rand().$_SERVER['REMOTE_ADDR']);
+
+$params = array(
+  'client_id' => '48abb0467b4aa1c0fa9f',
+  'redirect_uri' => 'http://localhost/pages/account/git-callback.php',
+  'scope' => 'user:email',
+  'response_type' => 'code',
+  'state' => $_SESSION['state'],
+);
+
 ?>
 <style>
     .btn-discord {
@@ -47,7 +57,6 @@ if ($_GET['rdC'] == "main") {
                                 <div class="input-group">
                                     <?php
 
-                                    error_reporting(E_ALL);
 
                                     if ($ip_server == "85.214.73.93") {
                                         $redirect = 'https://pre-live.fivemods.net/pages/account/d-callback.php';
@@ -56,13 +65,13 @@ if ($_GET['rdC'] == "main") {
                                     }
 
                                     define('OAUTH2_CLIENT_ID', '752568669061513327');
-                                    define('OAUTH2_CLIENT_SECRET', 'ggATQBY184X-O9YUZDWtgtmHMcldlFgZ');
 
                                     $authorizeURL = 'https://discordapp.com/api/oauth2/authorize';
                                     $tokenURL = 'https://discordapp.com/api/oauth2/token';
                                     $apiURLBase = 'https://discordapp.com/api/users/@me';
 
                                     // Start the login process by sending the user to Discord's authorization page
+<<<<<<< HEAD
                                     if (get('action') == 'login') {
 
                                         $params = array(
@@ -96,67 +105,40 @@ if ($_GET['rdC'] == "main") {
 
 
                                         header('Location: ' . $_SERVER['PHP_SELF']);
+=======
+                                    if(isset($_GET['action'])) {
+                                        if ($_GET['action'] == 'login') {
+
+                                            $params = array(
+                                                'client_id' => OAUTH2_CLIENT_ID,
+                                                'redirect_uri' => 'http://localhost/pages/account/d-callback.php',
+                                                'response_type' => 'code',
+                                                'scope' => 'identify email guilds'
+                                            );
+    
+                                            
+                                            
+                                            header('Location: https://discord.com/api/oauth2/authorize?client_id=752568669061513327&redirect_uri=http%3A%2F%2Flocalhost%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=identify%20email');
+    
+                                            die();
+                                        }
+>>>>>>> 034ce549361bc76b7f314bd26357db28ce7f398f
                                     }
+                                    
 
-                                    if (session('dc_access_token')) {
-                                        $user = apiRequest($apiURLBase);
 
-                                        header('location: /account/');
-                                    } else {
+                                    
                                         echo '<a href="?action=login" class="btn btn-block btn-discord">
                                      <i class="fab fa-discord"></i> &nbsp; ' . $lang['login-discord'] . '
                                    </a>';
-                                    }
-
-
-                                    if (get('action') == 'logout') {
-                                        // This must to logout you, but it didn't worked(
-
-                                        $params = array(
-                                            'dc_access_token' => $logout_token
-                                        );
-
-                                        // Redirect the user to Discord's revoke page
-                                        header('Location: https://discordapp.com/api/oauth2/token/revoke' . '?' . http_build_query($params));
-                                        die();
-                                    }
-
-                                    function apiRequest($url, $post = FALSE, $headers = array())
-                                    {
-                                        $ch = curl_init($url);
-                                        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
-                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-                                        $response = curl_exec($ch);
-
-
-                                        if ($post)
-                                            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($post));
-
-                                        $headers[] = 'Accept: application/json';
-
-                                        if (session('dc_access_token'))
-                                            $headers[] = 'Authorization: Bearer ' . session('dc_access_token');
-
-                                        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-                                        $response = curl_exec($ch);
-                                        return json_decode($response);
-                                    }
-
-                                    function get($key, $default = NULL)
-                                    {
-                                        return array_key_exists($key, $_GET) ? $_GET[$key] : $default;
-                                    }
-
-                                    function session($key, $default = NULL)
-                                    {
-                                        return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : $default;
-                                    }
+                                    
 
                                     ?>
                                     <a href="<?php echo $loginURL ?>" class="btn btn-block btn-danger">
                                         <i class="fab fa-google"></i> &nbsp; <?php echo $lang['login-google']; ?>
+                                    </a>
+                                    <a href="https://github.com/login/oauth/authorize?<?php echo http_build_query($params);?>" class="btn btn-block btn-secondary">
+                                        <i class="fab fa-github"></i> &nbsp;Login with GitHub
                                     </a>
                                 </div>
                             </div>

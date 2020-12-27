@@ -21,7 +21,7 @@ if (empty($_SESSION['user_username']) == TRUE) {
 	if (strpos($a, $b) !== false) {
 		$_SESSION['user_username'] = $_SESSION['dc_name'];
 		
-		require_once('./config.php');
+		require_once('../../config.php');
 
 		$servername = $mysql['servername'];
 		$username = $mysql['username'];
@@ -50,9 +50,9 @@ if (empty($_SESSION['user_username']) == TRUE) {
 
 		$conn->close();
 	} elseif (strpos($a, $c) !== false) {
-		$_SESSION['user_username'] = $_SESSION['g_givenName'] . rand();
+		$_SESSION['user_username'] = $_SESSION['g_givenName'] . "1234";
 		
-		require_once('./config.php');
+		require_once('../../config.php');
 
 		$servername = $mysql['servername'];
 		$username = $mysql['username'];
@@ -82,8 +82,12 @@ if (empty($_SESSION['user_username']) == TRUE) {
 	}
 }
 
+if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
+	header('location: /account/two-factor-authentication/');
+}
+
 ?>
-<meta http-equiv="refresh" content="1440;url=./logout/?url=timeout" />
+<meta http-equiv="refresh" content="1440;url=/account/logout/?url=timeout" />
 <div class="container mt-5 mb-5">
 	<?php echo $_SESSION['success'];
 	unset($_SESSION['success']); ?>
@@ -257,6 +261,19 @@ if (empty($_SESSION['user_username']) == TRUE) {
 								<button type="submit" class="btn btn-primary">Save & Update</button>
 							</div>
 						</form>
+						<?php
+						
+						if ($_SESSION['user_premium'] == "1") {
+							echo '<hr>
+							<form>
+								<div class="form-group mb-0">
+									<label class="d-block">Premium Partner</label>
+									<p class="font-size-sm text-muted">You are part of our partner program. Make sure to have two factor authentication. always enabled! Partner benefits & conditions apply.</p>
+								</div>
+							</form>';
+						}
+
+						?>
 						<hr>
 						<form>
 							<div class="form-group mb-0">
@@ -337,13 +354,30 @@ if (empty($_SESSION['user_username']) == TRUE) {
 					<div class="tab-pane fade" id="security">
 						<h6>SECURITY SETTINGS</h6>
 						<hr>
-						<form>
+						<?php
+						
+						if (empty($_SESSION['user_2fa']) || $_SESSION['user_2fa'] == "0") {
+							echo '<form>
 							<div class="form-group">
 								<label class="d-block">Two Factor Authentication</label>
 								<a href="/account/two-factor-authentication/" class="btn btn-info">Enable Two-Factor Authentication</a>
 								<p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
 							</div>
-						</form>
+						</form>';
+						} else {
+							echo '<form action="/pages/account/helper/2fa.disable.php" method="post">
+							<div class="form-group">
+							<label class="d-block">Two Factor Authentication</label>
+							<p class="small text-muted mt-2">Two-factor authentication is currenly enabled. this allows you to participate in our partner program and secures your account.</p>
+							<input type="text" name="call" value="callFunc" hidden>
+							<button type="submit" class="btn btn-danger">Disable Two Factor Authentication</button>
+							<p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
+						</div>
+						</form>';
+						}
+
+						?>
+						
 						<hr>
 						<form action="" method="post">
 							<div class="form-group mb-0">
@@ -361,85 +395,82 @@ if (empty($_SESSION['user_username']) == TRUE) {
 							</div>
 						</form>
 					</div>
-					<!-- <div class="tab-pane fade" id="notification">
-						<h6>NOTIFICATION SETTINGS</h6>
-						<hr>
-						<form action="" method="post">
-							<div class="form-group">
-								<label class="d-block mb-0">Security Alerts</label>
-								<div class="small text-muted mb-3">Receive security alert notifications via email</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-									<label class="custom-control-label" for="customCheck1">Email each time an account security issue is found</label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
-									<label class="custom-control-label" for="customCheck1">Send email when a new ip attempts to login</label>
-								</div>
-								<div class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" id="customCheck2" checked="">
-									<label class="custom-control-label" for="customCheck2">Email a digest summary of vulnerability</label>
-								</div>
-								<button type="submit" class="btn btn-primary mt-3">Save & Update</button>
-							</div>
-						</form>
-					</div> -->
+					<!-- @Oetkher -->
 					<div class="tab-pane fade" id="billing">
 						<h6>BILLING SETTINGS</h6>
 						<hr>
-						<form>
-							<div class="form-group">
-								<label class="d-block mb-0" style="font-size:29px;"><b>$<?php echo ""; ?></b></label>
-								<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
-							</div>
-							<div class="form-group">
-								<label class="d-block mb-0">Payment Method</label>
-								<div class="small text-muted mb-3">You have not added a payment method</div>
-								<button class="btn btn-info" type="button">Request payout</button>
-							</div>
-							<div class="form-group mb-0">
-								<label class="d-block">Income History</label>
-								<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
+						<?php
+							$ch = curl_init();
+							$token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+							$userid = $_SESSION['user_id'];
 
-									<div class="container">
-										
-												<?php
+							curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+							curl_setopt($ch, CURLOPT_POST, 1);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
+							curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+							$response = curl_exec($ch);
+							curl_close($ch);
+						?>
+						<div class="form-group">
+							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
+							<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
+						</div>
+						<label class="d-block mb-0">Payments</label>
+						<button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</button>
+                        <hr>
+						<label class="d-block mb-0">Payout</label>
+						<small class="text-danger">IMPORTANT: Minimum payout amount: 10.00€</small>
+						<br>
+						<?php 
+						if(floatval($response) > 10.00) 
+							echo '<a href="/payment/payout" class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  Request payout</a>';
+						else 
+							echo '<button class="btn btn-info" disabled><i class="fab fa-paypal"></i>  Request payout</button>';
+						?>
+						<hr>
+						<div class="form-group mb-0">
+							<label class="d-block">Income History</label>
+							<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
 
-												$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
-												$result = $conn->query($sql);
+								<div class="container">
+									
+											<?php
 
-												if ($result->num_rows > 0) {
+											$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
+											$result = $conn->query($sql);
 
-													echo '<table class="table">
-													<thead>
-														<tr>
-															<th scope="col">Mod-ID</th>
-															<th scope="col">Estimated Income</th>
-														</tr>
-													</thead>
-													<tbody>';
+											if ($result->num_rows > 0) {
 
-													// output data of each row
-													while ($row = $result->fetch_assoc()) {
+												echo '<table class="table">
+												<thead>
+													<tr>
+														<th scope="col">Mod-ID</th>
+														<th scope="col">Estimated Income</th>
+													</tr>
+												</thead>
+												<tbody>';
 
-														echo '<tr>
-															<th scope="row">' . $row['m_id'] . '</th>
-															<td>$'.($row['m_downloads']/1000).' </td>
-														</tr>';
-													}
-												} else {
-													echo 'There is no current income.';
+												// output data of each row
+												while ($row = $result->fetch_assoc()) {
+
+													echo '<tr>
+														<th scope="row">' . $row['m_id'] . '</th>
+														<td>'.($row['m_downloads']/1000).'€ </td>
+													</tr>';
 												}
+											} else {
+												echo 'There is no current income.';
+											}
 
-												?>
+											?>
 
-											</tbody>
-										</table>
-									</div>
-
+										</tbody>
+									</table>
 								</div>
+
 							</div>
-						</form>
+						</div>
 					</div>
 					<div class="tab-pane fade" id="uploads">
 						<h6>MY UPLOADS</h6>
@@ -470,15 +501,30 @@ if (empty($_SESSION['user_username']) == TRUE) {
 										// output data of each row
 										while ($row = $result->fetch_assoc()) {
 
-											if ($row['m_approved'] == 0) {
+											if ($row['m_approved'] == 0 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
-											} elseif ($row['m_approved'] == 1) {
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+												</form>';
+											} elseif ($row['m_approved'] == 1 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text text-warning"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
+												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>'
+												;
+											} elseif ($row['m_blocked'] == 1) {
+												$status = '
+												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>';
+												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>'
+												;
 											} else {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+												</form>';
 											}
 
 											echo '<tr>
@@ -486,10 +532,7 @@ if (empty($_SESSION['user_username']) == TRUE) {
 													<td><a href="/product/' . $row['m_id'] . '/" class="text text-info">' . $row['m_name'] . '</a></td>
 													<td>' . $status . '</td>
 													<td>' . $row['m_downloads'] . '</td>
-													<td>
-													<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
-													<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-													</form></td>
+													<td>' . $edit . '</td>
 												</tr>';
 										}
 									} else {

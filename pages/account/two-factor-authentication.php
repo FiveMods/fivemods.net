@@ -1,67 +1,51 @@
 <?php
+
 include('./include/header-banner.php');
 
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-	header('location: /account/logout/');
-	exit();
+if (empty($_SESSION['user_id'])) {
+   header('location: /logout');
 }
 
-if($_GET['rq'] == 1) {
+session_start();
+require "Authenticator.php";
 
-   if ($_SESSION['user_oauth_provider'] == "Google LLC." && empty($_COOKIE[$cookie_name]) || $_SESSION['user_oauth_provider'] == "Google LLC" && empty($_COOKIE[$cookie_name])) {
+// $_SESSION['on2fa'] = TRUE;
 
-      
-     function generateRandomString($length = 24) {
-      return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+$sql = "SELECT 2fa_acc FROM user WHERE oauth_uid LIKE $_SESSION[user_id]";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+   // output data of each row
+   while ($row = $result->fetch_assoc()) {
+      $t2ken = $row['2fa_acc'];
+   }
+}
+
+if (empty($t2ken) || $t2ken == NULL) {
+
+   $Authenticator = new Authenticator();
+   if (!isset($_SESSION['auth_secret'])) {
+      $secret = $Authenticator->generateRandomSecret();
+      // $secret = "Y7P2VQ5YK6HUKBSW";
+      // $secret = $t2ken;
+      // $_SESSION['auth_secret'] = $secret;
    }
 
-   $token = generateRandomString();
+   echo '<script>console.log("Token:' . $secret . '")</script>';
 
+   $iiid = $_SESSION['user_id'];
 
-      $userid = $_POST['value'];
-      $code = $token;
-      
-      if(!isset($_SESSION['2facode'])) {
-         $_SESSION['2facode'] = $code;
-      }
-      
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, "action=enable2FA&userid=$userid&token=$code");
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $response = curl_exec($ch);
-      curl_close($ch);
+   $sql = "UPDATE user SET 2fa_acc='$secret' WHERE oauth_uid='$iiid'";
 
-      if(startsWith($response, "Success")) {
-         $typeAlert = "success";
-      } else if(startsWith($response, "Error")) {
-         $typeAlert = "danger";
-      } else {
-         $typeAlert = "primary";
-      }
-
-      $_SESSION['dc_id_temp'] = $_POST['value'];
-
-      $pl = "Insert the 2FA token";
-      $btn = "Confirm two factor authentification";
-      $pattern = "\b[A-Za-z0-9]{24}\b";
-      $type = "password";
-      $action = "/pages/account/helper/2fa.enable.php";
-
-      $_SESSION['success'] = '<div class="alert alert-'.$typeAlert.'" alert-dismissible fade show center" role="alert">
-                     '.$response.'
-                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                  </div>';
-   } elseif ($_SESSION['user_oauth_provider'] == "Discord Inc." && empty($_COOKIE[$cookie_name]) || $_SESSION['user_oauth_provider'] == "Discord Inc" && empty($_COOKIE[$cookie_name])) {
-      // Email @phhajek
-   } 
+   if ($conn->query($sql) === TRUE) {
+      echo "Record updated successfully";
+      echo '<script>console.log("Updated");</script>';
+   } else {
+      echo '<script>console.log("Error: ' . $sql . "<br>" . $conn->error . '");</script>';
+      echo '<script>console.log("SQL error");</script>';
+   }
 } else {
+<<<<<<< HEAD
    if ($_SESSION['user_oauth_provider'] == "Google LLC." || $_SESSION['user_oauth_provider'] == "Google LLC") {
       $pl = "Please enter your Discord ID, e.g. 469208494260617217";
       $btn = "Request token";
@@ -75,37 +59,96 @@ if($_GET['rq'] == 1) {
       $type = "text";
       $action = "?rq=1";
    } 
+=======
+   echo '<script>console.log("Early exit");</script>';
+   $Authenticator = new Authenticator();
+   if (!isset($_SESSION['auth_secret'])) {
+      $secret = $Authenticator->generateRandomSecret();
+      $secret = $t2ken;
+      $_SESSION['auth_secret'] = $secret;
+   }
+>>>>>>> 034ce549361bc76b7f314bd26357db28ce7f398f
 }
 
+$qrCodeUrl = $Authenticator->getQR($_SESSION['user_email'], $_SESSION['auth_secret'], "FiveMods.net");
 
-function startsWith( $haystack, $needle ) {
-   $length = strlen( $needle );
-   return substr( $haystack, 0, $length ) === $needle;
+if (!isset($_SESSION['failed'])) {
+   $_SESSION['failed'] = false;
 }
+
 ?>
 <section class="pt-5 pb-5">
    <div class="container">
-      <div class="row d-flex justify-content-center">
-      <div class="col-md-7">
-         <?php echo $_SESSION['success']; 
-         unset($_SESSION['success']);
-         ?>
-         <div class="card border border-success">
-            <div class="card-body text-center p-5">
-            <h3 class="pb-2 h3 mt-1">Two-Factor Authentication</h3>
-            <p class="lead">Ensure the security of your account - enable the Two-Factor Authentication. </p>
-            <form action="<?php echo $action; ?>" method="post">
-               <input type="text" name="call" value="callFunc" hidden>
-					<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
-					<input type="text" name="mail" value="<?php echo $_SESSION['user_email']; ?>" hidden>
-               <input type="text" name="dcid" value="<?php echo $_SESSION['dc_id_temp']; ?>" hidden>
-               <input class="form-control mt-md-3" type="<?php echo $type;?>" pattern="<?php echo $pattern; ?>" name="value" placeholder="<?php echo $pl; ?>" required>
-               <button type="submit" class="btn btn-xs btn-round btn-sm btn-success btn-rised mt-md-3"><?php echo $btn; ?></button> <br>
-               <a href="/account/">Back</a>
-            </form>
+      <div class="row align-items-center justify-content-around">
+         <div class="col-12 col-md-5 mt-4 mt-md-0">
+            <div class="card shadow-lg p-3 mb-5 rounded">
+               <article class="card-body">
+                  <?php echo $_SESSION['logoutsuccess'];
+                  unset($_SESSION['logoutsuccess']); ?>
+                  <form action="/account/check/" method="post">
+                     <div style="text-align: center;">
+                        <?php if ($_SESSION['failed']) : ?>
+                           <div class="alert alert-danger" role="alert">
+                              <strong>Oh snap!</strong> Invalid Code.
+                           </div>
+                           <?php
+                           $_SESSION['failed'] = false;
+                           ?>
+                        <?php endif ?>
+
+                        <?php 
+                        
+                        if ($_SESSION['user_2fa'] == "0") {
+                           echo '<img style="text-align: center;" class="img-fluid" src="'.$qrCodeUrl.'" alt="Verify this Google Authenticator"><br><br>';
+                           echo '<small class="text-muted">Please scan this QR-Code with your favourite authentication app.</small>';
+                        } else {
+                           echo '<h4>Please enter your two factor authentication code.<h4>';
+                        }
+
+                        ?>
+                        
+                        
+                        <input type="text" class="form-control mt-2" name="code" minlength="6" maxlength="6" placeholder="******" autofocus style="font-size: xx-large;width:200px;border-radius: 0px;text-align: center;display: inline;color: #17141F;letter-spacing: 7px;"><br> <br>
+                        <button type="submit" class="btn btn-md btn-primary" >Verify Token</button>
+
+                     </div>
+
+                  </form>
+               </article>
             </div>
          </div>
-      </div>
+         <div class="col-12 col-md-6">
+            <!-- <h2>Nice Heading</h2>
+            <p class="text-h3 mt-4 pb-4">A collection of coded HTML and CSS elements to help your build your new website. Clean design, fully responsive and based on Bootstrap 4.</p> -->
+            <div class="media">
+               <img class="mr-3 img-fluid rounded" src="https://cdn.worldvectorlogo.com/logos/microsoft-authenticator.svg" width="64px" height="64px" alt="Microsoft Authenticator - IMG">
+               <div class="media-body">
+                  <h5 class="mt-0">Microsoft Authenticator</h5>
+                  FiveMods supports the Microsoft Authenticator app.
+               </div>
+            </div>
+            <div class="media mt-4">
+               <img class="mr-3 img-fluid rounded" src="https://upload.wikimedia.org/wikipedia/commons/c/cd/FreeOTP.png" width="64px" height="64px" alt="Free OTP - IMG">
+               <div class="media-body">
+                  <h5 class="mt-0">Free OTP</h5>
+                  FiveMods supports the Free OTP app.
+               </div>
+            </div>
+            <div class="media mt-4">
+               <img class="mr-3 img-fluid rounded" src="https://pbs.twimg.com/profile_images/1254447460879077377/qDtWdPeZ_400x400.png" width="64px" height="64px" alt="Authy - IMG">
+               <div class="media-body">
+                  <h5 class="mt-0">Authy</h5>
+                  FiveMods supports the Authy app.
+               </div>
+            </div>
+            <div class="media mt-4">
+               <img class="mr-3 img-fluid rounded" src="https://cdn.worldvectorlogo.com/logos/google-authenticator-2.svg" width="64px" height="64px" alt="Google Authenticator - IMG">
+               <div class="media-body">
+                  <h5 class="mt-0">Google Authenticator</h5>
+                  FiveMods supports the Google Authenticator app.
+               </div>
+            </div>
+         </div>
       </div>
    </div>
 </section>

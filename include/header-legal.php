@@ -27,7 +27,7 @@
                     <a class="nav-link" href="/upload-policy/"><?php echo $lang['upload-policy']; ?></a>
                 </li>
                 <li class="nav-item mr-1">
-                    <a class="nav-link" href="/ban-policy/"><?php echo $lang['ban-policy']; ?></a>
+                    <a class="nav-link" href="/account-policy/">Account Policy</a>
                 </li>
                 <?php
 

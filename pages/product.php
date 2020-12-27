@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0";
+   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
    $result = $conn->query($sql);
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
@@ -190,34 +190,32 @@ if ($_GET['id']) {
                <ol class="carousel-indicators">
                   <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
                   <?php
-                  for ($i = 1; $i < count($imgArray); $i++) {
+                  for ($i=1; $i < count($imgArray); $i++) {
                      echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
                   }
                   ?>
                </ol>
-               <div class="carousel-inner">
-                  <div class="carousel-item active">
-                     <a href="<?php echo $imgArray[0]; ?>" target="_blank">
-                        <img async=on src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <img src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
+                     </div>
+                     <?php
+                        for ($i=1; $i < count($imgArray); $i++) {
+                           echo '<div class="carousel-item">
+                                    <img src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
+                                 </div>';
+                        }
+                     ?>
                   </div>
-                  <?php
-                  for ($i = 1; $i < count($imgArray); $i++) {
-                     echo '<div class="carousel-item">
-                                 <img async=on src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
-                              </div>';
-                  }
-                  ?>
+                  <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
+                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                     <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
+                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                     <span class="sr-only">Next</span>
                   </a>
                </div>
-               <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-               </a>
-               <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-               </a>
-            </div>
             <br><br>
             <?php
 
@@ -253,7 +251,7 @@ if ($_GET['id']) {
          <div class="col-md-6 mt-5 mt-md-2 text-center text-md-left">
             <h2 class="mt-0 text-left"><?php echo $name; ?></h2>
             <small class="text-muted">Downloads: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($_SESSION['user_permission'] == "-1") {
-               echo " | <u title='You can see this, cause of your permissions.'>Estimated earnings: $".($downloads/1000).'</u>';
+               echo " | <u title='Not seeable for everyone.'>Estimated income: ".($downloads/1000).'€</u>';
             } ?> </small>
             <p class="lead mt-2 mb-3 primary-color text-left">
             <?php if($_SESSION['user_iid']):?>
@@ -358,7 +356,7 @@ if ($_GET['id']) {
          <div class="row text-center">
             <div class="col">
                <?php
-               $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 ORDER BY m_downloads ASC";
+               $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC";
                $result = $conn->query($sql);
                if ($result->num_rows > 0) {
                   echo '<h4>' . $lang['other-mods'] . '</h4>';
@@ -416,7 +414,7 @@ if ($_GET['id']) {
                }
             }
          } else {
-            $sql = "SELECT * FROM mods WHERE m_approved=0 ORDER BY m_downloads ASC LIMIT 9";
+            $sql = "SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC LIMIT 9";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {

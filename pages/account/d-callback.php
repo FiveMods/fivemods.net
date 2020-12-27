@@ -44,7 +44,11 @@ if (get('action') == 'login') {
     );
 
     // Redirect the user to Discord's authorization page
+<<<<<<< HEAD
     header('Location: https://discord.com/api/oauth2/authorize?client_id=790673684301873161&redirect_uri=http%3A%2F%2Flocalhost%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=email%20identify');
+=======
+    header('Location: '.$dcCallback);
+>>>>>>> 034ce549361bc76b7f314bd26357db28ce7f398f
     die();
 }
 
@@ -211,6 +215,16 @@ try {
     $permission = "1000";
     $main_ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
     $stmt->execute();
+
+    $servernameP = $mysqlPayment['servername'];
+    $usernameP = $mysqlPayment['username'];
+    $passwordP = $mysqlPayment['password'];
+    $dbnameP = $mysqlPayment['dbname'];
+
+    $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
+    $pdoPayment->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
+    $insertUser->execute(array('provider' => $oauth_provider, 'id' => $oauth_uid, 'uuid' => $v5uuid, 'username' => $first_name, 'email' => $email, 'country' => $locale));
 
     echo "New records created successfully";
 } catch (PDOException $e) {
