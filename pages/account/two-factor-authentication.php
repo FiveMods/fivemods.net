@@ -45,7 +45,6 @@ if (empty($t2ken) || $t2ken == NULL) {
       echo '<script>console.log("SQL error");</script>';
    }
 } else {
-<<<<<<< HEAD
    if ($_SESSION['user_oauth_provider'] == "Google LLC." || $_SESSION['user_oauth_provider'] == "Google LLC") {
       $pl = "Please enter your Discord ID, e.g. 469208494260617217";
       $btn = "Request token";
@@ -59,15 +58,6 @@ if (empty($t2ken) || $t2ken == NULL) {
       $type = "text";
       $action = "?rq=1";
    } 
-=======
-   echo '<script>console.log("Early exit");</script>';
-   $Authenticator = new Authenticator();
-   if (!isset($_SESSION['auth_secret'])) {
-      $secret = $Authenticator->generateRandomSecret();
-      $secret = $t2ken;
-      $_SESSION['auth_secret'] = $secret;
-   }
->>>>>>> 034ce549361bc76b7f314bd26357db28ce7f398f
 }
 
 $qrCodeUrl = $Authenticator->getQR($_SESSION['user_email'], $_SESSION['auth_secret'], "FiveMods.net");

@@ -8,13 +8,8 @@ if (empty($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
-<<<<<<< HEAD
     header('location: /');
     exit();
-=======
-    header('location: /account/logout/?url=error');
-    exit;
->>>>>>> 034ce549361bc76b7f314bd26357db28ce7f398f
   } else {
 
 
