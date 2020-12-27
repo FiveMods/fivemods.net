@@ -100,6 +100,10 @@ RewriteRule ^(payment/missing-information*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/payout*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/payout*)$ ./index.php?page=$1 [L,QSA]
 
+# Payment Checkout rdc.
+RewriteRule ^(payment/checkout*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment/checkout*)$ ./index.php?page=$1 [L,QSA]
+
 # Payment Deposit rdc.
 RewriteRule ^(payment/deposit*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/deposit*)$ ./index.php?page=$1 [L,QSA]
