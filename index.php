@@ -381,6 +381,8 @@ if (isset($_GET['page'])) {
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
       include('./include/header-legal.php');
+   } elseif ($_SESSION['on2fa'] == TRUE) {
+      include('./include/header-2fa.php');
    } else {
       include('./include/header-normal.php');
    }

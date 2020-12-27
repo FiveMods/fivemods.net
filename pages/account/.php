@@ -268,7 +268,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<form>
 								<div class="form-group mb-0">
 									<label class="d-block">Premium Partner</label>
-									<p class="font-size-sm text-muted">You are part of our partner program. Make sure to have 2FA always enabled! Partner benefits & conditions apply.</p>
+									<p class="font-size-sm text-muted">You are part of our partner program. Make sure to have two factor authentication. always enabled! Partner benefits & conditions apply.</p>
 								</div>
 							</form>';
 						}

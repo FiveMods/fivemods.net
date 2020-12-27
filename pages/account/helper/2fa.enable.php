@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $_SESSION['user_2fa'] = "1";
         $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Successfully changed! </strong> Your profile is now secured via 2FA.
+        <strong>Successfully changed! </strong> Your profile is now secured via a two factor authentication.
       </div>
       ';
         header('location: /account/');

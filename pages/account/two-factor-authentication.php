@@ -9,9 +9,7 @@ if (empty($_SESSION['user_id'])) {
 session_start();
 require "Authenticator.php";
 
-// if ($_SESSION['user_2fa'] == "1") {
-//    header('location: /account/');
-// }
+// $_SESSION['on2fa'] = TRUE;
 
 $sql = "SELECT 2fa_acc FROM user WHERE oauth_uid LIKE $_SESSION[user_id]";
 $result = $conn->query($sql);
@@ -85,13 +83,17 @@ if (!isset($_SESSION['failed'])) {
                         <?php 
                         
                         if ($_SESSION['user_2fa'] == "0") {
-                           echo '<img style="text-align: center;;" class="img-fluid" src="'.$qrCodeUrl.'" alt="Verify this Google Authenticator"><br><br>';
+                           echo '<img style="text-align: center;" class="img-fluid" src="'.$qrCodeUrl.'" alt="Verify this Google Authenticator"><br><br>';
+                           echo '<small class="text-muted">Please scan this QR-Code with your favourite authentication app.</small>';
+                        } else {
+                           echo '<h4>Please enter your two factor authentication code.<h4>';
                         }
 
                         ?>
                         
-                        <input type="text" class="form-control" name="code" minlength="6" maxlength="6" placeholder="******" autofocus style="font-size: xx-large;width:200px;border-radius: 0px;text-align: center;display: inline;color: #17141F;letter-spacing: 7px;"><br> <br>
-                        <button type="submit" class="btn btn-md btn-primary" style="width: 200px;border-radius: 0px;">Verify & enable</button>
+                        
+                        <input type="text" class="form-control mt-2" name="code" minlength="6" maxlength="6" placeholder="******" autofocus style="font-size: xx-large;width:200px;border-radius: 0px;text-align: center;display: inline;color: #17141F;letter-spacing: 7px;"><br> <br>
+                        <button type="submit" class="btn btn-md btn-primary" >Verify Token</button>
 
                      </div>
 
