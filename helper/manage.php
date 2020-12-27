@@ -15,7 +15,7 @@
     $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
 
     if(htmlspecialchars($_POST['contact'])) {
-        contact();
+        contact($pdo);
     } elseif (htmlspecialchars($_POST['partner'])) {
         partner($pdo);
     } elseif(htmlspecialchars($_POST['reportmod'])) {
@@ -34,29 +34,24 @@
         die();
     }
 
-    function contact() {
+    function contact($pdo) {
         session_start();
-        require_once('./config.php');
 
-        $servername = $mysql['servername'];
-        $username = $mysql['username'];
-        $password = $mysql['password'];
-        $dbname = $mysql['dbname'];
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-        }
-
-        $userid = htmlspecialchars($_POST['userid']);
+        $userid = $_SESSION['user_iid'];
         $category = htmlspecialchars($_POST['category']);
-        $heading = htmlspecialchars($_POST['heading']);
+        $header = htmlspecialchars($_POST['header']);
         $description = nl2br(htmlspecialchars($_POST['message']));
-        $sql = "INSERT INTO `contact` (userid, category, heading, c_description) VALUES ('$userid', '$category', '$heading', '$description')";
-        $conn->query($sql);
-        echo '<meta http-equiv="refresh" content="0; URL=/contact">';
+        
+        $insert = $pdo->prepare("INSERT INTO contact (userid, category, heading, c_description) VALUES (:userid, :cat, :header, :desc)");
+        $insert->execute(array("userid" => $userid, "cat" => $category, "header" => $header, "desc" => $description));
+
+        $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Successfully sent! </strong> We recieved your contact request and will answer it as soon as possible!
+        </div>';
+
+        header("Location: /contact/");
+
         exit();
         die();
     }

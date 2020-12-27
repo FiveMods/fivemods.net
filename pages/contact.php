@@ -13,6 +13,7 @@
       </div>
    </div>
    <div class="container">
+      <?php echo $_SESSION['success']; unset($_SESSION['success']);?>
       <div class="row-100"></div>
       <div class="row">
          <div class="col-12 col-md-6 col-lg-5">
@@ -54,7 +55,7 @@
                </div>
                <div class="row mt-4">
                   <div class="col">
-                     <input type="text" name="heading" class="form-control" pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" minlength="10" maxlength="75" placeholder="'.$lang['heading'].'" required>
+                     <input type="text" name="header" class="form-control" pattern="^[a-zA-Z]+( [a-zA-Z]+)*$" minlength="10" maxlength="75" placeholder="'.$lang['heading'].'" required>
                      <span style="font-size: 10px;">Please enter min. 10 and max. 75 characters.</span>
                   </div>
                </div>
