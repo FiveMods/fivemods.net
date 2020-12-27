@@ -15,7 +15,6 @@ if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
 
-
 if ($_GET['id']) {
    $nameID = $_GET['id'];
    $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
@@ -73,6 +72,19 @@ if ($_GET['id']) {
          $userimg = $row['picture'];
       }
    }
+
+   $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+   $url = $actual_link;
+   $parts = explode('/', $url);
+   $urlNumber = $parts[count($parts) - 2];
+
+   
+   if (strpos($url, 'download') != FALSE) {
+      header('location: '.$download);
+   }
+
+   echo '<script>console.log("Number: '.$urlNumber.'");</script>';
 
    if (isset($_SESSION['downloadMod'])) {
       if($_SESSION['lastDownload'] == $nameID) {
