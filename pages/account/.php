@@ -432,13 +432,8 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
 						</div>
 						<label class="d-block mb-0">Payments</label>
-<<<<<<< HEAD
-						<button class="btn btn-success" type="button"><i class="fas fa-plus"></i> Deposit money</button>
-						<hr>
-=======
 						<a href="/payment/deposit" class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</a>
                         <hr>
->>>>>>> 61d81f4e33068ab5a3b39ae30d139279f0648bc0
 						<label class="d-block mb-0">Payout</label>
 						<small class="text-danger">IMPORTANT: Minimum payout amount: 10.00€</small>
 						<br>
