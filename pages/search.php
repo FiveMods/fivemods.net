@@ -207,57 +207,81 @@ include('./include/header-banner.php');
             </div>
          <?php endforeach; ?>
 
-         <?php foreach($articles as $article): ?>
-            <?php 
-               
-            if ($article['m_downloads']>=1000 && $article['m_downloads']<1000000) {
-               $suffix = "k";
-               $donwloads = $article['m_downloads'] / 1000;
-               $donwloads = round($donwloads, 1);
-            } elseif ($article['m_downloads']>=1000000) {
-               $suffix = "M";
-               $donwloads = $article['m_downloads'] / 1000000;
-               $donwloads = round($donwloads, 1);
-            } else {
-               $suffix = "";
-               $donwloads = $article['m_downloads'];
-            }
+         <?php foreach ($articles as $article) : ?>
+               <?php
 
-            if ($article['m_approved'] != "0") {
-               continue;
-            }
+               if ($article['m_downloads'] >= 1000 && $article['m_downloads'] < 1000000) {
+                  $suffix = "k";
+                  $donwloads = $article['m_downloads'] / 1000;
+                  $donwloads = round($donwloads, 1);
+               } elseif ($article['m_downloads'] >= 1000000) {
+                  $suffix = "M";
+                  $donwloads = $article['m_downloads'] / 1000000;
+                  $donwloads = round($donwloads, 1);
+               } else {
+                  $suffix = "";
+                  $donwloads = $article['m_downloads'];
+               }
 
-            $tags = explode(" ",$article['m_tags']);
+               if ($article['m_approved'] != "0" || $article['m_blocked'] != "0") {
+                  continue;
+               }
 
-            ?>
-            <div class="col-md-4">
-               <div class="card mb-4 shadow-sm">
-                  <a href="/product/<?php echo $article['m_id']; ?>/">
-                  <img class="card-img-top img-fluid" style="width:350px;height:196px;" src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
-                  <?php 
-                  for ($i=0; $i < count($tags); $i++) { 
-                     echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
-                  }
-                  ?>
-                  </a>
-                  <div class="card-body">
-                     <a href="/product/<?php echo $article['m_id']; ?>/" class="text text-primary">
-                        <h5 class="card-topic text text-primary"><?php echo $article['m_name']; ?></h5>
+               ?>
+               <div class="col-md-4">
+                  <div class="loader-wrapper">
+                     <span class="loader"><span class="loader-inner"></span></span>
+                  </div>
+                  <div class="card mb-4 shadow-sm <?php echo $do; ?>">
+                     <a href="/product/<?php echo $article['m_id']; ?>/">
+                        <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <?php 
+                        if (!empty($article['m_price'])) {
+                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
+                        } 
+                        ?>
+                        <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
+                        <?php
+                        if (!empty($article['m_tags'])) {
+                           for ($i = 0; $i < count(explode(",", $article['m_tags'])); $i++) {
+                              echo '<small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> ' . explode(",", $article['m_tags'])[$i] . ' </small>';
+                           }
+                        }
+                        ?>
                      </a>
-                     <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
-                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                           <a href="<?php echo $article['m_downloadlink'];?>" class="btn btn-sm btn-outline-success"><?php echo $lang['download']; ?></a>
-                           <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo $donwloads. $suffix; ?> <i class="fas fa-download"></i></button>
+                     <div class="card-body">
+                        <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
+                           <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
+                        </a>
+                        <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                           <?php 
+                           
+                           if (empty($article['m_price'])) {
+                              echo '<div class="btn-group">
+                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
+                                 <button type="submit" class="btn btn-sm btn-outline-success">'.$lang['download'].'</button>
+                              </form>
+                              <button type="button" class="btn btn-sm btn-success" title="'.number_format($article['m_downloads']).' downloads">'.$donwloads . $suffix.' <i class="fas fa-download"></i></button>
+                           </div>';
+                           } else {
+                              echo '<div class="btn-group">
+                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
+                                 <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
+                              </form>
+                              <button type="button" class="btn btn-sm btn-info" title="'.$article['m_price'].'€">'.$article['m_price'].'€</button>
+                           </div>';
+                           }
+
+                           ?>
+                           <small class="text-muted"><?php echo $lang['by']; ?> <a href="/user/<?php echo $article['name']; ?>"><b><?php echo $article['name']; ?></b></a> <?php if ($article['premium'] == 1) {
+                                                                                                                                                                              echo '<a href="/partner-program/" class="fas fa-crown text text-muted" title="Premium content creator"></a>';
+                                                                                                                                                                           } ?></small>
                         </div>
-                        <small class="text-muted"><?php echo $lang['by']; ?> <a href="/user/<?php echo $article['name']; ?>/"><b><?php echo $article['name']; ?></b></a> <?php if ($article['premium'] == 1 ) {
-                           echo '<a href="/partner-program/" class="fas fa-crown text text-muted" title="Premium content creator"></a>';
-                        } ?></small>
                      </div>
                   </div>
                </div>
-            </div>
-         <?php endforeach; ?>
+            <?php endforeach; ?>
       </div>
    </div>
 </section>

@@ -142,11 +142,6 @@ if (isset($_SESSION['downloadMod'])) {
                   <div class="loader-wrapper">
                      <span class="loader"><span class="loader-inner"></span></span>
                   </div>
-                  <?php 
-                  if (!empty($article['m_price'])) {
-                     $do = 'border border-info';
-                  } 
-                  ?>
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
                         <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
