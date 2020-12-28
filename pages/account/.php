@@ -20,7 +20,7 @@ if (empty($_SESSION['user_username']) == TRUE) {
 	$c = "Google ";
 	if (strpos($a, $b) !== false) {
 		$_SESSION['user_username'] = $_SESSION['dc_name'];
-		
+
 		require_once('../../config.php');
 
 		$servername = $mysql['servername'];
@@ -51,7 +51,7 @@ if (empty($_SESSION['user_username']) == TRUE) {
 		$conn->close();
 	} elseif (strpos($a, $c) !== false) {
 		$_SESSION['user_username'] = $_SESSION['g_givenName'] . "1234";
-		
+
 		require_once('../../config.php');
 
 		$servername = $mysql['servername'];
@@ -130,6 +130,14 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<line x1="1" y1="10" x2="23" y2="10"></line>
 							</svg>Billing
 						</a>
+						<a href="#purchased" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart mr-2">
+								<circle cx="9" cy="21" r="1"></circle>
+								<circle cx="20" cy="21" r="1"></circle>
+								<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+							</svg>
+							Purchased items
+						</a>
 						<a href="#uploads" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud mr-2">
 								<polyline points="16 16 12 12 8 16"></polyline>
@@ -188,6 +196,13 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<line x1="1" y1="10" x2="23" y2="10"></line>
 								</svg></a>
 						</li>
+						<a href="#purchased" data-toggle="tab" class="nav-link has-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart mr-2">
+								<circle cx="9" cy="21" r="1"></circle>
+								<circle cx="20" cy="21" r="1"></circle>
+								<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+							</svg>
+						</a>
 						<li class="nav-item">
 							<a href="#uploads" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud mr-2">
 									<polyline points="16 16 12 12 8 16"></polyline>
@@ -256,13 +271,13 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<input type="text" name="call" value="callFunc" hidden>
 								<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
 								<div class="form-group small text-muted mt-3" id="info">
-								Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
+									Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
 								</div>
 								<button type="submit" class="btn btn-primary">Save & Update</button>
 							</div>
 						</form>
 						<?php
-						
+
 						if ($_SESSION['user_premium'] == "1") {
 							echo '<hr>
 							<form>
@@ -355,7 +370,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<h6>SECURITY SETTINGS</h6>
 						<hr>
 						<?php
-						
+
 						if (empty($_SESSION['user_2fa']) || $_SESSION['user_2fa'] == "0") {
 							echo '<form>
 							<div class="form-group">
@@ -377,7 +392,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						}
 
 						?>
-						
+
 						<hr>
 						<form action="" method="post">
 							<div class="form-group mb-0">
@@ -400,32 +415,32 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<h6>BILLING SETTINGS</h6>
 						<hr>
 						<?php
-							$ch = curl_init();
-							$token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
-							$userid = $_SESSION['user_id'];
+						$ch = curl_init();
+						$token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+						$userid = $_SESSION['user_id'];
 
-							curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
-							curl_setopt($ch, CURLOPT_POST, 1);
-							curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
-							curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-							$response = curl_exec($ch);
-							curl_close($ch);
+						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
+						curl_setopt($ch, CURLOPT_POST, 1);
+						curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
+						curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						$response = curl_exec($ch);
+						curl_close($ch);
 						?>
 						<div class="form-group">
 							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
 							<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
 						</div>
 						<label class="d-block mb-0">Payments</label>
-						<button class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</button>
+						<a href="/payment/deposit" class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</a>
                         <hr>
 						<label class="d-block mb-0">Payout</label>
 						<small class="text-danger">IMPORTANT: Minimum payout amount: 10.00€</small>
 						<br>
-						<?php 
-						if(floatval($response) > 10.00) 
+						<?php
+						if (floatval($response) > 10.00)
 							echo '<a href="/payment/payout" class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  Request payout</a>';
-						else 
+						else
 							echo '<button class="btn btn-info" disabled><i class="fab fa-paypal"></i>  Request payout</button>';
 						?>
 						<hr>
@@ -434,15 +449,15 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
 
 								<div class="container">
-									
-											<?php
 
-											$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
-											$result = $conn->query($sql);
+									<?php
 
-											if ($result->num_rows > 0) {
+									$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
+									$result = $conn->query($sql);
 
-												echo '<table class="table">
+									if ($result->num_rows > 0) {
+
+										echo '<table class="table">
 												<thead>
 													<tr>
 														<th scope="col">Mod-ID</th>
@@ -451,21 +466,21 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 												</thead>
 												<tbody>';
 
-												// output data of each row
-												while ($row = $result->fetch_assoc()) {
+										// output data of each row
+										while ($row = $result->fetch_assoc()) {
 
-													echo '<tr>
+											echo '<tr>
 														<th scope="row">' . $row['m_id'] . '</th>
-														<td>'.($row['m_downloads']/1000).'€ </td>
+														<td>' . ($row['m_downloads'] / 1000) . '€ </td>
 													</tr>';
-												}
-											} else {
-												echo 'There is no current income.';
-											}
+										}
+									} else {
+										echo 'There is no current income.';
+									}
 
-											?>
+									?>
 
-										</tbody>
+									</tbody>
 									</table>
 								</div>
 
@@ -511,14 +526,12 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text text-warning"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
 												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
-												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>'
-												;
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>';
 											} elseif ($row['m_blocked'] == 1) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>';
 												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
-												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>'
-												;
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>';
 											} else {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
@@ -533,6 +546,72 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 													<td>' . $status . '</td>
 													<td>' . $row['m_downloads'] . '</td>
 													<td>' . $edit . '</td>
+												</tr>';
+										}
+									} else {
+										echo '<tr>
+													<th scope="row">#</th>
+													<td>-</td>
+													<td>-</td>
+													<td>-</td>
+													<td>-</td>
+												</tr>';
+									}
+
+									?>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="tab-pane fade" id="purchased">
+						<h6>MY PURCHASES</h6>
+						<hr>
+						<div class="container">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">ID</th>
+										<th scope="col">Product ID</th>
+										<th scope="col">Status</th>
+										<th scope="col">Price</th>
+										<th scope="col">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+
+									$servername = $mysqlPayment['servername'];
+									$username = $mysqlPayment['username'];
+									$password = $mysqlPayment['password'];
+									$dbname = $mysqlPayment['dbname'];
+
+									// Create connection
+									$conn = new mysqli($servername, $username, $password, $dbname);
+									// Check connection
+									if ($conn->connect_error) {
+										die("Connection failed: " . $conn->connect_error);
+									}
+
+									$status = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
+
+									$sql = "SELECT * FROM product_log WHERE u_uuid = '$_SESSION[user_uuid]'";
+									$result = $conn->query($sql);
+
+									if ($result->num_rows > 0) {
+										// output data of each row
+										while ($row = $result->fetch_assoc()) {
+
+											echo '<tr>
+													<th scope="row">' . $row['id'] . '</th>
+													<td><a href="/product/' . $row['p_id'] . '/" class="text text-info">' . $row['p_id'] . '</a></td>
+													<td>' . $status . '</td>
+													<td>' . $row['price'] . '€</td>
+													<td>
+														<a href="/product/' . $row['p_id'] . '/download">													
+														<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>
+														</svg>
+													</td>
 												</tr>';
 										}
 									} else {

@@ -15,7 +15,6 @@ if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
 
-
 if ($_GET['id']) {
    $nameID = $_GET['id'];
    $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
@@ -34,6 +33,8 @@ if ($_GET['id']) {
          $changelog = $row['m_changelog'];
          $downloads = $row['m_downloads'];
          $uploaded = $row['m_created-at'];
+         $m_price = $row['m_price'];
+         $m_prices = $row['m_prices'];
 
          $tagArray = explode(",", $tags);
          $imgArray = explode(" ", $img);
@@ -73,6 +74,19 @@ if ($_GET['id']) {
          $userimg = $row['picture'];
       }
    }
+
+   $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+   $url = $actual_link;
+   $parts = explode('/', $url);
+   $urlNumber = $parts[count($parts) - 2];
+
+   
+   if (strpos($url, 'download') != FALSE) {
+      header('location: '.$download);
+   }
+
+   echo '<script>console.log("Number: '.$urlNumber.'");</script>';
 
    if (isset($_SESSION['downloadMod'])) {
       if($_SESSION['lastDownload'] == $nameID) {
@@ -250,10 +264,24 @@ if ($_GET['id']) {
          </div>
          <div class="col-md-6 mt-5 mt-md-2 text-center text-md-left">
             <h2 class="mt-0 text-left"><?php echo $name; ?></h2>
-            <small class="text-muted">Downloads: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($_SESSION['user_permission'] == "-1") {
+            <small class="text-muted"><?php if (empty($m_price)) {
+               echo 'Downloads';
+            } else {
+               echo 'Purchases';
+            } ?>: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($_SESSION['user_permission'] == "-1") {
                echo " | <u title='Not seeable for everyone.'>Estimated income: ".($downloads/1000).'€</u>';
             } ?> </small>
+
+
+
             <p class="lead mt-2 mb-3 primary-color text-left">
+            <?php
+            
+            if (!empty($m_price)) {
+               echo '<h3 class="border-bottom border-dark">Total: '.$m_price.'€</h3>';
+            }
+
+            ?>
             <?php if($_SESSION['user_iid']):?>
                <div class="report">
                   <a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> <?php echo $lang['report-mod']; ?></a>
@@ -278,7 +306,16 @@ if ($_GET['id']) {
                   <b class="text text-dark">(<?php echo count($rateArray); ?>)</b>
                </div>
 
-               <b class="badge badge-success"><?php echo $lang['free-download']; ?></b>
+               <?php 
+               
+               if (empty($m_price)) {
+                  echo '<b class="badge badge-success">'.$lang['free-download'].'</b>';
+               } else {
+                  echo '<b class="badge badge-info">Payed product</b>';
+               }
+
+               ?>
+               
                <?php
                echo '<a href="/search/?query=' . $cat . '&cat=1&submit-search=" class="badge badge-primary tag">' . $cat . '</a>';
                for ($i = 0; $i < count($tagArray); $i++) {
@@ -288,9 +325,19 @@ if ($_GET['id']) {
                ?>
             </p>
 
-            <form action="/helper/manage.php?o=product&download=<?php echo $nameID;?>" method="post">
-               <button type="submit" class="btn btn-block btn-lg btn-success"><?php echo $lang['download-now'];?></button>
-            </form>
+            <?php
+            
+            if (empty($m_price)) {
+               echo '<form action="/helper/manage.php?o=product&download='.$nameID.'" method="post">
+               <button type="submit" class="btn btn-block btn-lg btn-success">'.$lang['download-now'].'</button>
+            </form>';
+            } else {
+               echo '<form action="/helper/manage.php?o=product&download='.$nameID.'" method="post">
+               <button type="submit" class="btn btn-lg btn-info btn-block">Purchase now</button>
+            </form>';
+            }
+
+            ?>
             <?php
             if (!empty($required)) {
                if (strpos($required, "fivemods.net")) {
@@ -384,10 +431,17 @@ if ($_GET['id']) {
                $cat = $row['m_category'];
                $download = $row['m_downloadlink'];
                $downloads = $row['m_downloads'];
-               if ($id != $_GET['id'] && $mods < 9) {
+               $m_price = $row['m_price'];
+               $m_prices = $row['m_prices'];
+
+               if (!empty($m_price)) {
+                  $do = 'border border-info';
+               } 
+
+               if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                   $mods++;
                   echo '<div class="col-md-4">
-                                 <div class="card mb-4 shadow-sm">
+                                 <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
                                     <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
@@ -401,11 +455,38 @@ if ($_GET['id']) {
                                        </a>
                                        <p class="card-text">' . $predescription . '</p>
                                        <div class="d-flex justify-content-between align-items-center">
+                                       <div class="btn-group">
+                                       <form action="/helper/manage.php?o=index&download=' . $id. '" method="post">
+                                          <button type="submit" class="btn btn-sm btn-outline-success">'.$lang['download'].'</button>
+                                       </form>
+                                       <button type="button" class="btn btn-sm btn-success" title="'.number_format($downloads).' downloads">'.$downloads.' <i class="fas fa-download"></i></button>
+                                    </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>';
+               } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
+                  echo '<div class="col-md-4">
+                                 <div class="card mb-4 shadow-sm '.$do.'">
+                                    <a href="/product/' . $id . '/">
+                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <small class="badge badge-info ml-2" style="font-size:9px;">Payed product</small>
+                                    <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
+                  for ($i = 0; $i < count($tags); $i++) {
+                     echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
+                  }
+                  echo '</a>
+                                    <div class="card-body">
+                                       <a href="/product/' . $id . '/" class="text text-dark">
+                                          <h5 class="card-topic">' . $name . '</h5>
+                                       </a>
+                                       <p class="card-text">' . $predescription . '</p>
+                                       <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                             <form action="/helper/manage.php?o=product&download='. $id .'" method="post">
-                                                <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</a>
-                                             </form>
-                                             <button type="button" class="btn btn-sm btn-success" title="' . $downloads . ' downloads">' . $downloads . ' <i class="fas fa-download"></i></button>
+                                          <form action="/helper/manage.php?o=index&download='.$id.'" method="post">
+                                             <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
+                                          </form>
+                                             <button type="button" class="btn btn-sm btn-info" title="'.$m_price.'€">'.$m_price.'€</button>
                                           </div>
                                        </div>
                                     </div>
@@ -425,11 +506,11 @@ if ($_GET['id']) {
                   $tags = explode(",", $row['m_tags']);
                   $cat = $row['m_category'];
                   $download = $row['m_downloadlink'];
-                  if ($id != $_GET['id'] && $mods < 9) {
+                  if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                      echo '<div class="col-md-4">
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid" src="' . $img . '" alt="">
+                                       <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -449,7 +530,34 @@ if ($_GET['id']) {
                                        </div>
                                     </div>
                                  </div>';
+                  } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
+                  echo '<div class="col-md-4">
+                                 <div class="card mb-4 shadow-sm '.$do.'">
+                                    <a href="/product/' . $id . '/">
+                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <small class="badge badge-info ml-2" style="font-size:9px;">Payed product</small>
+                                    <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
+                  for ($i = 0; $i < count($tags); $i++) {
+                     echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
                   }
+                  echo '</a>
+                                    <div class="card-body">
+                                       <a href="/product/' . $id . '/" class="text text-dark">
+                                          <h5 class="card-topic">' . $name . '</h5>
+                                       </a>
+                                       <p class="card-text">' . $predescription . '</p>
+                                       <div class="d-flex justify-content-between align-items-center">
+                                          <div class="btn-group">
+                                          <form action="/helper/manage.php?o=index&download='.$id.'" method="post">
+                                             <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
+                                          </form>
+                                             <button type="button" class="btn btn-sm btn-info" title="'.$m_price.'€">'.$m_price.'€</button>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>';
+               }
                }
             }
          }

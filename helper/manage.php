@@ -3,8 +3,19 @@
     require_once('../config.php');
 
     $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+    
+    require_once('../config.php');
+        
+    $servernameP = $mysqlPayment['servername'];
+    $usernameP = $mysqlPayment['username'];
+    $passwordP = $mysqlPayment['password'];
+    $dbnameP = $mysqlPayment['dbname'];
+
+    $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
+
     if(htmlspecialchars($_POST['contact'])) {
-        contact();
+        contact($pdo);
     } elseif (htmlspecialchars($_POST['partner'])) {
         partner($pdo);
     } elseif(htmlspecialchars($_POST['reportmod'])) {
@@ -16,36 +27,31 @@
     } elseif (htmlspecialchars($_GET['upload'])) {
         uploadMod();
     } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
-        downloadMod($pdo);
+        downloadMod($pdo, $pdoPayment);
     } else {
         header('Location: ../error/400/403');
         exit();
         die();
     }
 
-    function contact() {
+    function contact($pdo) {
         session_start();
-        require_once('../config.php');
 
-        $servername = $mysql['servername'];
-        $username = $mysql['username'];
-        $password = $mysql['password'];
-        $dbname = $mysql['dbname'];
-
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-        }
-
-        $userid = htmlspecialchars($_POST['userid']);
+        $userid = $_SESSION['user_iid'];
         $category = htmlspecialchars($_POST['category']);
-        $heading = htmlspecialchars($_POST['heading']);
+        $header = htmlspecialchars($_POST['header']);
         $description = nl2br(htmlspecialchars($_POST['message']));
-        $sql = "INSERT INTO `contact` (userid, category, heading, c_description) VALUES ('$userid', '$category', '$heading', '$description')";
-        $conn->query($sql);
-        echo '<meta http-equiv="refresh" content="0; URL=/contact">';
+        
+        $insert = $pdo->prepare("INSERT INTO contact (userid, category, heading, c_description) VALUES (:userid, :cat, :header, :desc)");
+        $insert->execute(array("userid" => $userid, "cat" => $category, "header" => $header, "desc" => $description));
+
+        $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Successfully sent! </strong> We recieved your contact request and will answer it as soon as possible!
+        </div>';
+
+        header("Location: /contact/");
+
         exit();
         die();
     }
@@ -188,18 +194,36 @@
         return substr(str_shuffle($permitted_chars), 0, $length);
     }
 
-    function downloadMod($pdo) {
+    function downloadMod($pdo, $pdoPayment) {
         session_start();
+
+        
+
         $mod = $_GET['download'];
-        $download = $pdo->prepare("SELECT m_downloads FROM mods WHERE m_id = :id");
+        $download = $pdo->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM mods LEFT JOIN user ON mods.m_authorid = user.id WHERE m_id = :id");
         $download->execute(array('id' => $mod));
         while($row = $download->fetch()) {
             $downloads = $row['m_downloads'];
-        
+            
+            $_SESSION['lastDownload'] = "5000";
             if($_SESSION['lastDownload'] != $mod) {
                 $newDownloads = $downloads + 1;
                 $newDownloadSet = $pdo->prepare("UPDATE mods SET m_downloads = :downloads WHERE m_id = :id");
                 $newDownloadSet->execute(array("downloads" => $newDownloads, "id" => $mod));
+                
+                $selectBalance = $pdoPayment->prepare("SELECT balance FROM payment_user WHERE uuid = :uuid");
+                $selectBalance->execute(array("uuid" => $row['uuid']));
+
+                $fetchBalance = $selectBalance->fetch();
+                $balance = floatval($fetchBalance['balance']);
+
+                if($row['premium'] == 1) 
+                    $newBalance = $balance + 0.002;
+                else
+                    $newBalance = $balance + 0.001;
+
+                $updateBalance = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
+                $updateBalance->execute(array('balance' => $newBalance, 'uuid' => $row['uuid']));
 
                 $_SESSION['downloadMod'] = $newDownloads;
             } else {
@@ -207,6 +231,9 @@
             }
             $_SESSION['lastDownload'] = $mod;
         }
+
+        
+        
         switch ($_GET['o']) {
             case 'product':
                 header("Location: /product/$mod");
