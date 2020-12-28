@@ -264,12 +264,6 @@ function randomChars($length)
       document.getElementById('categoryfeedback').innerHTML = "Looks good!";
    };
 
-    function outputValue(item) {
-        document.getElementById('categoryfeedback').className = "valid-feedback";
-        document.getElementById('categoryfeedback').innerHTML = "Looks good!";
-    };
-
-
     var modupload = document.getElementById('modupload');
     modupload.onchange = function() {
         if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
