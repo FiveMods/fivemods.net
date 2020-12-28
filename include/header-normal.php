@@ -223,6 +223,12 @@ $currentPage = $_GET['page'];
          $response = curl_exec($ch);
          curl_close($ch);
 
+         if (empty($response) || $response <= 0) {
+            $response = "";
+         } else {
+            $response = $response ."€";
+         }
+
          if (empty($_SESSION['user_id'])) {
             echo '<ul class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
@@ -232,13 +238,14 @@ $currentPage = $_GET['page'];
          } else {
             echo '<form action="/account/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
-                  <a href="/payment/deposit/" type="submit" class="btn btn-outline-primary"> ' .$response.'€ <span class="caret"></span></a></form>';
+                  <a href="/payment/deposit/" type="submit" class="btn btn-outline-primary"> ' .$response.' <span class="caret"></span></a></form>';
             echo '<form action="/account/logout/" method="post">
-                  <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . ' <span class="caret"></span></button>
+                  <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i><span class="caret"></span></button>
                   <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
                   </form>';
          }
          ?>
+         <!-- ' . $lang['log-out'] . '  -->
       </div>
    </div>
    </div>
