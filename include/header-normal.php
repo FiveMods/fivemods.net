@@ -210,6 +210,25 @@ $currentPage = $_GET['page'];
             <button type="submit" name="submit-search" hidden></button>
          </form>
          <?php
+
+         $ch = curl_init();
+         $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+         $userid = $_SESSION['user_id'];
+
+         curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+         curl_setopt($ch, CURLOPT_POST, 1);
+         curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
+         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         $response = curl_exec($ch);
+         curl_close($ch);
+
+         if (empty($response) || $response <= 0) {
+            $response = "";
+         } else {
+            $response = $response ."€";
+         }
+
          if (empty($_SESSION['user_id'])) {
             echo '<ul class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
@@ -218,13 +237,15 @@ $currentPage = $_GET['page'];
                </ul>';
          } else {
             echo '<form action="/account/" method="post">
-                  <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>';
+                  <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
+                  <a href="/payment/deposit/" type="submit" class="btn btn-outline-primary"> ' .$response.' <span class="caret"></span></a></form>';
             echo '<form action="/account/logout/" method="post">
-                  <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . ' <span class="caret"></span></button>
+                  <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i><span class="caret"></span></button>
                   <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
                   </form>';
          }
          ?>
+         <!-- ' . $lang['log-out'] . '  -->
       </div>
    </div>
    </div>
