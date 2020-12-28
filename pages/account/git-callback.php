@@ -183,6 +183,7 @@ if($_SESSION['access_token']) {
     header("Location: /account/");
 
 } 
+header("Location: /account/");
 
 
 

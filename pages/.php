@@ -152,7 +152,7 @@ if (isset($_SESSION['downloadMod'])) {
                         <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
-                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Payed product</small>';
+                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
                         } 
                         ?>
                         <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>

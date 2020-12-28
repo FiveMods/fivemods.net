@@ -311,7 +311,7 @@ if ($_GET['id']) {
                if (empty($m_price)) {
                   echo '<b class="badge badge-success">'.$lang['free-download'].'</b>';
                } else {
-                  echo '<b class="badge badge-info">Payed product</b>';
+                  echo '<b class="badge badge-info">Paid product</b>';
                }
 
                ?>
