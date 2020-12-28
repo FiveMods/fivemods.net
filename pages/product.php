@@ -456,10 +456,10 @@ if ($_GET['id']) {
                                        <p class="card-text">' . $predescription . '</p>
                                        <div class="d-flex justify-content-between align-items-center">
                                        <div class="btn-group">
-                                       <form action="/helper/manage.php?o=index&download='.$m_id.'" method="post">
+                                       <form action="/helper/manage.php?o=index&download=' . $id. '" method="post">
                                           <button type="submit" class="btn btn-sm btn-outline-success">'.$lang['download'].'</button>
                                        </form>
-                                       <button type="button" class="btn btn-sm btn-success" title="'.number_format($m_downloads).' downloads">'.$donwloads . $suffix.' <i class="fas fa-download"></i></button>
+                                       <button type="button" class="btn btn-sm btn-success" title="'.number_format($downloads).' downloads">'.$downloads.' <i class="fas fa-download"></i></button>
                                     </div>
                                        </div>
                                     </div>
@@ -483,7 +483,7 @@ if ($_GET['id']) {
                                        <p class="card-text">' . $predescription . '</p>
                                        <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                          <form action="/helper/manage.php?o=index&download='.$m_id.'" method="post">
+                                          <form action="/helper/manage.php?o=index&download='.$id.'" method="post">
                                              <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                                           </form>
                                              <button type="button" class="btn btn-sm btn-info" title="'.$m_price.'€">'.$m_price.'€</button>
@@ -548,7 +548,7 @@ if ($_GET['id']) {
                                        <p class="card-text">' . $predescription . '</p>
                                        <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                          <form action="/helper/manage.php?o=index&download='.$m_id.'" method="post">
+                                          <form action="/helper/manage.php?o=index&download='.$id.'" method="post">
                                              <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                                           </form>
                                              <button type="button" class="btn btn-sm btn-info" title="'.$m_price.'€">'.$m_price.'€</button>
