@@ -137,7 +137,7 @@
                               <div class="col">
                                  <div class="card rounded">
                                     <div class="card-body d-flex justify-content-between border-bottom border-info">
-                                       <span><b>FiveMods Advertisement Service</b> <i class="far fa-question-circle" title="N/A"></i></span>
+                                       <span><b>FiveMods Advertisement Service</b> <i class="far fa-question-circle" title="Status for our own advertisement service. Thats something we planned for the future!"></i></span>
                                        <span><i class="fas fa-wrench text text-info"></i></span>
                                     </div>
                                  </div>
@@ -162,9 +162,9 @@
                               </div>
                               <div class="col">
                                  <div class="card rounded">
-                                    <div class="card-body d-flex justify-content-between border-bottom border-info">
-                                       <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="N/A"></i></span>
-                                       <span><i class="fas fa-wrench text text-info"></i></span>
+                                    <div class="card-body d-flex justify-content-between border-bottom border-success">
+                                       <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                                       <span><i class="fas fa-check text text-success"></i></span>
                                     </div>
                                  </div>
                               </div>

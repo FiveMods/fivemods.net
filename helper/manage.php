@@ -225,6 +225,11 @@
                 $updateBalance = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
                 $updateBalance->execute(array('balance' => $newBalance, 'uuid' => $row['uuid']));
 
+                $totalDownloads = $row['totaldownloads'] + 1;
+
+                $updateDownloads = $pdo->prepare("UPDATE user SET totaldownloads = :dwnld WHERE uuid = :uuid");
+                $updateDownloads->execute(array("dwnld" => $totalDownloads, "uuid" => $row['uuid']));
+
                 $_SESSION['downloadMod'] = $newDownloads;
             } else {
                 $_SESSION['downloadMod'] = $downloads;
