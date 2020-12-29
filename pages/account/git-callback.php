@@ -49,7 +49,7 @@ if($_GET['code']) {
   $token = apiRequest($tokenURL, array(
     'client_id' => OAUTH2_CLIENT_ID,
     'client_secret' => OAUTH2_CLIENT_SECRET,
-    'redirect_uri' => 'http://localhost/pages/account/git-callback.php',
+    'redirect_uri' => 'https://fivemods.net/pages/account/git-callback.php',
     'state' => $_SESSION['state'],
     'code' => $_GET['code'],
   ));
