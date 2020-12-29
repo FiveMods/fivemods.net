@@ -197,7 +197,7 @@ try {
     $uuid = $v5uuid;
     $oauth_uid = $user->id;
     $oauth_provider = "Discord Inc.";
-    // $name = $_SESSION['user_username'];
+    $_SESSION['user_username'] = $_SESSION['dc_name'];
     $first_name = $_SESSION['dc_name'];
     $last_name = "";
     $email = $user->email;
@@ -219,10 +219,12 @@ try {
     $insertUser->execute(array('provider' => $oauth_provider, 'id' => $oauth_uid, 'uuid' => $v5uuid, 'username' => $first_name, 'email' => $email, 'country' => $locale));
 
     echo "New records created successfully";
+
+    $_SESSION['justCreated'] = true;
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     if (strpos("1062 Duplicate entry", $e->getMessage()) !== TRUE) {
-
+        $_SESSION['justCreated'] = false;
   		$sid = session_id();
 
         require_once('../../config.php');
@@ -311,8 +313,11 @@ if ($result->num_rows > 0) {
 }
 
 $conn = null;
-
-header('Location: /account/');
+if($_SESSION['justCreated'] == true) {
+    header("Location: /pages/account/helper/account.check.php");
+} else {
+    header('Location: /account/');
+}
 exit();
 die();
 ?>

@@ -94,6 +94,9 @@ if($_SESSION['access_token']) {
         $_SESSION['user_blocked_by'] = $userFetch['blocked_by'];
         $_SESSION['user_blocked_reason'] = $userFetch['blocked_reason'];
         $_SESSION['user_permission'] = $userFetch['permission'];
+        
+        header("Location: /account/");
+
     } else {
 
         $email = apiRequest($apiURLBase . 'user/emails');
@@ -157,8 +160,8 @@ if($_SESSION['access_token']) {
         $_SESSION['user_permission'] = $permission;
         $_SESSION['user_image'] = $fileName;
 
-        $insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, name, email, picture, locale, description, twitter, github, main_ip) VALUES (:sid, '$v5uuid', :id, 'GitHub', :username, :email, :picture, :locale, :description, :twitter, :github, :mainip)");
-        $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => $description, 'twitter' => $twitter, 'github' => $user->login, 'mainip' => $main_ip, 'id' => $user->id, 'username' => $user->login, 'locale' => $location));
+        $insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, twitter, github, main_ip) VALUES (:sid, '$v5uuid', :id, 'GitHub', :email, :picture, :locale, :description, :twitter, :github, :mainip)");
+        $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => $description, 'twitter' => $twitter, 'github' => $user->login, 'mainip' => $main_ip, 'id' => $user->id, 'locale' => $location));
 
         $servernameP = $mysqlPayment['servername'];
         $usernameP = $mysqlPayment['username'];
@@ -170,7 +173,7 @@ if($_SESSION['access_token']) {
         $insertUser->execute(array('provider' => "GitHub", 'id' => $user->id, 'uuid' => $v5uuid, 'username' => $user->login, 'email' => $email, 'country' => $location));
 
         
-        $select = $pdo->prepare("SELECT id, created-at, updated-at FROM user WHERE uuid = :uuid");
+        $select = $pdo->prepare("SELECT * FROM user WHERE uuid = :uuid");
         $select->execute(array('uuid' => $v5uuid));
 
         $selectFetch = $select->fetch();
@@ -178,12 +181,12 @@ if($_SESSION['access_token']) {
         $_SESSION['user_iid'] = $selectFetch['id'];
         $_SESSION['created_at'] = $selectFetch['created-at'];
         $_SESSION['updated_at'] = $selectFetch['updated-at']; 
+
+        header("Location: /pages/account/helper/account.check.php");
     }
-
-    header("Location: /account/");
-
 } 
-header("Location: /account/");
+exit();
+die();
 
 
 
