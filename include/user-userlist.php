@@ -21,7 +21,7 @@ echo '<section class="pt-5 pb-5">
         <div class="row">';
 
 
-$sql = "SELECT * FROM user";
+$sql = "SELECT * FROM user ORDER BY name ASC";
    $result = $conn->query($sql);
    if($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {
