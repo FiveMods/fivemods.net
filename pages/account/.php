@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 	header('location: /account/logout/');
 	exit();
 }
-
+/*
 if (empty($_SESSION['user_username']) == TRUE) {
 
 	$a = $_SESSION['oauth_provider'];
@@ -80,7 +80,7 @@ if (empty($_SESSION['user_username']) == TRUE) {
 
 		$conn->close();
 	}
-}
+}*/
 
 if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 	header('location: /account/two-factor-authentication/');
