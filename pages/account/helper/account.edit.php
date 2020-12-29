@@ -25,6 +25,25 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $banner = htmlspecialchars($_POST['gbanner']);
         $tochange = htmlspecialchars($_POST['id']);
 
+        $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+        $userDB = $pdo->prepare("SELECT * FROM user WHERE name = :username");
+        $userDB->execute(array('username' => $username2));
+
+        if($userDB->rowCount() > 0) {
+
+          session_start();
+          $_SESSION['success'] = '<div class="alert alert-danger" id="success-alert">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>Error! </strong> Your selected username is already taken!
+        </div>
+        ';
+          header('location: /account/');
+          exit();
+          die();
+          
+        }
+
 
         try {
           $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

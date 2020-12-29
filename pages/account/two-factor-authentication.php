@@ -38,7 +38,7 @@ if (empty($t2ken) || $t2ken == NULL) {
    $sql = "UPDATE user SET 2fa_acc='$secret' WHERE oauth_uid='$iiid'";
 
    if ($conn->query($sql) === TRUE) {
-      echo "Record updated successfully";
+      // echo "Record updated successfully";
       echo '<script>console.log("Updated");</script>';
    } else {
       echo '<script>console.log("Error: ' . $sql . "<br>" . $conn->error . '");</script>';
