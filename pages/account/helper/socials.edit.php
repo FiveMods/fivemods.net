@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
     function editSocials() {
-      require_once('./config.php');
+      require_once('../../../config.php');
 
       $servername = $mysql['servername'];
       $username = $mysql['username'];
@@ -27,8 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $instagram = htmlspecialchars($_POST['instagram']);
         $github = htmlspecialchars($_POST['github']);
         $tochange = htmlspecialchars($_POST['id']);
-
-        require_once('./config.php');
 
         try {
           $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
