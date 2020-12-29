@@ -318,7 +318,7 @@ function purchaseMod($pdo, $pdoPayment)
 
                     $fetchBalance = $selectBalance->fetch();
                     $balance = floatval($fetchBalance['balance']);
-                    
+
                     // Purchasing user
 
                     $selectBalanceBuy = $pdoPayment->prepare("SELECT balance FROM payment_user WHERE uuid = :uuid");
@@ -354,18 +354,17 @@ function purchaseMod($pdo, $pdoPayment)
                     $costsB = (30 / 100) * $costs;
 
                     if ($selMod == $mod) {
-                        
+
                         if ($row['premium'] == 1) {
                             $newBalance = $balance + 0.002;
                         } else {
                             $newBalance = $balance + 0.001;
                         }
-    
+
                         $updateBalance = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
                         $updateBalance->execute(array('balance' => $newBalance, 'uuid' => $row['uuid']));
-    
-                        $_SESSION['downloadMod'] = $newDownloads;
 
+                        $_SESSION['downloadMod'] = $newDownloads;
                     } else {
                         if ($row['premium'] == 1) {
                             $newBalance = $balance + $costsA + 0.002;
@@ -374,10 +373,10 @@ function purchaseMod($pdo, $pdoPayment)
                             $newBalance = $balance + $costsA + 0.001;
                             $newBalanceBuy = $balanceBuy - $costs;
                         }
-    
+
                         $updateBalance = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
                         $updateBalance->execute(array('balance' => $newBalance, 'uuid' => $row['uuid']));
-    
+
                         $updateBalanceBuy = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
                         $updateBalanceBuy->execute(array('balance' => $newBalanceBuy, 'uuid' => $_SESSION['user_uuid']));
 
@@ -385,23 +384,20 @@ function purchaseMod($pdo, $pdoPayment)
 
                         $updateBalanceFM = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
                         $updateBalanceFM->execute(array('balance' => $newBalanceFM, 'uuid' => '4c48aaa4-3ee7-4fab-996a-3697e64604f0'));
-    
+
                         // Add entry to product log
-                        
+
                         $insertProdLog = $pdoPayment->prepare("INSERT INTO product_log (u_uuid, p_id, price) VALUES (?, ?, ?)");
                         $insertProdLog->execute(array($_SESSION['user_uuid'], $mod, $costs));
-    
+
                         $_SESSION['downloadMod'] = $newDownloads;
                     }
-
                 } else {
                     $_SESSION['downloadMod'] = $downloads;
                 }
                 $_SESSION['lastDownload'] = $mod;
             }
         }
-
-
 
         switch ($_GET['o']) {
             case 'product':
