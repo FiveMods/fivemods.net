@@ -53,8 +53,8 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // prepare sql and bind parameters
-    $stmt = $conn->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, first_name, last_name, email, password, picture, gender, locale, description, permission, main_ip)
-    VALUES (:sid, :uuid, :oauth_uid, :oauth_provider, :first_name, :last_name, :email, :password, :picture, :gender, :locale, :description, :permission, :main_ip)");
+    $stmt = $conn->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, first_name, last_name, email, picture, locale, description, permission, main_ip)
+    VALUES (:sid, :uuid, :oauth_uid, :oauth_provider, :first_name, :last_name, :email, :picture, :locale, :description, :permission, :main_ip)");
     $stmt->bindParam(':sid', $sid);
     $stmt->bindParam(':uuid', $uuid);
     $stmt->bindParam(':oauth_uid', $oauth_uid);
@@ -62,9 +62,7 @@ try {
     $stmt->bindParam(':first_name', $first_name);
     $stmt->bindParam(':last_name', $last_name);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':picture', $picture);
-    $stmt->bindParam(':gender', $gender);
     $stmt->bindParam(':locale', $locale);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':permission', $permission);
@@ -102,12 +100,6 @@ try {
     $v5uuid = UUID::v4();
 
 
-	if (empty($_SESSION['g_gender']) == TRUE) {
-		$gender = "-";
-	} else {
-		$gender = $_SESSION['g_gender'];
-	}
-
     // insert a row
     $sid = session_id();
     $uuid = $v5uuid;
@@ -117,7 +109,6 @@ try {
     $first_name = $_SESSION['g_givenName'];
     $last_name = $_SESSION['g_familyName'];
     $email = $_SESSION['user_email'];
-    $password = '************';
     $picture = $fileName;
     $locale = "-";
     $description = "No description set.";
