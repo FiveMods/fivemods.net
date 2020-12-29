@@ -161,6 +161,30 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                             </svg>
                             Mod Stats
                         </a>
+                        <?php
+
+                        if ($m_approved == "-1") {
+                            echo '<a href="#" data-toggle="modal" data-target="#reqMod" class="nav-item nav-link has-icon nav-link-faded">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-refresh-ccw mr-2">
+                                <polyline points="1 4 1 10 7 10"></polyline>
+                                <polyline points="23 20 23 14 17 14"></polyline>
+                                <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                            </svg>Request review
+                        </a>';
+                        }
+
+
+                        ?>
+
+                        <a href="#" data-toggle="modal" data-target="#delMod" class="nav-item nav-link has-icon nav-link-faded">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 mr-2">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>Delete Mod
+                        </a>
+
                         <a href="/account/" class="nav-item nav-link has-icon nav-link-faded">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -262,7 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                             <input type="text" name="call" value="callFunc" hidden>
                             <input type="text" name="id" value="<?php echo $_SESSION['user_iid']; ?>" hidden>
                             <button type="submit" class="btn btn-primary">Save & Update</button>
-                            <a href="?del=<?php echo $m_id; ?>" class="btn btn-danger">Delete mod</a>
                         </form>
                         <!-- <p class="mt-4 form-group small text-muted">Mit <span class="text text-danger">*</span> gekennzeichnete Felder sind sogennante Pflichtfelder und müssen ausgefüllt werden.</p> -->
                     </div>
@@ -318,3 +341,54 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         });
     });
 </script>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="delMod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deleted mods are neither accessable for you, the public or the FiveMods.net team.
+                Your income flow on this mod is stopped with deleting.
+            </div>
+            <div class="modal-footer">
+                <form action="/pages/account/helper/mod.del.php" method="post">
+                    <input type="text" name="call" value="callFunc" hidden>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Request Modal -->
+<div class="modal fade" id="reqMod" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Trigger a new review?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                If you trigger a new review, you can't change the modification anymore.
+                You can easily request another review should this one get denied.
+                Make sure you follow our <a href="/terms-of-service/">terms of service</a>.
+            </div>
+            <div class="modal-footer">
+                <form action="/pages/account/helper/mod.req.php" method="post">
+                    <input type="text" name="call" value="callFunc" hidden>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Please review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

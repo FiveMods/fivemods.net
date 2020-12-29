@@ -266,7 +266,7 @@ include('./include/header-banner.php');
                            </div>';
                            } else {
                               echo '<div class="btn-group">
-                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
+                              <form action="/product/'.$article['m_id'].'/" method="post">
                                  <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                               </form>
                               <button type="button" class="btn btn-sm btn-info" title="'.$article['m_price'].'€">'.$article['m_price'].'€</button>

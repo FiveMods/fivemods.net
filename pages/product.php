@@ -198,6 +198,20 @@ if ($_GET['id']) {
          unset($_SESSION['rated']);
          }
       ?>
+      <?php 
+   
+         if ($_SESSION['successpurchased'] == TRUE) {
+            echo '<div class="alert alert-success alert-dismissible fade show center" role="alert">
+            <strong>Success!</strong> You\'ve successfully purchased this mod!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>';
+         $_SESSION['successpurchased'] == FALSE;
+         unset($_SESSION['successpurchased']);
+         }
+
+      ?>
       <div class="row">
          <div class="col-md-6 text-center">
             <div id="imgCarousel" class="carousel slide" data-ride="carousel">
@@ -275,13 +289,6 @@ if ($_GET['id']) {
 
 
             <p class="lead mt-2 mb-3 primary-color text-left">
-            <?php
-            
-            if (!empty($m_price)) {
-               echo '<h3 class="border-bottom border-dark">Total: '.$m_price.'€</h3>';
-            }
-
-            ?>
             <?php if($_SESSION['user_iid']):?>
                <div class="report">
                   <a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> <?php echo $lang['report-mod']; ?></a>
@@ -332,9 +339,11 @@ if ($_GET['id']) {
                <button type="submit" class="btn btn-block btn-lg btn-success">'.$lang['download-now'].'</button>
             </form>';
             } else {
-               echo '<form action="/helper/manage.php?o=product&download='.$nameID.'" method="post">
-               <button type="submit" class="btn btn-lg btn-info btn-block">Purchase now</button>
-            </form>';
+               echo '
+               <button data-toggle="modal" data-target="#reqPur" class="btn btn-info col-10">Purchase now</button><span class="caret"></span>
+               <button type="text" class="btn btn-outline-info">'.$m_price.'€</button><span class="caret"></span>
+
+            ';
             }
 
             ?>
@@ -470,7 +479,7 @@ if ($_GET['id']) {
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
                                     <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
-                                    <small class="badge badge-info ml-2" style="font-size:9px;">Payed product</small>
+                                    <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -483,7 +492,7 @@ if ($_GET['id']) {
                                        <p class="card-text">' . $predescription . '</p>
                                        <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                          <form action="/helper/manage.php?o=index&download='.$id.'" method="post">
+                                          <form action="/product/'.$id.'/" method="post">
                                              <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                                           </form>
                                              <button type="button" class="btn btn-sm btn-info" title="'.$m_price.'€">'.$m_price.'€</button>
@@ -535,7 +544,7 @@ if ($_GET['id']) {
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
                                     <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
-                                    <small class="badge badge-info ml-2" style="font-size:9px;">Payed product</small>
+                                    <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -548,7 +557,7 @@ if ($_GET['id']) {
                                        <p class="card-text">' . $predescription . '</p>
                                        <div class="d-flex justify-content-between align-items-center">
                                           <div class="btn-group">
-                                          <form action="/helper/manage.php?o=index&download='.$id.'" method="post">
+                                          <form action="/product/'.$_id.'/" method="post">
                                              <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                                           </form>
                                              <button type="button" class="btn btn-sm btn-info" title="'.$m_price.'€">'.$m_price.'€</button>
@@ -683,4 +692,42 @@ if ($_GET['id']) {
          </div>
       </div>
    </div>
+</div>
+
+
+<!-- Request Modal -->
+<div class="modal fade" id="reqPur" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Continue shopping?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your current budget amounts: <?php $ch = curl_init();
+                  $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+                  $userid = $_SESSION['user_id'];
+
+                  curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+                  curl_setopt($ch, CURLOPT_POST, 1);
+                  curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
+                  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+                  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                  $response = curl_exec($ch);
+                  curl_close($ch); echo "<b>".$response."€</b><hr>"; ?>
+                  <!-- Are you sure you want to buy this product?<br> -->
+                  <i><b>Note:</b> After buying you can always download the product again for free!</i><br>
+                <small class="text-muted">With purchasing you accept our <a href="/payment-agreement/">universal billing & payment agreement</a>, and <a href="/terms-of-service/">terms of service</a>.</small>
+            </div>
+            <div class="modal-footer">
+                <form action="/helper/manage.php?o=index&purchase=<?php echo $nameID; ?>" method="post">
+                    <input type="text" name="call" value="callFunc" hidden>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" id="btnSave" class="btn btn-info" data-toggle="modal" data-target="#reqPur">Buy now</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
