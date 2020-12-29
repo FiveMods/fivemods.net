@@ -18,8 +18,8 @@ if ($conn->connect_error) {
 die("Connection failed: " . $conn->connect_error);
 }
 
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 ini_set('max_execution_time', 300); //300 seconds = 5 minutes. In case if your CURL is slow and is loading too much (Can be IPv6 problem)
 
 error_reporting(E_ALL);
@@ -174,7 +174,7 @@ try {
 
     //The path and filename that you want to save the file to.
     // Change to storage.fivemods.net later on!
-    $fileName = '../../localstorage/discord/' . $_SESSION['user_id'] . '.png';
+    $fileName = '../../../storage-html/profiles/discord/' . $_SESSION['user_id'] . '.png';
     echo $fileName;
 
     //Save the data using file_put_contents.
@@ -185,6 +185,8 @@ try {
         throw new Exception('Failed to save file to: ', $fileName);
         header('location: /account/logout/?url=error');
     }
+
+    $fileName = "https://storage.fivemods.net/profiles/discord/".$_SESSION['user_id'].".png";
 
     // Usage
     include 'uuid.php';
@@ -254,7 +256,8 @@ try {
 
   		//The path and filename that you want to save the file to.
   		// Change to storage.fivemods.net later on!
-  		$fileName = '../../../storage-html/profiles/discord/' . $_SESSION['user_id'] . '.png';
+      $fileName = '../../../storage-html/profiles/discord/' . $_SESSION['user_id'] . '.png';
+  		// $fileName = "https://storage.fivemods.net/profiles/discord/".$_SESSION['user_id'].".png";
   		echo $fileName;
 
   		//Save the data using file_put_contents.
@@ -265,7 +268,7 @@ try {
   			throw new Exception('Failed to save file to: ', $fileName);
   		}
 
-          $fileName = "https://storage.fivemods.net/profiles/discord/".$_SESSION['user_id'].".png";
+      $fileName = "https://storage.fivemods.net/profiles/discord/".$_SESSION['user_id'].".png";
 
   		$sql = "UPDATE user SET sid='$sid', first_name='$first_name', last_name='$last_name', email='$email', picture='$fileName' WHERE uuid = '$_SESSION[user_uuid]'";
 
