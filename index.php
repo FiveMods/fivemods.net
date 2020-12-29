@@ -150,12 +150,62 @@ if (isset($_GET['page'])) {
    <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
    <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
    <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
+   <meta name="msapplication-config" content="none">
+   <meta name="theme-color" content="#FF8637">
+   <meta name="msapplication-navbutton-color" content="#FF8637">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
 
    <meta name="DC.Language" content="en" />
    <meta name="DC.Creator" content="FiveMods" />
    <meta name="DC.Publisher" content="FiveMods" />
    <meta name="DC.Rights" content="FiveMods" />
    <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
+
+   <?php 
+
+      $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+      if (strpos($actual_link, 'product') != FALSE) {        
+
+         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+         $url = $actual_link;
+         $parts = explode('/', $url);
+         $urlNumber = $parts[count($parts) - 2];
+
+         $selMod = $pdo->prepare("SELECT * FROM mods WHERE m_id = :mid");
+         $selMod->execute(array("mid" => $urlNumber));
+
+         $fetchMod = $selMod->fetch();
+         $m_name = $fetchMod['m_name'];
+         $m_picture = $fetchMod['m_picture'];
+         $m_desc = $fetchMod['m_description'];
+
+
+         echo '<script>console.log("Mod name: '.$m_name.'");</script>';
+         echo '<script>console.log("Mod pic: '.$m_picture.'");</script>';
+
+
+         echo '
+         <meta property="og:type" content="website">
+         <meta property="og:url" content="http://fivemods.net/product/'.$urlNumber.'">
+         <meta property="og:title" content="FiveMods.net - '.$m_name.'">
+         <meta property="og:description" content="FiveMods.net - '.$m_desc.'">
+         <meta property="og:site_name" content="FiveMods.net - '.$m_name.'">
+         <meta property="og:image" content="'.$m_picture.'">
+      
+         <meta name="twitter:card" content="summary_large_image">
+         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:title" content="FiveMods.net - '.$m_name.'">
+         <meta name="twitter:description" content="FiveMods.net - '.$m_desc.'">
+         <meta name="twitter:image" content="'.$m_picture.'">
+         ';
+      
+         echo '<script>console.log("Control numb.: '.$urlNumber.'");</script>';
+      }   
+
+   ?>
 
    <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
 
@@ -165,6 +215,7 @@ if (isset($_GET['page'])) {
    <meta name="apple-mobile-web-app-capable" content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
 
+   <meta property="og:type" content="">
    <meta property="og:url" content="">
    <meta property="og:title" content="">
    <meta property="og:description" content="">
