@@ -38,7 +38,7 @@ if (isset($_POST['uploadMod'])) {
    if (!is_dir($path . '/' . $userid)) mkdir($path . '/' . $userid);
    if (!is_dir($path)) mkdir($path);
 
-   echo mkdir($path . '/' . $userid . '/' . $modid);
+   mkdir($path . '/' . $userid . '/' . $modid);
    mkdir($path . '/' . $userid . '/' . $modid . '/img');
 
    move_uploaded_file($_FILES["modupload"]["tmp_name"], $path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]));
