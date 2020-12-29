@@ -11,7 +11,7 @@ if (isset($_POST['uploadMod'])) {
 
    $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-   $path = '../../storage-html/uploads';
+   $path = '../storage-html/uploads';
    $userid = $_SESSION['user_iid'];
    $downloadWebsite = 'https://storage.fivemods.net/uploads';
 
@@ -38,7 +38,7 @@ if (isset($_POST['uploadMod'])) {
    if (!is_dir($path . '/' . $userid)) mkdir($path . '/' . $userid);
    if (!is_dir($path)) mkdir($path);
 
-   mkdir($path . '/' . $userid . '/' . $modid);
+   echo mkdir($path . '/' . $userid . '/' . $modid);
    mkdir($path . '/' . $userid . '/' . $modid . '/img');
 
    move_uploaded_file($_FILES["modupload"]["tmp_name"], $path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]));

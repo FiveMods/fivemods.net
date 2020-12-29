@@ -93,7 +93,7 @@ if($userDB->rowCount() > 0) {
 
   //The path and filename that you want to save the file to.
   // Change to storage.fivemods.net later on!
-  $fileName = '../../localstorage/google/' . $uid . '.png';
+  $fileName = '../../../storage-html/profiles/google/' . $uid . '.png';
 
   //Save the data using file_put_contents.
   $save = file_put_contents($fileName, $downloadedFileContents);
@@ -103,6 +103,7 @@ if($userDB->rowCount() > 0) {
       throw new Exception('Failed to save file to: ', $fileName);
       header('location: /account/logout/?url=error');
   }
+	$fileName = "https://storage.fivemods.net/profiles/google/".$uid.".png";
 
 
 	$_SESSION['user_username'] = $uname;
