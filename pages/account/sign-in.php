@@ -83,7 +83,7 @@ $params = array(
     
                                             
                                             
-                                            header('Location: https://discord.com/api/oauth2/authorize?client_id=752568669061513327&redirect_uri=https%3A%2F%fivemods.net%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=identify%20email');
+                                            header('Location: https://discord.com/api/oauth2/authorize?client_id=752568669061513327&redirect_uri=https%3A%2F%2Ffivemods.net%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=identify%20email');
     
                                             die();
                                         }
