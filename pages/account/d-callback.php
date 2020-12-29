@@ -254,7 +254,7 @@ try {
 
   		//The path and filename that you want to save the file to.
   		// Change to storage.fivemods.net later on!
-  		$fileName = '../../localstorage/discord/' . $_SESSION['user_id'] . '.png';
+  		$fileName = '../../../storage-html/profiles/discord/' . $_SESSION['user_id'] . '.png';
   		echo $fileName;
 
   		//Save the data using file_put_contents.
@@ -264,6 +264,8 @@ try {
   		if ($save === false) {
   			throw new Exception('Failed to save file to: ', $fileName);
   		}
+
+          $fileName = "https://storage.fivemods.net/profiles/discord/".$_SESSION['user_id'].".png";
 
   		$sql = "UPDATE user SET sid='$sid', first_name='$first_name', last_name='$last_name', email='$email', picture='$fileName' WHERE uuid = '$_SESSION[user_uuid]'";
 

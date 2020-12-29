@@ -15,7 +15,7 @@ $geoplugin->locate();
 include 'uuid.php';
 
 // Pseudo-random UUID
-    
+
 
 require_once('../../config.php');
 
@@ -64,7 +64,7 @@ if($_SESSION['access_token']) {
     $userDB->execute();
 
     if($userDB->rowCount() > 0) {
-        
+
         $userFetch = $userDB->fetch();
 
         $_SESSION['user_id'] = $userFetch['oauth_uid'];
@@ -94,10 +94,11 @@ if($_SESSION['access_token']) {
         $_SESSION['user_blocked_by'] = $userFetch['blocked_by'];
         $_SESSION['user_blocked_reason'] = $userFetch['blocked_reason'];
         $_SESSION['user_permission'] = $userFetch['permission'];
-        
+
         header("Location: /account/");
 
     } else {
+      echo "hier";
 
         $email = apiRequest($apiURLBase . 'user/emails');
 
@@ -118,20 +119,22 @@ if($_SESSION['access_token']) {
         if ($downloadedFileContents === false) {
             throw new Exception('Failed to download file at: ' . $user->avatar_url);
         }
-    
+
         //The path and filename that you want to save the file to.
         // Change to storage.fivemods.net later on!
-        $fileName = '../../localstorage/github/' . $user->id . '.png';
-        echo $fileName;
-    
+        $fileName = '../../../storage-html/profiles/github/' . $user->id . '.png';
+
+
         //Save the data using file_put_contents.
         $save = file_put_contents($fileName, $downloadedFileContents);
-    
+
         //Check to see if it failed to save or not.
         if ($save === false) {
             throw new Exception('Failed to save file to: ', $fileName);
             header('location: /account/logout/?url=error');
         }
+
+        $fileName = "https://storage.fivemods.net/profiles/github/".$user->id.".png";
 
 
         $_SESSION['user_username'] = $user->login;
@@ -172,7 +175,7 @@ if($_SESSION['access_token']) {
         $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
         $insertUser->execute(array('provider' => "GitHub", 'id' => $user->id, 'uuid' => $v5uuid, 'username' => $user->login, 'email' => $email, 'country' => $location));
 
-        
+
         $select = $pdo->prepare("SELECT * FROM user WHERE uuid = :uuid");
         $select->execute(array('uuid' => $v5uuid));
 
@@ -180,11 +183,11 @@ if($_SESSION['access_token']) {
 
         $_SESSION['user_iid'] = $selectFetch['id'];
         $_SESSION['created_at'] = $selectFetch['created-at'];
-        $_SESSION['updated_at'] = $selectFetch['updated-at']; 
+        $_SESSION['updated_at'] = $selectFetch['updated-at'];
 
         header("Location: /pages/account/helper/account.check.php");
     }
-} 
+}
 exit();
 die();
 
