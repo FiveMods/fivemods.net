@@ -132,6 +132,13 @@ RewriteRule ^(famous-creator*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(help-center*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(help-center*)$ ./index.php?page=$1 [L,QSA]
 
+# Payment Agreement rdc. 
+RewriteRule ^(payment-agreement*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(payment-agreement*)$ ./index.php?page=$1 [L,QSA]
+
+RewriteRule ^(payment-policy*/)$ ./payment-agreement/ [L,QSA]
+RewriteRule ^(payment-policy*)$ ./payment-agreement [L,QSA]
+
 # Legal Notice rdc. 
 RewriteRule ^(legal-notice*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal-notice*)$ ./index.php?page=$1 [L,QSA]

@@ -29,6 +29,9 @@
                 <li class="nav-item mr-1">
                     <a class="nav-link" href="/account-policy/">Account Policy</a>
                 </li>
+                <li class="nav-item mr-1">
+                    <a class="nav-link" href="/payment-agreement/">Payment Agreement</a>
+                </li>
                 <?php
 
                 if ($_SESSION['language'] == "DE") {
