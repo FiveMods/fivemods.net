@@ -142,17 +142,12 @@ if (isset($_SESSION['downloadMod'])) {
                   <div class="loader-wrapper">
                      <span class="loader"><span class="loader-inner"></span></span>
                   </div>
-                  <?php 
-                  if (!empty($article['m_price'])) {
-                     $do = 'border border-info';
-                  } 
-                  ?>
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
                         <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
-                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Payed product</small>';
+                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
                         } 
                         ?>
                         <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
@@ -181,7 +176,7 @@ if (isset($_SESSION['downloadMod'])) {
                            </div>';
                            } else {
                               echo '<div class="btn-group">
-                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
+                              <form action="/product/'.$article['m_id'].'/" method="post">
                                  <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                               </form>
                               <button type="button" class="btn btn-sm btn-info" title="'.$article['m_price'].'€">'.$article['m_price'].'€</button>

@@ -139,25 +139,71 @@
             </td>
           </tr>
         </tbody>
-      </table><table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" role="module" data-type="columns" style="padding:0px 0px 0px 0px;" bgcolor="#FFFFFF">
+      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="23beba81-3988-427f-a495-3a91e786547d" data-mc-module-version="2019-10-22">
+        <tbody>
+          <tr>
+            <td style="padding:18px 0px 18px 0px; line-height:30px; text-align:inherit; background-color:#FFFF;" height="100%" valign="top" bgcolor="#FFFF" role="module-content"><div><h2 style="text-align: center">Thank you for your order!</h2><div></div></div></td>
+          </tr>
+        </tbody>
+      </table><table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" role="module" data-type="columns" style="padding:0px 0px 0px 0px;" bgcolor="#FFFFFF" data-distribution="1,1">
+        <tbody>
+          <tr role="module-content">
+            <td height="100%" valign="top"><table width="390" style="width:390px; border-spacing:0; border-collapse:collapse; margin:0px 10px 0px 0px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="" class="column column-0">
+          <tbody>
+            <tr>
+              <td style="padding:0px;margin:0px;border-spacing:0;"><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="bf3b44ff-a10f-44b9-8c78-dc48d4a474e3" data-mc-module-version="2019-10-22">
+        <tbody>
+          <tr>
+            <td style="padding:18px 0px 18px 100px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><h3 style="text-align: left"><strong>Billing information</strong></h3>
+    <div style="font-family: inherit; text-align: left"><strong>Mr. John Doe</strong></div>
+    <div style="font-family: inherit; text-align: inherit"><strong>123 Maple Street</strong></div>
+    <div style="font-family: inherit; text-align: inherit"><span style="color: #000000; font-family: arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 700; letter-spacing: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline">Anytown, PA 17101 USA</span>&nbsp;</div>
+    <div style="font-family: inherit; text-align: left"><br></div>
+    <div style="font-family: inherit; text-align: left">Username:</div>
+    <div style="font-family: inherit; text-align: inherit"><strong>HabsEilig</strong></div>
+    <div style="font-family: inherit; text-align: left"><br></div>
+    <div style="font-family: inherit; text-align: left">Email:</div>
+    <div style="font-family: inherit; text-align: left"><strong>mail@test.de</strong></div>
+    <div style="font-family: inherit; text-align: left"><br></div><div></div></div></td>
+          </tr>
+        </tbody>
+      </table></td>
+            </tr>
+          </tbody>
+        </table><table width="390" style="width:390px; border-spacing:0; border-collapse:collapse; margin:0px 0px 0px 10px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="" class="column column-1">
+          <tbody>
+            <tr>
+              <td style="padding:0px;margin:0px;border-spacing:0;"><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="251462e3-e2b6-41db-8e8a-3e9d727790ec" data-mc-module-version="2019-10-22">
+        <tbody>
+          <tr>
+            <td style="padding:18px 0px 18px 100px; line-height:23px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><h3 style="text-align: left"><strong>Order information</strong></h3>
+    <h3 style="text-align: inherit"><strong>Deposit: 187.00€</strong></h3>
+    <h2 style="text-align: inherit"><span style="font-size: 11px">Total: 187.00 (EUR)</span></h2>
+    <div style="font-family: inherit; text-align: inherit"><span style="box-sizing: border-box; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-style: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: bold; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 14px; vertical-align: baseline; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-top-style: initial; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-top-color: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image-source: initial; border-image-slice: initial; border-image-width: initial; border-image-outset: initial; border-image-repeat: initial; text-align: left; color: #000000; letter-spacing: normal; orphans: 2; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">Order id: </span><span style="color: #c8c3bc; font-family: Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(24, 26, 27); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline">#</span><a href="https://www.amazon.de/gp/r.html?C=34PJAWSOK18YS&amp;K=2M4Y6UPO8NGKD&amp;M=urn:rtn:msg:202011292305124cff5c6e9c464acf91bde6ffbe80p0eu&amp;R=3ONYPLFF5U90F&amp;T=C&amp;U=https%3A%2F%2Fwww.amazon.de%2Fgp%2Fcss%2Fsummary%2Fedit.html%2Fref%3Dpe_3044161_189395811_TE_SCE_od_tn%3Fie%3DUTF8%26orderID%3D303-2069468-9907532&amp;H=EHTQERC3R8EIMEZVEI9Z9BNTY64A&amp;ref_=pe_3044161_189395811_TE_SCE_od_tn" title="303-2069468-9907532"><span style="color: #56a3f1; text-decoration-line: none; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-style: normal; font-variant-caps: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: 400; font-stretch: normal; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif; display: inline-block; letter-spacing: normal; orphans: 2; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(24, 26, 27)">303-2069468-9907532</span></a>&nbsp;</div>
+    <div style="font-family: inherit; text-align: inherit"><span style="box-sizing: border-box; padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font-style: inherit; font-variant-ligatures: inherit; font-variant-caps: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-weight: bold; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 14px; vertical-align: baseline; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 0px; border-left-width: 0px; border-top-style: initial; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-top-color: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image-source: initial; border-image-slice: initial; border-image-width: initial; border-image-outset: initial; border-image-repeat: initial; color: #000000; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: pre-wrap; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial">User id: </span><span style="color: #c8c3bc; font-family: Arial, sans-serif; font-size: 13px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(24, 26, 27); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline">#</span><a href="https://www.amazon.de/gp/r.html?C=34PJAWSOK18YS&amp;K=2M4Y6UPO8NGKD&amp;M=urn:rtn:msg:202011292305124cff5c6e9c464acf91bde6ffbe80p0eu&amp;R=3ONYPLFF5U90F&amp;T=C&amp;U=https%3A%2F%2Fwww.amazon.de%2Fgp%2Fcss%2Fsummary%2Fedit.html%2Fref%3Dpe_3044161_189395811_TE_SCE_od_tn%3Fie%3DUTF8%26orderID%3D303-2069468-9907532&amp;H=EHTQERC3R8EIMEZVEI9Z9BNTY64A&amp;ref_=pe_3044161_189395811_TE_SCE_od_tn" title="303-2069468-9907532"><span style="color: #56a3f1; text-decoration-line: none; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; font-style: normal; font-variant-caps: normal; font-variant-ligatures: normal; font-variant-numeric: normal; font-variant-east-asian: normal; font-weight: 400; font-stretch: normal; font-size: 13px; line-height: 18px; font-family: Arial, sans-serif; display: inline-block; letter-spacing: normal; orphans: 2; text-align: right; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(24, 26, 27)">303-2069468-9907532</span></a>&nbsp;</div>
+    <div style="font-family: inherit; text-align: left"><br></div>
+    <div style="font-family: inherit; text-align: left"><br></div><div></div></div></td>
+          </tr>
+        </tbody>
+      </table></td>
+            </tr>
+          </tbody>
+        </table></td>
+          </tr>
+        </tbody>
+      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="93d1ee90-106f-406e-b426-c0e411f38a5d" data-mc-module-version="2019-10-22">
+        <tbody>
+          <tr>
+            <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit; background-color:#FFFFFF;" height="100%" valign="top" bgcolor="#FFFFFF" role="module-content"><div><div style="font-family: inherit; text-align: center">Please make sure to read our terms of service and our universal billing &amp; payment agreement!</div><div></div></div></td>
+          </tr>
+        </tbody>
+      </table><table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" role="module" data-type="columns" style="padding:0px 0px 0px 0px;" bgcolor="#FFFFFF" data-distribution="1">
         <tbody>
           <tr role="module-content">
             <td height="100%" valign="top"><table width="780" style="width:780px; border-spacing:0; border-collapse:collapse; margin:0px 10px 0px 10px;" cellpadding="0" cellspacing="0" align="left" border="0" bgcolor="" class="column column-0">
           <tbody>
             <tr>
-              <td style="padding:0px;margin:0px;border-spacing:0;"><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="6e45e5cc-9a9b-4f96-b1dd-7820f7a5d0c5" data-mc-module-version="2019-10-22">
-        <tbody>
-          <tr>
-            <td style="padding:85px 20px 25px 20px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-size: 14px">A new ip address from a different location has tried to login,&nbsp;</span></div>
-    <div style="font-family: inherit; text-align: center"><span style="font-size: 14px">please have look for </span>suspicious <span style="font-size: 14px">activity and make sure it was you.</span></div>
-    <div style="font-family: inherit; text-align: center"><br></div>
-    <div style="font-family: inherit; text-align: center"><br></div>
-    <div style="font-family: inherit; text-align: center"><span style="font-size: 24px"><strong>85.214.73.93</strong></span></div>
-    <div style="font-family: inherit; text-align: center"><span style="font-size: 14px"><strong>Karlsruhe - Germany</strong></span></div>
-    <div style="font-family: inherit; text-align: center"><br></div><div></div></div></td>
-          </tr>
-        </tbody>
-      </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="9500b366-f515-4dee-985b-bd32310ec29f" data-mc-module-version="2019-10-22">
+              <td style="padding:0px;margin:0px;border-spacing:0;"><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="9500b366-f515-4dee-985b-bd32310ec29f" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
             <td style="padding:18px 0px 18px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-size: 8px">Mail-ID: Rq3uwJlsSOdD3U0uCc3UWoiLhQCkxjBy</span></div><div></div></div></td>
@@ -189,7 +235,7 @@
             <td style="padding:18px 0px 18px 0px; line-height:10px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="font-size: 8px; color: #c9c9db">FiveMods.net is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>
     All gamecontent and trademarks are the property of their respective owners - all rights reserved.</span></div>
     <div style="font-family: inherit; text-align: center"><br></div>
-    <div style="font-family: inherit; text-align: center"><span style="font-size: 8px; color: #c9c9db">This mail was sent to <a href="mailto://'.$email.'">'.$email.'</a>. You can change your <a href="https://fivemods.net/account/">email subscription preferences</a> at any time.</span></div><div></div></div></td>
+    <div style="font-family: inherit; text-align: center"><span style="font-size: 8px; color: #c9c9db">This mail was sent to hajek.ph@gmail.com. You can change your email subscription preferences at any time.</span></div><div></div></div></td>
           </tr>
         </tbody>
       </table></td>
@@ -214,7 +260,7 @@
           </center>
         </body>
       </html>';
-    $subject = "FiveMods.net - Security warning";
+    $subject = "FiveMods.net - Universal billing & payment";
 
     $headers = array(
         'Authorization: Bearer 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',

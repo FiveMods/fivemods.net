@@ -137,7 +137,7 @@
                               <div class="col">
                                  <div class="card rounded">
                                     <div class="card-body d-flex justify-content-between border-bottom border-info">
-                                       <span><b>FiveMods Advertisement Service</b> <i class="far fa-question-circle" title="N/A"></i></span>
+                                       <span><b>FiveMods Advertisement Service</b> <i class="far fa-question-circle" title="Status for our own advertisement service. Thats something we planned for the future!"></i></span>
                                        <span><i class="fas fa-wrench text text-info"></i></span>
                                     </div>
                                  </div>
@@ -162,131 +162,14 @@
                               </div>
                               <div class="col">
                                  <div class="card rounded">
-                                    <div class="card-body d-flex justify-content-between border-bottom border-info">
-                                       <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="N/A"></i></span>
-                                       <span><i class="fas fa-wrench text text-info"></i></span>
+                                    <div class="card-body d-flex justify-content-between border-bottom border-success">
+                                       <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                                       <span><i class="fas fa-check text text-success"></i></span>
                                     </div>
                                  </div>
                               </div>
                            </div>
-                           <div class="mt-5">
-                              <p>FiveMods Sub Services</p>
-                              <hr>
-                           </div>
-                           <?php
-                              // Initialize an URL to the variable 
-                              $url = array('https://account.fivemods.net/','https://account.fivemods.net/'); 
-                              ?> 
-                           <div class="row mt-2">
-                           <?php 
-                                 ////////////////////////////////////////////
-                                 // FiveMods Account Sub Service - Profile //
-                                 ////////////////////////////////////////////
-                                 $title1="Status for the FiveMods.net Account Sub Service checking the profile section.";
-                                 // Use get_headers() function 
-                                 $headers = @get_headers($url[0]); 
-                                 // Use condition to check the existence of URL 
-                                 if($headers && strpos( $headers[0], '200')) { 
-                                    $status = "URL Exist"; 
-                                    echo '<div class="col">
-                                    <div class="card rounded">
-                                       <div class="card-body d-flex justify-content-between border-bottom border-success">
-                                          <span><b>FiveMods Account Sub Service - Profile</b> <i class="far fa-question-circle" title="'.$title1.'"></i></span>
-                                          <span><i class="fas fa-check text text-success"></i></span>
-                                       </div>
-                                    </div>
-                                 </div>';
-                                    $statusvalue = $statusvalue;
-                                 } elseif ($headers && strpos( $headers[0], '302')) {
-                                    $status = "URL Directing"; 
-                                    echo '<div class="col">
-                                    <div class="card rounded">
-                                       <div class="card-body d-flex justify-content-between border-bottom border-warning">
-                                          <span><b>FiveMods Account Sub Service - Profile</b> <i class="far fa-question-circle" title="'.$title1.'"></i></span>
-                                          <span><i class="fas fa-battery-quarter text text-warning"></i></span>
-                                       </div>
-                                    </div>
-                                 </div>';
-                                    $statusvalue = $statusvalue+1;
-                                 } elseif ($headers && strpos( $headers[0], '403')) {
-                                 $status = "URL Directing"; 
-                                 echo '<div class="col">
-                                 <div class="card rounded">
-                                    <div class="card-body d-flex justify-content-between border-bottom border-dark">
-                                       <span><b>FiveMods Account Sub Service - Profile</b> <i class="far fa-question-circle" title="'.$title1.'"></i></span>
-                                       <span><i class="fas fa-lock text text-dark"></i></span>
-                                    </div>
-                                 </div>
-                                 </div>';
-                                 $statusvalue = $statusvalue+5;
-                                 } else { 
-                                    $status = "URL Doesn't Exist"; 
-                                    echo '<div class="col">
-                                    <div class="card rounded">
-                                       <div class="card-body d-flex justify-content-between border-bottom border-danger">
-                                          <span><b>FiveMods Account Sub Service - Profile</b> <i class="far fa-question-circle" title="'.$title1.'"></i></span>
-                                          <span><i class="fas fa-times text text-danger"></i></span>
-                                       </div>
-                                    </div>
-                                 </div>';
-                                    $statusvalue = $statusvalue+3;
-                                 } 
-                                 
-                                 ////////////////////////////////////////////
-                                 // FiveMods Account Sub Service - Product //
-                                 ////////////////////////////////////////////        
-                                 $title2="Status for the FiveMods.net Account Sub Service checking the product section.";
-                                 // Use get_headers() function 
-                                 $headers = @get_headers($url[1]); 
-                                 // Use condition to check the existence of URL 
-                                 if($headers && strpos( $headers[0], '200')) { 
-                                 $status = "URL Exist"; 
-                                 echo '<div class="col">
-                                 <div class="card rounded">
-                                    <div class="card-body d-flex justify-content-between border-bottom border-success">
-                                       <span><b>FiveMods Account Sub Service - Product</b> <i class="far fa-question-circle" title="'.$title2.'"></i></span>
-                                       <span><i class="fas fa-check text text-success"></i></span>
-                                    </div>
-                                 </div>
-                                 </div>';
-                                 $statusvalue = $statusvalue;
-                                 } elseif ($headers && strpos( $headers[0], '302')) {
-                                 $status = "URL Directing"; 
-                                 echo '<div class="col">
-                                 <div class="card rounded">
-                                    <div class="card-body d-flex justify-content-between border-bottom border-warning">
-                                       <span><b>FiveMods Account Sub Service - Product</b> <i class="far fa-question-circle" title="'.$title2.'"></i></span>
-                                       <span><i class="fas fa-battery-quarter text text-warning"></i></span>
-                                    </div>
-                                 </div>
-                                 </div>';
-                                 $statusvalue = $statusvalue+1;
-                                 } elseif ($headers && strpos( $headers[0], '403')) {
-                                 $status = "URL Directing"; 
-                                 echo '<div class="col">
-                                 <div class="card rounded">
-                                 <div class="card-body d-flex justify-content-between border-bottom border-dark">
-                                    <span><b>FiveMods Account Sub Service - Product</b> <i class="far fa-question-circle" title="'.$title2.'"></i></span>
-                                    <span><i class="fas fa-lock text text-dark"></i></span>
-                                 </div>
-                                 </div>
-                                 </div>';
-                                 $statusvalue = $statusvalue+5;
-                                 } else { 
-                                 $status = "URL Doesn't Exist"; 
-                                 echo '<div class="col">
-                                 <div class="card rounded">
-                                    <div class="card-body d-flex justify-content-between border-bottom border-danger">
-                                       <span><b>FiveMods Account Sub Service - Product</b> <i class="far fa-question-circle" title="'.$title2.'"></i></span>
-                                       <span><i class="fas fa-times text text-danger"></i></span>
-                                    </div>
-                                 </div>
-                                 </div>';
-                                 $statusvalue = $statusvalue+3;
-                                 } 
-                                 
-                                 ?>
-                           </div>
+                           
                            <div class="mt-5">
                               <p>FiveM Services</p>
                               <hr>

@@ -19,7 +19,7 @@ $_SESSION['state'] = hash('sha256', microtime(TRUE).rand().$_SERVER['REMOTE_ADDR
 
 $params = array(
   'client_id' => '48abb0467b4aa1c0fa9f',
-  'redirect_uri' => 'http://localhost/pages/account/git-callback.php',
+  'redirect_uri' => 'https://fivemods.net/pages/account/git-callback.php',
   'scope' => 'user:email',
   'response_type' => 'code',
   'state' => $_SESSION['state'],
@@ -61,7 +61,7 @@ $params = array(
                                     if ($ip_server == "85.214.73.93") {
                                         $redirect = 'https://pre-live.fivemods.net/pages/account/d-callback.php';
                                     } else {
-                                        $redirect = 'http://localhost/pages/account/d-callback.php';
+                                        $redirect = 'https://fivemods.net/pages/account/d-callback.php';
                                     }
 
                                     define('OAUTH2_CLIENT_ID', '790673684301873161');
@@ -76,7 +76,7 @@ $params = array(
 
                                             $params = array(
                                                 'client_id' => OAUTH2_CLIENT_ID,
-                                                'redirect_uri' => 'http://localhost/pages/account/d-callback.php',
+                                                'redirect_uri' => 'https://fivemods.net/pages/account/d-callback.php',
                                                 'response_type' => 'code',
                                                 'scope' => 'identify email guilds'
                                             );

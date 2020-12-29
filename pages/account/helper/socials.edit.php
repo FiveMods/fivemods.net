@@ -28,8 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $github = htmlspecialchars($_POST['github']);
         $tochange = htmlspecialchars($_POST['id']);
 
-        require_once('../../../config.php');
-
         try {
           $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
           // set the PDO error mode to exception

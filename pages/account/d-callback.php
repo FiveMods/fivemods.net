@@ -38,7 +38,7 @@ if (get('action') == 'login') {
 
     $params = array(
         'client_id' => OAUTH2_CLIENT_ID,
-        'redirect_uri' => 'http://localhost/pages/account/d-callback.php',
+        'redirect_uri' => 'https://fivemods.net/pages/account/d-callback.php',
         'response_type' => 'code',
         'scope' => 'identify email'
     );
@@ -57,7 +57,7 @@ if (get('code')) {
         "grant_type" => "authorization_code",
         'client_id' => OAUTH2_CLIENT_ID,
         'client_secret' => OAUTH2_CLIENT_SECRET,
-        'redirect_uri' => 'http://localhost/pages/account/d-callback.php',
+        'redirect_uri' => 'https://fivemods.net/pages/account/d-callback.php',
         'code' => get('code')
     ));
     $logout_token = $token->access_token;
@@ -146,8 +146,8 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // prepare sql and bind parameters
-    $stmt = $conn->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, first_name, last_name, email, password, picture, gender, locale, description, permission, main_ip)
-    VALUES (:sid, :uuid, :oauth_uid, :oauth_provider, :first_name, :last_name, :email, :password, :picture, :gender, :locale, :description, :permission, :main_ip)");
+    $stmt = $conn->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, first_name, last_name, email, picture, locale, description, permission, main_ip)
+    VALUES (:sid, :uuid, :oauth_uid, :oauth_provider, :first_name, :last_name, :email, :picture, :locale, :description, :permission, :main_ip)");
     $stmt->bindParam(':sid', $sid);
     $stmt->bindParam(':uuid', $uuid);
     $stmt->bindParam(':oauth_uid', $oauth_uid);
@@ -155,9 +155,7 @@ try {
     $stmt->bindParam(':first_name', $first_name);
     $stmt->bindParam(':last_name', $last_name);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
     $stmt->bindParam(':picture', $picture);
-    $stmt->bindParam(':gender', $gender);
     $stmt->bindParam(':locale', $locale);
     $stmt->bindParam(':description', $description);
     $stmt->bindParam(':permission', $permission);
@@ -203,9 +201,7 @@ try {
     $first_name = $_SESSION['dc_name'];
     $last_name = "";
     $email = $user->email;
-    $password = '************';
     $picture = $fileName;
-    $gender = "-";
     $locale = "-";
     $description = "No description set.";
     $permission = "1000";
