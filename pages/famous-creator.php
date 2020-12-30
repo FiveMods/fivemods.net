@@ -30,7 +30,7 @@
                      echo '<a href="/ref?rdc=https://twitter.com/'.$row["twitter"].'" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
                   }
                   if(!empty($row['instagram'])) {
-                    echo '<a href="/ref?rdc=https://instagram.com/'.$row["twitter"].'" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
+                    echo '<a href="/ref?rdc=https://instagram.com/'.$row["instagram"].'" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
                   }
                   if(!empty($row["youtube"])) {
                      echo '<a href="/ref?rdc=https://youtube.com/'.$row["youtube"].'" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
