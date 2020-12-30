@@ -24,16 +24,19 @@
                   }
                   echo '<div class="mr-3 align-self-center d-block">';
                   if(!empty($row["discord"])) {
-                     echo '<a href="/ref?rdc='.$row["discord"].'" role="button" class="fab fa-discord fa-md text-primary smallButton"></a>';
+                     echo '<a href="/ref?rdc=https://discord.gg/'.$row["discord"].'" role="button" class="fab fa-discord fa-md text-primary smallButton"></a>';
                   }
                   if(!empty($row["twitter"])) {
-                     echo '<a href="/ref?rdc='.$row["twitter"].'" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
+                     echo '<a href="/ref?rdc=https://twitter.com/'.$row["twitter"].'" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
+                  }
+                  if(!empty($row['instagram'])) {
+                    echo '<a href="/ref?rdc=https://instagram.com/'.$row["twitter"].'" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
                   }
                   if(!empty($row["youtube"])) {
-                     echo '<a href="/ref?rdc='.$row["youtube"].'" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
+                     echo '<a href="/ref?rdc=https://youtube.com/'.$row["youtube"].'" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
                   }
                   if(!empty($row["github"])) {
-                     echo '<a href="/ref?rdc='.$row["github"].'" role="button" class="fab fa-github fa-md text-primary smallButton"></a>';
+                     echo '<a href="/ref?rdc=https://github.com/'.$row["github"].'" role="button" class="fab fa-github fa-md text-primary smallButton"></a>';
                   }
                   echo '</div></div>';
                   }

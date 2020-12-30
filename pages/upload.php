@@ -19,7 +19,7 @@ if (isset($_POST['uploadMod'])) {
 
    $title = htmlspecialchars($_POST['title']);
    $description = nl2br(htmlspecialchars($_POST['description']));
-   $predescription = htmlspecialchars(substr($description, 0, 150) . "...");
+   $predescription = str_replace("<br />"," " , substr($description, 0, 150) . "...");
    $category = htmlspecialchars($_POST['category']);
    $tags = htmlspecialchars($_POST['tags']);
 
