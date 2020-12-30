@@ -220,7 +220,6 @@ function downloadMod($pdo, $pdoPayment)
             header('location: /account/logout/?url=error');
         }
 
-        $_SESSION['lastDownload'] = "5000";
         if ($_SESSION['lastDownload'] != $mod) {
             $newDownloads = $downloads + 1;
             $newDownloadSet = $pdo->prepare("UPDATE mods SET m_downloads = :downloads WHERE m_id = :id");
@@ -295,7 +294,6 @@ function purchaseMod($pdo, $pdoPayment)
             $downloads = $row['m_downloads'];
             $costs = $row['m_price'];
 
-            $_SESSION['lastDownload'] = "5000";
 
             // User has no money or not enough
 
