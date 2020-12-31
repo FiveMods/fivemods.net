@@ -79,7 +79,9 @@ if (isset($_GET['page'])) {
 
 <head>
 
-   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="2f5c0aa1-25c4-4dab-86d7-f9c320bd6722" data-blockingmode="auto" type="text/javascript"></script>
+   <!-- Start cookieyes banner -->
+   <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
+   <!-- End cookieyes banner --> 
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
@@ -466,7 +468,7 @@ if (isset($_GET['page'])) {
    ?>
    <!-- ========== END MAIN CONTENT ========== -->
 
-   <script id="CookieDeclaration" src="https://consent.cookiebot.com/2f5c0aa1-25c4-4dab-86d7-f9c320bd6722/cd.js" type="text/javascript" async></script>
+   <a href="https://www.netcup.de" target="_blank"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
 
    <!-- ========== FOOTER ========== -->
    <?php include('./include/footer-normal.php'); ?>
