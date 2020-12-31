@@ -18,9 +18,10 @@
             <div class="col-lg-8">
                 <article class="pb-2">
                     <p>Content is not translated. </p>
-                        
+
                     <p class="text-muted text-uppercase">
                     By using and uploading to FiveMods.net ("Service", "Site", "Us", "We", "Website") you agree that You have read, acknowledge, follow and accept Our Payment Agreement & Billing Policy part of our Terms of Use.
+                    Please note, no money is ever spent on a virtual product, it is at all times considered a service, paid for the effort and time spent creating the product.
                     </p>
 
                     <h3>General Guidelines</h3>
@@ -32,6 +33,7 @@
                             <li>The purchase contract is concluded with the email confirmation. This can take up to 24 hours.</li>
                             <li>By loading money, you receive virtual currency in our system.</li>
                             <li>Virtual currency is represented for accounting and system logic in euros.</li>
+                            <li>You are strictly forbidden to share a bought product.</li>
                         </ul>
                     </p>
 
@@ -44,11 +46,11 @@
 
                     <h3>Refund Guidelines</h3>
                     <p class="text-muted">
-                        If you are not satisfied with your purchased product, please contact us by email so that we can discuss a refund. 
+                        If you are not satisfied with your purchased product, please contact us by email so that we can discuss a refund.
                         In general, we act in accordance on behave of the right of revocation with the German law.
                     </p>
 
-                    
+
                 </article>
             </div>
         </div>

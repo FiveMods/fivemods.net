@@ -284,7 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                                 Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
                             </div>
                             <input type="text" name="call" value="callFunc" hidden>
-                            <input type="text" name="id" value="<?php echo $_SESSION['user_iid']; ?>" hidden>
+                            <input type="text" name="id" value="<?php echo $m_id; ?>" hidden>
                             <button type="submit" class="btn btn-primary">Save & Update</button>
                         </form>
                         <!-- <p class="mt-4 form-group small text-muted">Mit <span class="text text-danger">*</span> gekennzeichnete Felder sind sogennante Pflichtfelder und müssen ausgefüllt werden.</p> -->
