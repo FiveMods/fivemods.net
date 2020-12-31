@@ -468,10 +468,10 @@ if (isset($_GET['page'])) {
    ?>
    <!-- ========== END MAIN CONTENT ========== -->
 
-   <div class="text-center">
+   <div class="text-center pt-3 pb-2">
       <a href="https://www.netcup.de" target="_blank"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
    </div>
-   
+
    <!-- ========== FOOTER ========== -->
    <?php include('./include/footer-normal.php'); ?>
    <!-- ========== END FOOTER ========== -->
