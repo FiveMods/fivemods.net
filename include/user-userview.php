@@ -49,6 +49,8 @@ while ($row = $statement->fetch()) {
    $website = $row['website'];
    $location = $row['locale'];
 
+   if(empty($website)) $website = "-";
+
    $created = date("d. M Y", strtotime($created));
 
    if ($blocked == '1') {
@@ -193,8 +195,9 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       <div class="col-md-6">
          <div class="profile-head">
             <h4><?php echo $banned . '' . $line . '' . $username . '' . $rank; ?></h4>
+            
             <?php
-
+            
             if ($premium == 1 && $blocked == 0) {
                echo '<small><i class="fas fa-crown" title="Premium content creator"></i> Premium Content Creator</small>';
             } elseif ($blocked == 1) {
@@ -210,7 +213,22 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                } else {
                   echo '';
                }
-
+               
+               if(!empty($discord)) {
+                  echo '<a href="/ref?rdc=https://discord.gg/'.$discord.'" role="button" class="fab fa-discord text-primary "></a>';
+               }
+               if(!empty($twitter)) {
+                  echo '<a href="/ref?rdc=https://twitter.com/'.$twitter.'" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
+               }
+               if(!empty($instagram)) {
+               echo '<a href="/ref?rdc=https://instagram.com/'.$instagram.'" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
+               }
+               if(!empty($youtube)) {
+                  echo '<a href="/ref?rdc=https://youtube.com/'.$youtube.'" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
+               }
+               if(!empty($github)) {
+                  echo '<a href="/ref?rdc=https://github.com/'.$github.'" role="button" class="fab fa-github fa-md text-primary smallButton"></a>';
+               }
                ?>
             </div>
             <div class="pt-5">
@@ -219,10 +237,10 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                <li class="nav-item">
                   <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo $lang['about'] ?></a>
                </li>
-               <li class="nav-item">
+               <!--<li class="nav-item">
                   <a class="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab" aria-controls="social" aria-selected="true"><?php echo $lang['social-media'] ?></a>
                </li>
-               <!-- <li class="nav-item">
+                <li class="nav-item">
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><?php echo $lang['activity'] ?></a>
                </li> -->
             </ul>
@@ -289,6 +307,14 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                </div>
                <div class="row">
                   <div class="col-md-6">
+                     <label>Total Downloads</label>
+                  </div>
+                  <div class="col-md-6">
+                     <p>' . $totaldownloads . '</p>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-md-6">
                      <label>Location</label>
                   </div>
                   <div class="col-md-6">
@@ -296,6 +322,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                   </div>
                </div>
             </div>
+            <!--
             <div class="tab-pane fade show" id="social" role="tabpanel" aria-labelledby="social-tab">
                <div class="row">
                   <div class="col-md-6">
@@ -338,6 +365,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                   </div>
                </div>
             </div>
+            -->
             <!-- Activity not working nor planned yet -->
             <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                <div class="row">

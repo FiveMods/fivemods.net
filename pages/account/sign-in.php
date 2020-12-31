@@ -1,15 +1,15 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+ini_set('max_execution_time', 300);
+
 include('./include/header-banner.php');
 
 require_once('./pages/account/config.php');
 
 $loginURL = $gClient->createAuthUrl();
 
-$directPage = $_GET['rdc'];
-if (!empty($directPage)) {
-    header('location: /'.$directPage);
-}
 
 if ($_GET['rdC'] == "main") {
     echo '<meta http-equiv="refresh" content="2;url=/" />';
@@ -55,49 +55,9 @@ $params = array(
                         <form action="?login=1" method="post" class="mt-4">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <?php
-
-
-                                    if ($ip_server == "85.214.73.93") {
-                                        $redirect = 'https://pre-live.fivemods.net/pages/account/d-callback.php';
-                                    } else {
-                                        $redirect = 'https://fivemods.net/pages/account/d-callback.php';
-                                    }
-
-                                    define('OAUTH2_CLIENT_ID', '790673684301873161');
-
-                                    $authorizeURL = 'https://discordapp.com/api/oauth2/authorize';
-                                    $tokenURL = 'https://discordapp.com/api/oauth2/token';
-                                    $apiURLBase = 'https://discordapp.com/api/users/@me';
-
-                                    // Start the login process by sending the user to Discord's authorization page
-                                    if(isset($_GET['action'])) {
-                                        if ($_GET['action'] == 'login') {
-
-                                            $params = array(
-                                                'client_id' => OAUTH2_CLIENT_ID,
-                                                'redirect_uri' => 'https://fivemods.net/pages/account/d-callback.php',
-                                                'response_type' => 'code',
-                                                'scope' => 'identify email guilds'
-                                            );
-    
-                                            
-                                            
-                                            header('Location: https://discord.com/api/oauth2/authorize?client_id=790673684301873161&redirect_uri=http%3A%2F%2Flocalhost%2Fpages%2Faccount%2Fd-callback.php&response_type=code&scope=email%20identify');
-    
-                                            die();
-                                        }
-                                    }
-                                    
-
-
-                                    
-                                        echo '<a href="?action=login" class="btn btn-block btn-discord">
-                                     <i class="fab fa-discord"></i> &nbsp; ' . $lang['login-discord'] . '
-                                   </a>';
-                                    
-
-                                    ?>
+                                    <a href="<?php echo $dcCallback;?>" class="btn btn-block btn-discord">
+                                     <i class="fab fa-discord"></i> &nbsp; <?php echo $lang['login-discord']; ?>
+                                   </a>
                                     <a href="<?php echo $loginURL ?>" class="btn btn-block btn-danger">
                                         <i class="fab fa-google"></i> &nbsp; <?php echo $lang['login-google']; ?>
                                     </a>

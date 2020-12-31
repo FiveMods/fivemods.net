@@ -198,7 +198,7 @@ $currentPage = $_GET['page'];
          </ul>
          <?php
 
-         if (!empty($_SESSION['g_id']) || !empty($_SESSION['dc_id'])) {
+         if (!empty($_SESSION['user_id']) || !empty($_SESSION['user_uuid'])) {
             echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          } else {
             echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
@@ -210,24 +210,6 @@ $currentPage = $_GET['page'];
             <button type="submit" name="submit-search" hidden></button>
          </form>
          <?php
-
-         $ch = curl_init();
-         $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
-         $userid = $_SESSION['user_id'];
-
-         curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
-         curl_setopt($ch, CURLOPT_POST, 1);
-         curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         $response = curl_exec($ch);
-         curl_close($ch);
-
-         if (empty($response) || $response <= 0) {
-            $response = "";
-         } else {
-            $response = $response ."€";
-         }
 
          if (empty($_SESSION['user_id'])) {
             echo '<ul class="nav navbar-nav navbar-right">

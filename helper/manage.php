@@ -165,33 +165,35 @@ function reportprofile()
     die();
 }
 
-function rate($pdo)
-{
+function rate($pdo) {
     session_start();
 
     $cookieArray = explode("_", $_GET['id']);
 
     $nameID = $cookieArray[0];
     $rating = $cookieArray[1];
+    if($_SESSION['lastRated'] != $nameID) {
+      $changeRating = $pdo->prepare("SELECT m_rating FROM mods WHERE m_id = :id");
+      $changeRating->execute(array('id' => $nameID));
 
-    $changeRating = $pdo->prepare("SELECT m_rating FROM mods WHERE m_id = :id");
-    $changeRating->execute(array('id' => $nameID));
-    while ($row = $changeRating->fetch()) {
-        $m_rating = $row['m_rating'];
-        if (!empty($m_rating)) {
-            $newRating = $m_rating . " " . $rating;
-        } else {
-            $newRating = $rating;
-        }
-        $change = $pdo->prepare("UPDATE mods SET m_rating = :rating WHERE m_id = :id");
-        $change->execute(array('rating' => $newRating, 'id' => $nameID));
+      while ($row = $changeRating->fetch()) {
+          $m_rating = $row['m_rating'];
+          if (!empty($m_rating)) {
+              $newRating = $m_rating . " " . $rating;
+          } else {
+              $newRating = $rating;
+          }
+          $change = $pdo->prepare("UPDATE mods SET m_rating = :rating WHERE m_id = :id");
+          $change->execute(array('rating' => $newRating, 'id' => $nameID));
 
-        $log = $pdo->prepare("INSERT INTO rate (mod_id, user_id) VALUES (:mod, :id)");
-        $log->execute(array('mod' => $nameID, 'id' => $_GET['userid']));
-        header("Location: /product/$nameID");
-        $_SESSION['rated'] = $rating;
-        exit();
-        die();
+          $log = $pdo->prepare("INSERT INTO rate (mod_id, user_id) VALUES (:mod, :id)");
+          $log->execute(array('mod' => $nameID, 'id' => $_GET['userid']));
+          header("Location: /product/$nameID");
+          $_SESSION['rated'] = $rating;
+          $_SESSION['lastRated'] = $nameID;
+          exit();
+          die();
+      }
     }
 }
 function uploadMod()
@@ -226,7 +228,6 @@ function downloadMod($pdo, $pdoPayment)
             header('location: /account/logout/?url=error');
         }
 
-        $_SESSION['lastDownload'] = "5000";
         if ($_SESSION['lastDownload'] != $mod) {
             $newDownloads = $downloads + 1;
             $newDownloadSet = $pdo->prepare("UPDATE mods SET m_downloads = :downloads WHERE m_id = :id");
@@ -301,7 +302,6 @@ function purchaseMod($pdo, $pdoPayment)
             $downloads = $row['m_downloads'];
             $costs = $row['m_price'];
 
-            $_SESSION['lastDownload'] = "5000";
 
             // User has no money or not enough
 
