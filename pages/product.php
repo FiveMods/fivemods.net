@@ -340,8 +340,9 @@ if ($_GET['id']) {
             </form>';
             } else {
                echo '
-               <button data-toggle="modal" data-target="#reqPur" class="btn btn-info col-10">Purchase now</button><span class="caret"></span>
-               <button type="text" class="btn btn-outline-info">'.$m_price.'€</button><span class="caret"></span>
+               <div class="col-12 row">
+               <button data-toggle="modal" data-target="#reqPur" class="btn btn-info" style="width: 85%">Purchase now</button><span class="caret"></span>
+               <button type="text" class="btn btn-outline-info" style="width: 15%;">'.$m_price.'€</button><span class="caret"></span>
 
             ';
             }
