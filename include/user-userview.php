@@ -326,10 +326,10 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
             <div class="tab-pane fade show" id="social" role="tabpanel" aria-labelledby="social-tab">
                <div class="row">
                   <div class="col-md-6">
-                     <label>Discord</label>
+                     <label>Discord Server</label>
                   </div>
                   <div class="col-md-6">
-                     <p><a href="/ref?rdc=https://discord.com/users/' . urlencode($discord) . '" target="_blank">' . $discord . '</a></p>
+                     <p><a href="/ref?rdc=https://discord.com/invite/' . urlencode($discord) . '" target="_blank">' . $discord . '</a></p>
                   </div>
                </div>
                <div class="row">

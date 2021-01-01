@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 session_start();
 
@@ -38,15 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-          $sql = "UPDATE mods SET m_name='$modName', m_category='$modCategory', m_description='$modDesc', m_tags='$tags', m_requiredmod='$requiredMod' WHERE m_authorid = '$mid'";
-        
+
+          $sql = "UPDATE mods SET m_name='$modName', m_category='$modCategory', m_description='$modDesc', m_tags='$tags', m_requiredmod='$requiredMod' WHERE m_id = '$mid'";
+
           // Prepare statement
           $stmt = $conn->prepare($sql);
-        
+
           // execute the query
           $stmt->execute();
-        
+
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfull";
           session_start();
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           header('location: /account/');
           // echo $sql . "<br>" . $e->getMessage();
         }
-        
+
         $conn = null;
     }
 

@@ -69,15 +69,16 @@ function partner($pdo)
     $q3 = htmlspecialchars($_POST['q3']);
     $q4 = htmlspecialchars($_POST['q4']);
 
-    $pdo->prepare("INSERT INTO `partner` (userid, q1, q2, q3, q4) VALUES ('$userid', :q1, :q2, :q3, :q4)");
-    $pdo->execute(array('q1' => $q1, 'q2' => $q2, 'q3' => $q3, 'q4' => $q4));
+
+    $partner = $pdo->prepare("INSERT INTO `partner` (userid, q1, q2, q3, q4) VALUES ('$userid', :q1, :q2, :q3, :q4)");
+    $partner->execute(array('q1' => $q1, 'q2' => $q2, 'q3' => $q3, 'q4' => $q4));
 
     $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully sent! </strong> We recieved your partner application and will answer it as soons as possible!
         </div>';
 
-    header("Location: /partner-program");
+    header("Location: /partner-program/");
 
 
     exit();

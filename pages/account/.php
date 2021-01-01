@@ -313,7 +313,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<label for="discord">Discord server</label>
 								<div class="input-group mb-2 mr-sm-2">
 									<div class="input-group-prepend">
-										<div class="input-group-text">https://discord.gg/</div>
+										<div class="input-group-text">https://discord.gg/invite/</div>
 									</div>
 									<input type="text" class="form-control" name="discord" id="discord" placeholder="Your discord server" value="<?php echo $_SESSION['user_discord']; ?>">
 								</div>
