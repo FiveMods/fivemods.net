@@ -69,6 +69,8 @@ while ($row = $statement->fetch()) {
       $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Quality Assurance</small>';
    } elseif ($perms == "4096") {
       $rank = ' <small class="badge badge-success" style="font-size: 12px;">Developer</small>';
+   } elseif ($perms == "8192") {
+        $rank =' <small class="badge badge-secondary" style="font-size: 12px;">Awesome Dude</small>';
    }
 }
 
