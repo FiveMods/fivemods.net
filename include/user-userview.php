@@ -73,7 +73,7 @@ while ($row = $statement->fetch()) {
 }
 
 
-$statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name= ? ORDER BY m_name");
+$statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name=? AND m_approved='0' ORDER BY m_name");
 $statement->execute(array($uname));
 while ($row = $statement->fetch()) {
    $publishedmods = $row['COUNT(m_authorid)'];
