@@ -179,7 +179,7 @@ function randomChars($length)
                               <!-- Category -->
                               <div>
                                  <label for="category">Select a category <span class="text text-danger">*</span></label>
-                                 <select class="custom-select" id="category" name="category" onChange="outputValue(this)" required>
+                                 <select class="custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
                                     <option value="" disabled selected>Choose category...</option>
                                     <option value="Scripts">Scripts</option>
                                     <option value="Vehicles">Vehicles</option>
@@ -259,7 +259,7 @@ function randomChars($length)
       console.log("Site loaded!");
    });
 
-   function outputValue(item) {
+   function CategoryFeedback(item) {
       document.getElementById('categoryfeedback').className = "valid-feedback";
       document.getElementById('categoryfeedback').innerHTML = "Looks good!";
    };

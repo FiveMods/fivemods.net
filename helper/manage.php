@@ -211,12 +211,6 @@ function downloadMod($pdo, $pdoPayment)
 {
     session_start();
 
-<<<<<<< HEAD
-    function reportprofile() {
-        session_start();
-        require_once('../config.php');
-=======
->>>>>>> d55bd9c65c777db54cbf55123762581de429ad72
 
     $mod = $_GET['download'];
     $download = $pdo->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM mods LEFT JOIN user ON mods.m_authorid = user.id WHERE m_id = :id");
