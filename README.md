@@ -9,15 +9,4 @@ The best platform for the best mods, scripts and maps.
 
 # Still ToDo:
 
-## What to change (Feedback)
-- Please have a look into the issues tab in github
-
-ca. 20€ pro 5000 views
-Partner bekommen 25% mehr pro 5000 downloads pro mod
-
-Philipp: 
-- Edit / Delete Mod
-    |-> Payment leichte dinge
-- 2FA fixen / fertig machen
-
-Zwei von uns müssen payment approven
+-
