@@ -8,22 +8,12 @@ if (empty($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
-    header('location: /');
+    header('location: /account/logout/?url=error');
     exit();
   } else {
 
 
     function editMod() {
-      require_once('../../../config.php');
-
-      $servername = $mysql['servername'];
-      $username = $mysql['username'];
-      $password = $mysql['password'];
-      $dbname = $mysql['dbname'];
-
-        $username2 = htmlspecialchars($_POST['username']);
-        $banner = htmlspecialchars($_POST['gbanner']);
-        $tochange = htmlspecialchars($_POST['id']);
 
         $modName = htmlspecialchars($_POST['modName']);
         $modDesc = htmlspecialchars($_POST['modDesc']);
