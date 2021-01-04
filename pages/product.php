@@ -181,7 +181,7 @@ if ($_GET['id']) {
    .center {
       text-align: center;
    }
-   body {font-family: Arial, Helvetica, sans-serif;}
+   /*body {font-family: Arial, Helvetica, sans-serif;}
 
     #myImg {
     border-radius: 5px;
@@ -191,31 +191,32 @@ if ($_GET['id']) {
 
     #myImg:hover {opacity: 0.7;}
 
-    /* The Modal (background) */
     .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none; 
+    position: fixed;  
+    z-index: 1; 
+    padding-top: 100px; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); 
     }
 
-    /* Modal Content (image) */
+
     .modal-content {
+    position: relative;
     top: 15%;
     margin: auto;
     display: block;
     width: 80%;
     max-width: 700px;
+    z-index: 10;
     }
 
-    /* Caption of Modal Image */
+
     #caption {
     margin: auto;
     display: block;
@@ -227,7 +228,7 @@ if ($_GET['id']) {
     height: 150px;
     }
 
-    /* Add Animation */
+
     .modal-content, #caption {  
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
@@ -245,7 +246,7 @@ if ($_GET['id']) {
     to {transform:scale(1)}
     }
 
-    /* The Close Button */
+   
     .close {
     position: absolute;
     top: 100px;
@@ -263,25 +264,24 @@ if ($_GET['id']) {
     cursor: pointer;
     }
 
-    /* 100% Image Width on Smaller Screens */
     @media only screen and (max-width: 700px){
         .modal-content {
             width: 100%;
         }
     }
-
+*/
 </style>
 
-<div id="myModal" class="modal">
+<!-- <div id="myModal" class="modal">
   <span class="close">&times;</span>
   <img class="modal-content" id="img01">
   <div id="imgCarousel" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
         <?php
-        for ($i=1; $i < count($imgArray); $i++) {
+        /*for ($i=1; $i < count($imgArray); $i++) {
             echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
-        }
+        }*/
         ?>
     </ol>
         <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
@@ -293,7 +293,7 @@ if ($_GET['id']) {
             <span class="sr-only">Next</span>
         </a>
     </div>
-</div>
+</div> -->
 
 <section class="pt-5 pb-5">
    <div class="container">
@@ -844,7 +844,7 @@ if ($_GET['id']) {
         </div>
     </div>
 </div>
-<script>
+<!-- <script>
 var modal = document.getElementById("myModal");
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -864,4 +864,4 @@ var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
   modal.style.display = "none";
 }
-</script>
+</script> -->
