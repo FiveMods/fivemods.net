@@ -134,7 +134,7 @@ function randomChars($length)
                            <div class="tab-pane fade active show" id="card-pill-1" role="tabpanel" aria-labelledby="card-tab-1">
                               <div class="form-group text-center">
                                  <div class="alert alert-info" role="alert">
-                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . $_SESSION['user_username']; ?>!</h4>
+                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . ' ' . $_SESSION['user_username']; ?>!</h4>
                                     <p><?php echo $lang['upload-start-msg']; ?></p>
                                     <hr>
                                     <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days']; ?></b></p>
