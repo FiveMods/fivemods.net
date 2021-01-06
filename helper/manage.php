@@ -242,6 +242,11 @@ function downloadMod($pdo, $pdoPayment)
             $updateBalance = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
             $updateBalance->execute(array('balance' => $newBalance, 'uuid' => $row['uuid']));
 
+            $totalDownloads = $row['totaldownloads'] + 1;
+
+            $update = $pdo->prepare("UPDATE user SET totaldownloads = $totalDownloads WHERE uuid = :uuid");
+            $update->execute(array('uuid' => $row['uuid']));
+
             $_SESSION['downloadMod'] = $newDownloads;
         } else {
             $_SESSION['downloadMod'] = $downloads;
