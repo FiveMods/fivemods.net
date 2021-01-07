@@ -437,7 +437,7 @@ if ($_GET['id']) {
                $name = $row['m_name'];
                $predescription = $row['m_predescription'];
                $img = explode(" ", $row['m_picture'])[0];
-               $tags = explode(" ", $row['m_tags']);
+               $tags = explode(",", $row['m_tags']);
                $cat = $row['m_category'];
                $download = $row['m_downloadlink'];
                $downloads = $row['m_downloads'];
