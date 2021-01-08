@@ -47,12 +47,13 @@ if (empty($_GET['fm_design']) == "orange") {
    $css_text = 'text text-gray';
 }
 
-require_once('./config.php');
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
+$servername = $_ENV['MYSQL_HOST'];
+$username = $_ENV['MYSQL_USERNAME'];
+$password = $_ENV['MYSQL_PASSWORD'];
+$dbname = $_ENV['MYSQL_DATABASE'];
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -83,6 +84,14 @@ if (isset($_GET['page'])) {
    <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
    <!-- End cookieyes banner --> 
 
+    <?php // TODO: DO NOT INCLUDE IN DEVELOPMENT ?>
+    <?php
+    /*
+     * Two things:
+     * 1. Never include in development
+     * 2. Why are there two tracking tags?
+     */
+    ?>
    <!-- Global site tag (gtag.js) - Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
    <script>
@@ -172,6 +181,7 @@ if (isset($_GET['page'])) {
 
       if (strpos($actual_link, 'product') != FALSE) {        
 
+          // TODO: Why are we using a PDO and mysqli instance (THAT WE NEVER CLOSE) @ :59
          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
          $url = $actual_link;

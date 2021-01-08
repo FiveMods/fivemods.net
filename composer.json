@@ -3,6 +3,8 @@
         "phpmailer/phpmailer": "^6.1",
         "league/oauth2-client": "^2.6",
         "sendgrid/sendgrid": "^7.9",
-        "paypal/paypal-checkout-sdk": "1.0.1"
+        "paypal/paypal-checkout-sdk": "1.0.1",
+        "vlucas/phpdotenv": "^5.2",
+        "ext-mysqli": "*"
     }
 }

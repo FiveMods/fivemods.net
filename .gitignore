@@ -3,3 +3,5 @@ config/
 *config.php
 config.php~
 **/config.php~
+/vendor
+/.idea
