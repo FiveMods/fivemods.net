@@ -39,7 +39,7 @@ foreach($tags as $tag) {
     array_push($words, $tag['tag']);
 }
 
-$modDB = $pdo->prepare("SELECT m_name, m_tags FROM mods");
+$modDB = $pdo->prepare("SELECT m_name, m_tags FROM mods WHERE m_approved = 0 AND m_blocked = 0");
 $modDB->execute();
 
 $mods = $modDB->fetchAll(PDO::FETCH_ASSOC);
@@ -49,8 +49,11 @@ foreach($mods as $mod) {
     $tags = explode(",",$mod['m_tags']);
     
     foreach($tags as $tag) {
-        array_push($words, $tag);
+        array_push($words, str_replace(" ","", $tag));
     }
 }
+echo '<pre>';
+print_r($words);
+echo '</pre>';
 
 ?>
