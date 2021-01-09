@@ -25,18 +25,9 @@ $userData = $oAuth->userinfo_v2_me->get();
 
 $uid = $userData['id'];
 
+$sql = \Providers\SqlProvider::getInstance();
 
-require_once('../../config.php');
-
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
-
-$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = $uid");
+$userDB = $sql->prepare("SELECT * FROM user WHERE oauth_uid = $uid");
 $userDB->execute();
 
 if($userDB->rowCount() > 0) {
@@ -132,19 +123,13 @@ if($userDB->rowCount() > 0) {
   $_SESSION['user_permission'] = $permission;
   $_SESSION['user_image'] = $fileName;
 
-	$insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, main_ip) VALUES (:sid, '$v5uuid', :id, 'Google LLC.', :email, :picture, :locale, :description, :mainip)");
+	$insertDB = $sql->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, main_ip) VALUES (:sid, '$v5uuid', :id, 'Google LLC.', :email, :picture, :locale, :description, :mainip)");
   $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => "No Description Set.", 'mainip' => $main_ip, 'id' => $uid, 'locale' => "-"));
 
-	$servernameP = $mysqlPayment['servername'];
-  $usernameP = $mysqlPayment['username'];
-  $passwordP = $mysqlPayment['password'];
-  $dbnameP = $mysqlPayment['dbname'];
-
-  $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
-  $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
+  $insertUser = $sql->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
   $insertUser->execute(array('provider' => "Google", 'id' => $uid, 'uuid' => $v5uuid, 'username' => $uname, 'email' => $email, 'country' => $userData['locale']));
 
-	$select = $pdo->prepare("SELECT * FROM user WHERE uuid = :uuid");
+	$select = $sql->prepare("SELECT * FROM user WHERE uuid = :uuid");
   $select->execute(array('uuid' => $v5uuid));
 
   $selectFetch = $select->fetch();

@@ -4,7 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 ini_set('max_execution_time', 300);
 
-require_once 'config.php';
 require_once '../../helper/geo.class.php';
 
 
@@ -16,16 +15,7 @@ include 'uuid.php';
 
 // Pseudo-random UUID
 
-
-require_once('../../config.php');
-
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
-
-$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$sql = \Providers\SqlProvider::getInstance();
 
 define('OAUTH2_CLIENT_ID', '48abb0467b4aa1c0fa9f');
 define('OAUTH2_CLIENT_SECRET', $gitSecret);
@@ -60,7 +50,7 @@ if($_GET['code']) {
 if($_SESSION['access_token']) {
     $user = apiRequest($apiURLBase . 'user');
 
-    $userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = $user->id");
+    $userDB = $sql->prepare("SELECT * FROM user WHERE oauth_uid = $user->id");
     $userDB->execute();
 
     if($userDB->rowCount() > 0) {
@@ -163,20 +153,14 @@ if($_SESSION['access_token']) {
         $_SESSION['user_permission'] = $permission;
         $_SESSION['user_image'] = $fileName;
 
-        $insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, twitter, github, main_ip) VALUES (:sid, '$v5uuid', :id, 'GitHub', :email, :picture, :locale, :description, :twitter, :github, :mainip)");
+        $insertDB = $sql->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, twitter, github, main_ip) VALUES (:sid, '$v5uuid', :id, 'GitHub', :email, :picture, :locale, :description, :twitter, :github, :mainip)");
         $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => $description, 'twitter' => $twitter, 'github' => $user->login, 'mainip' => $main_ip, 'id' => $user->id, 'locale' => $location));
 
-        $servernameP = $mysqlPayment['servername'];
-        $usernameP = $mysqlPayment['username'];
-        $passwordP = $mysqlPayment['password'];
-        $dbnameP = $mysqlPayment['dbname'];
-
-        $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
-        $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
+        $insertUser = $sql->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
         $insertUser->execute(array('provider' => "GitHub", 'id' => $user->id, 'uuid' => $v5uuid, 'username' => $user->login, 'email' => $email, 'country' => $location));
 
 
-        $select = $pdo->prepare("SELECT * FROM user WHERE uuid = :uuid");
+        $select = $sql->prepare("SELECT * FROM user WHERE uuid = :uuid");
         $select->execute(array('uuid' => $v5uuid));
 
         $selectFetch = $select->fetch();

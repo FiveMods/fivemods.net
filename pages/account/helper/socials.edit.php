@@ -16,11 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     function editSocials() {
       require_once('../../../config.php');
 
-      $servername = $mysql['servername'];
-      $username = $mysql['username'];
-      $password = $mysql['password'];
-      $dbname = $mysql['dbname'];
-
         $discord = htmlspecialchars($_POST['discord']);
         $twitter = htmlspecialchars($_POST['twitter']);
         $youtube = htmlspecialchars($_POST['youtube']);

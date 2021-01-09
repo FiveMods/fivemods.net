@@ -5,6 +5,7 @@
         "sendgrid/sendgrid": "^7.9",
         "paypal/paypal-checkout-sdk": "1.0.1",
         "vlucas/phpdotenv": "^5.2",
-        "ext-mysqli": "*"
+        "ext-mysqli": "*",
+        "ext-pdo": "*"
     }
 }
