@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
+   $sql = "SELECT * FROM mods WHERE m_id = '$nameID'"; //  AND m_approved=0 AND m_blocked=0
    $result = $conn->query($sql);
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
@@ -49,6 +49,15 @@ if ($_GET['id']) {
             }
             $number = round($number / count($rateArray));
          }
+
+         
+         $description = preg_replace('/###(.+)/', "<h5>$1</h5>", $description);
+         $description = preg_replace('/##(.+)/', "<h4>$1</h4>", $description);
+         $description = preg_replace('/#(.+)/', "<h3>$1</h3>", $description);
+         $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
+         $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
+         $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
+         $description = preg_replace('/\`\`\`(.+)\`\`\`/s', "<pre>$1<br /></pre>", $description);
       }
    } else {
       header('location: /');
@@ -111,6 +120,18 @@ if ($_GET['id']) {
 ?>
 
 <style>
+   pre {
+      margin-bottom: 1em;
+      padding: 12px 8px;
+      padding-bottom: 20px !ie7;
+      width: 650px !important;
+      max-height: 600px;
+      overflow: auto;
+      background-color: #eff0f1;
+      border-radius: 3px;
+      display: inline-block;
+   }
+
    .tag {
       margin-right: 5px;
    }
@@ -359,6 +380,7 @@ if ($_GET['id']) {
             ?>
 
             <h5 class="mt-4 text-left"><?php echo $lang['description']; ?></h5>
+            <hr>
             <p class="text-left"><?php echo $description; ?></p>
          </div>
       </div>
