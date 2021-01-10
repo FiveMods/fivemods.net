@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
+   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0"; 
    $result = $conn->query($sql);
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
@@ -58,6 +58,7 @@ if ($_GET['id']) {
          $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
          $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
          $description = preg_replace('/\`\`\`(.+)\`\`\`/s', "<pre>$1<br /></pre>", $description);
+         $description = preg_replace('/@(.+)( )/U', "<a href=\"/user/$1\">@$1</a>$2", $description);
       }
    } else {
       header('location: /');
@@ -437,7 +438,7 @@ if ($_GET['id']) {
                <?php
                $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC";
                $result = $conn->query($sql);
-               if ($result->num_rows > 0) {
+               if ($result->num_rows > 1) {
                   echo '<h4>' . $lang['other-mods'] . '</h4>';
                } else {
                   echo '<h4>' . $lang['famous-mods'] . '</h4>';
@@ -452,7 +453,7 @@ if ($_GET['id']) {
    <div class="container">
       <div class="row">
          <?php
-         if ($result->num_rows > 0) {
+         if ($result->num_rows > 1) {
             $mods = 0;
             while ($row = $result->fetch_assoc()) {
                $id = $row['m_id'];
@@ -461,7 +462,6 @@ if ($_GET['id']) {
                $img = explode(" ", $row['m_picture'])[0];
                $tags = explode(",", $row['m_tags']);
                $cat = $row['m_category'];
-               $download = $row['m_downloadlink'];
                $downloads = $row['m_downloads'];
                $m_price = $row['m_price'];
                $m_prices = $row['m_prices'];
@@ -527,7 +527,7 @@ if ($_GET['id']) {
                }
             }
          } else {
-            $sql = "SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC LIMIT 9";
+            $sql = "SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads DESC LIMIT 7";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                while ($row = $result->fetch_assoc()) {
@@ -537,7 +537,7 @@ if ($_GET['id']) {
                   $img = explode(" ", $row['m_picture'])[0];
                   $tags = explode(",", $row['m_tags']);
                   $cat = $row['m_category'];
-                  $download = $row['m_downloadlink'];
+                  $downloads = $row['m_downloads'];
                   if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                      echo '<div class="col-md-4">
                                     <div class="card mb-4 shadow-sm">
