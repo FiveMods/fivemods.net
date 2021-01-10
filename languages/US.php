@@ -83,7 +83,7 @@
         "heading" => "Heading",
         "how-can-we-help" => "How can we help?",
         "by" => "by",
-        "copyright" => "&copy; 2020-2021 FiveMods or its subsidiaries and affiliates. All rights reserved.",
+        "copyright" => "&copy; 2020 - ".date("Y")." FiveMods or its subsidiaries and affiliates. All rights reserved.",
         "made-by" => "Made by",
         "other-mods" => "Other mods from this creator",
         "famous-mods" => "Famous mods",

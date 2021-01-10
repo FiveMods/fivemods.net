@@ -104,7 +104,7 @@
         "heading" => "Betreff",
         "how-can-we-help" => "Wie können wir helfen?",
         "by" => "von",
-        "copyright" => "Copyright &copy; 2020-2021 FiveMods. Alle Rechte vorbehalten.",
+        "copyright" => "Copyright &copy; 2020 - ".date("Y")." FiveMods. Alle Rechte vorbehalten.",
         "made-by" => "Erstellt von",
         "other-mods" => "Mehr Mods von diesem Künstler",
         "famous-mods" => "Berühmte Mods",
