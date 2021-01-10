@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID'"; //  AND m_approved=0 AND m_blocked=0
+   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0";
    $result = $conn->query($sql);
    if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
@@ -381,7 +381,7 @@ if ($_GET['id']) {
 
             <h5 class="mt-4 text-left"><?php echo $lang['description']; ?></h5>
             <hr>
-            <p class="text-left"><?php echo $description; ?></p>
+            <div class="text-left"><?php echo $description; ?></div>
          </div>
       </div>
    </div>
