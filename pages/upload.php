@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('./include/header-banner.php');
+
 if (empty($_SESSION['user_id'])) {
    header('location: /account/sign-in/');
 }
@@ -283,4 +284,5 @@ function randomChars($length)
          picupload.value = '';
       }
    };
+
 </script>
