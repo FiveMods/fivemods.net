@@ -52,8 +52,5 @@ foreach($mods as $mod) {
         array_push($words, str_replace(" ","", $tag));
     }
 }
-echo '<pre>';
-print_r($words);
-echo '</pre>';
 
 ?>
