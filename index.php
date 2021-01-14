@@ -61,18 +61,6 @@ if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_GET['page'])) {
-   $page_names = explode('/', $_GET["page"]);
-   if ($page_names[0] == "error-pages" and isset($page_names[1])) {
-      if (file_exists("error/400/" . $page_names[1] . ".inner.html")) {
-         http_response_code($page_names[1]);
-      } else {
-         http_response_code(404);
-      }
-   } else {
-      http_response_code(404);
-   }
-}
 ?>
 <!DOCTYPE html>
 <html lang="<?php echo $_SESSION['language']; ?>" dir="ltr">
@@ -139,7 +127,6 @@ if (isset($_GET['page'])) {
    <title><?php echo $lang['title']; ?></title>
 
    <meta http-equiv="content-language" content="en" />
-   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
    <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
    <meta name="robots" content="index, follow" />
    <meta name="department" content="legal" />
@@ -524,11 +511,12 @@ if (isset($_GET['page'])) {
       // add padding top to show content behind navbar
       $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
    </script>
+   <!--
    <script>
       const charactersList = document.getElementById('charactersList');
       const searchBar = document.getElementById('searchBar');
       let hpCharacters = [];
-
+      
       searchBar.addEventListener('keyup', (e) => {
          const searchString = e.target.value.toLowerCase();
 
@@ -540,7 +528,7 @@ if (isset($_GET['page'])) {
          });
          displayCharacters(filteredCharacters);
       });
-
+      
       const loadCharacters = async () => {
          try {
             const res = await fetch('https://hp-api.herokuapp.com/api/characters');
@@ -568,6 +556,7 @@ if (isset($_GET['page'])) {
 
       loadCharacters();
    </script>
+-->
 </body>
 
 </html>

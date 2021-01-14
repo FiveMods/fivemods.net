@@ -51,9 +51,9 @@ if ($_GET['id']) {
          }
 
          
-         $description = preg_replace('/###(.+)/', "<h5>$1</h5>", $description);
-         $description = preg_replace('/##(.+)/', "<h4>$1</h4>", $description);
-         $description = preg_replace('/#(.+)/', "<h3>$1</h3>", $description);
+         $description = preg_replace('/###\s(.+)/', "<h5>$1</h5>", $description);
+         $description = preg_replace('/##\s(.+)/', "<h4>$1</h4>", $description);
+         $description = preg_replace('/#\s(.+)/', "<h3>$1</h3>", $description);
          $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
          $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
          $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
