@@ -198,6 +198,7 @@ if ($conn->connect_error) {
          echo '<script>console.log("Control numb.: '.$urlNumber.'");</script>';
 
       } elseif (strpos($actual_link, 'status') != FALSE) {
+
          echo '<meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -218,6 +219,11 @@ if ($conn->connect_error) {
          <meta name="twitter:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
 
       } elseif (strpos($actual_link, 'user') != FALSE) {
+
+         echo '<script>console.log("Username: '.$user_username.'");</script>';
+         echo '<script>console.log("User desc.: '.$user_description.'");</script>';
+         echo '<script>console.log("User img.: '.$user_picture.'");</script>';
+
          echo '<meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
