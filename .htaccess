@@ -91,6 +91,13 @@ RewriteRule ^(impressum*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*)$ ./index.php?page=$1 [L,QSA]
 
+# Legal rdc. 
+RewriteRule ^(legal*/)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Privacy rdc.
+RewriteRule ^(legal/privacy-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/privacy-policy*)$ ./index.php?page=$1 [L,QSA]
+
 # Payment rdc. 
 RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
 
