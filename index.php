@@ -173,29 +173,71 @@ if ($conn->connect_error) {
          $m_picture = $fetchMod['m_picture'];
          $m_desc = $fetchMod['m_description'];
 
+         $imgArray = explode(" ", $m_picture);
+
 
          echo '<script>console.log("Mod name: '.$m_name.'");</script>';
-         echo '<script>console.log("Mod pic: '.$m_picture.'");</script>';
+         echo '<script>console.log("Mod pic: '.$imgArray[0].'");</script>';
 
 
          echo '
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/'.$urlNumber.'">
-         <meta property="og:title" content="FiveMods.net - '.$m_name.'">
+         <meta property="og:title" content="'.$m_name.'">
          <meta property="og:description" content="FiveMods.net - '.$m_desc.'">
-         <meta property="og:site_name" content="FiveMods.net - '.$m_name.'">
-         <meta property="og:image" content="'.$m_picture.'">
+         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:image" content="'.$imgArray[0].'">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
-         <meta name="twitter:title" content="FiveMods.net - '.$m_name.'">
+         <meta name="twitter:title" content="'.$m_name.'">
          <meta name="twitter:description" content="FiveMods.net - '.$m_desc.'">
-         <meta name="twitter:image" content="'.$m_picture.'">
+         <meta name="twitter:image" content="'.$imgArray[0].'">
          ';
       
          echo '<script>console.log("Control numb.: '.$urlNumber.'");</script>';
-      }   
 
+      } elseif (strpos($actual_link, 'status') != FALSE) {
+         echo '<meta name="msapplication-config" content="none">
+         <meta name="theme-color" content="#FF8637">
+         <meta name="msapplication-navbutton-color" content="#FF8637">
+         <meta name="apple-mobile-web-app-capable" content="yes">
+         <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+     
+         <meta property="og:type" content="website">
+         <meta property="og:url" content="https://fivemods.net/status/">
+         <meta property="og:title" content="FiveM & FiveMods Service Status">
+         <meta property="og:description" content="Your page for the current FiveM and FiveMods outages">
+         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">
+     
+         <meta name="twitter:card" content="summary_large_image">
+         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:title" content="FiveM & FiveMods Service Status">
+         <meta name="twitter:description" content="Your page for the current FiveM and FiveMods outages">
+         <meta name="twitter:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
+
+      } elseif (strpos($actual_link, 'user') != FALSE) {
+         echo '<meta name="msapplication-config" content="none">
+         <meta name="theme-color" content="#FF8637">
+         <meta name="msapplication-navbutton-color" content="#FF8637">
+         <meta name="apple-mobile-web-app-capable" content="yes">
+         <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+      
+         <meta property="og:type" content="website">
+         <meta property="og:url" content="https://fivemods.net/user/'.$username.'">
+         <meta property="og:title" content="'.$username.'">
+         <meta property="og:description" content="'.$description.'">
+         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:image" content="'.$picture.'">
+      
+         <meta name="twitter:card" content="summary_large_image">
+         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:title" content="'.$username.'">
+         <meta name="twitter:description" content="'.$description.'">
+         <meta name="twitter:image" content="'.$picture.'">';
+      }
+ 
    ?>
 
    <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
