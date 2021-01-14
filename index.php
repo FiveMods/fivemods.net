@@ -119,7 +119,7 @@ if ($conn->connect_error) {
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-   <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -220,6 +220,18 @@ if ($conn->connect_error) {
 
       } elseif (strpos($actual_link, 'user') != FALSE) {
 
+         $url = $actual_link;
+         $parts = explode('/', $url);
+         $urlName = $parts[count($parts) - 2];
+
+         $selName = $pdo->prepare("SELECT * FROM user WHERE name = :uname");
+         $selName->execute(array("uname" => $urlName));
+
+         $fetchMod = $selName->fetch();
+         $user_username = $fetchMod['m_name'];
+         $user_description = $fetchMod['m_picture'];
+         $user_picture = $fetchMod['m_description'];
+
          echo '<script>console.log("Username: '.$user_username.'");</script>';
          echo '<script>console.log("User desc.: '.$user_description.'");</script>';
          echo '<script>console.log("User img.: '.$user_picture.'");</script>';
@@ -245,29 +257,6 @@ if ($conn->connect_error) {
       }
  
    ?>
-
-   <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
-
-   <!-- <meta name="msapplication-config" content="none">
-   <meta name="theme-color" content="#FF8637">
-   <meta name="msapplication-navbutton-color" content="#FF8637">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-
-   <meta property="og:type" content="">
-   <meta property="og:url" content="">
-   <meta property="og:title" content="">
-   <meta property="og:description" content="">
-   <meta property="og:site_name" content="FiveMods.net">
-   <meta property="og:image" content="">
-
-   <meta name="twitter:card" content="summary_large_image">
-   <meta name="twitter:site" content="@five_mods">
-   <meta name="twitter:title" content="">
-   <meta name="twitter:description" content="">
-   <meta name="twitter:image" content=""> -->
-
-   <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
 
    <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
 
