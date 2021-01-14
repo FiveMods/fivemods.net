@@ -225,17 +225,17 @@ if ($conn->connect_error) {
          <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
       
          <meta property="og:type" content="website">
-         <meta property="og:url" content="https://fivemods.net/user/'.$username.'">
-         <meta property="og:title" content="'.$username.'">
-         <meta property="og:description" content="'.$description.'">
+         <meta property="og:url" content="https://fivemods.net/user/'.$user_username.'">
+         <meta property="og:title" content="'.$user_username.'">
+         <meta property="og:description" content="'.$user_description.'">
          <meta property="og:site_name" content="FiveMods.net">
-         <meta property="og:image" content="'.$picture.'">
+         <meta property="og:image" content="'.$user_picture.'">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
-         <meta name="twitter:title" content="'.$username.'">
-         <meta name="twitter:description" content="'.$description.'">
-         <meta name="twitter:image" content="'.$picture.'">';
+         <meta name="twitter:title" content="'.$user_username.'">
+         <meta name="twitter:description" content="'.$user_description.'">
+         <meta name="twitter:image" content="'.$user_picture.'">';
       }
  
    ?>
