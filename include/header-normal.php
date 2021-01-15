@@ -16,7 +16,7 @@ $currentPage = $_GET['page'];
          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+         <span class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item mr-1">
                <a class="nav-link" href="/"><?php echo $lang['home']; ?></a>
             </li>
@@ -150,11 +150,11 @@ $currentPage = $_GET['page'];
                <!-- End Dropdown Menu -->
             </li>
             <div class="nav-item dropdown show">
-               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $lang['community']; ?>
                </a>
 
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkCommunity">
                   <a class="dropdown-item" href="/partner-program/"><?php echo $lang['partner-program']; ?></a>
                   <a class="dropdown-item" href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
                   <a class="dropdown-item" href="/help-center/"><?php echo $lang['help-center']; ?></a>
@@ -177,11 +177,11 @@ $currentPage = $_GET['page'];
                      </div>
                   </div> -->
             <div class="nav-item dropdown show">
-               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkFiveM" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $lang['fivem-stuff']; ?> Links
                </a>
 
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkFiveM">
                   <a class="dropdown-item" href="https://fivemods.net/ref/?rdc=https://fivem.net"><?php echo $lang['fivem-download'] ?></a>
                   <hr>
                   <a class="dropdown-item" href="https://fivemods.net/ref/?rdc=https://github.com/tabarra/txAdmin"><?php echo $lang['fivem-txadmin'] ?></a>
@@ -195,7 +195,7 @@ $currentPage = $_GET['page'];
                   <a class="dropdown-item" href="https://fivemods.net/ref/?rdc=https://runtime.fivem.net/fivem-service-agreement-4.pdf"><?php echo $lang['terms-of-service'] ?></a>
                </div>
             </div>
-         </ul>
+         </span>
          <?php
 
          if (!empty($_SESSION['user_id']) || !empty($_SESSION['user_uuid'])) {
@@ -206,17 +206,18 @@ $currentPage = $_GET['page'];
 
          ?>
          <form id="demo-2" action="/search/" method="GET">
-            <input name="query" class="btn btn-outline-primary" type="search" placeholder="Search">
+            <input name="query" class="btn btn-outline-primary" id="query" type="search" placeholder="Search">
+            <label for="query"></label>
             <button type="submit" name="submit-search" hidden></button>
          </form>
          <?php
 
          if (empty($_SESSION['user_id'])) {
-            echo '<ul class="nav navbar-nav navbar-right">
+            echo '<span class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] .' <span class="caret"></span></button>
                   </form>
-               </ul>';
+               </span>';
          } else {
             echo '<form action="/account/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
