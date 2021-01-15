@@ -336,7 +336,7 @@ function purchaseMod($pdo, $pdoPayment)
                     // FiveMods user
 
                     $selectBalanceFM = $pdoPayment->prepare("SELECT balance FROM payment_user WHERE uuid = :uuid");
-                    $selectBalanceFM->execute(array("uuid" => '4c48aaa4-3ee7-4fab-996a-3697e64604f0'));
+                    $selectBalanceFM->execute(array("uuid" => '5b3107fd-3dfe-43ae-b8f6-028560184861'));
 
                     $fetchBalanceFM = $selectBalanceFM->fetch();
                     $balanceFM = floatval($fetchBalanceFM['balance']);
