@@ -63,7 +63,7 @@ if ($conn->connect_error) {
 
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $_SESSION['language']; ?>" dir="ltr">
+<html lang="en-EN" dir="ltr">
 
 <head>
 
