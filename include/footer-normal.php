@@ -143,7 +143,7 @@
                      <div class="btn-container  mt-1 text-md-right text-sm-center">
                         <div class="mb-1 mr-3 align-self-right pt-0 d-inline-block">
                            <!-- <a class="copyrighted-badge text-white p-1 m-2 btn btn-round btn-rised btn-icon btn-light" title="FiveMods.net Registered &amp; Protected" target="_blank" href="https://www.copyrighted.com/website/qQ69TsAAxU0kcAyH"><img alt="FiveMods.net Registered &amp; Protected" border="0" width="125" height="25" srcset="https://static.copyrighted.com/badges/125x25/01_1_2x.png 2x" src="https://static.copyrighted.com/badges/125x25/01_1.png" /></a> -->
-                           <a href="//www.dmca.com/Protection/Status.aspx?ID=1f03d338-c77e-44b8-9667-1c4879aa78af" title="DMCA.com Protection Status" class="dmca-badge"> <img async=on src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-08.png?ID=1f03d338-c77e-44b8-9667-1c4879aa78af" alt="DMCA.com Protection Status" /></a>
+                           <a href="//www.dmca.com/Protection/Status.aspx?ID=1f03d338-c77e-44b8-9667-1c4879aa78af" title="DMCA.com Protection Status" class="dmca-badge"> <img async=on src="https://images.dmca.com/Badges/dmca-badge-w100-5x1-08.png?ID=1f03d338-c77e-44b8-9667-1c4879aa78af" width="100px" height="20px" alt="DMCA.com Protection Status" /></a>
                            <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
                            <a href="/ref?rdc=https://discord.com/invite/AGvh9HX" role="button" class="text-white p-1 m-1 btn btn-rised btn-round btn-icon btn-primary" style="font-size:17px;" title="FiveMods Discord Server">
                               <i class="fab fa-discord fa-lg" aria-hidden="true"></i>
