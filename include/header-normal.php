@@ -150,11 +150,11 @@ $currentPage = $_GET['page'];
                <!-- End Dropdown Menu -->
             </li>
             <div class="nav-item dropdown show">
-               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $lang['community']; ?>
                </a>
 
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkCommunity">
                   <a class="dropdown-item" href="/partner-program/"><?php echo $lang['partner-program']; ?></a>
                   <a class="dropdown-item" href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
                   <a class="dropdown-item" href="/help-center/"><?php echo $lang['help-center']; ?></a>
@@ -177,11 +177,11 @@ $currentPage = $_GET['page'];
                      </div>
                   </div> -->
             <div class="nav-item dropdown show">
-               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkFiveM" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $lang['fivem-stuff']; ?> Links
                </a>
 
-               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+               <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkFiveM">
                   <a class="dropdown-item" href="https://fivemods.net/ref/?rdc=https://fivem.net"><?php echo $lang['fivem-download'] ?></a>
                   <hr>
                   <a class="dropdown-item" href="https://fivemods.net/ref/?rdc=https://github.com/tabarra/txAdmin"><?php echo $lang['fivem-txadmin'] ?></a>
