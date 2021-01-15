@@ -16,7 +16,7 @@ $currentPage = $_GET['page'];
          <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+         <span class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item mr-1">
                <a class="nav-link" href="/"><?php echo $lang['home']; ?></a>
             </li>
@@ -195,7 +195,7 @@ $currentPage = $_GET['page'];
                   <a class="dropdown-item" href="https://fivemods.net/ref/?rdc=https://runtime.fivem.net/fivem-service-agreement-4.pdf"><?php echo $lang['terms-of-service'] ?></a>
                </div>
             </div>
-         </ul>
+         </span>
          <?php
 
          if (!empty($_SESSION['user_id']) || !empty($_SESSION['user_uuid'])) {
@@ -212,11 +212,11 @@ $currentPage = $_GET['page'];
          <?php
 
          if (empty($_SESSION['user_id'])) {
-            echo '<ul class="nav navbar-nav navbar-right">
+            echo '<span class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] .' <span class="caret"></span></button>
                   </form>
-               </ul>';
+               </span>';
          } else {
             echo '<form action="/account/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
