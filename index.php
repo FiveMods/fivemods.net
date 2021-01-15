@@ -186,14 +186,14 @@ if ($conn->connect_error) {
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/'.$urlNumber.'">
          <meta property="og:title" content="'.$m_name.'">
-         <meta property="og:description" content="FiveMods.net - '.$m_desc.'">
+         <meta property="og:description" content="'.$m_desc.'">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="'.$imgArray[0].'">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
          <meta name="twitter:title" content="'.$m_name.'">
-         <meta name="twitter:description" content="FiveMods.net - '.$m_desc.'">
+         <meta name="twitter:description" content="'.$m_desc.'">
          <meta name="twitter:image" content="'.$imgArray[0].'">
          ';
       
@@ -226,19 +226,20 @@ if ($conn->connect_error) {
 
          $url = $actual_link;
          $parts = explode('/', $url);
-         $urlName = $parts[count($parts) - 2];
+         $urlName = $parts[count($parts) - 1];
 
-         $selName = $pdo->prepare("SELECT * FROM user WHERE name = :uname");
+         $selName = $pdo->prepare("SELECT * FROM user WHERE `name` = :uname");
          $selName->execute(array("uname" => $urlName));
 
          $fetchMod = $selName->fetch();
-         $user_username = $fetchMod['m_name'];
-         $user_description = $fetchMod['m_picture'];
-         $user_picture = $fetchMod['m_description'];
+         $user_username = $fetchMod['name'];
+         $user_description = $fetchMod['picture'];
+         $user_picture = $fetchMod['description'];
 
          echo '<script>console.log("Username: '.$user_username.'");</script>';
          echo '<script>console.log("User desc.: '.$user_description.'");</script>';
          echo '<script>console.log("User img.: '.$user_picture.'");</script>';
+         echo '<script>console.log("User: '.$urlName.'");</script>';
 
          echo '<meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
