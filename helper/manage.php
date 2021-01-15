@@ -279,6 +279,8 @@ function purchaseMod($pdo, $pdoPayment)
 {
     session_start();
 
+    $fivemodsuuid = "5b3107fd-3dfe-43ae-b8f6-028560184861";
+
     if (empty($_SESSION['user_id']) == TRUE) {
         header('location: /account/');
         die();
@@ -336,7 +338,7 @@ function purchaseMod($pdo, $pdoPayment)
                     // FiveMods user
 
                     $selectBalanceFM = $pdoPayment->prepare("SELECT balance FROM payment_user WHERE uuid = :uuid");
-                    $selectBalanceFM->execute(array("uuid" => '5b3107fd-3dfe-43ae-b8f6-028560184861'));
+                    $selectBalanceFM->execute(array("uuid" => $fivemodsuuid));
 
                     $fetchBalanceFM = $selectBalanceFM->fetch();
                     $balanceFM = floatval($fetchBalanceFM['balance']);
@@ -389,7 +391,7 @@ function purchaseMod($pdo, $pdoPayment)
                         $newBalanceFM = $balanceFM + $costsB;
 
                         $updateBalanceFM = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
-                        $updateBalanceFM->execute(array('balance' => $newBalanceFM, 'uuid' => '4c48aaa4-3ee7-4fab-996a-3697e64604f0'));
+                        $updateBalanceFM->execute(array('balance' => $newBalanceFM, 'uuid' => $fivemodsuuid));
 
                         // Add entry to product log
 
