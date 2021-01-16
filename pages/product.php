@@ -56,9 +56,14 @@ if ($_GET['id']) {
          $description = preg_replace('/#\s(.+)/', "<h3>$1</h3>", $description);
          $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
          $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
+         //$description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))youtube\.com\/)([A-Za-z0-9-_][^\s|<]{2,})/', "<iframe id=\"ytplayer\" type=\"text/html\" src=\"http://www.youtube.com/embed/$3?autoplay=1&origin=https.//fivemods.net/\"></iframe>", $description);
+         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=\"$2\" alt=\"$2\" style=\"max-width: 100%;\">", $description);
          $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
-         $description = preg_replace('/\`\`\`(.+)\`\`\`/s', "<pre>$1<br /></pre>", $description);
-         $description = preg_replace('/@(.+)( )/U', "<a href=\"/user/$1\">@$1</a>$2", $description);
+         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"$2\" style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9]+\.[^\s|\)|\<]{2,})/', "<a href=\"/ref?rdc=$2$3\">$2$3</a>", $description);
+         $description = preg_replace('/(\`\`\`)([^\`]+)(\`\`\`)/s', "<code style=\"max-width: 100%;\">$2<br /></code>", $description);
+         $description = preg_replace('/@([A-Za-z0-9-_]+[^\s|\W]{1,})/', "<a href=\"/user/$1\">@$1</a>$2", $description);
+         
       }
    } else {
       header('location: /');
@@ -121,7 +126,7 @@ if ($_GET['id']) {
 ?>
 
 <style>
-   pre {
+   code {
       margin-bottom: 1em;
       padding: 12px 8px;
       padding-bottom: 20px !ie7;
@@ -131,6 +136,7 @@ if ($_GET['id']) {
       background-color: #eff0f1;
       border-radius: 3px;
       display: inline-block;
+      color: black;
    }
 
    .tag {
