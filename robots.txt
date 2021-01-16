@@ -2,7 +2,7 @@ User-agent: *
 
 Allow: /
 Allow: /index.php
-Allow: .php
+Allow: /.php
 Allow: /contact/
 Allow: /cookie-consent/
 Allow: /famous-creator/
@@ -55,6 +55,6 @@ Disallow: /account/edit/*
 Disallow: /account/delete/*
 Disallow: /composer.lock
 Disallow: /composer.json
-Disallow: .htaccess
+Disallow: /.htaccess
 
 Sitemap: https://fivemods.net/sitemap.xml

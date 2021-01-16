@@ -63,7 +63,7 @@ if ($conn->connect_error) {
 
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $_SESSION['language']; ?>" dir="ltr">
+<html lang="en-EN" dir="ltr">
 
 <head>
 
@@ -120,6 +120,8 @@ if ($conn->connect_error) {
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+
+   <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
 
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -184,14 +186,14 @@ if ($conn->connect_error) {
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/'.$urlNumber.'">
          <meta property="og:title" content="'.$m_name.'">
-         <meta property="og:description" content="FiveMods.net - '.$m_desc.'">
+         <meta property="og:description" content="'.$m_desc.'">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="'.$imgArray[0].'">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
          <meta name="twitter:title" content="'.$m_name.'">
-         <meta name="twitter:description" content="FiveMods.net - '.$m_desc.'">
+         <meta name="twitter:description" content="'.$m_desc.'">
          <meta name="twitter:image" content="'.$imgArray[0].'">
          ';
       
@@ -220,21 +222,24 @@ if ($conn->connect_error) {
 
       } elseif (strpos($actual_link, 'user') != FALSE) {
 
+         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
          $url = $actual_link;
          $parts = explode('/', $url);
-         $urlName = $parts[count($parts) - 2];
+         $urlName = $parts[count($parts) - 1];
 
-         $selName = $pdo->prepare("SELECT * FROM user WHERE name = :uname");
+         $selName = $pdo->prepare("SELECT * FROM user WHERE `name` = :uname");
          $selName->execute(array("uname" => $urlName));
 
          $fetchMod = $selName->fetch();
-         $user_username = $fetchMod['m_name'];
-         $user_description = $fetchMod['m_picture'];
-         $user_picture = $fetchMod['m_description'];
+         $user_username = $fetchMod['name'];
+         $user_description = $fetchMod['picture'];
+         $user_picture = $fetchMod['description'];
 
          echo '<script>console.log("Username: '.$user_username.'");</script>';
          echo '<script>console.log("User desc.: '.$user_description.'");</script>';
          echo '<script>console.log("User img.: '.$user_picture.'");</script>';
+         echo '<script>console.log("User: '.$urlName.'");</script>';
 
          echo '<meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
@@ -286,6 +291,7 @@ if ($conn->connect_error) {
    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
+   <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
       function swapStyleSheet(sheet) {
          document.getElementById('pagestyle').setAttribute('href', sheet);
@@ -496,7 +502,7 @@ if ($conn->connect_error) {
    <!-- ========== END MAIN CONTENT ========== -->
 
    <div class="text-center pt-3 pb-2">
-      <a href="https://www.netcup.de" target="_blank"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
+      <a href="https://www.netcup.de" target="_blank" rel="noopener"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
    </div>
 
    <!-- ========== FOOTER ========== -->
