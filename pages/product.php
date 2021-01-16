@@ -183,13 +183,13 @@ if ($_GET['id']) {
    }
    /*body {font-family: Arial, Helvetica, sans-serif;}
 
-    #myImg {
+    #expandImg {
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
     }
 
-    #myImg:hover {opacity: 0.7;}
+    #expandImg:hover {opacity: 0.7;}
 
     .modal {
     display: none; 
@@ -337,12 +337,12 @@ if ($_GET['id']) {
                </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active">
-                        <img id="myImg" src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
+                        <img id="exandImg" src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
                      </div>
                      <?php
                         for ($i=1; $i < count($imgArray); $i++) {
                            echo '<div class="carousel-item">
-                                    <img id="myImg" src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
+                                    <img id="expandImg" src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
                                  </div>';
                         }
                      ?>
@@ -848,7 +848,7 @@ if ($_GET['id']) {
 var modal = document.getElementById("myModal");
 
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById("myImg");
+var img = document.getElementById("expandImg");
 var modalImg = document.getElementById("img01");
 var captionText = document.getElementById("caption");
 img.onclick = function(){
