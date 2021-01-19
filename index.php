@@ -61,24 +61,12 @@ if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_GET['page'])) {
-   $page_names = explode('/', $_GET["page"]);
-   if ($page_names[0] == "error-pages" and isset($page_names[1])) {
-      if (file_exists("error/400/" . $page_names[1] . ".inner.html")) {
-         http_response_code($page_names[1]);
-      } else {
-         http_response_code(404);
-      }
-   } else {
-      http_response_code(404);
-   }
-}
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $_SESSION['language']; ?>" dir="ltr">
+<html lang="en-EN" dir="ltr">
 
 <head>
-
+   <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- Start cookieyes banner -->
    <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
    <!-- End cookieyes banner --> 
@@ -127,8 +115,13 @@ if (isset($_GET['page'])) {
    </script>
    <!-- End Google Tag Manager -->
 
-   <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-   <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+   <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
+   
+   <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
+
+   <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
 
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,7 +129,6 @@ if (isset($_GET['page'])) {
    <title><?php echo $lang['title']; ?></title>
 
    <meta http-equiv="content-language" content="en" />
-   <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
    <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
    <meta name="robots" content="index, follow" />
    <meta name="department" content="legal" />
@@ -183,53 +175,93 @@ if (isset($_GET['page'])) {
          $m_picture = $fetchMod['m_picture'];
          $m_desc = $fetchMod['m_description'];
 
+         $imgArray = explode(" ", $m_picture);
+
 
          echo '<script>console.log("Mod name: '.$m_name.'");</script>';
-         echo '<script>console.log("Mod pic: '.$m_picture.'");</script>';
+         echo '<script>console.log("Mod pic: '.$imgArray[0].'");</script>';
 
 
          echo '
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/'.$urlNumber.'">
-         <meta property="og:title" content="FiveMods.net - '.$m_name.'">
-         <meta property="og:description" content="FiveMods.net - '.$m_desc.'">
-         <meta property="og:site_name" content="FiveMods.net - '.$m_name.'">
-         <meta property="og:image" content="'.$m_picture.'">
+         <meta property="og:title" content="'.$m_name.'">
+         <meta property="og:description" content="'.$m_desc.'">
+         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:image" content="'.$imgArray[0].'">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
-         <meta name="twitter:title" content="FiveMods.net - '.$m_name.'">
-         <meta name="twitter:description" content="FiveMods.net - '.$m_desc.'">
-         <meta name="twitter:image" content="'.$m_picture.'">
+         <meta name="twitter:title" content="'.$m_name.'">
+         <meta name="twitter:description" content="'.$m_desc.'">
+         <meta name="twitter:image" content="'.$imgArray[0].'">
          ';
       
          echo '<script>console.log("Control numb.: '.$urlNumber.'");</script>';
-      }   
 
+      } elseif (strpos($actual_link, 'status') != FALSE) {
+
+         echo '<meta name="msapplication-config" content="none">
+         <meta name="theme-color" content="#FF8637">
+         <meta name="msapplication-navbutton-color" content="#FF8637">
+         <meta name="apple-mobile-web-app-capable" content="yes">
+         <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+     
+         <meta property="og:type" content="website">
+         <meta property="og:url" content="https://fivemods.net/status/">
+         <meta property="og:title" content="FiveM & FiveMods Service Status">
+         <meta property="og:description" content="Your page for the current FiveM and FiveMods outages">
+         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">
+     
+         <meta name="twitter:card" content="summary_large_image">
+         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:title" content="FiveM & FiveMods Service Status">
+         <meta name="twitter:description" content="Your page for the current FiveM and FiveMods outages">
+         <meta name="twitter:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
+
+      } elseif (strpos($actual_link, 'user') != FALSE) {
+
+         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+         $url = $actual_link;
+         $parts = explode('/', $url);
+         $urlName = $parts[count($parts) - 1];
+
+         $selName = $pdo->prepare("SELECT * FROM user WHERE `name` = :uname");
+         $selName->execute(array("uname" => $urlName));
+
+         $fetchMod = $selName->fetch();
+         $user_username = $fetchMod['name'];
+         $user_description = $fetchMod['picture'];
+         $user_picture = $fetchMod['description'];
+
+         echo '<script>console.log("Username: '.$user_username.'");</script>';
+         echo '<script>console.log("User desc.: '.$user_description.'");</script>';
+         echo '<script>console.log("User img.: '.$user_picture.'");</script>';
+         echo '<script>console.log("User: '.$urlName.'");</script>';
+
+         echo '<meta name="msapplication-config" content="none">
+         <meta name="theme-color" content="#FF8637">
+         <meta name="msapplication-navbutton-color" content="#FF8637">
+         <meta name="apple-mobile-web-app-capable" content="yes">
+         <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+      
+         <meta property="og:type" content="website">
+         <meta property="og:url" content="https://fivemods.net/user/'.$user_username.'">
+         <meta property="og:title" content="'.$user_username.'">
+         <meta property="og:description" content="'.$user_description.'">
+         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:image" content="'.$user_picture.'">
+      
+         <meta name="twitter:card" content="summary_large_image">
+         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:title" content="'.$user_username.'">
+         <meta name="twitter:description" content="'.$user_description.'">
+         <meta name="twitter:image" content="'.$user_picture.'">';
+      }
+ 
    ?>
-
-   <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
-
-   <!-- <meta name="msapplication-config" content="none">
-   <meta name="theme-color" content="#FF8637">
-   <meta name="msapplication-navbutton-color" content="#FF8637">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-
-   <meta property="og:type" content="">
-   <meta property="og:url" content="">
-   <meta property="og:title" content="">
-   <meta property="og:description" content="">
-   <meta property="og:site_name" content="FiveMods.net">
-   <meta property="og:image" content="">
-
-   <meta name="twitter:card" content="summary_large_image">
-   <meta name="twitter:site" content="@five_mods">
-   <meta name="twitter:title" content="">
-   <meta name="twitter:description" content="">
-   <meta name="twitter:image" content=""> -->
-
-   <!-- RESP. FOR LINK EMBEDS ON TWITTER AND PROB. DC -->
 
    <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
 
@@ -259,6 +291,7 @@ if (isset($_GET['page'])) {
    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
+   <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
       function swapStyleSheet(sheet) {
          document.getElementById('pagestyle').setAttribute('href', sheet);
@@ -469,7 +502,7 @@ if (isset($_GET['page'])) {
    <!-- ========== END MAIN CONTENT ========== -->
 
    <div class="text-center pt-3 pb-2">
-      <a href="https://www.netcup.de" target="_blank"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
+      <a href="https://www.netcup.de" target="_blank" rel="noopener"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
    </div>
 
    <!-- ========== FOOTER ========== -->
@@ -521,11 +554,12 @@ if (isset($_GET['page'])) {
       // add padding top to show content behind navbar
       $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
    </script>
+   <!--
    <script>
       const charactersList = document.getElementById('charactersList');
       const searchBar = document.getElementById('searchBar');
       let hpCharacters = [];
-
+      
       searchBar.addEventListener('keyup', (e) => {
          const searchString = e.target.value.toLowerCase();
 
@@ -537,7 +571,7 @@ if (isset($_GET['page'])) {
          });
          displayCharacters(filteredCharacters);
       });
-
+      
       const loadCharacters = async () => {
          try {
             const res = await fetch('https://hp-api.herokuapp.com/api/characters');
@@ -565,6 +599,7 @@ if (isset($_GET['page'])) {
 
       loadCharacters();
    </script>
+-->
 </body>
 
 </html>

@@ -1,5 +1,7 @@
 # ErrorDocument 404
 
+Header set X-FRAME-OPTIONS: SAMEORIGIN
+
 ErrorDocument 401 /error/400/401.html
 ErrorDocument 403 /error/400/403.html
 ErrorDocument 404 /error/400/404.html
@@ -88,6 +90,13 @@ RewriteRule ^(impressum*)$ ./index.php?page=$1 [L,QSA]
 # About rdc. 
 RewriteRule ^(about-us*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*)$ ./index.php?page=$1 [L,QSA]
+
+# Legal rdc. 
+RewriteRule ^(legal*/)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Privacy rdc.
+RewriteRule ^(legal/privacy-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/privacy-policy*)$ ./index.php?page=$1 [L,QSA]
 
 # Payment rdc. 
 RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]

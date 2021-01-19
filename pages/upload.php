@@ -1,6 +1,7 @@
 <?php
 session_start();
 include('./include/header-banner.php');
+
 if (empty($_SESSION['user_id'])) {
    header('location: /account/sign-in/');
 }
@@ -18,7 +19,7 @@ if (isset($_POST['uploadMod'])) {
    $modid = randomChars(12);
 
    $title = htmlspecialchars($_POST['title']);
-   $description = nl2br(htmlspecialchars($_POST['description']));
+   $description = nl2br($_POST['description']);
    $predescription = str_replace("<br />"," " , substr($description, 0, 150) . "...");
    $category = htmlspecialchars($_POST['category']);
    $tags = htmlspecialchars($_POST['tags']);
@@ -278,9 +279,10 @@ function randomChars($length)
                 picupload.value = '';
                 break;
             }
-            }
-        } else {
-            picupload.value = '';
-        }
-    };
+         }
+      } else {
+         picupload.value = '';
+      }
+   };
+
 </script>

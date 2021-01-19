@@ -83,7 +83,7 @@
         "heading" => "Titel", //Heading
         "how-can-we-help" => "Hoe kunnen we helpen?", //How can we help?
         "by" => "door", //by
-        "copyright" => "&copy; 2020 FiveMods of haar dochterondernemingen en gelieerde ondernemingen.  Alle rechten voorbehouden.", // 2020 FiveMods or its subsidiaries and affiliates. All rights reserved.
+        "copyright" => "&copy; 2020 - ".date("Y")." FiveMods of haar dochterondernemingen en gelieerde ondernemingen.  Alle rechten voorbehouden.", // 2020 FiveMods or its subsidiaries and affiliates. All rights reserved.
         "made-by" => "Gemaakt door", //Made by
         "other-mods" => "Andere mods van deze Auteur", //Other mods from this creator
         "famous-mods" => "Populaire mods", //Famous mods

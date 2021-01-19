@@ -33,13 +33,14 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // set the PDO error mode to exception
           $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET discord='$discord', twitter='$twitter', youtube='$youtube', instagram='$instagram', github='$github' WHERE oauth_uid = $tochange";
+          $sql = "UPDATE user SET discord=:discord, twitter=:twitter, youtube=:youtube, instagram=:instagram, github=:github WHERE oauth_uid = :oauth";
         
           // Prepare statement
           $stmt = $conn->prepare($sql);
         
           // execute the query
-          $stmt->execute();
+          $stmt->execute(['discord' => $discord, 'twitter' => $twitter, 'youtube' => $youtube,
+              'instagram' => $instagram, 'github' => $github, 'oauth' => $tochange]);
         
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";

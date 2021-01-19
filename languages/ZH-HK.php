@@ -82,7 +82,7 @@
         "heading" => "標題", //Heading
         "how-can-we-help" => "請問有咩可以幫到你呢？", //How can we help?
         "by" => "作者為", //by
-        "copyright" => "&copy; 2020 FiveMods 或其附屬及關聯組織 - 版權所有", // 2020 FiveMods or its subsidiaries and affiliates. All rights reserved.
+        "copyright" => "&copy; 2020 - ".date("Y")." FiveMods 或其附屬及關聯組織 - 版權所有", // 2020 FiveMods or its subsidiaries and affiliates. All rights reserved.
         "made-by" => "創作者為", //Made by
         "other-mods" => "呢個作者嘅其他模組", //Other mods from this creator
         "famous-mods" => "著名模組", //Famous mods

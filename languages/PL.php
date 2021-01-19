@@ -83,7 +83,7 @@
         "heading" => "Nagłówek", //Heading
         "how-can-we-help" => "Jak możemy pomóc?", //How can we help?
         "by" => "przez", //by
-        "copyright" => "&copy; 2020 FiveMods lub jego spółki zależne i stowarzyszone. Wszystkie prawa zastrzeżone.", // 2020 FiveMods or its subsidiaries and affiliates. All rights reserved.
+        "copyright" => "&copy; 2020 - ".date("Y")." FiveMods lub jego spółki zależne i stowarzyszone. Wszystkie prawa zastrzeżone.", // 2020 FiveMods or its subsidiaries and affiliates. All rights reserved.
         "made-by" => "Zrobionę przez", //Made by
         "other-mods" => "Inne modyfikacje tego twórcy", //Other mods from this creator
         "famous-mods" => "Popularne mody", //Famous mods
