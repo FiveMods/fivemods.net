@@ -375,6 +375,7 @@ if ($_GET['id']) {
                         }
                      ?>
                   </div>
+                  <?php if(count($imgArray) > 1):?>
                   <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                      <span class="sr-only">Previous</span>
@@ -383,6 +384,7 @@ if ($_GET['id']) {
                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
                      <span class="sr-only">Next</span>
                   </a>
+                  <?php endif;?>
                </div>
 
             <br><br>
