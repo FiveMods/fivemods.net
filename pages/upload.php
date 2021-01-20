@@ -57,12 +57,38 @@ if (isset($_POST['uploadMod'])) {
    }
    $pictures = implode(" ", $pictures);
 
+   if($_SESSION['user_premium'] == 0) {
+      $approved = 1;
+      $approvedby = NULL;
+   } else {
+      $approved = 0;
+      $approvedby = "Automatically";
+   }
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price)");
-   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price));
+
+
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
+   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
 
    $_SESSION['upload'] = 1;
+
+
+   if($_SESSION['user_premium'] == 1) {
+
+      $ch = curl_init();
+      $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+      $modid = $id;
+
+      curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, "action=newMod&token=$token&modid=$modid");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $response = curl_exec($ch);
+      curl_close($ch);
+   }
+
 
    header("Location: /helper/manage.php?upload=1");
    exit();
