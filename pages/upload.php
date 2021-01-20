@@ -74,7 +74,7 @@ if (isset($_POST['uploadMod'])) {
    $_SESSION['upload'] = 1;
 
 
-   if($_SESSION['user_premium'] == 1) {
+   if($_SESSION['user_premium'] != 0) {
 
       $ch = curl_init();
       $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
