@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-:root {
+ :root {
     --blue: #007bff;
     --indigo: #6610f2;
     --purple: #ff8637;
@@ -2397,15 +2397,15 @@ textarea.form-control {
 
 .custom-select.is-invalid,
 .form-control.is-invalid,
-.was-validated .custom-select,
-.was-validated .form-control {
+.was-validated .custom-select:invalid,
+.was-validated .form-control:invalid {
     border-color: #fc3939
 }
 
 .custom-select.is-invalid:focus,
 .form-control.is-invalid:focus,
-.was-validated .custom-select:focus,
-.was-validated .form-control:focus {
+.was-validated .custom-select:invalid:focus,
+.was-validated .form-control:invalid:focus {
     border-color: #fc3939;
     -webkit-box-shadow: 0 0 0 .2rem rgba(252, 57, 57, .25);
     box-shadow: 0 0 0 .2rem rgba(252, 57, 57, .25)
@@ -2415,10 +2415,10 @@ textarea.form-control {
 .custom-select.is-invalid~.invalid-tooltip,
 .form-control.is-invalid~.invalid-feedback,
 .form-control.is-invalid~.invalid-tooltip,
-.was-validated .custom-select~.invalid-feedback,
-.was-validated .custom-select~.invalid-tooltip,
-.was-validated .form-control~.invalid-feedback,
-.was-validated .form-control~.invalid-tooltip {
+.was-validated .custom-select:invalid~.invalid-feedback,
+.was-validated .custom-select:invalid~.invalid-tooltip,
+.was-validated .form-control:invalid~.invalid-feedback,
+.was-validated .form-control:invalid~.invalid-tooltip {
     display: block
 }
 

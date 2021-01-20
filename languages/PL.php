@@ -61,7 +61,7 @@
         "partner-question3" => "Twoja wiedza na temat tworzenia modów do platformy FiveM", //Your knowledge regarding FiveM Mods creation
         "partner-question4" => "Dlaczego chcesz dołączyć do Programu Partnerstwa FiveMods?", //Why do you want to join the FiveMods Partner Program?
         "partner-conditions" => "Warunki", //Conditions
-        "partner-condition1" => "Twoje Konto musi być połączone z GitHub\'em & Discord\'em", //Your Account has to be linked with GitHub & Discord
+        "partner-condition1" => "You need to have 2FA activated on your account", //You need to have 2FA activated on your account
         "partner-condition2" => "Zweryfikowane Przesłane Pliki", //Verified Uploads
         "partner-condition3" => "Pobrania Razem", //Downloads in Total
         "search-results" => "Wyniki wyszukiwania dla", //Search results for 

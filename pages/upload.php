@@ -57,12 +57,38 @@ if (isset($_POST['uploadMod'])) {
    }
    $pictures = implode(" ", $pictures);
 
+   if($_SESSION['user_premium'] == 0) {
+      $approved = 1;
+      $approvedby = NULL;
+   } else {
+      $approved = 0;
+      $approvedby = "Automatically";
+   }
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price)");
-   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price));
+
+
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
+   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
 
    $_SESSION['upload'] = 1;
+
+
+   if($_SESSION['user_premium'] != 0) {
+
+      $ch = curl_init();
+      $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+      $modid = $id;
+
+      curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, "action=newMod&token=$token&modid=$modid");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $response = curl_exec($ch);
+      curl_close($ch);
+   }
+
 
    header("Location: /helper/manage.php?upload=1");
    exit();
@@ -135,7 +161,7 @@ function randomChars($length)
                            <div class="tab-pane fade active show" id="card-pill-1" role="tabpanel" aria-labelledby="card-tab-1">
                               <div class="form-group text-center">
                                  <div class="alert alert-info" role="alert">
-                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . $_SESSION['user_username']; ?>!</h4>
+                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . ' ' . $_SESSION['user_username']; ?>!</h4>
                                     <p><?php echo $lang['upload-start-msg']; ?></p>
                                     <hr>
                                     <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days']; ?></b></p>
@@ -180,7 +206,7 @@ function randomChars($length)
                               <!-- Category -->
                               <div>
                                  <label for="category">Select a category <span class="text text-danger">*</span></label>
-                                 <select class="custom-select" id="category" name="category" onChange="outputValue(this)" required>
+                                 <select class="custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
                                     <option value="" disabled selected>Choose category...</option>
                                     <option value="Scripts">Scripts</option>
                                     <option value="Vehicles">Vehicles</option>
@@ -260,24 +286,24 @@ function randomChars($length)
       console.log("Site loaded!");
    });
 
-   function outputValue(item) {
+   function CategoryFeedback(item) {
       document.getElementById('categoryfeedback').className = "valid-feedback";
       document.getElementById('categoryfeedback').innerHTML = "Looks good!";
    };
 
-   var modupload = document.getElementById('modupload');
-   modupload.onchange = function() {
-      if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
-         modupload.value = '';
-      }
-   };
-   var picupload = document.getElementById('picupload');
-   picupload.onchange = function() {
-      if (picupload.files.length <= 10) {
-         for (let v = 0; v < picupload.files.length; v++) {
+    var modupload = document.getElementById('modupload');
+    modupload.onchange = function() {
+        if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
+            modupload.value = '';
+        }
+    };
+    var picupload = document.getElementById('picupload');
+    picupload.onchange = function() {
+        if (picupload.files.length <= 10) {
+            for (let v = 0; v < picupload.files.length; v++) {
             if (!picupload.files[v].name.endsWith(".png") && !picupload.files[v].name.endsWith(".jpg") && !picupload.files[v].name.endsWith(".jpeg") && !picupload.files[v].name.endsWith(".webp")) {
-               picupload.value = '';
-               break;
+                picupload.value = '';
+                break;
             }
          }
       } else {

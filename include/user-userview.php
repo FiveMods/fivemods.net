@@ -64,16 +64,18 @@ while ($row = $statement->fetch()) {
    if ($perms == "-1") {
       $rank = ' <small class="badge badge-danger" style="font-size: 12px;">Owner</small>';
    } elseif ($perms == "1024") {
-      $rank = ' <small class="badge badge-info" style="font-size: 12px;">Helper</small>';
+      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Helper</small>';
    } elseif ($perms == "2048") {
-      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Quality Assurance</small>';
+      $rank = ' <small class="badge badge-info" style="font-size: 12px;">Developer</small>';
    } elseif ($perms == "4096") {
-      $rank = ' <small class="badge badge-success" style="font-size: 12px;">Developer</small>';
+      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Staff Member</small>';
+   } elseif ($perms == "8192") {
+      $rank = ' <small class="badge badge-success" style="font-size: 12px;">Staff Management</small>';
    }
 }
 
 
-$statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name= ? ORDER BY m_name");
+$statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name=? AND m_approved='0' AND m_blocked='0' ORDER BY m_name");
 $statement->execute(array($uname));
 while ($row = $statement->fetch()) {
    $publishedmods = $row['COUNT(m_authorid)'];
