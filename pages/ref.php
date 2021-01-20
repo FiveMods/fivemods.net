@@ -10,29 +10,10 @@ if (isset($_GET['rdc'])) {
 
     $ref = urldecode($_GET['rdc']);
 
-   $marks = array(
-    "grabify.link",
-    "bmwforum.co",
-    "leancoding.co",
-    "spottyfly.com",
-    "stopify.co",
-    "yoütu.be",
-    "discörd.com",
-    "minecräft.com",
-    "freegiftcards.co",
-    "disçordapp.com",
-    "särahah.eu",
-    "särahah.pl",
-    "xda-developers.us",
-    "quickmessage.us",
-    "fortnight.space",
-    "fortnitechat.site",
-    "youshouldclick.us",
-    "joinmy.site",
-    "crabrave.pw"
-   ); 
+    $suburl = getHost($ref);
+    $url = giveHost($suburl);
 
-    $sql = "SELECT marked_links FROM links WHERE marked_links LIKE '$ref'";
+    $sql = "SELECT marked_links FROM links WHERE marked_links LIKE '$url'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -127,7 +108,15 @@ if (isset($_GET['rdc'])) {
     
 }
 
+function getHost($Address) { 
+    $parseUrl = parse_url(trim($Address)); 
+    return trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2))); 
+} 
+
+function giveHost($host_with_subdomain) {
+    $array = explode(".", $host_with_subdomain);
+    return (array_key_exists(count($array) - 2, $array) ? $array[count($array) - 2] : "").".".$array[count($array) - 1];
+}
+
+
 ?>
-
-
-   
