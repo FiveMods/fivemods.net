@@ -16,19 +16,10 @@
     <div class="row">
         <div id="stickyBlockStartPoint" class="col-md-4 col-lg-3 mb-7 mb-md-0">
             <!-- Nav -->
-            <nav class="js-sticky-block card card-bordered" data-hs-sticky-block-options='{
-                 "parentSelector": "#stickyBlockStartPoint",
-                 "targetSelector": "#logoAndNav",
-                 "breakpoint": "md",
-                 "startPoint": "#stickyBlockStartPoint",
-                 "endPoint": "#stickyBlockEndPoint",
-                 "stickyOffsetTop": 24,
-                 "stickyOffsetBottom": 24
-               }'>
+            <nav class="js-sticky-block card card-bordered">
                 <div class="card-body">
-                    <ul class="js-scroll-nav nav nav-sm nav-x-0 flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold mb-2" href="#services">1. Using our services</a>
+                    <ul class="">
+                        <li class="">
 
                             <ol class="navbar-nav">
                                 <li class="nav-item">

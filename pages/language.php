@@ -67,15 +67,13 @@ if (isset($_GET['is'])) {
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
       </div>';
-    } elseif ($_GET['is'] == "NL") {
-        $_SESSION['selfselect'] = "1";
-        $_SESSION['selfselectlang'] = "NL";
-        header('location: ./');
-        $_SESSION['langupdate'] = '<div class="alert alert-success mb-5" id="success-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
-      </div>';
-    }
+    } 
+}
+
+if ($_SESSION['selfselect'] == '1') {
+    $cookie_name = "language_preference";
+    $cookie_value = $_SESSION['selfselectlang'];
+    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 }
 
 ?>
