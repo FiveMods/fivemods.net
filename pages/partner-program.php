@@ -166,8 +166,8 @@
          <p><?php echo $lang['partner-text4'];?></p>
          <ul>
             <li><?php echo $lang['partner-condition1'];?></li>
-            <li><b>10+</b> <?php echo $lang['partner-condition2'];?></li>
-            <li><b>5000+</b> <?php echo $lang['partner-condition3'];?></li>
+            <li><b>5+</b> <?php echo $lang['partner-condition2'];?></li>
+            <li><b>100+</b> <?php echo $lang['partner-condition3'];?></li>
          </ul>
       </div>
     </div>

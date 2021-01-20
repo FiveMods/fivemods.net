@@ -61,7 +61,7 @@
         "partner-question3" => "Your knowledge regarding FiveM Mods creation",
         "partner-question4" => "Why do you want to join the FiveMods Partner Program?",
         "partner-conditions" => "Conditions",
-        "partner-condition1" => "Your Account has to be linked with GitHub & Discord",
+        "partner-condition1" => "You need to have 2FA activated on your account",
         "partner-condition2" => "Verified Uploads",
         "partner-condition3" => "Downloads in Total",
         "search-results" => "Search results for ",
@@ -115,7 +115,7 @@
         "inap-desc" => "Inappropriate Description",
         "harassment" => "Harassment",
         "stolen-mod" => "Stolen Mod Circulation",
-        "link-to-evi" => "https://fivemods.net/link-to-evidence",
+        "link-to-evi" => "https://fivemods.net/link-to-evidence", // ?????
         "save-submit" => "Save & Submit",
         "all-user" => "All Users",
         "edit-profile" => "Edit Profile",
