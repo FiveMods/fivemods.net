@@ -2,21 +2,7 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
 else ob_start();
 
-ini_set("session.cookie_domain", ".fivemods.net");
-
 session_start();
-
-if (empty($_SESSION['language'])) {
-   $_SESSION['language'] = "Auto-EN";
-}
-
-
-if (isset($_GET['kill'])) {
-   if ($_GET['kill'] == "session") {
-      session_destroy();
-      header('location: ./');
-   }
-}
 
 if ($_SESSION['user_blocked'] == 1) {
    header('location: /account/logout/?url=banned');
@@ -136,9 +122,9 @@ if ($conn->connect_error) {
    <meta name="author" content="FiveMods" />
    <meta name="publisher" content="FiveMods" />
    <meta name="organisation" content="FiveMods" />
-   <meta name="copyright" content="FiveMods" />
+   <meta name="copyright" content="Copyright (c) 2020 - 2021 FiveMods" />
    <meta name="generator" content="Atom, Visual Studio Code" />
-   <meta name="keywords" content="FiveM, fivem, fivemods, FiveMods, GTA5, GTAV, gta5, gtav, gta, scripts, script, Scripts, Script, Development, Dev, dev, development, offical, usa, america, mod, modification, vehicles, planes, boats, model, loading screen, airport, map" />
+   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
    <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
    <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
    <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
@@ -148,6 +134,9 @@ if ($conn->connect_error) {
    <meta name="msapplication-navbutton-color" content="#FF8637">
    <meta name="apple-mobile-web-app-capable" content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+   <meta property="og:image" content="https://fivemods.net/static-assets/img/brand-side.png">
+
+   <meta name="websiteStage" content="live" />
 
    <meta name="DC.Language" content="en" />
    <meta name="DC.Creator" content="FiveMods" />

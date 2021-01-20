@@ -108,6 +108,20 @@
                             </div>
                         </a>
                     </div>
+                    <div class=" col-sm-6 col-md-3 mb-4">
+                        <a href="/legal/contact/">
+                            <div class="card h-100 border-0">
+                                <div class="card-img-top mt-4 pt-1">
+                                    <img src="/static-assets/img/svg/legal/contact.svg" class="img-fluid mx-auto d-block" width="100px" alt="<?php echo $lang['contact']; ?>IMG">
+                                </div>
+                                <div class="card-body text-center">
+                                    <h4 class="card-title">
+                                        <a href="/legal/contact/" class=" font-weight-bold text-dark text-uppercase small"> <?php echo $lang['contact']; ?></a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

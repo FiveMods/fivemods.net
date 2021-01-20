@@ -98,6 +98,10 @@ RewriteRule ^(legal*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/privacy-policy*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/privacy-policy*)$ ./index.php?page=$1 [L,QSA]
 
+# Legal Legal Notice rdc.
+RewriteRule ^(legal/legal-notice*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/legal-notice*)$ ./index.php?page=$1 [L,QSA]
+
 # Payment rdc. 
 RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
 
