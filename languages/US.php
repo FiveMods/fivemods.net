@@ -144,7 +144,7 @@
         "advertisement" => "Advertisement",
         "complaint" => "General or legal complaint",
         "privacy-manager" => "Privacy Manager",
-        "upload-policy" => "Upload policy",
+        "upload-policy" => "Upload Policy",
         "language" => "Language",
         "login-to-part" => "Please login to participate.",
         "welcome" => "Welcome ",
