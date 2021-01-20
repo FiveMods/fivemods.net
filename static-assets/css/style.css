@@ -6436,7 +6436,8 @@ button.close {
 }
 
 .carousel-indicators .active {
-    background-color: #fff
+    background-color: #fff;
+    opacity: -1;
 }
 
 .carousel-caption {

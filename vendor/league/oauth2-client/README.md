@@ -79,7 +79,7 @@ if (!isset($_GET['code'])) {
 
     // Redirect the user to the authorization URL.
     header('Location: ' . $authorizationUrl);
-    exit;
+    exit();
 
 // Check given state against previously stored one to mitigate CSRF attack
 } elseif (empty($_GET['state']) || (isset($_SESSION['oauth2state']) && $_GET['state'] !== $_SESSION['oauth2state'])) {

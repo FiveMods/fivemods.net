@@ -45,13 +45,13 @@ if (empty($t2ken) || $t2ken == NULL) {
       echo '<script>console.log("SQL error");</script>';
    }
 } else {
-   echo '<script>console.log("Early exit");</script>';
-   $Authenticator = new Authenticator();
-   if (!isset($_SESSION['auth_secret'])) {
-      $secret = $Authenticator->generateRandomSecret();
-      $secret = $t2ken;
-      $_SESSION['auth_secret'] = $secret;
-   }
+    echo '<script>console.log("Early exit");</script>';
+        $Authenticator = new Authenticator();
+        if (!isset($_SESSION['auth_secret'])) {
+           $secret = $Authenticator->generateRandomSecret();
+           $secret = $t2ken;
+           $_SESSION['auth_secret'] = $secret;
+        }
 }
 
 $qrCodeUrl = $Authenticator->getQR($_SESSION['user_email'], $_SESSION['auth_secret'], "FiveMods.net");

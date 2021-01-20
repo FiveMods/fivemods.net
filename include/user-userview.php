@@ -69,11 +69,13 @@ while ($row = $statement->fetch()) {
       $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Quality Assurance</small>';
    } elseif ($perms == "4096") {
       $rank = ' <small class="badge badge-success" style="font-size: 12px;">Developer</small>';
+   } elseif ($perms == "69") {
+        $rank =' <small class="badge badge-secondary" style="font-size: 12px;">Awesome Dude</small>';
    }
 }
 
 
-$statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name= ? ORDER BY m_name");
+$statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name=? AND m_approved='0' AND m_blocked='0' ORDER BY m_name");
 $statement->execute(array($uname));
 while ($row = $statement->fetch()) {
    $publishedmods = $row['COUNT(m_authorid)'];

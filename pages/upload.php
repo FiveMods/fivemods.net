@@ -161,7 +161,7 @@ function randomChars($length)
                            <div class="tab-pane fade active show" id="card-pill-1" role="tabpanel" aria-labelledby="card-tab-1">
                               <div class="form-group text-center">
                                  <div class="alert alert-info" role="alert">
-                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . $_SESSION['user_username']; ?>!</h4>
+                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . ' ' . $_SESSION['user_username']; ?>!</h4>
                                     <p><?php echo $lang['upload-start-msg']; ?></p>
                                     <hr>
                                     <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days']; ?></b></p>
@@ -206,7 +206,7 @@ function randomChars($length)
                               <!-- Category -->
                               <div>
                                  <label for="category">Select a category <span class="text text-danger">*</span></label>
-                                 <select class="custom-select" id="category" name="category" onChange="outputValue(this)" required>
+                                 <select class="custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
                                     <option value="" disabled selected>Choose category...</option>
                                     <option value="Scripts">Scripts</option>
                                     <option value="Vehicles">Vehicles</option>
@@ -286,24 +286,24 @@ function randomChars($length)
       console.log("Site loaded!");
    });
 
-   function outputValue(item) {
+   function CategoryFeedback(item) {
       document.getElementById('categoryfeedback').className = "valid-feedback";
       document.getElementById('categoryfeedback').innerHTML = "Looks good!";
    };
 
-   var modupload = document.getElementById('modupload');
-   modupload.onchange = function() {
-      if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
-         modupload.value = '';
-      }
-   };
-   var picupload = document.getElementById('picupload');
-   picupload.onchange = function() {
-      if (picupload.files.length <= 10) {
-         for (let v = 0; v < picupload.files.length; v++) {
+    var modupload = document.getElementById('modupload');
+    modupload.onchange = function() {
+        if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
+            modupload.value = '';
+        }
+    };
+    var picupload = document.getElementById('picupload');
+    picupload.onchange = function() {
+        if (picupload.files.length <= 10) {
+            for (let v = 0; v < picupload.files.length; v++) {
             if (!picupload.files[v].name.endsWith(".png") && !picupload.files[v].name.endsWith(".jpg") && !picupload.files[v].name.endsWith(".jpeg") && !picupload.files[v].name.endsWith(".webp")) {
-               picupload.value = '';
-               break;
+                picupload.value = '';
+                break;
             }
          }
       } else {

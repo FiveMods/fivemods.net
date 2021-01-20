@@ -53,7 +53,7 @@ if (!isset($_GET['code']) && !isset($_GET['provider'])) {
 </body>
 </html>
 <?php
-exit;
+exit();
 }
 
 require 'vendor/autoload.php';
@@ -123,7 +123,7 @@ if (!isset($_GET['code'])) {
     $authUrl = $provider->getAuthorizationUrl($options);
     $_SESSION['oauth2state'] = $provider->getState();
     header('Location: ' . $authUrl);
-    exit;
+    exit();
 // Check given state against previously stored one to mitigate CSRF attack
 } elseif (empty($_GET['state']) || ($_GET['state'] !== $_SESSION['oauth2state'])) {
     unset($_SESSION['oauth2state']);
