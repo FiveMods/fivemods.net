@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item mr-1">
-                    <a class="nav-link" href="/"><?php echo $lang['home']; ?></a>
+                    <a class="nav-link" href="/legal/"><?php echo $lang['home']; ?></a>
                 </li>
                 <?php
 
