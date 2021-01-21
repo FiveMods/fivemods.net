@@ -134,7 +134,7 @@ if ($conn->connect_error) {
    <meta name="msapplication-navbutton-color" content="#FF8637">
    <meta name="apple-mobile-web-app-capable" content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-   <meta property="og:image" content="https://fivemods.net/static-assets/img/brand-side.png">
+   <meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">
 
    <meta name="websiteStage" content="live" />
 
