@@ -56,7 +56,7 @@ if ($_GET['id']) {
          $description = preg_replace('/#\s(.+)/', "<h3>$1</h3>", $description);
          $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
          $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
-         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))youtube\.com\/)([A-Za-z0-9-_][^\s|<]{2,})/', "<iframe id=\"ytplayer\" type=\"text/html\" width=\"544\" height=\"306\" src=\"http://www.youtube.com/embed/$3\"></iframe>", $description);
+         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/', "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>", $description);
          $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=\"$2\" alt=\"$2\" style=\"max-width: 100%;\">", $description);
          $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
          $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"$2\" style=\"max-width: 100%;\">", $description);
