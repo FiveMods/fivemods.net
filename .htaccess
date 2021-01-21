@@ -98,6 +98,22 @@ RewriteRule ^(legal*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/privacy-policy*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/privacy-policy*)$ ./index.php?page=$1 [L,QSA]
 
+# Legal Imprint rdc.
+RewriteRule ^(legal/imprint*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/imprint*)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Payment Agreement rdc.
+RewriteRule ^(legal/payment-agreement*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/payment-agreement*)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Upload Policy rdc.
+RewriteRule ^(legal/upload-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/upload-policy*)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Account Policy rdc.
+RewriteRule ^(legal/account-policy*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/account-policy*)$ ./index.php?page=$1 [L,QSA]
+
 # Legal Legal Notice rdc.
 RewriteRule ^(legal/legal-notice*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/legal-notice*)$ ./index.php?page=$1 [L,QSA]
