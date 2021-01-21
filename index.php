@@ -55,12 +55,13 @@ if ($conn->connect_error) {
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- Start cookieyes banner -->
    <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
-   <!-- End cookieyes banner --> 
+   <!-- End cookieyes banner -->
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
    <script>
       window.dataLayer = window.dataLayer || [];
+
       function gtag() {
          dataLayer.push(arguments);
       }
@@ -104,7 +105,7 @@ if ($conn->connect_error) {
    <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
-   
+
    <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
@@ -115,6 +116,8 @@ if ($conn->connect_error) {
    <title><?php echo $lang['title']; ?></title>
 
    <meta http-equiv="content-language" content="en" />
+   <meta http-equiv="Pragma" content="no-cache">
+   <meta http-equiv="Cache-Control" content="no-cache">
    <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
    <meta name="robots" content="index, follow" />
    <meta name="department" content="legal" />
@@ -127,14 +130,18 @@ if ($conn->connect_error) {
    <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
    <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
    <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
+   <meta name="coverage" content="Worldwide">
+
+   <meta name="reply-to" content="fivemods.management@gmail.com">
+
    <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
    <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
+
    <meta name="msapplication-config" content="none">
    <meta name="theme-color" content="#FF8637">
    <meta name="msapplication-navbutton-color" content="#FF8637">
    <meta name="apple-mobile-web-app-capable" content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-   <meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">
 
    <meta name="websiteStage" content="live" />
 
@@ -144,53 +151,52 @@ if ($conn->connect_error) {
    <meta name="DC.Rights" content="FiveMods" />
    <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
-   <?php 
+   <?php
 
-      $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+   $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-      if (strpos($actual_link, 'product') != FALSE) {        
+   if (strpos($actual_link, 'product') != FALSE) {
 
-         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+      $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-         $url = $actual_link;
-         $parts = explode('/', $url);
-         $urlNumber = $parts[count($parts) - 2];
+      $url = $actual_link;
+      $parts = explode('/', $url);
+      $urlNumber = $parts[count($parts) - 2];
 
-         $selMod = $pdo->prepare("SELECT * FROM mods WHERE m_id = :mid");
-         $selMod->execute(array("mid" => $urlNumber));
+      $selMod = $pdo->prepare("SELECT * FROM mods WHERE m_id = :mid");
+      $selMod->execute(array("mid" => $urlNumber));
 
-         $fetchMod = $selMod->fetch();
-         $m_name = $fetchMod['m_name'];
-         $m_picture = $fetchMod['m_picture'];
-         $m_desc = $fetchMod['m_description'];
+      $fetchMod = $selMod->fetch();
+      $m_name = $fetchMod['m_name'];
+      $m_picture = $fetchMod['m_picture'];
+      $m_desc = $fetchMod['m_description'];
 
-         $imgArray = explode(" ", $m_picture);
-
-
-         echo '<script>console.log("Mod name: '.$m_name.'");</script>';
-         echo '<script>console.log("Mod pic: '.$imgArray[0].'");</script>';
+      $imgArray = explode(" ", $m_picture);
 
 
-         echo '
+      echo '<script>console.log("Mod name: ' . $m_name . '");</script>';
+      echo '<script>console.log("Mod pic: ' . $imgArray[0] . '");</script>';
+
+
+      echo '
          <meta property="og:type" content="website">
-         <meta property="og:url" content="http://fivemods.net/product/'.$urlNumber.'">
-         <meta property="og:title" content="'.$m_name.'">
-         <meta property="og:description" content="'.$m_desc.'">
+         <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
+         <meta property="og:title" content="' . $m_name . '">
+         <meta property="og:description" content="' . $m_desc . '">
          <meta property="og:site_name" content="FiveMods.net">
-         <meta property="og:image" content="'.$imgArray[0].'">
+         <meta property="og:image" content="' . $imgArray[0] . '">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
-         <meta name="twitter:title" content="'.$m_name.'">
-         <meta name="twitter:description" content="'.$m_desc.'">
-         <meta name="twitter:image" content="'.$imgArray[0].'">
+         <meta name="twitter:title" content="' . $m_name . '">
+         <meta name="twitter:description" content="' . $m_desc . '">
+         <meta name="twitter:image" content="' . $imgArray[0] . '">
          ';
-      
-         echo '<script>console.log("Control numb.: '.$urlNumber.'");</script>';
 
-      } elseif (strpos($actual_link, 'status') != FALSE) {
+      echo '<script>console.log("Control numb.: ' . $urlNumber . '");</script>';
+   } elseif (strpos($actual_link, 'status') != FALSE) {
 
-         echo '<meta name="msapplication-config" content="none">
+      echo '<meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
@@ -208,48 +214,49 @@ if ($conn->connect_error) {
          <meta name="twitter:title" content="FiveM & FiveMods Service Status">
          <meta name="twitter:description" content="Your page for the current FiveM and FiveMods outages">
          <meta name="twitter:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
+   } elseif (strpos($actual_link, 'user') != FALSE) {
 
-      } elseif (strpos($actual_link, 'user') != FALSE) {
+      $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+      $url = $actual_link;
+      $parts = explode('/', $url);
+      $urlName = $parts[count($parts) - 1];
 
-         $url = $actual_link;
-         $parts = explode('/', $url);
-         $urlName = $parts[count($parts) - 1];
+      $selName = $pdo->prepare("SELECT * FROM user WHERE `name` = :uname");
+      $selName->execute(array("uname" => $urlName));
 
-         $selName = $pdo->prepare("SELECT * FROM user WHERE `name` = :uname");
-         $selName->execute(array("uname" => $urlName));
+      $fetchMod = $selName->fetch();
+      $user_username = $fetchMod['name'];
+      $user_description = $fetchMod['picture'];
+      $user_picture = $fetchMod['description'];
 
-         $fetchMod = $selName->fetch();
-         $user_username = $fetchMod['name'];
-         $user_description = $fetchMod['picture'];
-         $user_picture = $fetchMod['description'];
+      echo '<script>console.log("Username: ' . $user_username . '");</script>';
+      echo '<script>console.log("User desc.: ' . $user_description . '");</script>';
+      echo '<script>console.log("User img.: ' . $user_picture . '");</script>';
+      echo '<script>console.log("User: ' . $urlName . '");</script>';
 
-         echo '<script>console.log("Username: '.$user_username.'");</script>';
-         echo '<script>console.log("User desc.: '.$user_description.'");</script>';
-         echo '<script>console.log("User img.: '.$user_picture.'");</script>';
-         echo '<script>console.log("User: '.$urlName.'");</script>';
-
-         echo '<meta name="msapplication-config" content="none">
+      echo '<meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
          <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
       
          <meta property="og:type" content="website">
-         <meta property="og:url" content="https://fivemods.net/user/'.$user_username.'">
-         <meta property="og:title" content="'.$user_username.'">
-         <meta property="og:description" content="'.$user_description.'">
+         <meta property="og:url" content="https://fivemods.net/user/' . $user_username . '">
+         <meta property="og:title" content="' . $user_username . '">
+         <meta property="og:description" content="' . $user_description . '">
          <meta property="og:site_name" content="FiveMods.net">
-         <meta property="og:image" content="'.$user_picture.'">
+         <meta property="og:image" content="' . $user_picture . '">
       
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
-         <meta name="twitter:title" content="'.$user_username.'">
-         <meta name="twitter:description" content="'.$user_description.'">
-         <meta name="twitter:image" content="'.$user_picture.'">';
-      }
- 
+         <meta name="twitter:title" content="' . $user_username . '">
+         <meta name="twitter:description" content="' . $user_description . '">
+         <meta name="twitter:image" content="' . $user_picture . '">';
+   } else {
+      echo '<meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">';
+   }
+
    ?>
 
    <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
@@ -274,6 +281,17 @@ if ($conn->connect_error) {
    ?>
 
    <link rel="icon" href="<?php echo $favicon; ?>">
+
+   <link rel="apple-touch-icon" href="/static-assets/img/apple-touch-icon/apple-touch-icon.png" />
+   <link rel="apple-touch-icon" sizes="57x57" href="/static-assets/img/apple-touch-icon/apple-touch-icon-57x57.png" />
+   <link rel="apple-touch-icon" sizes="72x72" href="/static-assets/img/apple-touch-icon/apple-touch-icon-72x72.png" />
+   <link rel="apple-touch-icon" sizes="76x76" href="/static-assets/img/apple-touch-icon/apple-touch-icon-76x76.png" />
+   <link rel="apple-touch-icon" sizes="114x114" href="/static-assets/img/apple-touch-icon/apple-touch-icon-114x114.png" />
+   <link rel="apple-touch-icon" sizes="120x120" href="/static-assets/img/apple-touch-icon/apple-touch-icon-120x120.png" />
+   <link rel="apple-touch-icon" sizes="144x144" href="/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
+   <link rel="apple-touch-icon" sizes="152x152" href="/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
+   <link rel="apple-touch-icon" sizes="180x180" href="/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
+
    <link rel="stylesheet" href="/static-assets/css/style-adj.css">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
