@@ -102,6 +102,14 @@ RewriteRule ^(legal/privacy-policy*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/legal-notice*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/legal-notice*)$ ./index.php?page=$1 [L,QSA]
 
+# Legal Cookie Consent rdc.
+RewriteRule ^(legal/cookie-consent*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/cookie-consent*)$ ./index.php?page=$1 [L,QSA]
+
+# Legal Terms Of Serivce rdc.
+RewriteRule ^(legal/terms-of-service*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(legal/terms-of-service*)$ ./index.php?page=$1 [L,QSA]
+
 # Payment rdc. 
 RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
 

@@ -25,28 +25,10 @@
                         <a href="/contact/"><?php echo $lang['contact']; ?></a>
                      </li>
                      <li>
-                        <a href="/privacy-policy/"><?php echo $lang['privacy-policy']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/terms-of-service/"><?php echo $lang['terms-of-service']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/legal-notice/"><?php echo $lang['legal-notice']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/cookie-consent/"><?php echo $lang['cookie-consent']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/status/"><?php echo $lang['status']; ?></a>
+                        <a href="/legal/">Legal Center</a>
                      </li>
                      <li>
                         <a href="/advertisement/"><?php echo $lang['advertisement']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/upload-policy/"><?php echo $lang['upload-policy']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/account-policy/">Account Policy</a>
                      </li>
                      <?php
                      if ($_SESSION['language'] == "DE") {
@@ -97,6 +79,9 @@
                         echo '<li><a href="/account/sign-in/">' . $lang['upload'] . '</a></li>';
                      }
                      ?>
+                     <li>
+                        <a href="/status/"><?php echo $lang['status']; ?></a>
+                     </li>
                      <li>
                         <a href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
                      </li>
