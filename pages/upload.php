@@ -45,7 +45,7 @@ if (isset($_POST['uploadMod'])) {
 
    move_uploaded_file($_FILES["modupload"]["tmp_name"], $path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]));
    rename($path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]), $path . '/' . $userid . '/' . $modid . '/' . preg_replace("/([&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip'));
-   $download = $downloadWebsite . '/' . $userid . '/' . $modid . '/' . preg_replace("/([&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip');
+   $download = $downloadWebsite . '/' . $userid . '/' . $modid . '/' . preg_replace("/([#&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip');
    $pictures = [];
    foreach ($_FILES["picupload"]["error"] as $key => $error) {
       if ($error == "UPLOAD_ERR_OK") {
