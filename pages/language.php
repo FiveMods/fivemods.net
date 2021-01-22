@@ -88,16 +88,16 @@ if ($_SESSION['selfselect'] == '1') {
                         <a class="text-muted" href="?is=DE"><span class="flag-icon flag-icon-de"></span> <?php echo $lang['de-de']; ?></a>
                     </li>
                     <li>
-                        <s class="text-muted" href="?is=FR"><span class="flag-icon flag-icon-fr"></span> <?php echo $lang['fr-fr']; ?></s>
+                        <!-- <s class="text-muted" href="?is=FR"><span class="flag-icon flag-icon-fr"></span> <?php echo $lang['fr-fr']; ?></s> -->
                     </li>
                     <li>
-                        <s class="text-muted" href="?is=ES"><span class="flag-icon flag-icon-es"></span> <?php echo $lang['es-es']; ?></s>
+                        <!-- <s class="text-muted" href="?is=ES"><span class="flag-icon flag-icon-es"></span> <?php echo $lang['es-es']; ?></s> -->
                     </li>
                     <li>
-                        <s class="text-muted" href="?is=IT"><span class="flag-icon flag-icon-it"></span> <?php echo $lang['it-it']; ?></s>
+                        <!-- <s class="text-muted" href="?is=IT"><span class="flag-icon flag-icon-it"></span> <?php echo $lang['it-it']; ?></s> -->
                     </li>
                     <li>
-                        <s class="text-muted" href="?is=GR"><span class="flag-icon flag-icon-gr"></span> <?php echo $lang['gr-gr']; ?></s>
+                        <!-- <s class="text-muted" href="?is=GR"><span class="flag-icon flag-icon-gr"></span> <?php echo $lang['gr-gr']; ?></s> -->
                     </li>
                     <li>
                         <a class="text-muted" href="?is=NL"><span class="flag-icon flag-icon-nl"></span> <?php echo $lang['nl-nl']; ?></a>
@@ -106,7 +106,7 @@ if ($_SESSION['selfselect'] == '1') {
                         <a class="text-muted" href="?is=GB"><span class="flag-icon flag-icon-gb"></span> <?php echo $lang['en-gb']; ?></a>
                     </li>
                     <li>
-                        <s class="text-muted" href="?is=RU"><span class="flag-icon flag-icon-ru"></span> <?php echo $lang['ru-ru']; ?></s>
+                        <!-- <s class="text-muted" href="?is=RU"><span class="flag-icon flag-icon-ru"></span> <?php echo $lang['ru-ru']; ?></s> -->
                     </li>
                     <li>
                         <a class="text-muted" href="?is=PL"><span class="flag-icon flag-icon-pl"></span> <?php echo $lang['pl-pl']; ?></a>
@@ -120,7 +120,7 @@ if ($_SESSION['selfselect'] == '1') {
                         <a class="text-muted" href="?is=US"><span class="flag-icon flag-icon-us"></span> <?php echo $lang['en-us']; ?></a>
                     </li>
                     <li>
-                        <s class="text-muted" href="?is=ES"><span class="flag-icon flag-icon-mx"></span> <?php echo $lang['mx-mx']; ?></s>
+                        <!-- <s class="text-muted" href="?is=ES"><span class="flag-icon flag-icon-mx"></span> <?php echo $lang['mx-mx']; ?></s> -->
                     </li>
                 </ul>
             </div>
@@ -128,7 +128,7 @@ if ($_SESSION['selfselect'] == '1') {
                 <h5><?php echo $lang['asia']; ?></h5>
                 <ul class="list-unstyled  ">
                     <li>
-                        <s class="text-muted" href="#"><span class="flag-icon flag-icon-jp"></span> <?php echo $lang['jp-jp']; ?></s>
+                        <!-- <s class="text-muted" href="#"><span class="flag-icon flag-icon-jp"></span> <?php echo $lang['jp-jp']; ?></s> -->
                     </li>
                     <li>
                         <a class="text-muted" href="?is=CN"><span class="flag-icon flag-icon-cn"></span> <?php echo $lang['cn-cn']; ?></a>
@@ -140,12 +140,13 @@ if ($_SESSION['selfselect'] == '1') {
                         <a class="text-muted" href="?is=TW"><span class="flag-icon flag-icon-tw"></span> <?php echo $lang['tw-tw']; ?></a>
                     </li>
                     <li>
-                        <s class="text-muted" href="#"><span class="flag-icon flag-icon-sg"></span> <?php echo $lang['sp-sp']; ?></s>
+                        <!-- <s class="text-muted" href="#"><span class="flag-icon flag-icon-sg"></span> <?php echo $lang['sp-sp']; ?></s> -->
                     </li>
                 </ul>
             </div>
         </div>
         <hr>
         <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/huskyy/">Huskyy</a> for translating the polish version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
+        <small>We are happy about any help with our translations - via <a href="/ref?https://github.com/FiveMods">GitHub</a>.</small>
     </section>
 </section>

@@ -76,7 +76,7 @@ if (isset($_SESSION['downloadMod'])) {
                      ?>
                      <div class="col-6">
                         <a href="/product/<?php echo $mosts['m_id']; ?>/" class="card mb-3">
-                           <img class="card-img-top img-fluid" style="width:253px;height:143px;" async=on src="<?php echo explode(" ", $mosts['m_picture'])[0]; ?>" alt="<?php echo $mosts['m_name'] ?>-PICTURE">
+                           <img class="card-img-top img-fluid img-thumbnail cover-sm" async=on src="<?php echo explode(" ", $mosts['m_picture'])[0]; ?>" alt="<?php echo $mosts['m_name'] ?>-PICTURE">
                            <div class="card-body">
                               <div class="d-flex justify-content-between align-items-center">
                                  <h6 class="mb-0"><?php echo $mosts['m_name'] ?></h6>
@@ -144,7 +144,7 @@ if (isset($_SESSION['downloadMod'])) {
                   </div>
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

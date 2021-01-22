@@ -34,24 +34,51 @@
                                     </li>
                                 </ul>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">B. The use of the Cookies</a>
+                                    <a class="nav-link mb-1">B. Acknowledgement</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">C. Links to Other Websites</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">D. Termination</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">E. Limitation of Liability</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">F. "AS IS" and "AS AVAILABLE" Disclaimer</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">G. Governing Law</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">H. Disputes Resolution</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">I. For European Union (EU) Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">J. United States Legal Compliance</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">K. Severability and Waiver</a>
                                 </li>
                                 <ul class="">
                                     <li class="nav-item">
-                                        <a>Type of Cookies We Use</a>
+                                        <a>Severability</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a>Waiver</a>
                                     </li>
                                 </ul>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">C. Your Choices Regarding Cookies</a>
+                                    <a class="nav-link mb-1">L. Translation Interpretation</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">D. More Information about Cookies</a>
+                                    <a class="nav-link mb-1">M. Changes to These Terms and Conditions</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">E. Our Cookies</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link mb-1">F. Contact Us</a>
+                                    <a class="nav-link mb-1">N. Contact Us</a>
                                 </li>
                             </ol>
                         </li>

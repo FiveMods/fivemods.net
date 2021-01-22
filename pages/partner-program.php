@@ -2,7 +2,7 @@
    <div class="container ">
       <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
          <div class="col-12 col-md-12 h-50 ">
-            <h1 class="font-weight-bold   text-white display-2 mb-2 mt-5"> FiveMods
+            <h1 class="font-weight-bold   text-white display-2 mb-2 mt-5"> <small>FiveMods</small>
                <br><?php echo $lang['partner-program']; ?>
             </h1>
             <p>
@@ -20,7 +20,7 @@
       <div class="row text-center pb-md-4 justify-content-sm-center ">
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-dollar-sign fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>
-            <h3 class="h4 mt-2 mb-3"><?php echo $lang['benefit1'];?></h3>
+            <h3 class="h4 mt-2 mb-3"></h3>
          </div>
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-percentage fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>

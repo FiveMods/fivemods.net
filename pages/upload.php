@@ -77,8 +77,10 @@ if (isset($_POST['uploadMod'])) {
 
    if($_SESSION['user_premium'] != 0) {
 
+      require_once "/config.php";
+      
       $ch = curl_init();
-      $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+      $token = $apiToken;
       $modid = $id;
 
       curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");

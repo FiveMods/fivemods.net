@@ -595,7 +595,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4">
                                  <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -621,7 +621,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -662,7 +662,7 @@ if ($_GET['id']) {
                      echo '<div class="col-md-4">
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                       <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -686,7 +686,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -850,7 +850,10 @@ if ($_GET['id']) {
             </div>
             <div class="modal-body">
                 Your current budget amounts: <?php $ch = curl_init();
-                  $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+
+                  require_once "/config.php";
+
+                  $token = $apiToken;
                   $userid = $_SESSION['user_id'];
 
                   curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");

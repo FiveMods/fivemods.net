@@ -234,7 +234,7 @@ include('./include/header-banner.php');
                   </div>
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

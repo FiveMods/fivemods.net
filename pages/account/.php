@@ -416,7 +416,9 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<hr>
 						<?php
 						$ch = curl_init();
-						$token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+						require_once "/config.php";
+
+                  		$token = $apiToken;
 						$userid = $_SESSION['user_id'];
 
 						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
