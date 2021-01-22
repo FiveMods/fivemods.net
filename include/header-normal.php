@@ -160,6 +160,7 @@ $currentPage = $_GET['page'];
                   <a class="dropdown-item" href="/help-center/"><?php echo $lang['help-center']; ?></a>
                   <a class="dropdown-item" href="/user/"><?php echo $lang['all-user']; ?></a>
                   <a class="dropdown-item" href="/status/"><?php echo $lang['status']; ?></a>
+                  <a class="dropdown-item" href="/affiliate/">Affiliate</a>
                </div>
             </div>
             <!-- <div class="nav-item dropdown show">

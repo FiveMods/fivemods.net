@@ -281,12 +281,14 @@ function purchaseMod($pdo, $pdoPayment)
 
     $fivemodsuuid = "5b3107fd-3dfe-43ae-b8f6-028560184861";
 
+    require_once "./config.php";
+
     if (empty($_SESSION['user_id']) == TRUE) {
         header('location: /account/');
         die();
     } else {
         $ch = curl_init();
-        $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+        $token = $apiToken;
         $userid = $_SESSION['user_id'];
 
         curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");

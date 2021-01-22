@@ -49,7 +49,7 @@ while ($row = $statement->fetch()) {
    $website = $row['website'];
    $location = $row['locale'];
 
-   if(empty($website)) $website = "-";
+   if (empty($website)) $website = "-";
 
    $created = date("d. M Y", strtotime($created));
 
@@ -83,7 +83,7 @@ while ($row = $statement->fetch()) {
 
 if ($_SESSION['user_id'] == $oauth_uid && $blocked == 0) {
    $editbtn = '<a href="/account/" class="text text-success" style="font-size:12px;"><i class="fas fa-user"></i> ' . $lang['edit-profile'] . '</a>';
-} elseif(!empty($_SESSION['user_id'])) {
+} elseif (!empty($_SESSION['user_id'])) {
    $repbtn = '<a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> ' . $lang['report-profile'] . '</a>';
 } else {
    $repbtn = '<a href="/account/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
@@ -197,9 +197,9 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       <div class="col-md-6">
          <div class="profile-head">
             <h4><?php echo $banned . '' . $line . '' . $username . '' . $rank; ?></h4>
-            
+
             <?php
-            
+
             if ($premium == 1 && $blocked == 0) {
                echo '<small><i class="fas fa-crown" title="Premium content creator"></i> Premium Content Creator</small>';
             } elseif ($blocked == 1) {
@@ -215,21 +215,21 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                } else {
                   echo '';
                }
-               
-               if(!empty($discord)) {
-                  echo '<a href="/ref?rdc=https://discord.gg/'.$discord.'" role="button" class="fab fa-discord text-primary "></a>';
+
+               if (!empty($discord)) {
+                  echo '<a href="/ref?rdc=https://discord.gg/' . $discord . '" role="button" class="fab fa-discord text-primary "></a>';
                }
-               if(!empty($twitter)) {
-                  echo '<a href="/ref?rdc=https://twitter.com/'.$twitter.'" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
+               if (!empty($twitter)) {
+                  echo '<a href="/ref?rdc=https://twitter.com/' . $twitter . '" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
                }
-               if(!empty($instagram)) {
-               echo '<a href="/ref?rdc=https://instagram.com/'.$instagram.'" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
+               if (!empty($instagram)) {
+                  echo '<a href="/ref?rdc=https://instagram.com/' . $instagram . '" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
                }
-               if(!empty($youtube)) {
-                  echo '<a href="/ref?rdc=https://youtube.com/'.$youtube.'" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
+               if (!empty($youtube)) {
+                  echo '<a href="/ref?rdc=https://youtube.com/' . $youtube . '" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
                }
-               if(!empty($github)) {
-                  echo '<a href="/ref?rdc=https://github.com/'.$github.'" role="button" class="fab fa-github fa-md text-primary smallButton"></a>';
+               if (!empty($github)) {
+                  echo '<a href="/ref?rdc=https://github.com/' . $github . '" role="button" class="fab fa-github fa-md text-primary smallButton"></a>';
                }
                ?>
             </div>
@@ -439,81 +439,81 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    <div class="container">
       <div class="row">
 
-      <?php foreach ($articles as $article) : ?>
-               <?php
+         <?php foreach ($articles as $article) : ?>
+            <?php
 
-               if ($article['m_downloads'] >= 1000 && $article['m_downloads'] < 1000000) {
-                  $suffix = "k";
-                  $donwloads = $article['m_downloads'] / 1000;
-                  $donwloads = round($donwloads, 1);
-               } elseif ($article['m_downloads'] >= 1000000) {
-                  $suffix = "M";
-                  $donwloads = $article['m_downloads'] / 1000000;
-                  $donwloads = round($donwloads, 1);
-               } else {
-                  $suffix = "";
-                  $donwloads = $article['m_downloads'];
-               }
+            if ($article['m_downloads'] >= 1000 && $article['m_downloads'] < 1000000) {
+               $suffix = "k";
+               $donwloads = $article['m_downloads'] / 1000;
+               $donwloads = round($donwloads, 1);
+            } elseif ($article['m_downloads'] >= 1000000) {
+               $suffix = "M";
+               $donwloads = $article['m_downloads'] / 1000000;
+               $donwloads = round($donwloads, 1);
+            } else {
+               $suffix = "";
+               $donwloads = $article['m_downloads'];
+            }
 
-               if ($article['m_approved'] != "0" || $article['m_blocked'] != "0") {
-                  continue;
-               }
+            if ($article['m_approved'] != "0" || $article['m_blocked'] != "0") {
+               continue;
+            }
 
-               ?>
-               <div class="col-md-4">
-                  <div class="loader-wrapper">
-                     <span class="loader"><span class="loader-inner"></span></span>
-                  </div>
-                  <div class="card mb-4 shadow-sm <?php echo $do; ?>">
-                     <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
-                        <?php 
-                        if (!empty($article['m_price'])) {
-                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
-                        } 
-                        ?>
-                        <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
-                        <?php
-                        if (!empty($article['m_tags'])) {
-                           for ($i = 0; $i < count(explode(",", $article['m_tags'])); $i++) {
-                              echo '<small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> ' . explode(",", $article['m_tags'])[$i] . ' </small>';
-                           }
+            ?>
+            <div class="col-md-4">
+               <div class="loader-wrapper">
+                  <span class="loader"><span class="loader-inner"></span></span>
+               </div>
+               <div class="card mb-4 shadow-sm <?php echo $do; ?>">
+                  <a href="/product/<?php echo $article['m_id']; ?>/">
+                     <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                     <?php
+                     if (!empty($article['m_price'])) {
+                        echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
+                     }
+                     ?>
+                     <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
+                     <?php
+                     if (!empty($article['m_tags'])) {
+                        for ($i = 0; $i < count(explode(",", $article['m_tags'])); $i++) {
+                           echo '<small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> ' . explode(",", $article['m_tags'])[$i] . ' </small>';
                         }
-                        ?>
+                     }
+                     ?>
+                  </a>
+                  <div class="card-body">
+                     <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
+                        <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                      </a>
-                     <div class="card-body">
-                        <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
-                           <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
-                        </a>
-                        <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
-                        <div class="d-flex justify-content-between align-items-center">
-                           <?php 
-                           
-                           if (empty($article['m_price'])) {
-                              echo '<div class="btn-group">
-                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
-                                 <button type="submit" class="btn btn-sm btn-outline-success">'.$lang['download'].'</button>
+                     <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
+                     <div class="d-flex justify-content-between align-items-center">
+                        <?php
+
+                        if (empty($article['m_price'])) {
+                           echo '<div class="btn-group">
+                              <form action="/helper/manage.php?o=index&download=' . $article['m_id'] . '" method="post">
+                                 <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</button>
                               </form>
-                              <button type="button" class="btn btn-sm btn-success" title="'.number_format($article['m_downloads']).' downloads">'.$donwloads . $suffix.' <i class="fas fa-download"></i></button>
+                              <button type="button" class="btn btn-sm btn-success" title="' . number_format($article['m_downloads']) . ' downloads">' . $donwloads . $suffix . ' <i class="fas fa-download"></i></button>
                            </div>';
-                           } else {
-                              echo '<div class="btn-group">
-                              <form action="/product/'.$article['m_id'].'/" method="post">
+                        } else {
+                           echo '<div class="btn-group">
+                              <form action="/product/' . $article['m_id'] . '/" method="post">
                                  <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                               </form>
-                              <button type="button" class="btn btn-sm btn-info" title="'.$article['m_price'].'€">'.$article['m_price'].'€</button>
+                              <button type="button" class="btn btn-sm btn-info" title="' . $article['m_price'] . '€">' . $article['m_price'] . '€</button>
                            </div>';
-                           }
+                        }
 
-                           ?>
-                           <small class="text-muted"><?php echo $lang['by']; ?> <a href="/user/<?php echo $article['name']; ?>"><b><?php echo $article['name']; ?></b></a> <?php if ($article['premium'] == 1) {
-                                                                                                                                                                              echo '<a href="/partner-program/" class="fas fa-crown text text-muted" title="Premium content creator"></a>';
-                                                                                                                                                                           } ?></small>
-                        </div>
+                        ?>
+                        <small class="text-muted"><?php echo $lang['by']; ?> <a href="/user/<?php echo $article['name']; ?>"><b><?php echo $article['name']; ?></b></a> <?php if ($article['premium'] == 1) {
+                                                                                                                                                                           echo '<a href="/partner-program/" class="fas fa-crown text text-muted" title="Premium content creator"></a>';
+                                                                                                                                                                        } ?></small>
                      </div>
                   </div>
                </div>
-            <?php endforeach; ?>
+            </div>
+         <?php endforeach; ?>
       </div>
    </div>
 </section>

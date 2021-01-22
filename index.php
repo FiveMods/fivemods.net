@@ -54,7 +54,7 @@ if ($conn->connect_error) {
 <head>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- Start cookieyes banner -->
-   <!-- <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script> -->
+   <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
    <!-- End cookieyes banner -->
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -449,6 +449,18 @@ if ($conn->connect_error) {
 
       .center {
          text-align: center;
+      }
+
+      .cover {
+         width: 348px;
+         height: 196px;
+         object-fit: cover;
+      }
+
+      .cover-sm {
+         width: 253px;
+         height: 143px;
+         object-fit: cover;
       }
    </style>
 </head>

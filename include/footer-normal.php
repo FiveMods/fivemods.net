@@ -83,6 +83,9 @@
                         <a href="/status/"><?php echo $lang['status']; ?></a>
                      </li>
                      <li>
+                        <a href="/affiliate/">Affiliate</a>
+                     </li>
+                     <li>
                         <a href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
                      </li>
                      <li>
