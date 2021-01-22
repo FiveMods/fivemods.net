@@ -416,7 +416,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<hr>
 						<?php
 						$ch = curl_init();
-						require_once "/config.php";
+						require_once "./config.php";
 
                   		$token = $apiToken;
 						$userid = $_SESSION['user_id'];
