@@ -851,8 +851,6 @@ if ($_GET['id']) {
             <div class="modal-body">
                 Your current budget amounts: <?php $ch = curl_init();
 
-                  require_once "/config.php";
-
                   $token = $apiToken;
                   $userid = $_SESSION['user_id'];
 
