@@ -98,7 +98,6 @@ $articles = $dbpdo->prepare('
    LEFT JOIN user ON mods.m_authorid = user.id
    WHERE name="' . $username . '"
    ORDER BY m_id DESC
-   LIMIT 6;
 ');
 
 $articles->execute();
@@ -424,6 +423,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       </div>
    </div>
 </section>
+<?php if(!empty($articles)): ?>
 <section class="">
    <footer class="pt-5 pb-3">
       <div class="container">
@@ -517,6 +517,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       </div>
    </div>
 </section>
+<?php endif; ?>
 <section>
    <!-- Modal -->
    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
