@@ -29,7 +29,7 @@ session_start();
 
 
 // When Discord redirects the user back here, there will be a "code" and "state" parameter in the query string
-if ($_GET['code']) {
+if (isset($_GET['code'])) {
 
     // Exchange the auth code for a token
     $token = apiRequest($tokenURL, array(
