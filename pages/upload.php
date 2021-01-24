@@ -205,6 +205,7 @@ function randomChars($length)
                                  <div class="valid-feedback">Looks good!</div>
                                  <div class="invalid-feedback">You have to upload a .zip, .7z, .rar, .tar or .tar.gz file</div>
                               </div>
+                              <output id="uploadOutput"></output>
                               <br><br>
                               <!-- Category -->
                               <div>
@@ -238,6 +239,7 @@ function randomChars($length)
                                  <div class="valid-feedback">Looks good!</div>
                                  <div class="invalid-feedback">You have to upload at least one .jpg, .jpeg, .png or .webp image file (max. 10 pictures)</div>
                               </div>
+                              <output id="pictureOutput"></output>
                               <br><br>
                               <!-- Required Mod -->
                               <div>
@@ -289,6 +291,38 @@ function randomChars($length)
       console.log("Site loaded!");
    });
 
+   function picchange(evt) {
+      
+      var files = evt.target.files; 
+
+      var fragments = [];
+      
+      for (var i = 0, f; f = files[i]; i++) {
+         fragments.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
+                        f.size, ' bytes</li>');
+      }          
+   document.getElementById('pictureOutput').innerHTML = '<ul>' + fragments.join('') + '</ul>';
+   }
+
+   function uploadChange(evt) {
+      
+      var files = evt.target.files; 
+
+      var fragments = [];
+      
+      for (var i = 0, f; f = files[i]; i++) {
+         fragments.push('-> <strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
+            (f.size / 1000000).toString().slice(0, 4) , ' MB');
+      }          
+   document.getElementById('uploadOutput').innerHTML = fragments.join('');
+   }
+
+   document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('picupload').addEventListener('change', picchange, false);
+      document.getElementById('modupload').addEventListener('change', uploadChange, false);
+   });
+
+
    function CategoryFeedback(item) {
       document.getElementById('categoryfeedback').className = "valid-feedback";
       document.getElementById('categoryfeedback').innerHTML = "Looks good!";
@@ -313,5 +347,4 @@ function randomChars($length)
          picupload.value = '';
       }
    };
-
 </script>
