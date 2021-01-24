@@ -36,7 +36,7 @@ if (isset($_GET['code'])) {
         "grant_type" => "authorization_code",
         'client_id' => OAUTH2_CLIENT_ID,
         'client_secret' => OAUTH2_CLIENT_SECRET,
-        'redirect_uri' => 'https://fivemods.net/pages/account/d-callback.php',
+        'redirect_uri' => $dcRedirect,
         'code' => get('code')
     ));
     $logout_token = $token->access_token;

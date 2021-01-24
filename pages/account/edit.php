@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             $m_picture = $r['m_picture'];
             $m_category = $r['m_category'];
             $m_tags = $r['m_tags'];
-            $m_description = $r['m_description'];
+            $m_description = preg_replace('/<br\s?\/?>/i', "\n", $r['m_description']);
             $m_predescription = $r['m_predescription'];
             $m_changelog = $r['m_changelog'];
             $m_authorid2 = $r['m_authorid2'];
@@ -74,10 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 <meta http-equiv="refresh" content="1440;url=/logout/?url=timeout" />
 <style>
     textarea {
-        resize: none;
         overflow: hidden;
-        min-height: 50px;
-        max-height: 100px;
     }
 </style>
 <script>
@@ -238,8 +235,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
                             </div>
                             <div class="form-group">
                                 <label for="modDesc">Mod Description <a href="#info" class="text text-danger">*</a></label>
-                                <textarea oninput="auto_grow(this)" class="form-control autosize" rows="50" name="modDesc" id="modDesc" minlegth="150" maxlength="1000" placeholder="Write something about your product" required><?php echo $m_description; ?></textarea>
-                                <small id="modDesc" class="form-text text-muted">The description has to be at least 150 characters and max. 1000 chars long</small>
+                                <textarea oninput="auto_grow(this)" class="form-control autosize" rows="33" name="modDesc" id="modDesc" minlegth="150" maxlength="1000" placeholder="Write something about your product" required><?php echo $m_description; ?></textarea>
+                                <small id="modDesc" class="form-text text-muted">The description has to be at least 150 characters long</small>
                             </div>
                             <div class="form-group">
                                 <div>
