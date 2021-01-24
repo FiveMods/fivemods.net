@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     function editMod() {
 
         $modName = htmlspecialchars($_POST['modName']);
-        $modDesc = htmlspecialchars($_POST['modDesc']);
+        $modDesc = nl2br($_POST['modDesc']);
         $modCategory = htmlspecialchars($_POST['modCategory']);
         $tags = htmlspecialchars($_POST['tags']);
         $requiredMod = htmlspecialchars($_POST['requiredMod']);
