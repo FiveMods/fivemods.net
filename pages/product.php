@@ -377,26 +377,26 @@ if ($_GET['id']) {
       <div class="row">
          <div class="col-md-6 text-center">
             <div id="imgCarousel" class="carousel slide" data-ride="carousel">
-               <ol class="carousel-indicators">
-                  <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
-                  <?php
-                  for ($i=1; $i < count($imgArray); $i++) {
-                     echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
-                  }
-                  ?>
-               </ol>
-                  <div class="carousel-inner">
-                     <div class="carousel-item active">
-                        <img id="exandImg" src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
-                     </div>
-                     <?php
-                        for ($i=1; $i < count($imgArray); $i++) {
-                           echo '<div class="carousel-item">
-                                    <img id="expandImg" src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
-                                 </div>';
-                        }
-                     ?>
+            <ol class="carousel-indicators">
+               <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
+               <?php
+               for ($i=1; $i < count($imgArray); $i++) {
+                  echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
+               }
+               ?>
+            </ol>
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <img src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
                   </div>
+                  <?php
+                     for ($i=1; $i < count($imgArray); $i++) {
+                        echo '<div class="carousel-item">
+                                 <img src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                              </div>';
+                     }
+                  ?>
+               </div>
                   <?php if(count($imgArray) > 1):?>
                   <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -597,7 +597,7 @@ if ($_GET['id']) {
          <?php
          if ($result->rowCount() > 1) {
             $mods = 0;
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch()) {
                $id = $row['m_id'];
                $name = $row['m_name'];
                $predescription = $row['m_predescription'];
@@ -740,6 +740,7 @@ if ($_GET['id']) {
    </div>
 </section>
 <!-- Modal -->
+<!--
 <div class="modal fade bd-example-modal-lg" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="changeModal" aria-hidden="true">
    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -760,7 +761,7 @@ if ($_GET['id']) {
          </div>
       </div>
    </div>
-</div>
+</div>-->
 <section>
    <!-- Modal -->
    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
@@ -811,6 +812,7 @@ if ($_GET['id']) {
    </div>
 </section>
 <!-- Modal -->
+
 <div class="modal fade d-justify-content-center text-center bg bg-dark" style="margin:7%;" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-dismiss="myModal">
    <div class="modal-dialog">
       <div class="modal-content">
