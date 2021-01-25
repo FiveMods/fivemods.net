@@ -3,12 +3,8 @@ session_start();
 
 include_once('../../../config.php');
 
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $selectUsername = $pdo->prepare("SELECT * FROM user WHERE name = :name");
@@ -23,7 +19,7 @@ $_SESSION['user_username'] = $username;
 $insert = $pdo->prepare("UPDATE user SET name = :name WHERE uuid = :uuid");
 $insert->execute(array("name" => $username, "uuid" => $_SESSION['user_uuid']));
 
-
+$pdo = null;
 header("Location: /account/");
 exit();
 die();

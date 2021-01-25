@@ -3,24 +3,15 @@ session_start();
 include('./include/header-banner.php');
 require_once('./config.php');
 
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-   die("Connection failed: " . $conn->connect_error);
-}
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0"; 
-   $result = $conn->query($sql);
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+   $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0"); 
+   $result->execute(array($nameID));
+   if ($result->rowCount() > 0) {
+      while ($row = $result->fetch()) {
          $name = $row['m_name'];
          $description = $row['m_description'];
          $img = $row['m_picture'];
@@ -100,10 +91,10 @@ if ($_GET['id']) {
       header('location: /');
    }
    $allowRate = true;
-   $sql = "SELECT user_id from rate WHERE mod_id = $nameID";
-   $result = $conn->query($sql);
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+   $result = $pdo->prepare("SELECT user_id FROM rate WHERE mod_id = ?");
+   $result->execute(array($nameID));
+   if ($result->rowCount() > 0) {
+      while ($row = $result->fetch()) {
          if($row['user_id'] == $_SESSION['user_iid']) {
             $allowRate = false;
             break;
@@ -112,10 +103,10 @@ if ($_GET['id']) {
    }
 
 
-   $sql = "SELECT * FROM user WHERE id = '$userid'";
-   $result = $conn->query($sql);
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+   $result = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+   $result->execute(array($userid));
+   if ($result->rowCount() > 0) {
+      while ($row = $result->fetch()) {
          $username = $row['name'];
          $userimg = $row['picture'];
       }
@@ -140,7 +131,7 @@ if ($_GET['id']) {
          header("Location: $download");
 
       } else {
-         $downloadMod = $dbpdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
+         $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
          $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
          while($row = $downloadMod->fetch()) {
             $downloadLink = $row['m_downloadlink'];
@@ -587,9 +578,9 @@ if ($_GET['id']) {
          <div class="row text-center">
             <div class="col">
                <?php
-               $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC";
-               $result = $conn->query($sql);
-               if ($result->num_rows > 1) {
+               $result = $pdo->prepare("SELECT * FROM mods WHERE m_authorid = ? AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC");
+               $result->execute(array($userid));
+               if ($result->rowCount() > 1) {
                   echo '<h4>' . $lang['other-mods'] . '</h4>';
                } else {
                   echo '<h4>' . $lang['famous-mods'] . '</h4>';
@@ -604,7 +595,7 @@ if ($_GET['id']) {
    <div class="container">
       <div class="row">
          <?php
-         if ($result->num_rows > 1) {
+         if ($result->rowCount() > 1) {
             $mods = 0;
             while ($row = $result->fetch_assoc()) {
                $id = $row['m_id'];
@@ -678,10 +669,10 @@ if ($_GET['id']) {
                }
             }
          } else {
-            $sql = "SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads DESC LIMIT 7";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-               while ($row = $result->fetch_assoc()) {
+            $result = $pdo->prepare("SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads DESC LIMIT 7");
+            $result->execute();
+            if ($result->rowCount() > 0) {
+               while ($row = $result->fetch()) {
                   $id = $row['m_id'];
                   $name = $row['m_name'];
                   $predescription = str_replace("<br />", " ", $row['m_predescription']);
@@ -927,3 +918,7 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 </script> -->
+
+<?php
+   $pdo = null;
+?>

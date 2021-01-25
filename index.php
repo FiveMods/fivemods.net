@@ -35,17 +35,6 @@ if (empty($_GET['fm_design']) == "orange") {
 
 require_once('./config.php');
 
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-   die("Connection failed: " . $conn->connect_error);
-}
 
 ?>
 <!DOCTYPE html>

@@ -2,17 +2,8 @@
 
 require_once('./config.php');
 
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-die("Connection failed: " . $conn->connect_error);
-}
 
 include('./include/header-banner.php'); 
 
@@ -21,10 +12,10 @@ echo '<section class="pt-5 pb-5">
         <div class="row">';
 
 
-$sql = "SELECT * FROM user ORDER BY name ASC";
-   $result = $conn->query($sql);
-   if($result->num_rows > 0) {
-      while($row = $result->fetch_assoc()) {
+$result = $pdo->prepare("SELECT * FROM user ORDER BY name ASC");
+$result->execute();
+   if($result->rowCount() > 0) {
+      while($row = $result->fetch()) {
          $username = $row['name'];
          $userimg = $row['picture'];
          $uid = $row['uuid'];
@@ -62,6 +53,7 @@ $sql = "SELECT * FROM user ORDER BY name ASC";
          }
       }
    }
+   $pdo = null;
 
    echo '</div>
    </div>

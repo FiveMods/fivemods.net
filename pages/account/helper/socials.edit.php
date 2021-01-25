@@ -16,31 +16,20 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     function editSocials() {
       require_once('../../../config.php');
 
-      $servername = $mysql['servername'];
-      $username = $mysql['username'];
-      $password = $mysql['password'];
-      $dbname = $mysql['dbname'];
 
-        $discord = htmlspecialchars($_POST['discord']);
-        $twitter = htmlspecialchars($_POST['twitter']);
-        $youtube = htmlspecialchars($_POST['youtube']);
-        $instagram = htmlspecialchars($_POST['instagram']);
-        $github = htmlspecialchars($_POST['github']);
+        $discord = empty(htmlspecialchars($_POST['discord'])) ? NULL : htmlspecialchars($_POST['discord']);
+        $twitter = empty(htmlspecialchars($_POST['twitter'])) ? NULL : htmlspecialchars($_POST['twitter']);
+        $youtube = empty(htmlspecialchars($_POST['youtube'])) ? NULL : htmlspecialchars($_POST['youtube']);
+        $instagram = empty(htmlspecialchars($_POST['instagram'])) ? NULL : htmlspecialchars($_POST['instagram']);
+        $github = empty(htmlspecialchars($_POST['github'])) ? NULL : htmlspecialchars($_POST['github']);
         $tochange = htmlspecialchars($_POST['id']);
 
         try {
-          $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-          // set the PDO error mode to exception
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET discord=:discord, twitter=:twitter, youtube=:youtube, instagram=:instagram, github=:github WHERE oauth_uid = :oauth";
-        
-          // Prepare statement
-          $stmt = $conn->prepare($sql);
-        
-          // execute the query
-          $stmt->execute(['discord' => $discord, 'twitter' => $twitter, 'youtube' => $youtube,
-              'instagram' => $instagram, 'github' => $github, 'oauth' => $tochange]);
+          $stmt = $pdo->prepare("UPDATE user SET discord=:discord, twitter=:twitter, youtube=:youtube, instagram=:instagram, github=:github WHERE oauth_uid = :oauth");
+          $stmt->execute(array('discord' => $discord, 'twitter' => $twitter, 'youtube' => $youtube, 'instagram' => $instagram, 'github' => $github, 'oauth' => $tochange));
         
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
@@ -62,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // echo $sql . "<br>" . $e->getMessage();
         }
 
-        $conn = null;
+        $pdo = null;
 
     }
 

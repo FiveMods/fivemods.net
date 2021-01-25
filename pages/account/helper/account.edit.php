@@ -16,11 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     function editAccount() {
       require_once('../../../config.php');
 
-      $servername = $mysql['servername'];
-      $username = $mysql['username'];
-      $password = $mysql['password'];
-      $dbname = $mysql['dbname'];
-
         $username2 = htmlspecialchars($_POST['username']);
         $banner = htmlspecialchars($_POST['gbanner']);
         $tochange = htmlspecialchars($_POST['id']);
@@ -46,19 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 
         try {
-          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
           // set the PDO error mode to exception
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET name='$username2', banner='$banner' WHERE oauth_uid = $tochange";
+          $stmt = $pdo->prepare("UPDATE user SET name = :name, banner = :banner WHERE oauth_uid = :uid");
+          $stmt->execute(array("name" => $username2, "banner" => $banner, "uid" => $tochange));
         
-          // Prepare statement
-          $stmt = $conn->prepare($sql);
-        
-          // execute the query
-          $stmt->execute();
-        
-          // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
           $_SESSION['user_username'] = $username2;
@@ -72,10 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         } catch(PDOException $e) {
           echo "X";
           header('location: /account/');
-          // echo $sql . "<br>" . $e->getMessage();
         }
         
-        $conn = null;
+        $pdo = null;
     }
 
     if(htmlspecialchars($_POST['call']) == "callFunc") {

@@ -3,7 +3,7 @@ session_start();
 require_once('../config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
+ 
 
 require_once('../config.php');
 

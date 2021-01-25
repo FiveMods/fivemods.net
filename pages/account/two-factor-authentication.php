@@ -9,14 +9,16 @@ if (empty($_SESSION['user_id'])) {
 session_start();
 require "Authenticator.php";
 
-// $_SESSION['on2fa'] = TRUE;
+require_once('config.php');
 
-$sql = "SELECT 2fa_acc FROM user WHERE oauth_uid LIKE $_SESSION[user_id]";
-$result = $conn->query($sql);
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-if ($result->num_rows > 0) {
-   // output data of each row
-   while ($row = $result->fetch_assoc()) {
+
+$result = $pdo->prepare("SELECT 2fa_acc FROM user WHERE oauth_uid = ?");
+$result->execute(array($_SESSION['user_id']));
+
+if ($result->rowCount() > 0) {
+   while ($row = $result->fetch()) {
       $t2ken = $row['2fa_acc'];
    }
 }
@@ -34,16 +36,9 @@ if (empty($t2ken) || $t2ken == NULL) {
    echo '<script>console.log("Token:' . $secret . '")</script>';
 
    $iiid = $_SESSION['user_id'];
+   $stmt = $pdo->prepare("UPDATE user SET 2fa_acc = :secret WHERE oauth_uid = :id");
+   $stmt->execute(array("secret" => $secret, "id" => $iiid));
 
-   $sql = "UPDATE user SET 2fa_acc='$secret' WHERE oauth_uid='$iiid'";
-
-   if ($conn->query($sql) === TRUE) {
-      // echo "Record updated successfully";
-      echo '<script>console.log("Updated");</script>';
-   } else {
-      echo '<script>console.log("Error: ' . $sql . "<br>" . $conn->error . '");</script>';
-      echo '<script>console.log("SQL error");</script>';
-   }
 } else {
     echo '<script>console.log("Early exit");</script>';
         $Authenticator = new Authenticator();
@@ -136,3 +131,6 @@ if (!isset($_SESSION['failed'])) {
       </div>
    </div>
 </section>
+<?php
+   $pdo = null;
+?>
