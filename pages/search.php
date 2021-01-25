@@ -148,11 +148,12 @@ include('./include/header-banner.php');
 
          if (isset($_GET['cat']) == 1) {
             
-            $dbpdo = "SELECT * FROM tags WHERE category = '$cat' ORDER BY tag ASC";
-            $result = $conn->query($dbpdo);
-            if ($result->num_rows > 0) {
+            $db = "SELECT * FROM tags WHERE category = '' ORDER BY tag ASC";
+            $stmt = $dbpdo->prepare("SELECT * FROM tags WHERE category = :cat ORDER BY tag ASC");
+            $stmt->execute(array("cat" => $cat));
+            if ($stmt->rowCount() > 0) {
                echo '<h5>';
-               while($row = $result->fetch_assoc()) {
+               while($row = $stmt->fetch()) {
                   $tag = $row["tag"];
                   echo '<a href="/search/?query='.urlencode(htmlspecialchars($tag)).'&cat=1&catset='.urlencode(htmlspecialchars($_GET['query'])).'&submit-search=" class="badge badge-pill badge-primary tag ml-1 mr-1"><i class="fas fa-tag mr-1"></i>'.$tag.'</a>';
                }
