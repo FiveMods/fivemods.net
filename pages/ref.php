@@ -13,8 +13,9 @@ if (isset($_GET['rdc'])) {
     $suburl = getHost($ref);
     $url = giveHost($suburl);
 
-    $sql = "SELECT marked_links FROM links WHERE marked_links LIKE '$url'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT marked_links FROM links WHERE marked_links LIKE '$url'");
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         // output data of each row

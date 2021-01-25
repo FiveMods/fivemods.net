@@ -22,8 +22,6 @@ if (htmlspecialchars($_POST['contact'])) {
     reportmod($pdo);
 } elseif (htmlspecialchars($_GET['rate'])) {
     rate($pdo);
-} elseif (htmlspecialchars($_POST['reportuser'])) {
-    reportuser();
 } elseif (htmlspecialchars($_GET['upload'])) {
     uploadMod();
 } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
@@ -104,64 +102,6 @@ function reportmod($pdo)
 
 
     header("Location: /product?id=$modid");
-    exit();
-    die();
-}
-
-function reportuser()
-{
-    session_start();
-    require_once('./config.php');
-
-    $servername = $mysql['servername'];
-    $username = $mysql['username'];
-    $password = $mysql['password'];
-    $dbname = $mysql['dbname'];
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $authorid = htmlspecialchars($_POST['authorid']);
-    $modid = htmlspecialchars($_POST['modid']);
-    $reason = htmlspecialchars($_POST['reason']);
-    $evidence = htmlspecialchars($_POST['evidence']);
-
-    $sql = "INSERT INTO `reports` (modid, authorid, reason, evidence) VALUES ('$modid', '$authorid', '$reason', '$evidence')";
-    $conn->query($sql);
-    echo '<meta http-equiv="refresh" content="0; URL=/product?id=' . $modid . '">';
-    exit();
-    die();
-}
-
-function reportprofile()
-{
-    session_start();
-    require_once('./config.php');
-
-    $servername = $mysql['servername'];
-    $username = $mysql['username'];
-    $password = $mysql['password'];
-    $dbname = $mysql['dbname'];
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $authorid = htmlspecialchars($_POST['authorid']);
-    $modid = htmlspecialchars($_POST['modid']);
-    $reason = htmlspecialchars($_POST['reason']);
-    $evidence = htmlspecialchars($_POST['evidence']);
-
-    $sql = "INSERT INTO `reports` (modid, authorid, reason, evidence) VALUES ('$modid', '$authorid', '$reason', '$evidence')";
-    $conn->query($sql);
-    header("location: /product/?id=" . $modid);
     exit();
     die();
 }
