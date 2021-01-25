@@ -69,9 +69,9 @@ if (isset($_POST['uploadMod'])) {
 
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
-   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
-
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
+   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
+   $pdo = null;
    $_SESSION['upload'] = 1;
 
 

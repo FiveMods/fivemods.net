@@ -9,9 +9,9 @@ if (empty($uname)) {
 }
 
 require_once('./config.php');
-
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 if (isset($_SESSION['downloadMod'])) {
-   $downloadMod = $dbpdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
+   $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
    $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
    while ($row = $downloadMod->fetch()) {
       $downloadLink = $row['m_downloadlink'];
@@ -20,7 +20,7 @@ if (isset($_SESSION['downloadMod'])) {
    unset($_SESSION['downloadMod']);
 }
 
-$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
 
 $statement = $pdo->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM user WHERE name = ?");
 $statement->execute(array($uname));
@@ -89,18 +89,17 @@ if ($_SESSION['user_id'] == $oauth_uid && $blocked == 0) {
    $repbtn = '<a href="/account/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
 }
 
-$dbpdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 // Query
-$articles = $dbpdo->prepare('
+$articles = $pdo->prepare('
    SELECT SQL_CALC_FOUND_ROWS *
    FROM mods
    LEFT JOIN user ON mods.m_authorid = user.id
-   WHERE name="' . $username . '"
+   WHERE name=:username
    ORDER BY m_id DESC
 ');
 
-$articles->execute();
+$articles->execute(array("username" => $username));
 $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -323,85 +322,6 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                   </div>
                </div>
             </div>
-            <!--
-            <div class="tab-pane fade show" id="social" role="tabpanel" aria-labelledby="social-tab">
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>Discord Server</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p><a href="/ref?rdc=https://discord.com/invite/' . urlencode($discord) . '" target="_blank">' . $discord . '</a></p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>Twitter</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p><a href="/ref?rdc=https://twitter.com/' . urlencode($twitter) . '" target="_blank">' . $twitter . '</a></p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>YouTube</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p><a href="/ref?rdc=https://youtube.com/' . urlencode($youtube) . '" target="_blank">' . $youtube . '</a></p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>Instagram</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p><a href="/ref?rdc=https://instagram.com/' . urlencode($instagram) . '" target="_blank">' . $instagram . '</a></p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>GitHub</label>
-                  </div>
-                  <div class="col-md-6">
-                  <p><a href="/ref?rdc=https://github.com/' . urlencode($github) . '" target="_blank">' . $github . '</a></p>
-                  </div>
-               </div>
-            </div>
-            -->
-            <!-- Activity not working nor planned yet -->
-            <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>18.07.2020</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>Got accepted for Partner program</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>17.07.2020</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>Uploaded Mod: Jacks Airport reloaded</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>17.07.2020</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>Uploaded Mod: Jacks Airport got fucked</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>17.07.2020</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>Account got created</p>
-                  </div>
-               </div>
-            </div> -->
          </div>
       </div>
    </div>';
@@ -547,3 +467,8 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       </div>
    </div>
 </section>
+<?php 
+
+$pdo = null;
+
+?>

@@ -16,25 +16,16 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         session_start();
         require_once('../../../config.php');
 
-        $servername = $mysql['servername'];
-        $username = $mysql['username'];
-        $password = $mysql['password'];
-        $dbname = $mysql['dbname'];
-
         $id = $_SESSION['user_id'];
 
         try {
-          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
           // set the PDO error mode to exception
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET 2fa='0', premium='0' WHERE oauth_uid = $id";
-        
-          // Prepare statement
-          $stmt = $conn->prepare($sql);
-        
-          // execute the query
-          $stmt->execute();
+          $stmt = $pdo->prepare("UPDATE user SET 2fa='0', premium='0' WHERE oauth_uid = ?");
+          $stmt->execute(array($id));
         
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
@@ -52,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // echo $sql . "<br>" . $e->getMessage();
         }
 
-        $conn = null;
+        $pdo = null;
 
     }
 

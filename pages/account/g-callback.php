@@ -157,3 +157,7 @@ if($userDB->rowCount() > 0) {
 }
 exit();
 die();
+
+$pdo = null;
+$pdoPayment = null;
+?>

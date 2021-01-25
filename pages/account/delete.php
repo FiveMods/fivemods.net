@@ -336,21 +336,17 @@ if (!empty($_POST['token'])) {
       echo "Account got deleted, you will get logout.";
 
       try {
-        $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // sql to delete a record
-        $sql = "DELETE FROM user WHERE oauth_uid=$userid";
-
-        // use exec() because no results are returned
-        $conn->exec($sql);
+        $stmt = $pdo->prepare("DELETE FROM user WHERE oauth_uid = ?");
+        $stmt->execute(array($userid));
         echo "Record deleted successfully";
       } catch(PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
       }
 
-      $conn = null;
+      $pdo = null;
 
       header('location: /account/logout/?url=removal');
    }

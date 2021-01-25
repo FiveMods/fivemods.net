@@ -25,17 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         try {
         require_once('../../../config.php');
 
-          $conn = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-          // set the PDO error mode to exception
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-          $sql = "UPDATE mods SET m_name='$modName', m_category='$modCategory', m_description='$modDesc', m_tags='$tags', m_requiredmod='$requiredMod' WHERE m_id = '$mid'";
-
-          // Prepare statement
-          $stmt = $conn->prepare($sql);
-
-          // execute the query
-          $stmt->execute();
+          $stmt = $pdo->prepare("UPDATE mods SET m_name = :mname, m_category = :mcat, m_description = :desc, m_tags = :tags, m_requiredmod = :req WHERE m_id = :mid");
+          $stmt->execute(array("mname" => $modName, "mcat" => $modCategory, "desc" => $modDesc, "tags" => $tags, "req" => $requiredMod, "mid" => $mid));
 
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfull";
@@ -48,10 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         } catch(PDOException $e) {
           echo "X";
           header('location: /account/');
-          // echo $sql . "<br>" . $e->getMessage();
         }
 
-        $conn = null;
+        $pdo = null;
     }
 
     if(htmlspecialchars($_POST['call']) == "callFunc") {

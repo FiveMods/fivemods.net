@@ -15,38 +15,31 @@ $dbname = $mysql['dbname'];
 if (!empty(htmlspecialchars($_GET['q']))) {
    $query = htmlspecialchars($_GET['q']);
 
-   require_once('./config.php');
 
-   $dbpdo = new PDO('mysql:dbname='.$mysql['dbname'].';host='.$mysql['servername'].'', ''.$mysql['username'].'', ''.$mysql['password'].'');
+   $pdo = new PDO('mysql:dbname='.$mysql['dbname'].';host='.$mysql['servername'].'', ''.$mysql['username'].'', ''.$mysql['password'].'');
 
    // Query
-   $questions = $dbpdo->prepare("
+   $questions = $pdo->prepare("
       SELECT SQL_CALC_FOUND_ROWS *
       FROM faq
-      WHERE question LIKE '%$query%' OR answer LIKE '%$query%'
+      WHERE question LIKE '%?%' OR answer LIKE '%?%'
       ORDER BY f_id DESC;
    ");
 
    // Fetiching questions
-   $questions->execute();
+   $questions->execute(array($query, $query));
    $questions = $questions->fetchAll(PDO::FETCH_ASSOC);
 
 }
 
+$pdo = new PDO('mysql:dbname='.$mysql['dbname'].';host='.$mysql['servername'].'', ''.$mysql['username'].'', ''.$mysql['password'].'');
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-} 
+$result = $pdo->prepare("SELECT * FROM faq WHERE f_id = ?");
+$result->execute(array($ratedid));
 
-$sql = "SELECT * FROM faq WHERE f_id = $ratedid";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
+if ($result->rowCount() > 0) {
   // output data of each row
-  while($row = $result->fetch_assoc()) {
+  while($row = $result->fetch()) {
    $helpful = $row['good'];
    $nothelpful = $row['bad'];
   }
@@ -59,13 +52,10 @@ if ($rating == 1) {
    // Was helpful -> good
    $helpfulrate = $helpful+1;
    
-   $sql = "UPDATE faq SET good='$helpfulrate' WHERE f_id=$ratedid";
-   if ($conn->query($sql) === TRUE) {
-      echo "Record updated successfully";
-      header('location: /help-center/#'.$ratedid);
-    } else {
-      echo "Error updating record: " . $conn->error;
-    }
+   $stmt = $pdo->prepare("UPDATE faq SET good = ? WHERE f_id = ?");
+   $stmt->execute(array($helpfulrate, $ratedid));
+   
+   header('location: /help-center/#'.$ratedid);
 
    $_SESSION['control'] = 1;
 
@@ -74,18 +64,13 @@ if ($rating == 1) {
    // Was not helpful -> bad
    $nothelpfulrate = $nothelpful+1;
 
-   $sql = "UPDATE faq SET bad='$nothelpfulrate' WHERE f_id=$ratedid";
-   if ($conn->query($sql) === TRUE) {
-      echo "Record updated successfully";
-      header('location: /help-center/#'.$ratedid);
-    } else {
-      echo "Error updating record: " . $conn->error;
-    }
+   $stmt = $pdo->prepare("UPDATE faq SET bad = ? WHERE f_id = ?");
+   $stmt->execute(array($nothelpfulrate, $ratedid));
+   header('location: /help-center/#'.$ratedid);
 
    $_SESSION['control'] = 1; 
 
 }
-   $conn->close();
 }
 ?>
 <section class="bg-light pb-5">
@@ -157,10 +142,10 @@ if ($rating == 1) {
          <h2 class="mb-5"><?php echo $lang['faq']; ?></h2>
          <div class="accordion" id="accordionExample">
             <?php
-               $sql = "SELECT * FROM faq f INNER JOIN user u ON f.userid = u.id";
-               $result = $conn->query($sql);
-               if($result->num_rows > 0) {
-                  while($row = $result->fetch_assoc()) {
+               $result = $pdo->prepare("SELECT * FROM faq f INNER JOIN user u ON f.userid = u.id");
+               $result->execute();
+               if($result->rowCount() > 0) {
+                  while($row = $result->fetch()) {
                      $id = $row['f_id'];
                      $question = $row['question'];
                      $answer = $row['answer'];
@@ -193,5 +178,6 @@ if ($rating == 1) {
       </div>
    </div>
 </section>
-
-<!-- INSERT INTO `faq`(`question`, `answer`, `userid`) VALUES ('How do I create a FiveM server on my localhost?', '', '1') -->
+<?php
+   $pdo = null;
+?>

@@ -16,34 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     function editProfile() {
       require_once('../../../config.php');
 
-      $servername = $mysql['servername'];
-      $username = $mysql['username'];
-      $password = $mysql['password'];
-      $dbname = $mysql['dbname'];
 
         $fullName = explode(" ", htmlspecialchars($_POST['fullName']));
         $first_name = $fullName[0];
         $last_name = $fullName[1];
         $email = htmlspecialchars($_POST['email']);
         $description = htmlspecialchars($_POST['desc']);
-        $website = htmlspecialchars($_POST['website']);
+        $website = empty(htmlspecialchars($_POST['website'])) ? NULL : htmlspecialchars($_POST['website']);
         $location = htmlspecialchars($_POST['location']);
         $tochange = htmlspecialchars($_POST['id']);
 
         try {
-          $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-          // set the PDO error mode to exception
-          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $sql = "UPDATE user SET first_name='$first_name', last_name='$last_name', email='$email', description='$description', website='$website', locale='$location' WHERE oauth_uid = $tochange";
-        
-          // Prepare statement
-          $stmt = $conn->prepare($sql);
-        
-          // execute the query
-          $stmt->execute();
-        
-          // echo a message to say the UPDATE succeeded
+          $stmt = $pdo->prepare("UPDATE user SET first_name = :first, last_name = :last, email = :email, description = :desc, website = :website, locale = :local WHERE oauth_uid = :uid");
+          $stmt->execute(array("first" => $first_name, "last" => $last_name, "email" => $email, "desc" => $description, "website" => $website, "local" => $location, "uid" => $tochange));
+
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
           $_SESSION['user_username'] = $first_name ." ". $last_name;
@@ -63,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // echo $sql . "<br>" . $e->getMessage();
         }
         
-        $conn = null;
+        $pdo = null;
 
     }
 

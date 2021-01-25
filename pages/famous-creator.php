@@ -8,10 +8,13 @@
       </div>
       <div class="row text-center mt-md-5">
          <?php
-            $sql = "SELECT * FROM user ORDER BY totaldownloads DESC LIMIT 8";
-            $result = $conn->query($sql);
-            if($result->num_rows > 0) {
-               while($row = $result->fetch_assoc()) {
+            $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+            $result = $pdo->prepare("SELECT * FROM user ORDER BY totaldownloads DESC LIMIT 8");
+            $result->execute();
+            $pdo = null;
+            if($result->rowCount() > 0) {
+               while($row = $result->fetch()) {
                   if (!empty($row['name'])) {
                      echo '<div class="col-md-3 mb-5 col-12">
                      <a class="profile" href="/user/'.$row["name"].'" title="Go to the profile">
