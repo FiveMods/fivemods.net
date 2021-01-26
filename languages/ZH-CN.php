@@ -60,7 +60,7 @@
         "partner-question3" => "简述你对于制作FiveM模组的经验", //Your knowledge regarding FiveM Mods creation
         "partner-question4" => "为什么你想加入FiveMods合作伙伴计划？", //Why do you want to join the FiveMods Partner Program?
         "partner-conditions" => "条件", //Conditions
-        "partner-condition1" => "你的帐号需要连接GitHub和Discord", //Your Account has to be linked with GitHub & Discord
+        "partner-condition1" => "You need to have 2FA activated on your account", //You need to have 2FA activated on your account
         "partner-condition2" => "已验证及发布的模组", //Verified Uploads
         "partner-condition3" => "总下载量", //Downloads in Total
         "search-results" => "查找结果", //Search results for 

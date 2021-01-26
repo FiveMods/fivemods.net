@@ -251,7 +251,7 @@ if ($result->num_rows > 0) {
       </div>
    </div>
 </section>
-<section class="pb-5 pt-5">
+<!-- <section class="pb-5 pt-5">
    <div class="container">
       <div class="row my-4">
       <div class="col-sm-6">
@@ -330,7 +330,7 @@ if ($result->num_rows > 0) {
       </div>
       </div>
    </div>
-</section>
+</section> -->
 <section class="pt-2 pb-0">
    <div class="container  py-5 ">
       <div class="row    w-100 overflow-hidden">

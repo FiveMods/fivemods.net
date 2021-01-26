@@ -29,14 +29,14 @@ session_start();
 
 
 // When Discord redirects the user back here, there will be a "code" and "state" parameter in the query string
-if ($_GET['code']) {
+if (isset($_GET['code'])) {
 
     // Exchange the auth code for a token
     $token = apiRequest($tokenURL, array(
         "grant_type" => "authorization_code",
         'client_id' => OAUTH2_CLIENT_ID,
         'client_secret' => OAUTH2_CLIENT_SECRET,
-        'redirect_uri' => 'https://fivemods.net/pages/account/d-callback.php',
+        'redirect_uri' => $dcRedirect,
         'code' => get('code')
     ));
     $logout_token = $token->access_token;
@@ -207,4 +207,6 @@ function session($key, $default = NULL)
 {
     return array_key_exists($key, $_SESSION) ? $_SESSION[$key] : $default;
 }
+$pdo = null;
+$pdoPayment = null;
 ?>

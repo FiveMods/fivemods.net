@@ -12,75 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 	header('location: /account/logout/');
 	exit();
 }
-/*
-if (empty($_SESSION['user_username']) == TRUE) {
-
-	$a = $_SESSION['oauth_provider'];
-	$b = "Discord ";
-	$c = "Google ";
-	if (strpos($a, $b) !== false) {
-		$_SESSION['user_username'] = $_SESSION['dc_name'];
-
-		require_once('../../config.php');
-
-		$servername = $mysql['servername'];
-		$username = $mysql['username'];
-		$password = $mysql['password'];
-		$dbname = $mysql['dbname'];
-
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-
-		$sql = "UPDATE user SET name='$_SESSION[user_username]' WHERE oauth_uid='$_SESSION[user_id]'";
-
-		if ($conn->query($sql) === TRUE) {
-			// echo "Record updated successfully";
-			// exit();
-			// die();
-		} else {
-			echo "Error updating record: " . $conn->error;
-			header('location: /account/logout/?url=error');
-			exit();
-			die();
-		}
-
-		$conn->close();
-	} elseif (strpos($a, $c) !== false) {
-		$_SESSION['user_username'] = $_SESSION['g_givenName'] . "1234";
-
-		require_once('../../config.php');
-
-		$servername = $mysql['servername'];
-		$username = $mysql['username'];
-		$password = $mysql['password'];
-		$dbname = $mysql['dbname'];
-
-		// Create connection
-		$conn = new mysqli($servername, $username, $password, $dbname);
-		// Check connection
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
-
-		$sql = "UPDATE user SET name='$_SESSION[user_username]' WHERE oauth_uid='$_SESSION[user_id]'";
-
-		if ($conn->query($sql) === TRUE) {
-			echo "Record updated successfully";
-			exit();
-			die();
-		} else {
-			echo "Error updating record: " . $conn->error;
-			exit();
-			die();
-		}
-
-		$conn->close();
-	}
-}*/
 
 if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 	header('location: /account/two-factor-authentication/');
@@ -154,12 +85,6 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 			<div class="card">
 				<div class="card-header border-bottom mb-3 d-flex d-md-none">
 					<ul class="nav nav-tabs card-header-tabs nav-gap-x-1" id="myTab" role="tablist">
-						<!-- <li class="nav-item">
-							<a href="#uploads" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart">
-									<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-									<circle cx="12" cy="7" r="4"></circle>
-								</svg></a>
-						</li> -->
 						<li class="nav-item">
 							<a href="#profile" data-toggle="tab" class="nav-link has-icon active"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
 									<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -416,7 +341,9 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<hr>
 						<?php
 						$ch = curl_init();
-						$token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+						require_once "./config.php";
+
+                  		$token = $apiToken;
 						$userid = $_SESSION['user_id'];
 
 						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
@@ -451,11 +378,12 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<div class="container">
 
 									<?php
+									$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-									$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
-									$result = $conn->query($sql);
+									$result = $pdo->prepare("SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = ?");
+									$result->execute(array($_SESSION['user_iid']));
 
-									if ($result->num_rows > 0) {
+									if ($result->rowCount() > 0) {
 
 										echo '<table class="table">
 												<thead>
@@ -467,7 +395,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 												<tbody>';
 
 										// output data of each row
-										while ($row = $result->fetch_assoc()) {
+										while ($row = $result->fetch()) {
 
 											echo '<tr>
 														<th scope="row">' . $row['m_id'] . '</th>
@@ -509,12 +437,11 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<tbody>
 									<?php
 
-									$sql = "SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = '$_SESSION[user_iid]'";
-									$result = $conn->query($sql);
+									$result = $pdo->prepare("SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = ?");
+									$result->execute(array($_SESSION['user_iid']));
 
-									if ($result->num_rows > 0) {
-										// output data of each row
-										while ($row = $result->fetch_assoc()) {
+									if ($result->rowCount() > 0) {
+										while ($row = $result->fetch()) {
 
 											if ($row['m_approved'] == 0 && $row['m_blocked'] == 0) {
 												$status = '
@@ -525,8 +452,9 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 											} elseif ($row['m_approved'] == 1 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text text-warning"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
-												$edit = '<button type="submit" class="btn bg-transparent btn-sm text-muted" disabled>
-												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>';
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+												</form>';
 											} elseif ($row['m_blocked'] == 1) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-slash text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>';
@@ -581,26 +509,16 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<tbody>
 									<?php
 
-									$servername = $mysqlPayment['servername'];
-									$username = $mysqlPayment['username'];
-									$password = $mysqlPayment['password'];
-									$dbname = $mysqlPayment['dbname'];
-
-									// Create connection
-									$conn = new mysqli($servername, $username, $password, $dbname);
-									// Check connection
-									if ($conn->connect_error) {
-										die("Connection failed: " . $conn->connect_error);
-									}
+									
 
 									$status = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
 
-									$sql = "SELECT * FROM product_log WHERE u_uuid = '$_SESSION[user_uuid]'";
-									$result = $conn->query($sql);
+									$result = $pdo->prepare("SELECT * FROM product_log WHERE u_uuid = ?");
+									$result->execute(array($_SESSION['user_uuid']));
 
-									if ($result->num_rows > 0) {
+									if ($result->rowCount() > 0) {
 										// output data of each row
-										while ($row = $result->fetch_assoc()) {
+										while ($row = $result->fetch()) {
 
 											echo '<tr>
 													<th scope="row">' . $row['id'] . '</th>
@@ -673,3 +591,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 		});
 	});
 </script>
+
+<?php
+	$pdo = null;
+?>

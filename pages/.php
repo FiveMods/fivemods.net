@@ -2,7 +2,7 @@
 
 require_once('./config.php');
 
-$dbpdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 // User input
 $site = isset($_GET['site']) ? (int)$_GET['site'] : 1;
@@ -12,7 +12,7 @@ $perPage = isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
 
 // Query
-$articles = $dbpdo->prepare("
+$articles = $pdo->prepare("
    SELECT SQL_CALC_FOUND_ROWS *
    FROM mods
    LEFT JOIN user ON mods.m_authorid = user.id
@@ -24,7 +24,7 @@ $articles->execute();
 $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
 // Query 2
-$most = $dbpdo->prepare("
+$most = $pdo->prepare("
    SELECT SQL_CALC_FOUND_ROWS *
    FROM mods
    LEFT JOIN user ON mods.m_authorid = user.id
@@ -36,12 +36,12 @@ $most->execute();
 $most = $most->fetchAll(PDO::FETCH_ASSOC);
 
 // Pages
-$total = $dbpdo->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
+$total = $pdo->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
 $sites = ceil($total / $perPage);
 
 
 if (isset($_SESSION['downloadMod'])) {
-   $downloadMod = $dbpdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
+   $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
    $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
    while ($row = $downloadMod->fetch()) {
       $downloadLink = $row['m_downloadlink'];
@@ -76,7 +76,7 @@ if (isset($_SESSION['downloadMod'])) {
                      ?>
                      <div class="col-6">
                         <a href="/product/<?php echo $mosts['m_id']; ?>/" class="card mb-3">
-                           <img class="card-img-top img-fluid" style="width:253px;height:143px;" async=on src="<?php echo explode(" ", $mosts['m_picture'])[0]; ?>" alt="<?php echo $mosts['m_name'] ?>-PICTURE">
+                           <img class="card-img-top img-fluid img-thumbnail cover-sm" async=on src="<?php echo explode(" ", $mosts['m_picture'])[0]; ?>" alt="<?php echo $mosts['m_name'] ?>-PICTURE">
                            <div class="card-body">
                               <div class="d-flex justify-content-between align-items-center">
                                  <h6 class="mb-0"><?php echo $mosts['m_name'] ?></h6>
@@ -144,7 +144,7 @@ if (isset($_SESSION['downloadMod'])) {
                   </div>
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid" style="width:350px;height:196px;" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
@@ -217,3 +217,6 @@ if (isset($_SESSION['downloadMod'])) {
       </nav>
    </section>
 </div>
+<?php
+   $pdo = null;
+?>

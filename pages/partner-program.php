@@ -2,7 +2,7 @@
    <div class="container ">
       <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
          <div class="col-12 col-md-12 h-50 ">
-            <h1 class="font-weight-bold   text-white display-2 mb-2 mt-5"> FiveMods
+            <h1 class="font-weight-bold   text-white display-2 mb-2 mt-5"> <small>FiveMods</small>
                <br><?php echo $lang['partner-program']; ?>
             </h1>
             <p>
@@ -20,7 +20,7 @@
       <div class="row text-center pb-md-4 justify-content-sm-center ">
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-dollar-sign fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>
-            <h3 class="h4 mt-2 mb-3"><?php echo $lang['benefit1'];?></h3>
+            <h3 class="h4 mt-2 mb-3"></h3>
          </div>
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-percentage fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>
@@ -90,10 +90,13 @@
       </div>
       <div class="row text-center mt-md-5">
       <?php
-         $sql = "SELECT name, picture FROM user WHERE premium = 1 ORDER BY totaldownloads DESC";
-         $result = $conn->query($sql);
-         if($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+      
+         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+         $result = $pdo->prepare("SELECT name, picture FROM user WHERE premium = 1 ORDER BY totaldownloads DESC");
+         $result->execute();
+         if($result->rowCount() > 0) {
+            while($row = $result->fetch()) {
                echo '<div class="col-md-3 mb-5 col-12">
                         <a class="profile" href="/user/'.$row["name"].'" title="Go to the profile">
                         <img alt="image" style="width: 150px; height: 150px;" class="img-fluid mb-4 mt-3 rounded-circle img-rised" src="'.$row['picture'].'">
@@ -166,11 +169,14 @@
          <p><?php echo $lang['partner-text4'];?></p>
          <ul>
             <li><?php echo $lang['partner-condition1'];?></li>
-            <li><b>10+</b> <?php echo $lang['partner-condition2'];?></li>
-            <li><b>5000+</b> <?php echo $lang['partner-condition3'];?></li>
+            <li><b>5+</b> <?php echo $lang['partner-condition2'];?></li>
+            <li><b>100+</b> <?php echo $lang['partner-condition3'];?></li>
          </ul>
       </div>
     </div>
   </div>
 </div>
 </section>
+<?php 
+   $pdo = null;
+?>

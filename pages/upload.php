@@ -2,6 +2,7 @@
 session_start();
 include('./include/header-banner.php');
 
+
 if (empty($_SESSION['user_id'])) {
    header('location: /account/sign-in/');
 }
@@ -43,8 +44,8 @@ if (isset($_POST['uploadMod'])) {
    mkdir($path . '/' . $userid . '/' . $modid . '/img');
 
    move_uploaded_file($_FILES["modupload"]["tmp_name"], $path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]));
-   rename($path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]), $path . '/' . $userid . '/' . $modid . '/' . str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip');
-   $download = $downloadWebsite . '/' . $userid . '/' . $modid . '/' . str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip';
+   rename($path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]), $path . '/' . $userid . '/' . $modid . '/' . preg_replace("/([&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip'));
+   $download = $downloadWebsite . '/' . $userid . '/' . $modid . '/' . preg_replace("/([#&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip');
    $pictures = [];
    foreach ($_FILES["picupload"]["error"] as $key => $error) {
       if ($error == "UPLOAD_ERR_OK") {
@@ -57,12 +58,40 @@ if (isset($_POST['uploadMod'])) {
    }
    $pictures = implode(" ", $pictures);
 
+   if($_SESSION['user_premium'] == 0) {
+      $approved = 1;
+      $approvedby = NULL;
+   } else {
+      $approved = 0;
+      $approvedby = "Automatically";
+   }
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price) VALUES ('$userid', :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price)");
-   $statement->execute(array('title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price));
 
+
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
+   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
+   $pdo = null;
    $_SESSION['upload'] = 1;
+
+
+   if($_SESSION['user_premium'] != 0) {
+
+      require_once "/config.php";
+      
+      $ch = curl_init();
+      $token = $apiToken;
+      $modid = $id;
+
+      curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, "action=newMod&token=$token&modid=$modid");
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      $response = curl_exec($ch);
+      curl_close($ch);
+   }
+
 
    header("Location: /helper/manage.php?upload=1");
    exit();
@@ -176,6 +205,7 @@ function randomChars($length)
                                  <div class="valid-feedback">Looks good!</div>
                                  <div class="invalid-feedback">You have to upload a .zip, .7z, .rar, .tar or .tar.gz file</div>
                               </div>
+                              <output id="uploadOutput"></output>
                               <br><br>
                               <!-- Category -->
                               <div>
@@ -209,6 +239,7 @@ function randomChars($length)
                                  <div class="valid-feedback">Looks good!</div>
                                  <div class="invalid-feedback">You have to upload at least one .jpg, .jpeg, .png or .webp image file (max. 10 pictures)</div>
                               </div>
+                              <output id="pictureOutput"></output>
                               <br><br>
                               <!-- Required Mod -->
                               <div>
@@ -260,6 +291,38 @@ function randomChars($length)
       console.log("Site loaded!");
    });
 
+   function picchange(evt) {
+      
+      var files = evt.target.files; 
+
+      var fragments = [];
+      
+      for (var i = 0, f; f = files[i]; i++) {
+         fragments.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
+                        f.size, ' bytes</li>');
+      }          
+   document.getElementById('pictureOutput').innerHTML = '<ul>' + fragments.join('') + '</ul>';
+   }
+
+   function uploadChange(evt) {
+      
+      var files = evt.target.files; 
+
+      var fragments = [];
+      
+      for (var i = 0, f; f = files[i]; i++) {
+         fragments.push('-> <strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
+            (f.size / 1000000).toString().slice(0, 4) , ' MB');
+      }          
+   document.getElementById('uploadOutput').innerHTML = fragments.join('');
+   }
+
+   document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('picupload').addEventListener('change', picchange, false);
+      document.getElementById('modupload').addEventListener('change', uploadChange, false);
+   });
+
+
    function CategoryFeedback(item) {
       document.getElementById('categoryfeedback').className = "valid-feedback";
       document.getElementById('categoryfeedback').innerHTML = "Looks good!";
@@ -284,5 +347,4 @@ function randomChars($length)
          picupload.value = '';
       }
    };
-
 </script>

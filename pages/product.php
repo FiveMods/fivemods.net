@@ -3,24 +3,15 @@ session_start();
 include('./include/header-banner.php');
 require_once('./config.php');
 
-$servername = $mysql['servername'];
-$username = $mysql['username'];
-$password = $mysql['password'];
-$dbname = $mysql['dbname'];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-   die("Connection failed: " . $conn->connect_error);
-}
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $sql = "SELECT * FROM mods WHERE m_id = '$nameID' AND m_approved=0 AND m_blocked=0"; 
-   $result = $conn->query($sql);
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+   $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0"); 
+   $result->execute(array($nameID));
+   if ($result->rowCount() > 0) {
+      while ($row = $result->fetch()) {
          $name = $row['m_name'];
          $description = $row['m_description'];
          $img = $row['m_picture'];
@@ -50,29 +41,60 @@ if ($_GET['id']) {
             $number = round($number / count($rateArray));
          }
 
-         
-         $description = preg_replace('/###\s(.+)/', "<h5>$1</h5>", $description);
-         $description = preg_replace('/##\s(.+)/', "<h4>$1</h4>", $description);
-         $description = preg_replace('/#\s(.+)/', "<h3>$1</h3>", $description);
+         // Header
+         $description = preg_replace('/#####\s(.+)/', "<h6>$1</h6>", $description);
+         $description = preg_replace('/####\s(.+)/', "<h5>$1</h5>", $description);
+         $description = preg_replace('/###\s(.+)/', "<h4>$1</h4>", $description);
+         $description = preg_replace('/##\s(.+)/', "<h3>$1</h3>", $description);
+         $description = preg_replace('/#\s(.+)/', "<h2>$1</h2>", $description);
+
+         // Bold
          $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
+         $description = preg_replace('/\[b\](.+)\[\/b\]/', "<b>$1</b>", $description);
+
+         // Italic
          $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
-         //$description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))youtube\.com\/)([A-Za-z0-9-_][^\s|<]{2,})/', "<iframe id=\"ytplayer\" type=\"text/html\" src=\"http://www.youtube.com/embed/$3?autoplay=1&origin=https.//fivemods.net/\"></iframe>", $description);
-         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=\"$2\" alt=\"$2\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
-         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"$2\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9]+\.[^\s|\)|\<]{2,})/', "<a href=\"/ref?rdc=$2$3\">$2$3</a>", $description);
+         $description = preg_replace('/\[i\](.+)\[\/i\]/', "<i>$1</i>", $description);
+
+         // Underline
+         $description = preg_replace('/\_\_(.+)\_\_/', "<u>$1</u>", $description);
+         $description = preg_replace('/\[u\](.+)\[\/u\]/', "<u>$1</u>", $description);
+
+         // Crossed out
+         $description = preg_replace('/\[s\](.+)\[\/s\]/', "<s>$1</s>", $description);
+
+         // Code
          $description = preg_replace('/(\`\`\`)([^\`]+)(\`\`\`)/s', "<code style=\"max-width: 100%;\">$2<br /></code>", $description);
+
+         // Links
+         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/', "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>", $description);
+         
+         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=\"$2\" alt=\"$2\" style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=\"$1\" style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"$2\" style=\"max-width: 100%;\">", $description);
+
+         $description = preg_replace('/\[url\](.+)\[\/url\]/', "<a href=\"/ref?rdc=$1\">$1</a>", $description);
+         $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
+         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9]+\.[^\s|\)|\<]{2,})/', "<a href=\"/ref?rdc=$2$3\">$2$3</a>", $description);
+         
+         // Mentions
          $description = preg_replace('/@([A-Za-z0-9-_]+[^\s|\W]{1,})/', "<a href=\"/user/$1\">@$1</a>$2", $description);
          
+         // Smileys
+         $description = preg_replace('/\:\)|\=\)|\:slight_smile\:/', "🙂", $description);
+         $description = preg_replace('/\:rolleyes\:/', "🙄", $description);
+         $description = preg_replace('/\:cool\:/', "😎", $description);
+         $description = preg_replace('/\:lol\:|\:joy\:/', "😂", $description);
+
       }
    } else {
       header('location: /');
    }
    $allowRate = true;
-   $sql = "SELECT user_id from rate WHERE mod_id = $nameID";
-   $result = $conn->query($sql);
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+   $result = $pdo->prepare("SELECT user_id FROM rate WHERE mod_id = ?");
+   $result->execute(array($nameID));
+   if ($result->rowCount() > 0) {
+      while ($row = $result->fetch()) {
          if($row['user_id'] == $_SESSION['user_iid']) {
             $allowRate = false;
             break;
@@ -81,10 +103,10 @@ if ($_GET['id']) {
    }
 
 
-   $sql = "SELECT * FROM user WHERE id = '$userid'";
-   $result = $conn->query($sql);
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
+   $result = $pdo->prepare("SELECT * FROM user WHERE id = ?");
+   $result->execute(array($userid));
+   if ($result->rowCount() > 0) {
+      while ($row = $result->fetch()) {
          $username = $row['name'];
          $userimg = $row['picture'];
       }
@@ -109,7 +131,7 @@ if ($_GET['id']) {
          header("Location: $download");
 
       } else {
-         $downloadMod = $dbpdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
+         $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
          $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
          while($row = $downloadMod->fetch()) {
             $downloadLink = $row['m_downloadlink'];
@@ -257,13 +279,26 @@ if ($_GET['id']) {
       <div class="row">
          <div class="col-md-6 text-center">
             <div id="imgCarousel" class="carousel slide" data-ride="carousel">
-               <ol class="carousel-indicators">
-                  <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
+            <ol class="carousel-indicators">
+               <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
+               <?php
+               for ($i=1; $i < count($imgArray); $i++) {
+                  echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
+               }
+               ?>
+            </ol>
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <img src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                  </div>
                   <?php
-                  for ($i=1; $i < count($imgArray); $i++) {
-                     echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
-                  }
+                     for ($i=1; $i < count($imgArray); $i++) {
+                        echo '<div class="carousel-item">
+                                 <img src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                              </div>';
+                     }
                   ?>
+<<<<<<< HEAD
                </ol>
                   <div class="carousel-inner">
                      <div class="carousel-item active" id="image">
@@ -281,6 +316,10 @@ if ($_GET['id']) {
                         }
                      ?>
                   </div>
+=======
+               </div>
+                  <?php if(count($imgArray) > 1):?>
+>>>>>>> d229e8f5ba705b5240bfbbe7948775ee59b55c59
                   <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                      <span class="sr-only">Previous</span>
@@ -289,6 +328,7 @@ if ($_GET['id']) {
                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
                      <span class="sr-only">Next</span>
                   </a>
+<<<<<<< HEAD
                </div> 
                <div class="modal fade " id="imagemodal" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog modal-sm">
@@ -296,6 +336,9 @@ if ($_GET['id']) {
                            <img class="modal-img" />
                         </div>
                   </div>
+=======
+                  <?php endif;?>
+>>>>>>> d229e8f5ba705b5240bfbbe7948775ee59b55c59
                </div>
             <br><br>
             <?php
@@ -466,9 +509,9 @@ if ($_GET['id']) {
          <div class="row text-center">
             <div class="col">
                <?php
-               $sql = "SELECT * FROM mods WHERE m_authorid = '$userid' AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC";
-               $result = $conn->query($sql);
-               if ($result->num_rows > 1) {
+               $result = $pdo->prepare("SELECT * FROM mods WHERE m_authorid = ? AND m_approved=0 AND m_blocked=0 ORDER BY m_downloads ASC");
+               $result->execute(array($userid));
+               if ($result->rowCount() > 1) {
                   echo '<h4>' . $lang['other-mods'] . '</h4>';
                } else {
                   echo '<h4>' . $lang['famous-mods'] . '</h4>';
@@ -483,9 +526,9 @@ if ($_GET['id']) {
    <div class="container">
       <div class="row">
          <?php
-         if ($result->num_rows > 1) {
+         if ($result->rowCount() > 1) {
             $mods = 0;
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch()) {
                $id = $row['m_id'];
                $name = $row['m_name'];
                $predescription = $row['m_predescription'];
@@ -505,7 +548,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4">
                                  <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -531,7 +574,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -557,10 +600,10 @@ if ($_GET['id']) {
                }
             }
          } else {
-            $sql = "SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads DESC LIMIT 7";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-               while ($row = $result->fetch_assoc()) {
+            $result = $pdo->prepare("SELECT * FROM mods WHERE m_approved=0 AND m_blocked=0 ORDER BY m_downloads DESC LIMIT 7");
+            $result->execute();
+            if ($result->rowCount() > 0) {
+               while ($row = $result->fetch()) {
                   $id = $row['m_id'];
                   $name = $row['m_name'];
                   $predescription = str_replace("<br />", " ", $row['m_predescription']);
@@ -572,7 +615,7 @@ if ($_GET['id']) {
                      echo '<div class="col-md-4">
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                       <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -596,7 +639,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid" style="width:350px;height:196px;" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -628,6 +671,7 @@ if ($_GET['id']) {
    </div>
 </section>
 <!-- Modal -->
+<!--
 <div class="modal fade bd-example-modal-lg" id="changeModal" tabindex="-1" role="dialog" aria-labelledby="changeModal" aria-hidden="true">
    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -648,7 +692,7 @@ if ($_GET['id']) {
          </div>
       </div>
    </div>
-</div>
+</div>-->
 <section>
    <!-- Modal -->
    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
@@ -699,6 +743,7 @@ if ($_GET['id']) {
    </div>
 </section>
 <!-- Modal -->
+
 <div class="modal fade d-justify-content-center text-center bg bg-dark" style="margin:7%;" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-dismiss="myModal">
    <div class="modal-dialog">
       <div class="modal-content">
@@ -760,7 +805,8 @@ if ($_GET['id']) {
             </div>
             <div class="modal-body">
                 Your current budget amounts: <?php $ch = curl_init();
-                  $token = "TOzXNzpsBMyMEfehloqIeEDFOPZRzjDV6YzqjFiXPbOab0GfRcxHEC89nLDckG9MFsafPCFY4Uz2aYZW28ty4tV0KbI9c1bFLqA2";
+
+                  $token = $apiToken;
                   $userid = $_SESSION['user_id'];
 
                   curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
@@ -784,6 +830,7 @@ if ($_GET['id']) {
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(function(){
@@ -793,3 +840,30 @@ $(function(){
    });
 });
 </script>
+=======
+<!-- <script>
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementById("expandImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+img.onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+</script> -->
+
+<?php
+   $pdo = null;
+?>
+>>>>>>> d229e8f5ba705b5240bfbbe7948775ee59b55c59
