@@ -5,8 +5,8 @@ require_once('./config.php');
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 // User input
-$site = isset($_GET['site']) ? (int)$_GET['site'] : 1;
-$perPage = isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
+$site = (int)isset($_GET['site']) ? (int)$_GET['site'] : 1;
+$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
 
 // Positioning
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
