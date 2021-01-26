@@ -6,6 +6,17 @@ RedirectMatch 403 ^/config.php$
 RedirectMatch 403 ^/account/config.php$
 RedirectMatch 403 ^/pages/account/config.php$
 
+RewriteEngine on
+RewriteCond %{HTTP:VIA}                 !^$ [OR]
+RewriteCond %{HTTP:FORWARDED}           !^$ [OR]
+RewriteCond %{HTTP:USERAGENT_VIA}       !^$ [OR]
+RewriteCond %{HTTP:X_FORWARDED_FOR}     !^$ [OR]
+RewriteCond %{HTTP:PROXY_CONNECTION}    !^$ [OR]
+RewriteCond %{HTTP:XPROXY_CONNECTION}   !^$ [OR]
+RewriteCond %{HTTP:HTTP_PC_REMOTE_ADDR} !^$ [OR]
+RewriteCond %{HTTP:HTTP_CLIENT_IP}      !^$
+RewriteRule ^(.*)$ - [F]
+
 ErrorDocument 401 /error/400/401.html
 ErrorDocument 403 /error/400/403.html
 ErrorDocument 404 /error/400/404.html
