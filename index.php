@@ -24,6 +24,8 @@ function minifier($code)
 
 include('./helper/lang-confg.php');
 
+include('./helper/geo-vpn.sub.php');
+
 if (empty($_GET['fm_design']) == "orange") {
    $css_banner  = '/static-assets/img/banner.png';
    $css_search = '#ff8637';
