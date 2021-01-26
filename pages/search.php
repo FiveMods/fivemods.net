@@ -23,7 +23,7 @@ $articles = $dbpdo->prepare("
    FROM mods
    LEFT JOIN user ON mods.m_authorid = user.id
    WHERE m_id LIKE :search AND m_approved = 0 OR m_name LIKE :search AND m_approved = 0 OR m_category LIKE :search AND m_approved = 0 OR
-   name LIKE :search AND m_approved = 0 OR m_tags LIKE :search AND m_approved = 0 OR m_predescription LIKE :search AND m_approved = 0
+   name LIKE :search AND m_approved = 0 OR m_tags LIKE :search AND m_approved = 0 OR m_description LIKE :search AND m_approved = 0
    ORDER BY m_id DESC
    LIMIT {$start}, {$perPage};
 ");
@@ -255,7 +255,7 @@ include('./include/header-banner.php');
                         <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
                            <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                         </a>
-                        <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
+                        <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
                         <div class="d-flex justify-content-between align-items-center">
                            <?php 
                            

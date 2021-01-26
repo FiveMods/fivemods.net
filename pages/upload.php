@@ -21,7 +21,6 @@ if (isset($_POST['uploadMod'])) {
 
    $title = htmlspecialchars($_POST['title']);
    $description = nl2br($_POST['description']);
-   $predescription = str_replace("<br />"," " , substr($description, 0, 150) . "...");
    $category = htmlspecialchars($_POST['category']);
    $tags = htmlspecialchars($_POST['tags']);
 
@@ -69,8 +68,8 @@ if (isset($_POST['uploadMod'])) {
 
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
-   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :requiredMod, :download, :price, :approved, :approvedby)");
+   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
    
    $_SESSION['upload'] = 1;
 
