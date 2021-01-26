@@ -17,9 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
       require_once('../../../config.php');
 
 
-        $fullName = explode(" ", htmlspecialchars($_POST['fullName']));
-        $first_name = $fullName[0];
-        $last_name = $fullName[1];
         $email = htmlspecialchars($_POST['email']);
         $description = htmlspecialchars($_POST['desc']);
         $website = empty(htmlspecialchars($_POST['website'])) ? NULL : htmlspecialchars($_POST['website']);
@@ -30,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $stmt = $pdo->prepare("UPDATE user SET first_name = :first, last_name = :last, email = :email, description = :desc, website = :website, locale = :local WHERE oauth_uid = :uid");
-          $stmt->execute(array("first" => $first_name, "last" => $last_name, "email" => $email, "desc" => $description, "website" => $website, "local" => $location, "uid" => $tochange));
+          $stmt = $pdo->prepare("UPDATE user SET email = :email, description = :desc, website = :website, locale = :local WHERE oauth_uid = :uid");
+          $stmt->execute(array("email" => $email, "desc" => $description, "website" => $website, "local" => $location, "uid" => $tochange));
 
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();

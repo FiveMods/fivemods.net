@@ -392,20 +392,12 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                         echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
                      }
                      ?>
-                     <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
-                     <?php
-                     if (!empty($article['m_tags'])) {
-                        for ($i = 0; $i < count(explode(",", $article['m_tags'])); $i++) {
-                           echo '<small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> ' . explode(",", $article['m_tags'])[$i] . ' </small>';
-                        }
-                     }
-                     ?>
                   </a>
                   <div class="card-body">
                      <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
                         <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                      </a>
-                     <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
+                     <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "...");; ?></p>
                      <div class="d-flex justify-content-between align-items-center">
                         <?php
 
