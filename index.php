@@ -33,41 +33,6 @@ if (empty($_GET['fm_design']) == "orange") {
    $css_text = 'text text-gray';
 }
 
-function shapeSpace_block_proxy_visits()
-{
-
-   $ports = array(80, 81, 553, 554, 1080, 3128, 4480, 6588, 8000, 8080);
-
-   foreach ($ports as $port) {
-      if (@fsockopen($_SERVER['REMOTE_ADDR'], $port, $errno, $errstr, 5)) {
-         header('location: /error/proxy/');
-         die();
-      }
-   }
-}
-
-function get_ip_address($proxy = false)
-{
-   if ($proxy === true) {
-      foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED') as $key) {
-         if (array_key_exists($key, $_SERVER) === true) {
-            foreach (array_map('trim', explode(',', $_SERVER[$key])) as $ip) {
-               if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false) {
-                  return $ip;
-               }
-            }
-         }
-      }
-   }
-
-   return $_SERVER['REMOTE_ADDR'];
-}
-
-if (get_ip_address() !== get_ip_address(true)) {
-   header('location: /error/proxy/');
-   die();
-}
-
 require_once('./config.php');
 
 
