@@ -24,7 +24,7 @@ function minifier($code)
 
 include('./helper/lang-confg.php');
 
-include('./helper/geo-vpn.sub.php');
+// include('./helper/geo-vpn.sub.php');
 
 if (empty($_GET['fm_design']) == "orange") {
    $css_banner  = '/static-assets/img/banner.png';
@@ -37,6 +37,10 @@ if (empty($_GET['fm_design']) == "orange") {
 
 require_once('./config.php');
 
+function isMobile()
+{
+   return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
 
 ?>
 <!DOCTYPE html>
@@ -92,6 +96,13 @@ require_once('./config.php');
       })(window, document, 'script', 'dataLayer', 'GTM-5XZ6BDR');
    </script>
    <!-- End Google Tag Manager -->
+
+   <script type="text/javascript">
+      window._mNHandle = window._mNHandle || {};
+      window._mNHandle.queue = window._mNHandle.queue || [];
+      medianet_versionId = "3121199";
+   </script>
+   <script src="https://contextual.media.net/dmedianet.js?cid=8CUHCHBR2" async="async"></script>
 
    <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
@@ -284,19 +295,35 @@ require_once('./config.php');
    <link rel="apple-touch-icon" sizes="180x180" href="/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
 
    <link rel="stylesheet" href="/static-assets/css/style-adj.css">
+
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
    <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
       function swapStyleSheet(sheet) {
          document.getElementById('pagestyle').setAttribute('href', sheet);
       }
    </script>
+   <script>
+      $("#loader").show();
+      $("#cload").hide();
+      $(document).ready(function() {
+         // $("#cload").show();
+         $("#loader").hide();
+         console.log("Content: loaded");
+      });
+   </script>
    <!-- Plugins -->
    <style>
+      html {
+         scroll-behavior: smooth;
+      }
+
       @media all and (min-width: 992px) {
          .navbar .has-megamenu {
             position: static !important;
@@ -453,6 +480,18 @@ require_once('./config.php');
          height: 143px;
          object-fit: cover;
       }
+
+      body::-webkit-scrollbar {
+         width: .5rem;
+      }
+
+      body::-webkit-scrollbar-track {
+         background: #17141f;
+      }
+
+      body::-webkit-scrollbar-thumb {
+         background: #ff8637;
+      }
    </style>
 </head>
 
@@ -490,37 +529,63 @@ require_once('./config.php');
    <!-- ========== END HEADER ========== -->
 
    <!-- ========== MAIN CONTENT ========== -->
-   <?php
-   if (isset($_GET['page'])) {
-      $page_names = explode('/', $_GET["page"]);
-      if (file_exists("pages/" . $page_names[0] . ".php")) {
-         include("pages/" . $page_names[0] . ".php");
-      } else if ($page_names[0] == "error-pages" and isset($page_names[1])) {
-         if (file_exists("error/400/" . $page_names[1] . ".html")) {
-            http_response_code($page_names[1]);
-            include("error/400/" . $page_names[1] . ".html");
+
+   <main>
+      <div id="loader">
+         <?php include('./static.html'); ?>
+      </div>
+      <div id="cload">
+
+         <?php
+         if (isset($_GET['page'])) {
+            $page_names = explode('/', $_GET["page"]);
+            if (file_exists("pages/" . $page_names[0] . ".php")) {
+               include("pages/" . $page_names[0] . ".php");
+            } else if ($page_names[0] == "error-pages" and isset($page_names[1])) {
+               if (file_exists("error/400/" . $page_names[1] . ".html")) {
+                  http_response_code($page_names[1]);
+                  include("error/400/" . $page_names[1] . ".html");
+               } else {
+                  include("error/400/404.html");
+               }
+            } else {
+               include("error/400/404.html");
+            }
          } else {
-            include("error/400/404.html");
+            include("pages/.php");
          }
-      } else {
-         include("error/400/404.html");
-      }
-   } else {
-      include("pages/.php");
-   }
-   ?>
+         ?>
+
+      </div>
+   </main>
+
    <!-- ========== END MAIN CONTENT ========== -->
 
-   <div class="text-center pt-3 pb-2">
-      <a href="https://www.netcup.de" target="_blank" rel="noopener"><img src="https://www.netcup.de/static/assets/images/promotion/netcup-setC-728x90.png" width="728" height="90" alt="netcup.de" /></a>
-   </div>
+
+   <?php
+
+   if (!(isMobile())) {
+      echo '<div id="441135697">
+      <script type="text/javascript">
+          try {
+              window._mNHandle.queue.push(function (){
+                  window._mNDetails.loadTag("441135697", "970x90", "441135697");
+              });
+          }
+          catch (error) {}
+      </script>
+  </div>';
+   }
+
+   ?>
+
+
 
    <!-- ========== FOOTER ========== -->
    <?php include('./include/footer-normal.php'); ?>
    <!-- ========== END FOOTER ========== -->
 
    <!-- jQuery is required -->
-   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -550,8 +615,7 @@ require_once('./config.php');
       } else {
          console.log("Adblock: " + hasAdblock());
       }
-   </script>
-   <script>
+
       function openSearch() {
          document.getElementById("myOverlay").style.display = "block";
       }

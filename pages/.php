@@ -141,7 +141,7 @@ if (isset($_SESSION['downloadMod'])) {
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
                         <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
-                        
+
                      </a>
                      <div class="card-body">
                         <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
@@ -149,21 +149,21 @@ if (isset($_SESSION['downloadMod'])) {
                         </a>
                         <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
                         <div class="d-flex justify-content-between align-items-center">
-                           <?php 
-                           
+                           <?php
+
                            if (empty($article['m_price'])) {
                               echo '<div class="btn-group">
-                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
-                                 <button type="submit" class="btn btn-sm btn-outline-success">'.$lang['download'].'</button>
+                              <form action="/helper/manage.php?o=index&download=' . $article['m_id'] . '" method="post">
+                                 <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</button>
                               </form>
-                              <button type="button" class="btn btn-sm btn-success" title="'.number_format($article['m_downloads']).' downloads">'.$donwloads . $suffix.' <i class="fas fa-download"></i></button>
+                              <button type="button" class="btn btn-sm btn-success" title="' . number_format($article['m_downloads']) . ' downloads">' . $donwloads . $suffix . ' <i class="fas fa-download"></i></button>
                            </div>';
                            } else {
                               echo '<div class="btn-group">
-                              <form action="/product/'.$article['m_id'].'/" method="post">
+                              <form action="/product/' . $article['m_id'] . '/" method="post">
                                  <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                               </form>
-                              <button type="button" class="btn btn-sm btn-info" title="'.$article['m_price'].'€">'.$article['m_price'].'€</button>
+                              <button type="button" class="btn btn-sm btn-info" title="' . $article['m_price'] . '€">' . $article['m_price'] . '€</button>
                            </div>';
                            }
 
@@ -202,5 +202,5 @@ if (isset($_SESSION['downloadMod'])) {
    </section>
 </div>
 <?php
-   $pdo = null;
+$pdo = null;
 ?>
