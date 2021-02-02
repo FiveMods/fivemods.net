@@ -152,15 +152,6 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<hr>
 						<form action="/pages/account/helper/profile.edit.php" method="post">
 							<div class="form-group">
-								<label for="fullName">Full Name <a href="#info" class="text text-danger">*</a> </label>
-								<input type="text" class="form-control" name="fullName" id="noSpace3" maxlength="32" aria-describedby="fullNameHelp" placeholder="Enter your fullname" value="<?php if ($_SESSION['oauth_provider'] == "Google LLC" || $_SESSION['oauth_provider'] == "Google LLC.") {
-																																																	echo $_SESSION['user_firstname'] . " " . $_SESSION['user_lastname'];
-																																																} else {
-																																																	echo $_SESSION['user_firstname'];
-																																																}  ?>" required>
-								<small id="fullNameHelp" class="form-text text-muted">Your name may appear around here where you are mentioned. You can change or remove it at any time.</small>
-							</div>
-							<div class="form-group">
 								<label for="email">Email <a href="#info" class="text text-danger">*</a> </label>
 								<input type="text" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $_SESSION['user_email']; ?>" required>
 								<small id="emailHelp" class="form-text text-muted">Your email which is used to send you the newest updates and account updates, if you enabled it in the notifications tab.</small>

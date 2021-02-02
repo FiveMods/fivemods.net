@@ -5,8 +5,8 @@ require_once('./config.php');
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 // User input
-$site = isset($_GET['site']) ? (int)$_GET['site'] : 1;
-$perPage = isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
+$site = (int)isset($_GET['site']) ? (int)$_GET['site'] : 1;
+$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
 
 // Positioning
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
@@ -28,8 +28,9 @@ $most = $pdo->prepare("
    SELECT SQL_CALC_FOUND_ROWS *
    FROM mods
    LEFT JOIN user ON mods.m_authorid = user.id
+   WHERE m_approved = 0 AND m_blocked = 0
    ORDER BY m_downloads DESC
-   LIMIT 4;
+   LIMIT 0, 4;
 ");
 
 $most->execute();
@@ -69,11 +70,6 @@ if (isset($_SESSION['downloadMod'])) {
                <div class="row">
 
                   <?php foreach ($most as $mosts) : ?>
-                     <?php
-                     if ($mosts['m_approved'] != "0" || $mosts['m_blocked'] != "0") {
-                        continue;
-                     }
-                     ?>
                      <div class="col-6">
                         <a href="/product/<?php echo $mosts['m_id']; ?>/" class="card mb-3">
                            <img class="card-img-top img-fluid img-thumbnail cover-sm" async=on src="<?php echo explode(" ", $mosts['m_picture'])[0]; ?>" alt="<?php echo $mosts['m_name'] ?>-PICTURE">
@@ -145,41 +141,29 @@ if (isset($_SESSION['downloadMod'])) {
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
                         <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
-                        <?php 
-                        if (!empty($article['m_price'])) {
-                           echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
-                        } 
-                        ?>
-                        <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
-                        <?php
-                        if (!empty($article['m_tags'])) {
-                           for ($i = 0; $i < count(explode(",", $article['m_tags'])); $i++) {
-                              echo '<small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> ' . explode(",", $article['m_tags'])[$i] . ' </small>';
-                           }
-                        }
-                        ?>
+
                      </a>
                      <div class="card-body">
                         <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
                            <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                         </a>
-                        <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
+                        <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
                         <div class="d-flex justify-content-between align-items-center">
-                           <?php 
-                           
+                           <?php
+
                            if (empty($article['m_price'])) {
                               echo '<div class="btn-group">
-                              <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">
-                                 <button type="submit" class="btn btn-sm btn-outline-success">'.$lang['download'].'</button>
+                              <form action="/helper/manage.php?o=index&download=' . $article['m_id'] . '" method="post">
+                                 <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</button>
                               </form>
-                              <button type="button" class="btn btn-sm btn-success" title="'.number_format($article['m_downloads']).' downloads">'.$donwloads . $suffix.' <i class="fas fa-download"></i></button>
+                              <button type="button" class="btn btn-sm btn-success" title="' . number_format($article['m_downloads']) . ' downloads">' . $donwloads . $suffix . ' <i class="fas fa-download"></i></button>
                            </div>';
                            } else {
                               echo '<div class="btn-group">
-                              <form action="/product/'.$article['m_id'].'/" method="post">
+                              <form action="/product/' . $article['m_id'] . '/" method="post">
                                  <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                               </form>
-                              <button type="button" class="btn btn-sm btn-info" title="'.$article['m_price'].'€">'.$article['m_price'].'€</button>
+                              <button type="button" class="btn btn-sm btn-info" title="' . $article['m_price'] . '€">' . $article['m_price'] . '€</button>
                            </div>';
                            }
 
@@ -218,5 +202,5 @@ if (isset($_SESSION['downloadMod'])) {
    </section>
 </div>
 <?php
-   $pdo = null;
+$pdo = null;
 ?>

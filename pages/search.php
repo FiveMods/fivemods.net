@@ -6,8 +6,8 @@ require_once('./config.php');
 $dbpdo = new PDO('mysql:dbname='.$mysql['dbname'].';host='.$mysql['servername'].'', ''.$mysql['username'].'', ''.$mysql['password'].'');
 
 // User input
-$site = isset($_GET['site']) ? (int)$_GET['site'] : 1;
-$perPage = isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
+$site = (int)isset($_GET['site']) ? (int)$_GET['site'] : 1;
+$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
 
 // Positioning
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
@@ -15,20 +15,21 @@ $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
 if (isset($_GET['submit-search'])) {
    $search = htmlspecialchars($_GET['query']);
 } 
+$searchDB = "%".$search."%";
 
 // Query
 $articles = $dbpdo->prepare("
    SELECT SQL_CALC_FOUND_ROWS *
    FROM mods
    LEFT JOIN user ON mods.m_authorid = user.id
-   WHERE m_id LIKE '%$search%' AND m_approved = 0 OR m_name LIKE '%$search%' AND m_approved = 0 OR m_category LIKE '%$search%' AND m_approved = 0 OR
-   name LIKE '%$search%' AND m_approved = 0 OR m_tags LIKE '%$search%' AND m_approved = 0 OR m_predescription LIKE '%$search%' AND m_approved = 0
+   WHERE m_id LIKE :search AND m_approved = 0 OR m_name LIKE :search AND m_approved = 0 OR m_category LIKE :search AND m_approved = 0 OR
+   name LIKE :search AND m_approved = 0 OR m_tags LIKE :search AND m_approved = 0 OR m_description LIKE :search AND m_approved = 0
    ORDER BY m_id DESC
    LIMIT {$start}, {$perPage};
 ");
 
 // Fetiching article
-$articles->execute();
+$articles->execute(array("search" => $searchDB));
 $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
 // Pages
@@ -42,12 +43,12 @@ $cat = htmlspecialchars(htmlspecialchars($_GET['query']));
 $tags = $dbpdo->prepare("
    SELECT * 
    FROM tags
-   WHERE category = '$cat'
+   WHERE category = ?
    ORDER BY tag ASC
 ");
 
 // Fetching tags
-$tags->execute();
+$tags->execute(array($cat));
 $tags = $tags->fetchAll(PDO::FETCH_ASSOC);
 
 $user = htmlspecialchars(htmlspecialchars($_GET['query']));
@@ -55,12 +56,12 @@ $user = htmlspecialchars(htmlspecialchars($_GET['query']));
 $display_user = $dbpdo->prepare("
    SELECT * 
    FROM user
-   WHERE name = '$user' OR uuid = '$user'
+   WHERE name = ? OR uuid = ?
    LIMIT 1
 ");
 
 // Fetching tags
-$display_user->execute();
+$display_user->execute(array($user, $user));
 $display_user = $display_user->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -254,7 +255,7 @@ include('./include/header-banner.php');
                         <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
                            <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                         </a>
-                        <p class="card-text"><?php echo str_replace("<br />", " ", $article['m_predescription']); ?></p>
+                        <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
                         <div class="d-flex justify-content-between align-items-center">
                            <?php 
                            

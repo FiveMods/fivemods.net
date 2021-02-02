@@ -531,7 +531,7 @@ if ($_GET['id']) {
             while ($row = $result->fetch()) {
                $id = $row['m_id'];
                $name = $row['m_name'];
-               $predescription = $row['m_predescription'];
+               $predescription = str_replace("<br />", " ", substr($row['m_description'], 0, 130) . "...");
                $img = explode(" ", $row['m_picture'])[0];
                $tags = explode(",", $row['m_tags']);
                $cat = $row['m_category'];
@@ -606,7 +606,7 @@ if ($_GET['id']) {
                while ($row = $result->fetch()) {
                   $id = $row['m_id'];
                   $name = $row['m_name'];
-                  $predescription = str_replace("<br />", " ", $row['m_predescription']);
+                  $predescription = str_replace("<br />", " ", substr($row['m_description'], 0, 130) . "...");
                   $img = explode(" ", $row['m_picture'])[0];
                   $tags = explode(",", $row['m_tags']);
                   $cat = $row['m_category'];

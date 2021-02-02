@@ -1,4 +1,12 @@
 <?php
+require_once('config.php');
+$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 $sql = "SELECT COUNT(oauth_uid) AS `amount` FROM user";
 $result = $conn->query($sql);
@@ -24,17 +32,26 @@ if ($result->num_rows > 0) {
   echo "0 results";
 }
 
-$sql = "SELECT COUNT(name) AS `amount3` FROM user WHERE premium = '1'";
-$result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    $amount3 = $row['amount3'];
+$totalDownloadsDB = $pdo->prepare("SELECT m_downloads AS download FROM mods");
+$totalDownloadsDB->execute();
+$totalDownloads = 0;
+if($totalDownloadsDB->rowCount() > 0) {
+  $fetch = $totalDownloadsDB->fetchAll(PDO::FETCH_ASSOC);
+  foreach($fetch as $dwnld) {
+    $download = $dwnld['download'];
+    $totalDownloads += $download;
   }
-} else {
-  echo "0 results";
 }
+if ($totalDownloads >= 1000 && $totalDownloads < 1000000) {
+    $totalDownloads = $totalDownloads / 1000;
+    $totalDownloads = round($totalDownloads, 1) . "k";
+} elseif ($totalDownloads >= 1000000) {
+    $totalDownloads = $totalDownloads / 1000000;
+    $totalDownloads = round($totalDownloads, 1) . "M";
+}
+
+$pdo = null;
 
 ?>
 <style>
@@ -180,7 +197,7 @@ if ($result->num_rows > 0) {
       <div class="col-md-3 col-6">
          <div class="counter card card-body bg-light rounded">
             <i class="fa fa-code fa-2x text-primary mb-3"></i>
-            <h2 class="timer count-title count-number" data-to="7,000" data-speed="1500">7,000+</h2>
+            <h2 class="timer count-title count-number" data-to="15,000" data-speed="1500">15,000+</h2>
             <p class="count-text ">Lines of code</p>
          </div>
       </div>
@@ -200,9 +217,9 @@ if ($result->num_rows > 0) {
       </div>
       <div class="col-md-3 col-6">
          <div class="counter card card-body bg-light rounded">
-            <i class="fas fa-award fa-2x text-primary mb-3"></i>
-            <h2 class="timer count-title count-number" data-to="<?php echo $amount3; ?>" data-speed="1500"><?php echo $amount3; ?></h2>
-            <p class="count-text ">Premium Partners</p>
+            <i class="fas fa-download fa-2x text-primary mb-3"></i>
+            <h2 class="timer count-title count-number" data-to="<?php echo $totalDownloads; ?>" data-speed="1500"><?php echo $totalDownloads; ?></h2>
+            <p class="count-text ">Total Mod Downloads</p>
          </div>
       </div>
       </div>
@@ -213,7 +230,7 @@ if ($result->num_rows > 0) {
       <div class="  text-center pb-0">
       <div class="row justify-content-center d-flex">
          <div class="col-12 col-md-12 align-self-center">
-            <img src="https://cdn.skyfs.net/go/1a7bb524c18bb33bfb32e3d2eded823a.png" alt="" class="img-fluid shadow-lg rounded mt-2 mb-2" style="margin:auto">
+            <img src="../static-assets/img/about-us/website.png" alt="" class="img-fluid shadow-lg rounded mt-2 mb-2" style="margin:auto">
             <div class="row mt-5  justify-content-around d-flex">
             <div class="col-md-3">
                <div class="featured-list-icon mt-1 mr-md-2 mb-4">
@@ -251,8 +268,9 @@ if ($result->num_rows > 0) {
       </div>
    </div>
 </section>
-<!-- <section class="pb-5 pt-5">
+<section class="pb-5 pt-5">
    <div class="container">
+      <h1 style="text-align: center; margin-bottom: 50px;">Our features</h1>
       <div class="row my-4">
       <div class="col-sm-6">
          <dl class=" ">
@@ -261,9 +279,9 @@ if ($result->num_rows > 0) {
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Feature title</h3>
+               <h3>Easy to browse</h3>
                <p>
-                  Use dropbox to save things in the "cloud" because throwing things away is stressful and this way you don't have to.
+                  Our simple and modern structure gives you the best experience while browsing for mods and user can easily find your mods!
                </p>
             </div>
             </dd>
@@ -272,9 +290,9 @@ if ($result->num_rows > 0) {
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Feature title</h3>
+               <h3>Get paid for mods</h3>
                <p>
-                  Use dropbox to save things in the "cloud" because throwing things away is stressful and this way you don't have to.
+                  Since you are uploading your mods for free on this page, we want to give something back to you to show our appreciation for your work! Thats why you get money for every mod download.
                </p>
             </div>
             </dd>
@@ -283,9 +301,9 @@ if ($result->num_rows > 0) {
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Feature title</h3>
+               <h3>Sell mods</h3>
                <p>
-                  Use github to share things on the internet then change them. Make things better. Free software? But not as in beer.
+                  If you decide to sell your work, we are the perfect choice. With our PayPal integration it's really easy to buy mods on our page.
                </p>
             </div>
             </dd>
@@ -298,9 +316,9 @@ if ($result->num_rows > 0) {
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Feature title</h3>
+               <h3>Partner Program</h3>
                <p>
-                  Use dropbox to save things in the "cloud" because throwing things away is stressful and this way you don't have to.
+                  With our exclusive partner program, you benefit with an instant upload check, faster support and many other benefits. 
                </p>
             </div>
             </dd>
@@ -309,9 +327,9 @@ if ($result->num_rows > 0) {
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Feature title</h3>
+               <h3>High security standards</h3>
                <p>
-                  Use dropbox to save things in the "cloud" because throwing things away is stressful and this way you don't have to.
+                  We take security very serious here, thats why we provide a two-factor-authenfication. Furthermore we always use a SSL certificate and do not redirect you to unknown pages without letting you know.
                </p>
             </div>
             </dd>
@@ -320,9 +338,9 @@ if ($result->num_rows > 0) {
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Feature title</h3>
+               <h3>Easy Mod Upload</h3>
                <p>
-                  Use github to share things on the internet then change them. Make things better. Free software? But not as in beer.
+                  We are working very hard to give every mod creator the best experience. This requires an easy and understandable mod upload.
                </p>
             </div>
             </dd>
@@ -330,10 +348,12 @@ if ($result->num_rows > 0) {
       </div>
       </div>
    </div>
-</section> -->
+</section>
 <section class="pt-2 pb-0">
+   <h4 style="text-align: center;">Some other features:</h4>
    <div class="container  py-5 ">
       <div class="row    w-100 overflow-hidden">
+         <!--
       <div class="col-md-6 mb-4 text-center  overflow-hidden">
          <div class="card border-0 bg-light">
             <div class="card-body">
@@ -346,7 +366,7 @@ if ($result->num_rows > 0) {
             </div>
             </div>
          </div>
-      </div>
+      </div>-->
       <div class="col-md-6 mb-4 text-center  overflow-hidden">
          <div class="card border-0 bg-light">
             <div class="card-body">
@@ -355,11 +375,12 @@ if ($result->num_rows > 0) {
                <p class="lead">No extra account needed. Easy login with Google or Discord.</p>
             </div>
             <div class="bg-light shadow mx-auto overflow-hidden" style="width: 80%; max-height: 300px; border-radius: 21px 21px 0 0;">
-               <img alt="image" class="img-fluid rounded m-0" src="https://cdn.skyfs.net/go/54edeea7c8acae777c3260ca85247ba1.png">
+               <img alt="image" class="img-fluid rounded m-0" src="../static-assets/img/about-us/login.png">
             </div>
             </div>
          </div>
       </div>
+      <!--
       <div class="col-md-6 mb-4 text-center  overflow-hidden">
          <div class="card border-0 bg-light">
             <div class="card-body">
@@ -372,7 +393,7 @@ if ($result->num_rows > 0) {
             </div>
             </div>
          </div>
-      </div>
+      </div>-->
       <div class="col-md-6 mb-4 text-center  overflow-hidden">
          <div class="card border-0 bg-light">
             <div class="card-body">
@@ -381,7 +402,7 @@ if ($result->num_rows > 0) {
                <p class="lead">Easy to check if FiveM or FiveMods is having issues.</p>
             </div>
             <div class="bg-light shadow mx-auto overflow-hidden" style="width: 80%; max-height: 300px; border-radius: 21px 21px 0 0;">
-               <img alt="image" class="img-fluid rounded m-0" src="https://cdn.skyfs.net/go/e6f711c9f686e00dac74f297205214ac.png">
+               <img alt="image" class="img-fluid rounded m-0" src="../static-assets/img/about-us/status.png">
             </div>
             </div>
          </div>

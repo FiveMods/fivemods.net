@@ -69,8 +69,6 @@ if($_SESSION['access_token']) {
 
         $_SESSION['user_id'] = $userFetch['oauth_uid'];
         $_SESSION['user_username'] = $userFetch['name'];
-        $_SESSION['user_firstname'] = $userFetch['first_name'];
-        $_SESSION['user_lastname'] = $userFetch['last_name'];
         $_SESSION['user_email'] = $userFetch['email'];
         $_SESSION['user_description'] = $userFetch['description'];
         $_SESSION['user_locale'] = $userFetch['locale'];
@@ -138,8 +136,6 @@ if($_SESSION['access_token']) {
 
 
         $_SESSION['user_username'] = $user->login;
-        $_SESSION['user_firstname'] = NULL;
-        $_SESSION['user_lastname'] = NULL;
         $_SESSION['user_email'] = $email;
         $_SESSION['user_description'] = $description;
         $_SESSION['user_locale'] = $location;

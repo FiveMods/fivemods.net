@@ -21,7 +21,6 @@ if (isset($_POST['uploadMod'])) {
 
    $title = htmlspecialchars($_POST['title']);
    $description = nl2br($_POST['description']);
-   $predescription = str_replace("<br />"," " , substr($description, 0, 150) . "...");
    $category = htmlspecialchars($_POST['category']);
    $tags = htmlspecialchars($_POST['tags']);
 
@@ -69,19 +68,21 @@ if (isset($_POST['uploadMod'])) {
 
 
 
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_predescription, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :m_predescription, :requiredMod, :download, :price, :approved, :approvedby)");
-   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'm_predescription' => $predescription, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
-   $pdo = null;
+   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :requiredMod, :download, :price, :approved, :approvedby)");
+   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
+   
    $_SESSION['upload'] = 1;
 
 
    if($_SESSION['user_premium'] != 0) {
-
-      require_once "/config.php";
       
+      $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_picture = :pic");
+      $stmt->execute(array("name" => $title, "pic" => $pictures));
+      $statement = $stmt->fetch();
+
       $ch = curl_init();
       $token = $apiToken;
-      $modid = $id;
+      $modid = $statement['m_id'];
 
       curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
       curl_setopt($ch, CURLOPT_POST, 1);
@@ -97,6 +98,8 @@ if (isset($_POST['uploadMod'])) {
    exit();
    die();
 }
+
+$pdo = null;
 function randomChars($length)
 {
    $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
