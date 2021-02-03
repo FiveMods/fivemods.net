@@ -17,6 +17,28 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 	header('location: /account/two-factor-authentication/');
 }
 
+$id = $_SESSION['user_id'];
+
+$stmt = $conn->prepare("SELECT * FROM status_key WHERE userid = '$id'");
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $api_key = $row['apikey'];
+        $key_exp = $row['expiration_date'];
+    }
+}
+
+$date = date("U");
+$checkdate = $key_exp - $date;
+
+$api_key_exp = 'Expires in: ' . date("n", $checkdate) . ' Months ' . date("j", $checkdate) . ' Days';
+
+if (empty($_SESSION['api_key'])) {
+    $_SESSION['api_key'] = 'You don\'t have an API key!';
+}
+
 ?>
 <meta http-equiv="refresh" content="1440;url=/account/logout/?url=timeout" />
 <div class="container mt-5 mb-5">
@@ -77,14 +99,6 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<polyline points="16 16 12 12 8 16"></polyline>
 							</svg>My Uploads
 						</a>
-						<!--<a href="#developer" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tool mr-2">
-								<polyline points="16 16 12 12 8 16"></polyline>
-								<line x1="12" y1="12" x2="12" y2="21"></line>
-								<path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
-								<polyline points="16 16 12 12 8 16"></polyline>
-							</svg>Developer Settings
-						</a>-->
 					</nav>
 				</div>
 			</div>
@@ -220,6 +234,28 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<p class="font-size-sm text-muted">You are using <b><?php echo $_SESSION['user_oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://fivemods.management@gmail.com?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
+                        <form action="/pages/account/helper/apikey.req.php" method="post">
+                            <hr>
+							<div class="form-group">
+								<label for="username">Current API key</label>
+								<input type="text" class="form-control" aria-describedby="usernameHelp" value="<?php echo $api_key; ?>" disabled>
+								<small id="usernameHelp" class="form-text text-muted"><?php echo $api_key_exp; ?></small>
+							</div>
+							<div class="form-group">
+                                <h6>Request a new API key</h6><br>
+
+								<label for="username">Expires in</label>
+								<select class="form-control" name="key-exp" aria-describedby="gbanner" required>
+                                    <option value="1209600">2 Weeks</option>
+                                    <option value="2592000">1 Month</option>
+                                    <option value="7776000">3 Months</option>
+                                    <option value="15552000">6 Months</option>
+                                </select>
+								<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden><br>
+								<button type="submit" class="btn btn-primary">Request</button>
+							</div>
+						</form>
+                        
 						<form action="" method="post">
 							<hr>
 							<div class="form-group">

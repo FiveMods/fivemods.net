@@ -7,11 +7,13 @@
 // 4 = Maintenance
 // 5 = Security Mode (Cloudflare)
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 require_once '../../../config.php';
+
+$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 require_once './errors.php';
 
 $input = file_get_contents('php://input');
@@ -19,27 +21,29 @@ $input = file_get_contents('php://input');
 $decinput = json_decode($input, TRUE, 512, JSON_BIGINT_AS_STRING);
 
 $key = $decinput['info']['0']['key'];
-$fivemods = $decinput['status']['0']['fivemods']['0'];
-$fivem = $decinput['status']['0']['fivem']['0'];
-$date = date("U");
-$array = array();
 
 if (empty($key)) {
     http_response_code(400);
     echo $invalidkey;
+    die();
 }
+
+$fivemods = $decinput['status']['0']['fivemods']['0'];
+$fivem = $decinput['status']['0']['fivem']['0'];
+$date = date("U");
+$array = array();
 
 $stmt = $conn->prepare("SELECT * FROM status_key WHERE apikey = '$key'");
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    if ($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $checkkey = $row['apikey'];
         $exdate = $row['expiration_date'];
         $active = $row['active'];
     }
-    if ($checkkey != $key || $date > $exdate || $active = 0) {
+    if ($checkkey != $key || $date > $exdate || $active == 0) {
         http_response_code(400);
         echo $invalidkey;
     } else {
@@ -62,6 +66,7 @@ if ($result->num_rows > 0) {
 
         http_response_code(200);
         $statusarray = json_encode($array);
+        echo $statusarray;
         
     }
 } else {
@@ -71,7 +76,7 @@ if ($result->num_rows > 0) {
 
 function fivemodsstatus($fmcheck) {
     
-    global $main, $updown, $discord, $google, $github, $advertisement, $cookies, $location, $payment, $array;
+    global $conn, $main, $updown, $discord, $google, $github, $advertisement, $cookies, $location, $payment, $array;
 
     $stmt = $conn->prepare("SELECT * FROM fm_status WHERE status_name = '$fmcheck'");
     $stmt->execute();
@@ -138,6 +143,7 @@ function fivemodsstatus($fmcheck) {
             if ($row = $result->fetch_assoc()) {
                 $payment = $row['status'];
             }
+
             $array['payment'] = $payment;
         }
     }
@@ -147,19 +153,20 @@ function fivemstatus($fcheck) {
 
     global $serverlist, $auth, $ingame, $website, $artifacts, $keymaster, $array;
 
-    if ($fcheck == 'severlist') {
+    if ($fcheck == 'serverlist') {
 
         $url = 'https://servers.fivem.net/servers';
 
         $headers = @get_headers($url); 
+
         if ($headers && strpos( $headers[0], '200')) {
-            $serverlist == '0';
+            $serverlist = 0;
         } elseif ($headers && strpos( $headers[0], '302')) {
-            $serverlist == '1';
+            $serverlist = 1;
         } elseif ($headers && strpos( $headers[0], '403')) {
-            $serverlist == '5';
+            $serverlist = 5;
         } else {
-            $serverlist == '3';
+            $serverlist = 3;
         }
         $array['serverlist'] = $serverlist;
 
@@ -167,15 +174,15 @@ function fivemstatus($fcheck) {
 
         $url = 'https://fivem.net';
 
-        $headers = @get_headers($url); 
+        $headers = @get_headers($url);
         if ($headers && strpos( $headers[0], '200')) {
-            $auth == '0';
+            $auth = 0;
         } elseif ($headers && strpos( $headers[0], '302')) {
-            $auth == '1';
+            $auth = 1;
         } elseif ($headers && strpos( $headers[0], '403')) {
-            $auth == '5';
+            $auth = 5;
         } else {
-            $auth == '3';
+            $auth = 3;
         }
         $array['auth'] = $auth;
 
@@ -185,13 +192,13 @@ function fivemstatus($fcheck) {
 
         $headers = @get_headers($url); 
         if ($headers && strpos( $headers[0], '200')) {
-            $ingame == '0';
+            $ingame = 0;
         } elseif ($headers && strpos( $headers[0], '302')) {
-            $ingame == '1';
+            $ingame = 1;
         } elseif ($headers && strpos( $headers[0], '403')) {
-            $ingame == '5';
+            $ingame = 5;
         } else {
-            $ingame == '3';
+            $ingame = 3;
         }
         $array['ingame'] = $ingame;
 
@@ -201,13 +208,13 @@ function fivemstatus($fcheck) {
 
         $headers = @get_headers($url); 
         if ($headers && strpos( $headers[0], '200')) {
-            $website == '0';
+            $website = 0;
         } elseif ($headers && strpos( $headers[0], '302')) {
-            $website == '1';
+            $website = 1;
         } elseif ($headers && strpos( $headers[0], '403')) {
-            $website == '5';
+            $website = 5;
         } else {
-            $website == '3';
+            $website = 3;
         }
         $array['website'] = $website;
 
@@ -217,13 +224,13 @@ function fivemstatus($fcheck) {
 
         $headers = @get_headers($url); 
         if ($headers && strpos( $headers[0], '200')) {
-            $artifacts == '0';
+            $artifacts = 0;
         } elseif ($headers && strpos( $headers[0], '302')) {
-            $artifacts == '1';
+            $artifacts = 1;
         } elseif ($headers && strpos( $headers[0], '403')) {
-            $artifacts == '5';
+            $artifacts = 5;
         } else {
-            $artifacts == '3';
+            $artifacts = 3;
         }
         $array['artifacts'] = $artifacts
         ;
@@ -233,13 +240,13 @@ function fivemstatus($fcheck) {
 
         $headers = @get_headers($url); 
         if ($headers && strpos( $headers[0], '200')) {
-            $keymaster == '0';
+            $keymaster = 0;
         } elseif ($headers && strpos( $headers[0], '302')) {
-            $keymaster == '1';
+            $keymaster = 1;
         } elseif ($headers && strpos( $headers[0], '403')) {
-            $keymaster == '5';
+            $keymaster = 5;
         } else {
-            $keymaster == '3';
+            $keymaster = 3;
         }
         $array['keymaster'] = $keymaster;
     }
