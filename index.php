@@ -115,43 +115,11 @@ function isMobile()
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title><?php echo $lang['title']; ?></title>
-
+   
    <meta http-equiv="content-language" content="en" />
    <meta http-equiv="Pragma" content="no-cache">
    <meta http-equiv="Cache-Control" content="no-cache">
-   <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
-   <meta name="robots" content="index, follow" />
-   <meta name="department" content="legal" />
-   <meta name="audience" content="all" />
-   <meta name="author" content="FiveMods" />
-   <meta name="publisher" content="FiveMods" />
-   <meta name="organisation" content="FiveMods" />
-   <meta name="copyright" content="Copyright (c) 2020 - 2021 FiveMods" />
-   <meta name="generator" content="Atom, Visual Studio Code" />
-   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
-   <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
-   <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
-   <meta name="coverage" content="Worldwide">
 
-   <meta name="reply-to" content="fivemods.management@gmail.com">
-
-   <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
-   <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
-
-   <meta name="msapplication-config" content="none">
-   <meta name="theme-color" content="#FF8637">
-   <meta name="msapplication-navbutton-color" content="#FF8637">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-
-   <meta name="websiteStage" content="live" />
-
-   <meta name="DC.Language" content="en" />
-   <meta name="DC.Creator" content="FiveMods" />
-   <meta name="DC.Publisher" content="FiveMods" />
-   <meta name="DC.Rights" content="FiveMods" />
-   <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
    <?php
 
@@ -181,6 +149,7 @@ function isMobile()
 
 
       echo '
+         <title>'.$m_name.' - FiveMods.net</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
          <meta property="og:title" content="' . $m_name . '">
@@ -198,7 +167,9 @@ function isMobile()
       echo '<script>console.log("Control numb.: ' . $urlNumber . '");</script>';
    } elseif (strpos($actual_link, 'status') != FALSE) {
 
-      echo '<meta name="msapplication-config" content="none">
+      echo '
+         <title>Statuspage - FiveMods.net</title>   
+         <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
@@ -237,7 +208,9 @@ function isMobile()
       echo '<script>console.log("User img.: ' . $user_picture . '");</script>';
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
-      echo '<meta name="msapplication-config" content="none">
+      echo '
+         <title>'.$user_username.' - FiveMods.net</title>
+         <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
@@ -257,9 +230,43 @@ function isMobile()
          <meta name="twitter:image" content="' . $user_picture . '">';
    } else {
       echo '<meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">';
+      echo '<title>'.$lang['title'].'</title>';
    }
 
    ?>
+
+   <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
+   <meta name="robots" content="index, follow" />
+   <meta name="department" content="legal" />
+   <meta name="audience" content="all" />
+   <meta name="author" content="FiveMods" />
+   <meta name="publisher" content="FiveMods" />
+   <meta name="organisation" content="FiveMods" />
+   <meta name="copyright" content="Copyright (c) 2020 - 2021 FiveMods" />
+   <meta name="generator" content="Atom, Visual Studio Code" />
+   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
+   <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
+   <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
+   <meta name="coverage" content="Worldwide">
+
+   <meta name="reply-to" content="fivemods.management@gmail.com">
+
+   <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
+   <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
+
+   <meta name="msapplication-config" content="none">
+   <meta name="theme-color" content="#FF8637">
+   <meta name="msapplication-navbutton-color" content="#FF8637">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+
+   <meta name="websiteStage" content="live" />
+
+   <meta name="DC.Language" content="en" />
+   <meta name="DC.Creator" content="FiveMods" />
+   <meta name="DC.Publisher" content="FiveMods" />
+   <meta name="DC.Rights" content="FiveMods" />
+   <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
    <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
 
@@ -302,6 +309,11 @@ function isMobile()
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+   <!-- <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/vendor.min.css">
+   <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/theme.min.css?v=1.0">
+   <script src="https://htmlstream.com/front/assets/js/vendor.min.js"></script>
+   <script src="https://htmlstream.com/front/assets/js/theme.min.js"></script> -->
 
    <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
@@ -511,7 +523,7 @@ function isMobile()
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE) {
       include('./include/header-legal.php');
-   } elseif (strpos($_GET['page'], "impressum") !== FALSE) {
+   } elseif (strpos($_GET['page'], "imprint") !== FALSE) {
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
       include('./include/header-legal.php');
@@ -582,7 +594,30 @@ function isMobile()
 
 
    <!-- ========== FOOTER ========== -->
-   <?php include('./include/footer-normal.php'); ?>
+
+   <?php
+
+   if (strpos($_GET['page'], "upload-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "legal-notice") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "terms-of-service") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "imprint") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "payment-agreement") !== FALSE) {
+      include('./include/footer-legal.php');
+   } else {
+      include('./include/footer-normal.php');
+   }
+
+   ?>
    <!-- ========== END FOOTER ========== -->
 
    <!-- jQuery is required -->
