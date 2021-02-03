@@ -115,43 +115,11 @@ function isMobile()
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title><?php echo $lang['title']; ?></title>
-
+   
    <meta http-equiv="content-language" content="en" />
    <meta http-equiv="Pragma" content="no-cache">
    <meta http-equiv="Cache-Control" content="no-cache">
-   <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
-   <meta name="robots" content="index, follow" />
-   <meta name="department" content="legal" />
-   <meta name="audience" content="all" />
-   <meta name="author" content="FiveMods" />
-   <meta name="publisher" content="FiveMods" />
-   <meta name="organisation" content="FiveMods" />
-   <meta name="copyright" content="Copyright (c) 2020 - 2021 FiveMods" />
-   <meta name="generator" content="Atom, Visual Studio Code" />
-   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
-   <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
-   <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
-   <meta name="coverage" content="Worldwide">
 
-   <meta name="reply-to" content="fivemods.management@gmail.com">
-
-   <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
-   <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
-
-   <meta name="msapplication-config" content="none">
-   <meta name="theme-color" content="#FF8637">
-   <meta name="msapplication-navbutton-color" content="#FF8637">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-
-   <meta name="websiteStage" content="live" />
-
-   <meta name="DC.Language" content="en" />
-   <meta name="DC.Creator" content="FiveMods" />
-   <meta name="DC.Publisher" content="FiveMods" />
-   <meta name="DC.Rights" content="FiveMods" />
-   <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
    <?php
 
@@ -181,6 +149,7 @@ function isMobile()
 
 
       echo '
+         <title>'.$m_name.' - FiveMods.net</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
          <meta property="og:title" content="' . $m_name . '">
@@ -198,7 +167,9 @@ function isMobile()
       echo '<script>console.log("Control numb.: ' . $urlNumber . '");</script>';
    } elseif (strpos($actual_link, 'status') != FALSE) {
 
-      echo '<meta name="msapplication-config" content="none">
+      echo '
+         <title>Statuspage - FiveMods.net</title>   
+         <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
@@ -237,7 +208,9 @@ function isMobile()
       echo '<script>console.log("User img.: ' . $user_picture . '");</script>';
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
-      echo '<meta name="msapplication-config" content="none">
+      echo '
+         <title>'.$user_username.' - FiveMods.net</title>
+         <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
@@ -257,9 +230,43 @@ function isMobile()
          <meta name="twitter:image" content="' . $user_picture . '">';
    } else {
       echo '<meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">';
+      echo '<title>'.$lang['title'].'</title>';
    }
 
    ?>
+
+   <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
+   <meta name="robots" content="index, follow" />
+   <meta name="department" content="legal" />
+   <meta name="audience" content="all" />
+   <meta name="author" content="FiveMods" />
+   <meta name="publisher" content="FiveMods" />
+   <meta name="organisation" content="FiveMods" />
+   <meta name="copyright" content="Copyright (c) 2020 - 2021 FiveMods" />
+   <meta name="generator" content="Atom, Visual Studio Code" />
+   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
+   <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
+   <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
+   <meta name="coverage" content="Worldwide">
+
+   <meta name="reply-to" content="fivemods.management@gmail.com">
+
+   <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
+   <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
+
+   <meta name="msapplication-config" content="none">
+   <meta name="theme-color" content="#FF8637">
+   <meta name="msapplication-navbutton-color" content="#FF8637">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+
+   <meta name="websiteStage" content="live" />
+
+   <meta name="DC.Language" content="en" />
+   <meta name="DC.Creator" content="FiveMods" />
+   <meta name="DC.Publisher" content="FiveMods" />
+   <meta name="DC.Rights" content="FiveMods" />
+   <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
    <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
 
