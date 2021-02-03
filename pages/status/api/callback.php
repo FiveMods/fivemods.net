@@ -1,11 +1,4 @@
 <?php
-// Statusvalues:
-// 0 = Operational
-// 1 = Degraded Performance
-// 2 = Partial Outage
-// 3 = Major Outage
-// 4 = Maintenance
-// 5 = Security Mode (Cloudflare)
 
 require_once '../../../config.php';
 
