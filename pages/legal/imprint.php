@@ -23,10 +23,10 @@
                             <h4 class="text-left"><u>Table of content</u></h4>
                             <ol class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">A. Kontakt</a>
+                                    <a class="nav-link mb-1">A. Name und Anschrift</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">B. Représentant</a>
+                                    <a class="nav-link mb-1">B. Verwendung</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link mb-1">C. Streitschlichtung</a>
@@ -40,6 +40,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link mb-1">F. Urheberrecht</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">G. Hinweise auf Rechtsverstöße</a>
+                                </li>
                             </ol>
                         </li>
                     </ul>
@@ -50,7 +53,7 @@
 
         <div class="col-md-8 col-lg-9">
             <article class="pb-2">
-                <h3>Kontakt</h3>
+                <h3>Name und Anschrift</h3>
                 <p>
                     Mailboxde.com GmbH<br>
                     Zoios, ID 134607<br>
@@ -58,12 +61,15 @@
                     02763 Zittau, GERMANY
                 </p>
                 <p>Web: www.fivemods.net</p>
-                <p>E-Mail: fivemods.management@gmail.com</p>
-                <h3>Représentant</h3>
-                <p>
-                    Tim Spengler<br>
-                    Philipp Hajek<br>
-                </p>
+                <h6>E-Mail-Adresse (allgemeines)</h6>
+                <a href="mailto://fivemods.management@gmail.com">fivemods.management@gmail.com</a><br><br>
+                <h6>E-Mail-Adresse (Datenschutzbeauftragte/r)</h6>
+                <a href="mailto://fivemods.management@gmail.com">fivemods.management@gmail.com</a><br><br>
+
+                <p>Der Anbieter ist unter der o.g. Anschrift zu erreichen. Es handelt sich bei der Impressum-Anschrift um einen postalischen Weiterleitungsservice, da der Anbieter seine private Anschrift nicht öffentlich anzeigen möchte. Mailboxde.com wird für die fristgerechte und schnellstmögliche Weiterleitung der Post an den Anbieter sorgen, sofern diese an die o.g. Anschrift gerichtet wird.</p>
+
+                <h3>Verwendung</h3>
+                <p>Der Missbrauch der oben angegebenen Daten wird strafrechtlich durch die Behörden verfolgt.</p>
 
                 <h3>Streitschlichtung</h3>
                 <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr.
@@ -85,11 +91,10 @@
                 <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
 
                 <p>Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
+                
+                <h3>Hinweise auf Rechtsverstöße</h3>
+                <p>Sollten Sie innerhalb unseres Internetauftritts Rechtsverstöße bemerken, bitten wir Sie uns auf diese hinzuweisen. Wir werden rechtswidrige Inhalte und Links nach Kenntnisnahme unverzüglich entfernen.</p>
 
-                </p>
-                <p class="small mt-5 text-center">
-                    <b class="text-dark">by FiveMods.net</b>
-                </p>
             </article>
         </div>
     </div>

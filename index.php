@@ -310,6 +310,11 @@ function isMobile()
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
+   <!-- <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/vendor.min.css">
+   <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/theme.min.css?v=1.0">
+   <script src="https://htmlstream.com/front/assets/js/vendor.min.js"></script>
+   <script src="https://htmlstream.com/front/assets/js/theme.min.js"></script> -->
+
    <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
       function swapStyleSheet(sheet) {
@@ -518,7 +523,7 @@ function isMobile()
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE) {
       include('./include/header-legal.php');
-   } elseif (strpos($_GET['page'], "impressum") !== FALSE) {
+   } elseif (strpos($_GET['page'], "imprint") !== FALSE) {
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
       include('./include/header-legal.php');
@@ -589,7 +594,30 @@ function isMobile()
 
 
    <!-- ========== FOOTER ========== -->
-   <?php include('./include/footer-normal.php'); ?>
+
+   <?php
+
+   if (strpos($_GET['page'], "upload-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "legal-notice") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "terms-of-service") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "imprint") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "payment-agreement") !== FALSE) {
+      include('./include/footer-legal.php');
+   } else {
+      include('./include/footer-normal.php');
+   }
+
+   ?>
    <!-- ========== END FOOTER ========== -->
 
    <!-- jQuery is required -->

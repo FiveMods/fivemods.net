@@ -115,8 +115,7 @@
                   <p class="mt-3 text-white"><?php echo $lang['copyright']; ?><br>
                      <br>
                      <span style="font-size:8px;"><?php echo $lang['footer-subtext']; ?>.
-                        FiveM™ is © 2016-2020 by the CitizenFX Collective.
-                        FiveM is a registered trademark of ZAP-Hosting GmbH & Co. KG in the European Union and is used under license.
+                        FiveM® is © 2016-2021 by Cfx.re.
                      </span>
                   <!-- <p style="font-size:8px;" class="text text-muted">Session: <?php echo session_id() ?>, Country: <?php echo $_SESSION['language']; ?>, IP: <?php echo $ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?>, Server node-01, URL: <?php echo $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?> -->
                   </p>
