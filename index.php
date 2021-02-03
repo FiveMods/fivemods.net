@@ -310,6 +310,11 @@ function isMobile()
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
+   <!-- <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/vendor.min.css">
+   <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/theme.min.css?v=1.0">
+   <script src="https://htmlstream.com/front/assets/js/vendor.min.js"></script>
+   <script src="https://htmlstream.com/front/assets/js/theme.min.js"></script> -->
+
    <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
       function swapStyleSheet(sheet) {
