@@ -23,10 +23,10 @@
                             <h4 class="text-left"><u>Table of content</u></h4>
                             <ol class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">A. Kontakt</a>
+                                    <a class="nav-link mb-1">A. Name und Anschrift</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link mb-1">B. Représentant</a>
+                                    <a class="nav-link mb-1">B. Verwendung</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link mb-1">C. Streitschlichtung</a>
@@ -39,6 +39,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link mb-1">F. Urheberrecht</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link mb-1">G. Hinweise auf Rechtsverstöße</a>
                                 </li>
                             </ol>
                         </li>
