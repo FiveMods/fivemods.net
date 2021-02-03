@@ -589,7 +589,30 @@ function isMobile()
 
 
    <!-- ========== FOOTER ========== -->
-   <?php include('./include/footer-normal.php'); ?>
+
+   <?php
+
+   if (strpos($_GET['page'], "upload-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "legal-notice") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "terms-of-service") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "imprint") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
+      include('./include/footer-legal.php');
+   } elseif (strpos($_GET['page'], "payment-agreement") !== FALSE) {
+      include('./include/footer-legal.php');
+   } else {
+      include('./include/footer-normal.php');
+   }
+
+   ?>
    <!-- ========== END FOOTER ========== -->
 
    <!-- jQuery is required -->
