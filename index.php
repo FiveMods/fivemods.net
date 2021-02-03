@@ -518,7 +518,7 @@ function isMobile()
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE) {
       include('./include/header-legal.php');
-   } elseif (strpos($_GET['page'], "impressum") !== FALSE) {
+   } elseif (strpos($_GET['page'], "imprint") !== FALSE) {
       include('./include/header-legal.php');
    } elseif (strpos($_GET['page'], "account-policy") !== FALSE) {
       include('./include/header-legal.php');
