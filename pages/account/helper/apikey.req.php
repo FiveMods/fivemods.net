@@ -18,6 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    $stmt = $conn->prepare("SELECT * FROM status_key WHERE userid='$userid' AND active = 1");
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $api_key = $row['apikey'];
+            $stmt = $conn->prepare("UPDATE status_key SET active = 0 WHERE apikey = '$api_key'");
+            $stmt->execute();
+        }
+    }
+
+    
+
     $inp_exp = htmlspecialchars($_POST['key-exp']);
     $date = date("U");
     $key_exp = $inp_exp + $date;

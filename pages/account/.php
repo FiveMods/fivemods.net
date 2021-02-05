@@ -19,7 +19,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 
 $id = $_SESSION['user_id'];
 
-$stmt = $conn->prepare("SELECT * FROM status_key WHERE userid = '$id'");
+$stmt = $conn->prepare("SELECT * FROM status_key WHERE userid = '$id' AND active=1");
 $stmt->execute();
 $result = $stmt->get_result();
 
