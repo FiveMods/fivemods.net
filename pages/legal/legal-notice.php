@@ -122,7 +122,7 @@
                 <h2>Contact Us</h2>
                 <p>If you have any questions about this Disclaimer, You can contact Us:</p>
                 <ul>
-                    <li>By email: <a href="mailto:fivemods.management@gmail.com">fivemods.management@gmail.com</a></li>
+                    <li>By email: <a href="mailto:contact@fivemods.net">contact@fivemods.net</a></li>
                 </ul>
             </article>
         </div>

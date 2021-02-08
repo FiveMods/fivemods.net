@@ -209,7 +209,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form>
 							<div class="form-group mb-0">
 								<label class="d-block">Login type</label>
-								<p class="font-size-sm text-muted">You are using <b><?php echo $_SESSION['user_oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://fivemods.management@gmail.com?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
+								<p class="font-size-sm text-muted">You are using <b><?php echo $_SESSION['user_oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
 						<form action="" method="post">

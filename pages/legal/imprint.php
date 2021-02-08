@@ -62,9 +62,9 @@
                 </p>
                 <p>Web: www.fivemods.net</p>
                 <h6>E-Mail-Adresse (allgemeines)</h6>
-                <a href="mailto://fivemods.management@gmail.com">fivemods.management@gmail.com</a><br><br>
+                <a href="mailto://contact@fivemods.net">contact@fivemods.net</a><br><br>
                 <h6>E-Mail-Adresse (Datenschutzbeauftragte/r)</h6>
-                <a href="mailto://fivemods.management@gmail.com">fivemods.management@gmail.com</a><br><br>
+                <a href="mailto://privacy@fivemods.net">privacy@fivemods.net</a><br><br>
 
                 <p>Der Anbieter ist unter der o.g. Anschrift zu erreichen. Es handelt sich bei der Impressum-Anschrift um einen postalischen Weiterleitungsservice, da der Anbieter seine private Anschrift nicht öffentlich anzeigen möchte. Mailboxde.com wird für die fristgerechte und schnellstmögliche Weiterleitung der Post an den Anbieter sorgen, sofern diese an die o.g. Anschrift gerichtet wird.</p>
 

@@ -12,7 +12,7 @@
                   <address class="color-light-20 mt-3">
                      <?php echo $lang['footer-infotext']; ?>
                   </address>
-                  <a href="mailto:fivemods.management@gmail.com">fivemods.management@gmail.com</a>
+                  <a href="mailto:contact@fivemods.net">contact@fivemods.net</a> <br>
                   <small class="text text-muted">v0.7.46-a.1</small>
                </div>
                <div class="col-xs-6 col-sm-3">

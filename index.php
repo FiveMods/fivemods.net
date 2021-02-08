@@ -49,7 +49,7 @@ function isMobile()
 <head>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- Start cookieyes banner -->
-   <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
+   <!-- <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script> -->
    <!-- End cookieyes banner -->
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -249,7 +249,7 @@ function isMobile()
    <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
    <meta name="coverage" content="Worldwide">
 
-   <meta name="reply-to" content="fivemods.management@gmail.com">
+   <meta name="reply-to" content="contact@fivemods.net">
 
    <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
    <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
