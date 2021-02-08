@@ -171,7 +171,7 @@
                 <p>If you have any questions about these Terms and Conditions, You can contact us:</p>
 
                 <ul>
-                    <li>By email: <a href="mailto:fivemods.management@gmail.com">fivemods.management@gmail.com</a></li>
+                    <li>By email: <a href="mailto:contact@fivemods.net">contact@fivemods.net</a></li>
                 </ul>
             </article>
         </div>
