@@ -1,21 +1,35 @@
 <?php
 
+require_once "./config.php";
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
 include('./include/header-banner.php');
 
 session_start();
 
-if ($_SESSION['user_blocked'] == 1) {
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	
+	header("location: /account/logout/");
+	exit();
+	die();
+	
+	echo "<script>console.log(\"No Cookies\");</script>";
+}
+
+$selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+$selVals->execute(array($_SESSION['uuid']));
+$vals = $selVals->fetch();
+
+
+if ($vals['blocked'] == 1) {
 	header('location: /account/logout/?url=banned');
 }
 
-if (!isset($_SESSION['user_id'])) {
-	header('location: /account/logout/');
-	exit();
-}
 
-if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
+if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 	header('location: /account/two-factor-authentication/');
 }
+
 
 ?>
 <meta http-equiv="refresh" content="1440;url=/account/logout/?url=timeout" />
@@ -145,27 +159,26 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form action="/pages/account/helper/profile.edit.php" method="post">
 							<div class="form-group">
 								<label for="email">Email <a href="#info" class="text text-danger">*</a> </label>
-								<input type="text" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $_SESSION['user_email']; ?>" required>
+								<input type="text" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $vals['email']; ?>" required>
 								<small id="emailHelp" class="form-text text-muted">Your email which is used to send you the newest updates and account updates, if you enabled it in the notifications tab.</small>
 							</div>
 							<div class="form-group">
 								<label for="bio">Description</label>
-								<textarea class="form-control autosize" name="desc" id="textarea" maxlength="100" placeholder="Write something about you" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"><?php echo $_SESSION['user_description']; ?></textarea>
+								<textarea class="form-control autosize" name="desc" id="textarea" maxlength="100" placeholder="Write something about you" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"><?php echo $vals['description']; ?></textarea>
 								<small id="emailHelp" class="form-text text-muted">Maximal characters: 100</small>
 							</div>
 							<div class="form-group">
 								<label for="url">Website</label>
-								<input type="text" class="form-control" name="website" id="noSpace" maxlength="64" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" name="website" placeholder="Enter your website address" value="<?php echo $_SESSION['user_website']; ?>">
+								<input type="text" class="form-control" name="website" id="noSpace" maxlength="64" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" name="website" placeholder="Enter your website address" value="<?php echo $vals['website']; ?>">
 							</div>
 							<div class="form-group">
 								<label for="location">Location</label>
-								<input type="text" class="form-control" name="location" id="location" minlength="2" maxlength="48" placeholder="Enter your location" value="<?php echo $_SESSION['user_locale']; ?>">
+								<input type="text" class="form-control" name="location" id="location" minlength="2" maxlength="48" placeholder="Enter your location" value="<?php echo $vals['locale']; ?>">
 							</div>
 							<div class="form-group small text-muted" id="info">
 								Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
 							</div>
 							<input type="text" name="call" value="callFunc" hidden>
-							<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
 							<button type="submit" class="btn btn-primary">Save & Update</button>
 							<button type="reset" class="btn btn-light">Reset Changes</button>
 						</form>
@@ -177,15 +190,14 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form action="/pages/account/helper/account.edit.php" method="post">
 							<div class="form-group">
 								<label for="username">Username <a href="#info" class="text text-danger">*</a></label>
-								<input type="text" class="form-control" id="noSpace2" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $_SESSION['user_username']; ?>" placeholder="Enter your username" required>
+								<input type="text" class="form-control" id="noSpace2" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
 								<small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
 							</div>
 							<div class="form-group">
 								<label for="username">Global banner</label>
-								<input type="text" class="form-control" name="gbanner" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg|webp)" aria-describedby="gbanner" value="<?php echo $_SESSION['user_banner']; ?>" placeholder="Enter a valid image url to your prefered banner. Resolution: 1900x70">
+								<input type="text" class="form-control" name="gbanner" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg|webp)" aria-describedby="gbanner" value="<?php echo $vals['banner']; ?>" placeholder="Enter a valid image url to your prefered banner. Resolution: 1900x70">
 								<small id="usernameHelp" class="form-text text-muted">You can change the global banner in the header to your prefered design. Just enter a valid image url.</small>
 								<input type="text" name="call" value="callFunc" hidden>
-								<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
 								<div class="form-group small text-muted mt-3" id="info">
 									Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
 								</div>
@@ -194,7 +206,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						</form>
 						<?php
 
-						if ($_SESSION['user_premium'] == "1") {
+						if ($vals['premium'] == "1") {
 							echo '<hr>
 							<form>
 								<div class="form-group mb-0">
@@ -209,7 +221,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form>
 							<div class="form-group mb-0">
 								<label class="d-block">Login type</label>
-								<p class="font-size-sm text-muted">You are using <b><?php echo $_SESSION['user_oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
+								<p class="font-size-sm text-muted">You are using <b><?php echo $vals['oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
 						<form action="" method="post">
@@ -231,7 +243,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<div class="input-group-prepend">
 										<div class="input-group-text">https://discord.gg/invite/</div>
 									</div>
-									<input type="text" class="form-control" name="discord" id="discord" placeholder="Your discord server" value="<?php echo $_SESSION['user_discord']; ?>">
+									<input type="text" class="form-control" name="discord" id="discord" placeholder="Your discord server" value="<?php echo $vals['discord']; ?>">
 								</div>
 								<small id="fullNameHelp" class="form-text text-muted">Your discord server may appear around here where you are mentioned. You can change or remove it at any time.</small>
 							</div>
@@ -241,7 +253,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<div class="input-group-prepend">
 										<div class="input-group-text">https://twitter.com/</div>
 									</div>
-									<input type="text" class="form-control" name="twitter" id="twitter" placeholder="Your twitter account" value="<?php echo $_SESSION['user_twitter']; ?>">
+									<input type="text" class="form-control" name="twitter" id="twitter" placeholder="Your twitter account" value="<?php echo $vals['twitter']; ?>">
 								</div>
 								<small id="fullNameHelp" class="form-text text-muted">Your twitter account may appear around here where you are mentioned. You can change or remove it at any time.</small>
 							</div>
@@ -251,7 +263,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<div class="input-group-prepend">
 										<div class="input-group-text">https://youtube.com/</div>
 									</div>
-									<input type="text" class="form-control" name="youtube" id="youtube" placeholder="Your youtube channel" value="<?php echo $_SESSION['user_youtube']; ?>">
+									<input type="text" class="form-control" name="youtube" id="youtube" placeholder="Your youtube channel" value="<?php echo $vals['youtube']; ?>">
 								</div>
 								<small id="fullNameHelp" class="form-text text-muted">Your youtube channel may appear around here where you are mentioned. You can change or remove it at any time.</small>
 							</div>
@@ -261,7 +273,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<div class="input-group-prepend">
 										<div class="input-group-text">https://instagram.com/</div>
 									</div>
-									<input type="text" class="form-control" name="instagram" id="instagram" placeholder="Your instagram account" value="<?php echo $_SESSION['user_instagram']; ?>">
+									<input type="text" class="form-control" name="instagram" id="instagram" placeholder="Your instagram account" value="<?php echo $vals['instagram']; ?>">
 								</div>
 								<small id="fullNameHelp" class="form-text text-muted">Your instagram account may appear around here where you are mentioned. You can change or remove it at any time.</small>
 							</div>
@@ -271,12 +283,11 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<div class="input-group-prepend">
 										<div class="input-group-text">https://github.com/</div>
 									</div>
-									<input type="text" class="form-control" name="github" id="github" placeholder="Your github account" value="<?php echo $_SESSION['user_github']; ?>">
+									<input type="text" class="form-control" name="github" id="github" placeholder="Your github account" value="<?php echo $vals['github']; ?>">
 								</div>
 								<small id="fullNameHelp" class="form-text text-muted">Your github account may appear around here where you are mentioned. You can change or remove it at any time.</small>
 							</div>
 							<input type="text" name="call" value="callFunc" hidden>
-							<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden>
 							<button type="submit" class="btn btn-primary">Save & Update</button>
 							<button type="reset" class="btn btn-light">Reset Changes</button>
 						</form>
@@ -287,7 +298,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<hr>
 						<?php
 
-						if (empty($_SESSION['user_2fa']) || $_SESSION['user_2fa'] == "0") {
+						if ($vals['2fa'] == "0") {
 							echo '<form>
 							<div class="form-group">
 								<label class="d-block">Two Factor Authentication</label>
@@ -332,10 +343,9 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<hr>
 						<?php
 						$ch = curl_init();
-						require_once "./config.php";
 
                   		$token = $apiToken;
-						$userid = $_SESSION['user_id'];
+						$userid = $vals['id'];
 
 						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
 						curl_setopt($ch, CURLOPT_POST, 1);
@@ -369,10 +379,9 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<div class="container">
 
 									<?php
-									$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
+									
 									$result = $pdo->prepare("SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = ?");
-									$result->execute(array($_SESSION['user_iid']));
+									$result->execute(array($vals['id']));
 
 									if ($result->rowCount() > 0) {
 
@@ -429,7 +438,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<?php
 
 									$result = $pdo->prepare("SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = ?");
-									$result->execute(array($_SESSION['user_iid']));
+									$result->execute(array($vals['id']));
 
 									if ($result->rowCount() > 0) {
 										while ($row = $result->fetch()) {
@@ -437,13 +446,13 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 											if ($row['m_approved'] == 0 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
-												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
 												</form>';
 											} elseif ($row['m_approved'] == 1 && $row['m_blocked'] == 0) {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock text text-warning"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>';
-												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
 												</form>';
 											} elseif ($row['m_blocked'] == 1) {
@@ -454,7 +463,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 											} else {
 												$status = '
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle text text-danger"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>';
-												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <input type="number" name="uid" value="' . $_SESSION['user_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
+												$edit = '<form action="/account/edit/" method="post"> <input type="number" name="id" value="' . $row['m_id'] . '" hidden> <button type="submit" class="btn bg-transparent btn-sm text-info">
 												<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
 												</form>';
 											}
@@ -505,7 +514,7 @@ if ($_SESSION['user_2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									$status = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
 
 									$result = $pdo->prepare("SELECT * FROM product_log WHERE u_uuid = ?");
-									$result->execute(array($_SESSION['user_uuid']));
+									$result->execute(array($_SESSION['uuid']));
 
 									if ($result->rowCount() > 0) {
 										// output data of each row

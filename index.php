@@ -42,6 +42,37 @@ function isMobile()
    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
 
+
+if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
+   echo '<script>console.log("Logged in");</script>';
+
+   $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+   
+   $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
+   $selToken->execute(array($_COOKIE['f_key']));
+   if($selToken->rowCount() > 0) {
+      $fetch = $selToken->fetch();
+      
+      $timestamp = strtotime($fetch['created_at']);
+      if((($timestamp - 5) > $_COOKIE['f_val']) && (($timestamp + 5) < $_COOKIE['f_val'])) {
+         
+         setcookie("f_val", " ", time() - 3600, "/");
+         setcookie("f_key", " ", time() - 3600, "/");
+         header("Location: /account/logout/?url=invalid");
+         
+      } else {
+         $_SESSION['uuid'] = $fetch['uuid'];
+      }
+   } else {
+      
+      setcookie("f_val", " ", time() - 3600, "/");
+      setcookie("f_key", " ", time() - 3600, "/");
+      header("Location: /account/logout/?url=invalid");
+      
+   }
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-EN" dir="ltr">

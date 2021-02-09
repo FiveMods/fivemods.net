@@ -1,14 +1,17 @@
 <?php 
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-  header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
     header('location: /');
-    exit;
+    exit();
+    die();
   } else {
 
 
@@ -16,21 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         session_start();
         require_once('../../../config.php');
 
-        $id = $_SESSION['user_id'];
-
         try {
           $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
-          // set the PDO error mode to exception
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $stmt = $pdo->prepare("UPDATE user SET 2fa='0', premium='0' WHERE oauth_uid = ?");
-          $stmt->execute(array($id));
+          $stmt = $pdo->prepare("UPDATE user SET 2fa='0', premium='0' WHERE uuid = ?");
+          $stmt->execute(array($_SESSION['uuid']));
         
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
-        $_SESSION['user_2fa'] = "0";
         $_SESSION['success'] = '<div class="alert alert-warning" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully changed! </strong> Your profile is no longer secured via a two factor authentication! Your profile will be adjusted accordingly.
