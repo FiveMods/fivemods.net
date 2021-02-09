@@ -44,6 +44,11 @@ function isMobile()
 
 
 if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
+   if(empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
+      setcookie("f_val", " ", time() - 3600, "/");
+      setcookie("f_key", " ", time() - 3600, "/");
+      header("Location: /account/logout/?url=invalid");
+	}
    echo '<script>console.log("Logged in");</script>';
 
    $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');

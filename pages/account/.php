@@ -8,7 +8,6 @@ include('./include/header-banner.php');
 session_start();
 
 if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
-	
 	header("location: /account/logout/");
 	exit();
 	die();
