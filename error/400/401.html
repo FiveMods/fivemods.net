@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FiveMods.net - Error 401</title>
+    <title>Unauthorized access (Error 401) - FiveMods.net</title>
     <meta http-equiv="content-language" content="en" />
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the palce to get the best resources for your FiveM server." />
@@ -28,48 +28,55 @@
     <script src="/cdn-cgi/apps/head/ictDLxICQsFVMPS59T0akYEa1qs.js"></script>
     <link rel="icon" href="https://cdn.discordapp.com/attachments/662762008504041522/737797664221167666/fivemods.png">
     <style>
-        * {
-            background-color: #17141f;
-        }
-        
-        .center {
-            text-align: center;
-            margin-top: 35vh;
+        html,
+        body {
+            color: #ff8637;
             font-family: Arial, Helvetica, sans-serif;
-            color: #ff8637;
-            font-size: 12px;
+            font-weight: 100;
+            height: 100vh;
+            margin: 0;
+            background: url('/static-assets/img/background/icon_bg_dark.png');
+            background-repeat: repeat;
+            background-size: 50%;
         }
         
-        .center2 {
+        .full-height {
+            height: 100vh;
+        }
+        
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .position-ref {
+            position: relative;
+        }
+        
+        .code {
+            border-right: 2px solid;
+            font-size: 26px;
+            padding: 0 15px 0 15px;
             text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #ff8637;
-            font-size: 12px;
-            text-decoration: none;
         }
         
-        .sub {
+        .message {
+            font-size: 18px;
             text-align: center;
-            color: #ff8637;
-            margin-top: -130px;
-            letter-spacing: 2px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        a {
-            color: #ff8637;
-        }
-        
-        a:hover {
-            color: #ee7727;
         }
     </style>
 </head>
 
 <body>
-    <h1 class="center" style="font-size: 175px;">401</h1>
-    <p class="sub">Unauthorized access. Take me <a href="#" onclick="window.history.back();">back</a>.</p>
-    <!-- <p class="center">Copyright &copy; 2020 FiveMods. All rights reserved.</p> -->
+    <div class="flex-center position-ref full-height">
+        <div class="code">
+            401 </div>
+
+        <div class="message" style="padding: 10px;">
+            Unauthorized access </div>
+    </div>
+
 </body>
 
 </html>

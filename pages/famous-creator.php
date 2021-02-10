@@ -1,5 +1,5 @@
 <?php include('./include/header-banner.php'); ?>
-<section class="bg-white text-dark pt-5 pb-5">
+<section class="text-dark pt-5 pb-5">
    <div class="container">
       <div class="row text-center">
          <div class="col">

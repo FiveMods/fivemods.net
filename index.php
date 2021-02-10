@@ -147,7 +147,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   
+
    <meta http-equiv="content-language" content="en" />
    <meta http-equiv="Pragma" content="no-cache">
    <meta http-equiv="Cache-Control" content="no-cache">
@@ -181,7 +181,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 
       echo '
-         <title>'.$m_name.' - FiveMods.net</title>
+         <title>' . $m_name . ' - FiveMods.net</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
          <meta property="og:title" content="' . $m_name . '">
@@ -241,7 +241,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
       echo '
-         <title>'.$user_username.' - FiveMods.net</title>
+         <title>' . $user_username . ' - FiveMods.net</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -262,7 +262,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta name="twitter:image" content="' . $user_picture . '">';
    } else {
       echo '<meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">';
-      echo '<title>'.$lang['title'].'</title>';
+      echo '<title>' . $lang['title'] . '</title>';
    }
 
    ?>
@@ -525,6 +525,12 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          object-fit: cover;
       }
 
+      .cover-cat {
+         width: 348px;
+         height: 217px;
+         object-fit: cover;
+      }
+
       body::-webkit-scrollbar {
          width: .5rem;
       }
@@ -536,10 +542,39 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       body::-webkit-scrollbar-thumb {
          background: #ff8637;
       }
+
+      .bg {
+         background: url('/static-assets/img/background/icon_bg_lighter.png');
+         background-repeat: repeat;
+         background-size: 75%;
+      }
+
+      .shadow1 {
+         box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+      }
+
+      #myBtn {
+         display: none;
+         position: fixed;
+         bottom: 20px;
+         right: 30px;
+         z-index: 99;
+         font-size: 18px;
+         border: none;
+         outline: none;
+         background-color: #E57C0B;
+         color: white;
+         cursor: pointer;
+         border-radius: 4px;
+      }
+
+      #myBtn:hover {
+         background-color: #17141F;
+      }
    </style>
 </head>
 
-<body>
+<body class="bg">
    <!-- Google Tag Manager (noscript) -->
    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XZ6BDR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <!-- End Google Tag Manager (noscript) -->
@@ -579,6 +614,12 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <?php include('./static.html'); ?>
       </div>
       <div id="cload">
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+         <!-- Vertical-Static-Ads -->
+         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712" data-ad-format="auto" data-full-width-responsive="true"></ins>
+         <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+         </script>
 
          <?php
          if (isset($_GET['page'])) {
@@ -652,12 +693,38 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    ?>
    <!-- ========== END FOOTER ========== -->
 
+   <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-sort-up"></i></button>
+
    <!-- jQuery is required -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous"></script>
 
+
+   <script>
+      //Get the button
+      var mybutton = document.getElementById("myBtn");
+
+      // When the user scrolls down 20px from the top of the document, show the button
+      window.onscroll = function() {
+         scrollFunction()
+      };
+
+      function scrollFunction() {
+         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+         } else {
+            mybutton.style.display = "none";
+         }
+      }
+
+      // When the user clicks on the button, scroll to the top of the document
+      function topFunction() {
+         document.body.scrollTop = 0;
+         document.documentElement.scrollTop = 0;
+      }
+   </script>
    <script>
       /* Author: AdGlare Ad Server (https://www.adglare.com) */
       function hasAdblock() {
