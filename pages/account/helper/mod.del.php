@@ -2,8 +2,20 @@
 
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-  header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
+} else {
+  require_once('../../../config.php');
+  $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+  $acc = $pdo->prepare("SELECT id FROM user WHERE uuid = ?");
+  $acc->execute(array($_SESSION['uuid']));
+  if($acc->rowCount() > 0) {
+     $accvals = $acc->fetch();
+     $id = $accvals['id'];
+  }
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -13,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 } else {
 
 
-  function delMod()
+  function delMod($id)
   {
 
     $mid = htmlspecialchars($_POST['mid']);
@@ -23,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
     $stmt = $pdo->prepare("DELETE FROM mods WHERE m_id = :mid AND m_authorid = :aid");
-    $stmt->execute(array("mid" => $_SESSION['mmid'], "aid" => $_SESSION['user_iid']));
+    $stmt->execute(array("mid" => $_SESSION['mmid'], "aid" => $id));
     $pdo = null;
       echo "Record deleted successfully";
       session_start();
@@ -36,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
   }
 
   if (htmlspecialchars($_POST['call']) == "callFunc") {
-    delMod();
+    delMod($id);
     exit();
     die();
   }

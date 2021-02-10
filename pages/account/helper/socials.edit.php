@@ -2,8 +2,10 @@
 
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-  header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -22,26 +24,20 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $youtube = empty(htmlspecialchars($_POST['youtube'])) ? NULL : htmlspecialchars($_POST['youtube']);
         $instagram = empty(htmlspecialchars($_POST['instagram'])) ? NULL : htmlspecialchars($_POST['instagram']);
         $github = empty(htmlspecialchars($_POST['github'])) ? NULL : htmlspecialchars($_POST['github']);
-        $tochange = htmlspecialchars($_POST['id']);
 
         try {
           $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $stmt = $pdo->prepare("UPDATE user SET discord=:discord, twitter=:twitter, youtube=:youtube, instagram=:instagram, github=:github WHERE oauth_uid = :oauth");
-          $stmt->execute(array('discord' => $discord, 'twitter' => $twitter, 'youtube' => $youtube, 'instagram' => $instagram, 'github' => $github, 'oauth' => $tochange));
+          $stmt = $pdo->prepare("UPDATE user SET discord=:discord, twitter=:twitter, youtube=:youtube, instagram=:instagram, github=:github WHERE uuid = :uuid");
+          $stmt->execute(array('discord' => $discord, 'twitter' => $twitter, 'youtube' => $youtube, 'instagram' => $instagram, 'github' => $github, 'uuid' => $_SESSION['uuid']));
         
           // echo a message to say the UPDATE succeeded
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
-          $_SESSION['user_discord'] = $discord;
-          $_SESSION['user_twitter'] = $twitter;
-          $_SESSION['user_youtube'] = $youtube;
-          $_SESSION['user_instagram'] = $instagram;
-          $_SESSION['user_github'] = $github;
           $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
           <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>Successfully changed! </strong> Your profile got successfully updated. Click <a href="/user/'.$_SESSION['user_username'].'">here</a> to see your changes.
+          <strong>Successfully changed! </strong> Your profile got successfully updated.
         </div>
         ';
         header('location: /account/');

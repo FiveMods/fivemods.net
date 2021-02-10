@@ -3,18 +3,22 @@ session_start();
 include('./include/header-banner.php');
 
 
-if (empty($_SESSION['user_id'])) {
-   header('location: /account/sign-in/');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
-
-if (isset($_POST['uploadMod'])) {
-
-   require_once('./config.php');
+require_once('./config.php');
 
    $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+   
+   $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+   $selVals->execute(array($_SESSION['uuid']));
+   $vals = $selVals->fetch();
+if (isset($_POST['uploadMod'])) {
 
    $path = '../storage-html/uploads';
-   $userid = $_SESSION['user_iid'];
+   $userid = $vals['id'];
    $downloadWebsite = 'https://storage.fivemods.net/uploads';
 
    $modid = randomChars(12);
@@ -57,7 +61,7 @@ if (isset($_POST['uploadMod'])) {
    }
    $pictures = implode(" ", $pictures);
 
-   if($_SESSION['user_premium'] == 0) {
+   if($vals['premium'] == 0) {
       $approved = 1;
       $approvedby = NULL;
    } else {
@@ -74,7 +78,7 @@ if (isset($_POST['uploadMod'])) {
    $_SESSION['upload'] = 1;
 
 
-   if($_SESSION['user_premium'] != 0) {
+   if($vals['premium'] == 1) {
       
       $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_picture = :pic");
       $stmt->execute(array("name" => $title, "pic" => $pictures));
@@ -167,7 +171,7 @@ function randomChars($length)
                            <div class="tab-pane fade active show" id="card-pill-1" role="tabpanel" aria-labelledby="card-tab-1">
                               <div class="form-group text-center">
                                  <div class="alert alert-info" role="alert">
-                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . ' ' . $_SESSION['user_username']; ?>!</h4>
+                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . ' ' . $vals['name']; ?>!</h4>
                                     <p><?php echo $lang['upload-start-msg']; ?></p>
                                     <hr>
                                     <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days']; ?></b></p>
