@@ -65,7 +65,7 @@
                $vals = $selVals->fetch();
                //if ($vals['2fa'] == "1") {
                   if ($vals['premium'] == "0") {
-                     echo '<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#joinModal">'.$lang['partner-button'].'</button>
+                     echo '<button class="btn btn-primary rounded btn-lg" data-toggle="modal" data-target="#joinModal">'.$lang['partner-button'].'</button>
                      <span class="d-block mx-1 mx-sm-2 text-small text-white">-</span>
                      <button class="btn btn-light btn-lg" data-toggle="modal" data-target="#conModal">'.$lang['partner-conditions'].'</button>';
                   } else {
@@ -73,7 +73,7 @@
                   }
                /*
                } else {
-                  echo '<a href="/account/" class="btn btn-light btn-lg">Please activate Two-Factor Authentication</a>';
+                  echo '<a href="/account/" class="btn btn-light btn-lg rounded">Please activate Two-Factor Authentication</a>';
                }*/    
             } else {
                echo '<a class="btn btn-light btn-lg" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';

@@ -207,7 +207,7 @@ $currentPage = $_GET['page'];
          <?php
 
          if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
-            echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
+            echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary rounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          } else {
             echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          }

@@ -1,114 +1,15 @@
-<section class="mb-0 mt-0">
-   <div class="footer text-white">
-      <div class="bg-dark pt-5 pb-5">
-         <div class="container">
-            <div class="row border-bottom">
-               <div class="col-xs-6 col-sm-3">
-                  <span class="text text-primary">
-                     <a href="/">
-                        <img async=on src="<?php echo $brand_side; ?>" width="163.5px" height="56px" alt="FiveMods Logo">
-                     </a>
-                  </span>
-                  <address class="color-light-20 mt-3">
-                     <?php echo $lang['footer-infotext']; ?>
-                  </address>
-                  <a href="mailto:contact@fivemods.net">contact@fivemods.net</a> <br>
-                  <small class="text text-muted">v0.7.46-a.1</small>
-               </div>
-               <div class="col-xs-6 col-sm-3">
-                  <h4 class="my-2"><?php echo $lang['legal']; ?></h4>
-                  <ul class="list-unstyled list-light">
-                     <li>
-                        <a href="/about-us/"><?php echo $lang['about-us']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/contact/"><?php echo $lang['contact']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/legal/">Legal Center</a>
-                     </li>
-                     <li>
-                        <a href="/advertisement/"><?php echo $lang['advertisement']; ?></a>
-                     </li>
-                     <?php
-                     if ($_SESSION['language'] == "DE") {
-                        echo '<li>
-                              <a href="/impressum/">Impressum</a>
-                           </li>';
-                     }
-                     ?>
-                  </ul>
-               </div>
-               <br style="clear:both" class="hidden-sm-up">
-               <div class="col-xs-6 col-sm-3">
-                  <h4 class="my-2"><?php echo $lang['categories']; ?></h4>
-                  <ul class="list-unstyled list-light">
-                     <li>
-                        <a href="/search/?query=Scripts&cat=1&submit-search="><?php echo $lang['scripts']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/search/?query=Vehicles&cat=1&submit-search="><?php echo $lang['vehicles']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/search/?query=Weapons&cat=1&submit-search="><?php echo $lang['weapons']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/search/?query=Peds&cat=1&submit-search="><?php echo $lang['peds']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/search/?query=Maps&cat=1&submit-search="><?php echo $lang['maps']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/search/?query=Liveries&cat=1&submit-search="><?php echo $lang['liveries']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/search/?query=Misc&cat=1&submit-search="><?php echo $lang['misc']; ?></a>
-                     </li>
-                  </ul>
-               </div>
-               <div class="col-xs-6 col-sm-3">
-                  <h4 class="my-2"><?php echo $lang['community']; ?></h4>
-                  <ul class="list-unstyled list-light">
-                     <li>
-                        <a href="/login/"><?php echo $lang['log-in']; ?></a>
-                     </li>
-                     <?php
-                     if (!empty($_COOKIE['f_key']) || !empty($_COOKIE['f_val'])) {
-                        echo '<li><a href="/upload/"></i>' . $lang['upload'] . '</a></li>';
-                     } else {
-                        echo '<li><a href="/account/sign-in/">' . $lang['upload'] . '</a></li>';
-                     }
-                     ?>
-                     <li>
-                        <a href="/status/"><?php echo $lang['status']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/affiliate/">Affiliate</a>
-                     </li>
-                     <li>
-                        <a href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/partner-program/"><?php echo $lang['partner-program']; ?></a>
-                     </li>
-                     <li>
-                        <a href="/help-center/"><?php echo $lang['help-center']; ?></a>
-                     </li>
-                     <li>
-                        <div class="dropup">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Design
-                              <span class="caret"></span></a>
-                           <ul class="dropdown-menu bg-dark border-light pl-4">
-                              <li><a href="#" onclick="swapStyleSheet('/static-assets/css-dark/style.css');document.cookie = 'fm_design=normal; expires=Sat, 31 Dec 1970 00:00:00 GMT';document.cookie = 'fm_design=dark; expires=Sat, 31 Dec 2022 00:00:00 GMT';"><i class="fas fa-moon"></i> Darkmode</a></li>
-                              <li><a href="#" onclick="swapStyleSheet('/static-assets/css/style.css');document.cookie = 'fm_design=dark; expires=Sat, 31 Dec 1970 00:00:00 GMT';document.cookie = 'fm_design=normal; expires=Sat, 31 Dec 2022 00:00:00 GMT';"><i class="fas fa-sun"></i> Lightmode</a></li>
-                           </ul>
-                        </div>
-                     </li>
-                     <li>
-                        <a href="/language/"><?php echo $lang['language']; ?></a>
-                     </li>
-                  </ul>
-               </div>
+<section class="mt-5">
+    <footer class="pt-4 pb-4 bg-dark text-white">
+        <div class="container">
+            <div class="row align-items-center text-center">
+                <div class="col-12 col-lg-2 text-lg-left">
+                </div>
+                <div class="col-12 col-lg-8 mt-4 mt-lg-0">
+                    <img alt="image" src="/static-assets/img/brand-down.png" height="40">
+                    <p class="text-h5 mt-4"><?php echo $lang['copyright']; ?></p>
+                </div>
+                <div class="col-12 col-lg-2 text-lg-right mt-4 mt-lg-0">
+                </div>
             </div>
             <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                <div class="col-md-8 text-xs-center text-left text-secondary my-1" style="line-height: 90%;">
