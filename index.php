@@ -536,6 +536,43 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       body::-webkit-scrollbar-thumb {
          background: #ff8637;
       }
+     
+      .bg {
+         background: url('/static-assets/img/background/icon_bg_lighter.png');
+         background-repeat: repeat;
+         background-size: 75%;
+      }
+
+      .shadow1 {
+         box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+      }
+
+      #myBtn {
+         display: none;
+         position: fixed;
+         bottom: 20px;
+         right: 30px;
+         z-index: 99;
+         font-size: 18px;
+         border: none;
+         outline: none;
+         background-color: #E57C0B;
+         color: white;
+         cursor: pointer;
+         border-radius: 4px;
+      }
+
+      #myBtn:hover {
+         background-color: #17141F;
+      }
+
+      #leftBasedAds {
+         left: 0px;
+         position: fixed;
+         text-align: center;
+         top: 0px;
+         z-index: 99;
+      }
    </style>
 </head>
 
@@ -575,11 +612,23 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <!-- ========== MAIN CONTENT ========== -->
 
    <main>
-      <div id="loader">
-         <?php include('./static.html'); ?>
-      </div>
       <div id="cload">
-
+         <div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Vertical-Static-Ads -->
+            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
+            <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+         </div>
+         <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Vertical-Static-Ads -->
+            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
+            <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+         </div>
          <?php
          if (isset($_GET['page'])) {
             $page_names = explode('/', $_GET["page"]);
@@ -599,15 +648,11 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
             include("pages/.php");
          }
          ?>
-
       </div>
    </main>
 
    <!-- ========== END MAIN CONTENT ========== -->
-
-
    <?php
-
    if (!(isMobile())) {
       echo '<div id="441135697">
       <script type="text/javascript">
@@ -620,11 +665,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       </script>
   </div>';
    }
-
    ?>
-
-
-
    <!-- ========== FOOTER ========== -->
 
    <?php
