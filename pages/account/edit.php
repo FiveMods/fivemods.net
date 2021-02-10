@@ -2,13 +2,24 @@
 
 require_once('./config.php');
 
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
+} else {
+    $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+    $selVals->execute(array($_SESSION['uuid']));
+    $vals = $selVals->fetch();
+}
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     echo "Not allowed!";
     header('location: /account/logout/');
     exit;
 } else {
 
-    if ($_SESSION['user_id'] != htmlspecialchars($_POST['uid'])) {
+    if (!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
         header('location: /account/');
     } else {
 
@@ -16,16 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
         session_start();
 
-        if ($_SESSION['user_blocked'] == 1) {
-            header('location: /account/logout/?url=banned');
-        }
-
-        if (!isset($_SESSION['user_id'])) {
-            header('location: /account/logout/');
-            exit();
-        }
-
-        $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
         if (isset($_POST['id'])) {
             $modid = htmlspecialchars($_POST['id']);
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
             $m_updated_at = $r['m_updated-at'];
         }
 
-        if ($m_authorid != $_SESSION['user_iid']) {
+        if ($m_authorid != $vals['id']) {
             header('location: /account/logout/?url=error');
         }
     }

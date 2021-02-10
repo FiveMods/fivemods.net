@@ -2,8 +2,10 @@
 
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-  header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {

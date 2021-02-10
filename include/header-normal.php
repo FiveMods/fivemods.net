@@ -206,7 +206,7 @@ $currentPage = $_GET['page'];
          </span>
          <?php
 
-         if (!empty($_SESSION['user_id']) || !empty($_SESSION['user_uuid'])) {
+         if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
             echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          } else {
             echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
@@ -220,7 +220,7 @@ $currentPage = $_GET['page'];
          </form>
          <?php
 
-         if (empty($_SESSION['user_id'])) {
+         if (empty($_COOKIE['f_val']) && empty($_COOKIE['f_key'])) {
             echo '<span class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] .' <span class="caret"></span></button>

@@ -11,8 +11,6 @@ if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
 	header("location: /account/logout/");
 	exit();
 	die();
-	
-	echo "<script>console.log(\"No Cookies\");</script>";
 }
 
 $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
@@ -34,7 +32,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 <meta http-equiv="refresh" content="1440;url=/account/logout/?url=timeout" />
 <div class="container mt-5 mb-5">
 	<?php echo $_SESSION['success'];
-	unset($_SESSION['success']); ?>
+	//unset($_SESSION['success']); ?>
 	<div class="row gutters-sm">
 		<div class="col-md-4 d-none d-md-block">
 			<div class="card">

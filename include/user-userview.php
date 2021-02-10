@@ -81,12 +81,12 @@ while ($row = $statement->fetch()) {
    $publishedmods = $row['COUNT(m_authorid)'];
 }
 
-if ($_SESSION['user_id'] == $oauth_uid && $blocked == 0) {
+if ($_SESSION['uuid'] == $uuid && $blocked == 0) {
    $editbtn = '<a href="/account/" class="text text-success" style="font-size:12px;"><i class="fas fa-user"></i> ' . $lang['edit-profile'] . '</a>';
-} elseif (!empty($_SESSION['user_id'])) {
+} elseif (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
    $repbtn = '<a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> ' . $lang['report-profile'] . '</a>';
 } else {
-   $repbtn = '<a href="/account/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
+   $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
 }
 
 

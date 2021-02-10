@@ -209,7 +209,7 @@ $currentPage = $_GET['page'];
                 <button type="submit" name="submit-search" hidden></button>
             </form>
             <?php
-            if (empty($_SESSION['user_id'])) {
+            if (!empty($_COOKIE['f_key']) && !empty($_COOKIE['f_val'])) {
                 echo '<ul class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
                   <button type="submit" class="btn btn-outline-primary"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] . ' <span class="caret"></span></button>

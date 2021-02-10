@@ -2,8 +2,10 @@
 
 include('./include/header-banner.php');
 
-if (empty($_SESSION['user_id'])) {
-   header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
 
 session_start();
@@ -14,12 +16,14 @@ require_once('config.php');
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 
-$result = $pdo->prepare("SELECT 2fa_acc FROM user WHERE oauth_uid = ?");
-$result->execute(array($_SESSION['user_id']));
+$result = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+$result->execute(array($_SESSION['uuid']));
 
 if ($result->rowCount() > 0) {
    while ($row = $result->fetch()) {
       $t2ken = $row['2fa_acc'];
+      $mail = $row['email'];
+      $fa2 = $row['2fa'];
    }
 }
 
@@ -28,16 +32,12 @@ if (empty($t2ken) || $t2ken == NULL) {
    $Authenticator = new Authenticator();
    if (!isset($_SESSION['auth_secret'])) {
       $secret = $Authenticator->generateRandomSecret();
-      // $secret = "Y7P2VQ5YK6HUKBSW";
-      // $secret = $t2ken;
-      // $_SESSION['auth_secret'] = $secret;
    }
 
    echo '<script>console.log("Token:' . $secret . '")</script>';
 
-   $iiid = $_SESSION['user_id'];
-   $stmt = $pdo->prepare("UPDATE user SET 2fa_acc = :secret WHERE oauth_uid = :id");
-   $stmt->execute(array("secret" => $secret, "id" => $iiid));
+   $stmt = $pdo->prepare("UPDATE user SET 2fa_acc = :secret WHERE uuid = :uuid");
+   $stmt->execute(array("secret" => $secret, "uuid" => $_SESSION['uuid']));
 
 } else {
     echo '<script>console.log("Early exit");</script>';
@@ -49,7 +49,7 @@ if (empty($t2ken) || $t2ken == NULL) {
         }
 }
 
-$qrCodeUrl = $Authenticator->getQR($_SESSION['user_email'], $_SESSION['auth_secret'], "FiveMods.net");
+$qrCodeUrl = $Authenticator->getQR($mail, $_SESSION['auth_secret'], "FiveMods.net");
 
 if (!isset($_SESSION['failed'])) {
    $_SESSION['failed'] = false;
@@ -77,7 +77,7 @@ if (!isset($_SESSION['failed'])) {
 
                         <?php 
                         
-                        if ($_SESSION['user_2fa'] == "0") {
+                        if ($fa2 == "0") {
                            echo '<img style="text-align: center;" class="img-fluid" src="'.$qrCodeUrl.'" alt="Verify this Google Authenticator"><br><br>';
                            echo '<small class="text-muted">Please scan this QR-Code with your favourite authentication app.</small>';
                         } else {

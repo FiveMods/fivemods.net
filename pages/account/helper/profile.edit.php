@@ -2,8 +2,10 @@
 
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-  header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -21,22 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $description = htmlspecialchars($_POST['desc']);
         $website = empty(htmlspecialchars($_POST['website'])) ? NULL : htmlspecialchars($_POST['website']);
         $location = htmlspecialchars($_POST['location']);
-        $tochange = htmlspecialchars($_POST['id']);
 
         try {
           $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $stmt = $pdo->prepare("UPDATE user SET email = :email, description = :desc, website = :website, locale = :local WHERE oauth_uid = :uid");
-          $stmt->execute(array("email" => $email, "desc" => $description, "website" => $website, "local" => $location, "uid" => $tochange));
+          $stmt = $pdo->prepare("UPDATE user SET email = :email, description = :desc, website = :website, locale = :local WHERE uuid = :uuid");
+          $stmt->execute(array("email" => $email, "desc" => $description, "website" => $website, "local" => $location, "uuid" => $_SESSION['uuid']));
 
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
-          $_SESSION['user_username'] = $first_name ." ". $last_name;
-          $_SESSION['user_email'] = $email;
-          $_SESSION['user_description'] = $description;
-          $_SESSION['user_locale'] = $location;
-          $_SESSION['user_website'] = $website;
           $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
           <button type="button" class="close" data-dismiss="alert">x</button>
           <strong>Successfully changed! </strong> Your profile has been updated.

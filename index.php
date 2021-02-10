@@ -4,10 +4,6 @@ else ob_start();
 
 session_start();
 
-if ($_SESSION['user_blocked'] == 1) {
-   header('location: /account/logout/?url=banned');
-}
-
 ob_start("minifier");
 function minifier($code)
 {

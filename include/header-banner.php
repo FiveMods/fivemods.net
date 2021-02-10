@@ -1,3 +1,17 @@
+<?php
+require_once "./config.php";
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+$headerVals = $pdo->prepare("SELECT banner FROM user WHERE uuid = ?");
+$headerVals->execute(array($_SESSION['uuid']));
+if($headerVals->rowCount() > 0) {
+   $hvals = $headerVals->fetch();
+   $banner = $hvals['banner'];
+} else {
+   $banner = $css_banner;
+}
+?>
+
 <style>
 .fill {
     min-height: 17vh;
@@ -5,9 +19,7 @@
     overflow: hidden;
     background-size: cover;
     background-position: center;
-    background-image: url('<?php if (empty($_SESSION['user_iid'])) {
-   echo $css_banner;
-} else { echo $_SESSION['user_banner']; }  ?>');
+    background-image: url('<?php echo $banner; ?>');
 }
 </style>
 <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-light blinker fill">

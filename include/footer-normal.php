@@ -73,7 +73,7 @@
                         <a href="/login/"><?php echo $lang['log-in']; ?></a>
                      </li>
                      <?php
-                     if (!empty($_SESSION['g_id']) || !empty($_SESSION['dc_id'])) {
+                     if (!empty($_COOKIE['f_key']) || !empty($_COOKIE['f_val'])) {
                         echo '<li><a href="/upload/"></i>' . $lang['upload'] . '</a></li>';
                      } else {
                         echo '<li><a href="/account/sign-in/">' . $lang['upload'] . '</a></li>';
