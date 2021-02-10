@@ -42,13 +42,13 @@ $sites = ceil($total / $perPage);
 
 
 if (isset($_SESSION['downloadMod'])) {
-    $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
-    $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
-    while ($row = $downloadMod->fetch()) {
-        $downloadLink = $row['m_downloadlink'];
-    }
-    header("Location: $downloadLink");
-    unset($_SESSION['downloadMod']);
+   $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
+   $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
+   while ($row = $downloadMod->fetch()) {
+      $downloadLink = $row['m_downloadlink'];
+   }
+   header("Location: $downloadLink");
+   unset($_SESSION['downloadMod']);
 }
 
 
@@ -229,6 +229,7 @@ if (isset($_SESSION['downloadMod'])) {
                            </div>';
                                     } else {
                                         echo '<div class="btn-group">
+
                               <form action="/product/' . $article['m_id'] . '/" method="post">
                                  <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
                               </form>

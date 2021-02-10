@@ -4,10 +4,6 @@ else ob_start();
 
 session_start();
 
-if ($_SESSION['user_blocked'] == 1) {
-   header('location: /account/logout/?url=banned');
-}
-
 ob_start("minifier");
 function minifier($code)
 {
@@ -40,6 +36,42 @@ require_once('./config.php');
 function isMobile()
 {
    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
+}
+
+
+if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
+   if(empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
+      setcookie("f_val", " ", time() - 3600, "/");
+      setcookie("f_key", " ", time() - 3600, "/");
+      header("Location: /account/logout/?url=invalid");
+	}
+   echo '<script>console.log("Logged in");</script>';
+
+   $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+   
+   $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
+   $selToken->execute(array($_COOKIE['f_key']));
+   if($selToken->rowCount() > 0) {
+      $fetch = $selToken->fetch();
+      
+      $timestamp = strtotime($fetch['created_at']);
+      if((($timestamp - 5) > $_COOKIE['f_val']) && (($timestamp + 5) < $_COOKIE['f_val'])) {
+         
+         setcookie("f_val", " ", time() - 3600, "/");
+         setcookie("f_key", " ", time() - 3600, "/");
+         header("Location: /account/logout/?url=invalid");
+         
+      } else {
+         $_SESSION['uuid'] = $fetch['uuid'];
+      }
+   } else {
+      
+      setcookie("f_val", " ", time() - 3600, "/");
+      setcookie("f_key", " ", time() - 3600, "/");
+      header("Location: /account/logout/?url=invalid");
+      
+   }
+
 }
 
 ?>
@@ -115,7 +147,7 @@ function isMobile()
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+   
    <meta http-equiv="content-language" content="en" />
    <meta http-equiv="Pragma" content="no-cache">
    <meta http-equiv="Cache-Control" content="no-cache">
@@ -149,7 +181,7 @@ function isMobile()
 
 
       echo '
-         <title>' . $m_name . ' - FiveMods.net</title>
+         <title>'.$m_name.' - FiveMods.net</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
          <meta property="og:title" content="' . $m_name . '">
@@ -209,7 +241,7 @@ function isMobile()
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
       echo '
-         <title>' . $user_username . ' - FiveMods.net</title>
+         <title>'.$user_username.' - FiveMods.net</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -230,7 +262,7 @@ function isMobile()
          <meta name="twitter:image" content="' . $user_picture . '">';
    } else {
       echo '<meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">';
-      echo '<title>' . $lang['title'] . '</title>';
+      echo '<title>'.$lang['title'].'</title>';
    }
 
    ?>
@@ -493,12 +525,6 @@ function isMobile()
          object-fit: cover;
       }
 
-      .cover-cat {
-         width: 348px;
-         height: 217px;
-         object-fit: cover;
-      }
-
       body::-webkit-scrollbar {
          width: .5rem;
       }
@@ -510,7 +536,7 @@ function isMobile()
       body::-webkit-scrollbar-thumb {
          background: #ff8637;
       }
-
+     
       .bg {
          background: url('/static-assets/img/background/icon_bg_lighter.png');
          background-repeat: repeat;
@@ -550,7 +576,7 @@ function isMobile()
    </style>
 </head>
 
-<body class="bg">
+<body>
    <!-- Google Tag Manager (noscript) -->
    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XZ6BDR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <!-- End Google Tag Manager (noscript) -->
@@ -667,38 +693,12 @@ function isMobile()
    ?>
    <!-- ========== END FOOTER ========== -->
 
-   <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fas fa-sort-up"></i></button>
-
    <!-- jQuery is required -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous"></script>
 
-
-   <script>
-      //Get the button
-      var mybutton = document.getElementById("myBtn");
-
-      // When the user scrolls down 20px from the top of the document, show the button
-      window.onscroll = function() {
-         scrollFunction()
-      };
-
-      function scrollFunction() {
-         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            mybutton.style.display = "block";
-         } else {
-            mybutton.style.display = "none";
-         }
-      }
-
-      // When the user clicks on the button, scroll to the top of the document
-      function topFunction() {
-         document.body.scrollTop = 0;
-         document.documentElement.scrollTop = 0;
-      }
-   </script>
    <script>
       /* Author: AdGlare Ad Server (https://www.adglare.com) */
       function hasAdblock() {

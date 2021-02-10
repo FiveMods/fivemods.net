@@ -3,8 +3,15 @@ session_start();
 require_once('../config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
- 
 
+if(!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
+    $manageVals = $pdo->prepare("SELECT id FROM user WHERE uuid = ?");
+    $manageVals->execute(array($_SESSION['uuid']));
+    if($manageVals->rowCount() > 0) {
+       $mvals = $headerVals->fetch();
+       $uid = $hvals['id'];
+    }
+}
 require_once('../config.php');
 
 $servernameP = $mysqlPayment['servername'];
@@ -15,36 +22,35 @@ $dbnameP = $mysqlPayment['dbname'];
 $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
 
 if (htmlspecialchars($_POST['contact'])) {
-    contact($pdo);
+    contact($pdo, $uid);
 } elseif (htmlspecialchars($_POST['partner'])) {
-    partner($pdo);
+    partner($pdo, $uid);
 } elseif (htmlspecialchars($_POST['reportmod'])) {
-    reportmod($pdo);
+    reportmod($pdo, $uid);
 } elseif (htmlspecialchars($_GET['rate'])) {
-    rate($pdo);
+    rate($pdo, $uid);
 } elseif (htmlspecialchars($_GET['upload'])) {
     uploadMod();
 } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
     downloadMod($pdo, $pdoPayment);
 } elseif (htmlspecialchars($_GET['purchase']) and htmlspecialchars($_GET['o'])) {
-    purchaseMod($pdo, $pdoPayment);
+    purchaseMod($pdo, $pdoPayment, $uid);
 } else {
     header('Location: ../error/400/403');
     exit();
     die();
 }
 
-function contact($pdo)
+function contact($pdo, $uid)
 {
     session_start();
 
-    $userid = $_SESSION['user_iid'];
     $category = htmlspecialchars($_POST['category']);
     $header = htmlspecialchars($_POST['header']);
     $description = nl2br(htmlspecialchars($_POST['message']));
 
     $insert = $pdo->prepare("INSERT INTO contact (userid, category, heading, c_description) VALUES (:userid, :cat, :header, :desc)");
-    $insert->execute(array("userid" => $userid, "cat" => $category, "header" => $header, "desc" => $description));
+    $insert->execute(array("userid" => $uid, "cat" => $category, "header" => $header, "desc" => $description));
 
     $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
@@ -57,19 +63,18 @@ function contact($pdo)
     die();
 }
 
-function partner($pdo)
+function partner($pdo, $uid)
 {
     session_start();
 
-    $userid = $_SESSION['user_iid'];
     $q1 = htmlspecialchars($_POST['q1']);
     $q2 = htmlspecialchars($_POST['q2']);
     $q3 = htmlspecialchars($_POST['q3']);
     $q4 = htmlspecialchars($_POST['q4']);
 
 
-    $partner = $pdo->prepare("INSERT INTO `partner` (userid, q1, q2, q3, q4) VALUES ('$userid', :q1, :q2, :q3, :q4)");
-    $partner->execute(array('q1' => $q1, 'q2' => $q2, 'q3' => $q3, 'q4' => $q4));
+    $partner = $pdo->prepare("INSERT INTO `partner` (userid, q1, q2, q3, q4) VALUES (:uid, :q1, :q2, :q3, :q4)");
+    $partner->execute(array('uid' => $uid, 'q1' => $q1, 'q2' => $q2, 'q3' => $q3, 'q4' => $q4));
 
     $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
@@ -83,17 +88,16 @@ function partner($pdo)
     die();
 }
 
-function reportmod($pdo)
+function reportmod($pdo, $uid)
 {
     session_start();
 
-    $authorid = $_SESSION['user_iid'];
     $modid = htmlspecialchars($_POST['modid']);
     $reason = htmlspecialchars($_POST['reason']);
     $evidence = htmlspecialchars($_POST['evidence']);
     echo $authorid;
     $db = $pdo->prepare("INSERT INTO `reports` (modid, authorid, reason, evidence) VALUES (:mid, :aid, :reason, :evidence)");
-    $db->execute(array(":mid" => $modid, ":aid" => $authorid, ":reason" => $reason, ":evidence" => $evidence));
+    $db->execute(array(":mid" => $modid, ":aid" => $uid, ":reason" => $reason, ":evidence" => $evidence));
 
     $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
@@ -106,7 +110,7 @@ function reportmod($pdo)
     die();
 }
 
-function rate($pdo) {
+function rate($pdo, $uid) {
     session_start();
 
     $cookieArray = explode("_", $_GET['id']);
@@ -128,7 +132,7 @@ function rate($pdo) {
           $change->execute(array('rating' => $newRating, 'id' => $nameID));
 
           $log = $pdo->prepare("INSERT INTO rate (mod_id, user_id) VALUES (:mod, :id)");
-          $log->execute(array('mod' => $nameID, 'id' => $_GET['userid']));
+          $log->execute(array('mod' => $nameID, 'id' => $uid));
           header("Location: /product/$nameID");
           $_SESSION['rated'] = $rating;
           $_SESSION['lastRated'] = $nameID;
@@ -215,7 +219,7 @@ function downloadMod($pdo, $pdoPayment)
 }
 
 
-function purchaseMod($pdo, $pdoPayment)
+function purchaseMod($pdo, $pdoPayment, $uid)
 {
     session_start();
 
@@ -223,13 +227,13 @@ function purchaseMod($pdo, $pdoPayment)
 
     require_once "./config.php";
 
-    if (empty($_SESSION['user_id']) == TRUE) {
+    if (empty($uid)) {
         header('location: /account/');
         die();
     } else {
         $ch = curl_init();
         $token = $apiToken;
-        $userid = $_SESSION['user_id'];
+        $userid = $uid;
 
         curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
         curl_setopt($ch, CURLOPT_POST, 1);
@@ -272,7 +276,7 @@ function purchaseMod($pdo, $pdoPayment)
                     // Purchasing user
 
                     $selectBalanceBuy = $pdoPayment->prepare("SELECT balance FROM payment_user WHERE uuid = :uuid");
-                    $selectBalanceBuy->execute(array("uuid" => $_SESSION['user_uuid']));
+                    $selectBalanceBuy->execute(array("uuid" => $_SESSION['uuid']));
 
                     $fetchBalanceBuy = $selectBalanceBuy->fetch();
                     $balanceBuy = floatval($fetchBalanceBuy['balance']);
@@ -286,7 +290,7 @@ function purchaseMod($pdo, $pdoPayment)
                     $balanceFM = floatval($fetchBalanceFM['balance']);
 
                     $selectMod = $pdoPayment->prepare("SELECT p_id FROM product_log WHERE u_uuid = :uuid");
-                    $selectMod->execute(array("uuid" => $_SESSION['user_uuid']));
+                    $selectMod->execute(array("uuid" => $_SESSION['uuid']));
 
                     $fetchMod = $selectMod->fetch();
                     $selMod = floatval($fetchMod['p_id']);
@@ -328,7 +332,7 @@ function purchaseMod($pdo, $pdoPayment)
                         $updateBalance->execute(array('balance' => $newBalance, 'uuid' => $row['uuid']));
 
                         $updateBalanceBuy = $pdoPayment->prepare("UPDATE payment_user SET balance = :balance WHERE uuid = :uuid");
-                        $updateBalanceBuy->execute(array('balance' => $newBalanceBuy, 'uuid' => $_SESSION['user_uuid']));
+                        $updateBalanceBuy->execute(array('balance' => $newBalanceBuy, 'uuid' => $_SESSION['uuid']));
 
                         $newBalanceFM = $balanceFM + $costsB;
 
@@ -338,7 +342,7 @@ function purchaseMod($pdo, $pdoPayment)
                         // Add entry to product log
 
                         $insertProdLog = $pdoPayment->prepare("INSERT INTO product_log (u_uuid, p_id, price) VALUES (?, ?, ?)");
-                        $insertProdLog->execute(array($_SESSION['user_uuid'], $mod, $costs));
+                        $insertProdLog->execute(array($_SESSION['uuid'], $mod, $costs));
 
                         $_SESSION['downloadMod'] = $newDownloads;
                     }

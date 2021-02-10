@@ -6,7 +6,7 @@
                <br><?php echo $lang['partner-program']; ?>
             </h1>
             <p>
-               <a href="#info" class="btn btn-success btn-lg mt-5 mb-5 rounded"><?php echo $lang['see-benefits'];?> &gt;</a>
+               <a href="#info" class="btn btn-success btn-lg mt-5 mb-5 "><?php echo $lang['see-benefits'];?> &gt;</a>
             </p>
             <div class="btn-container-wrapper p-relative d-block  zindex-1">
                <hr>
@@ -58,22 +58,25 @@
             <div class="d-flex align-items-center">
             <?php
             
-            if (($_SESSION['user_id'])) {
-               if ($_SESSION['user_2fa'] == "1") {
-                  if ($_SESSION['user_premium'] == "0") {
+            if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
+               
+               $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+               $selVals->execute(array($_SESSION['uuid']));
+               $vals = $selVals->fetch();
+               //if ($vals['2fa'] == "1") {
+                  if ($vals['premium'] == "0") {
                      echo '<button class="btn btn-primary rounded btn-lg" data-toggle="modal" data-target="#joinModal">'.$lang['partner-button'].'</button>
                      <span class="d-block mx-1 mx-sm-2 text-small text-white">-</span>
                      <button class="btn btn-light btn-lg" data-toggle="modal" data-target="#conModal">'.$lang['partner-conditions'].'</button>';
-                  } elseif (empty($_SESSION['user_id'])) {
-                     echo '';
                   } else {
-                     echo '<button class="btn btn-light btn-lg rounded">'.$lang['already-in'].'</button>';
+                     echo '<button class="btn btn-light btn-lg">'.$lang['already-in'].'</button>';
                   }
+               /*
                } else {
                   echo '<a href="/account/" class="btn btn-light btn-lg rounded">Please activate Two-Factor Authentication</a>';
-               }              
+               }*/    
             } else {
-               echo '<a class="btn btn-light btn-lg rounded" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
+               echo '<a class="btn btn-light btn-lg" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
             } 
             ?>
             </div>
@@ -81,7 +84,7 @@
       </div>
    </div>
 </section>
-<section class="text-dark pt-5 pb-5">
+<section class="bg-white text-dark pt-5 pb-5">
    <div class="container">
       <div class="row text-center">
          <div class="col">
@@ -126,7 +129,7 @@
             <input name="partner" value="1" hidden>
             <div class="form-group">
             <label for="username"><?php echo $lang['partner-question1'];?><span class="text text-danger">*</span></label>
-               <input type="text" name="q1" tabindex="1" class="form-control" placeholder="<?php echo $_SESSION['user_username']; ?>" required>
+               <input type="text" name="q1" tabindex="1" class="form-control" placeholder="John Doe" required>
             </div>
             <div class="form-group">
             <label for="username"><?php echo $lang['partner-question2'];?><span class="text text-danger">*</span></label>

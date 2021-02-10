@@ -230,10 +230,13 @@ include('./include/header-banner.php');
                }
 
                ?>
-               <div class="col-md-4 d-flex align-items-stretch">
-                  <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
+               <div class="col-md-4">
+                  <div class="loader-wrapper">
+                     <span class="loader"><span class="loader-inner"></span></span>
+                  </div>
+                  <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid cover rounded shadow1" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

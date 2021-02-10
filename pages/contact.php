@@ -36,7 +36,7 @@
          </div>
          <?php
          
-         if (empty($_SESSION['user_id'])) {
+         if (empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
             echo '<div class="col-12 col-md-6 ml-auto"><div class="row mt-4"><a href="/account/login/" class="btn btn-block btn-primary">'.$lang['log-in'].' to fill out the form.</a></div></div>';
          } else {
             echo '<div class="col-12 col-md-6 ml-auto">

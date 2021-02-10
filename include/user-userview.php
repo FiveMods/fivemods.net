@@ -81,12 +81,12 @@ while ($row = $statement->fetch()) {
    $publishedmods = $row['COUNT(m_authorid)'];
 }
 
-if ($_SESSION['user_id'] == $oauth_uid && $blocked == 0) {
+if ($_SESSION['uuid'] == $uuid && $blocked == 0) {
    $editbtn = '<a href="/account/" class="text text-success" style="font-size:12px;"><i class="fas fa-user"></i> ' . $lang['edit-profile'] . '</a>';
-} elseif (!empty($_SESSION['user_id'])) {
+} elseif (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
    $repbtn = '<a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> ' . $lang['report-profile'] . '</a>';
 } else {
-   $repbtn = '<a href="/account/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
+   $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
 }
 
 
@@ -380,10 +380,13 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
             }
 
             ?>
-            <div class="col-md-4 d-flex align-items-stretch">
-               <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
+            <div class="col-md-4">
+               <div class="loader-wrapper">
+                  <span class="loader"><span class="loader-inner"></span></span>
+               </div>
+               <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                   <a href="/product/<?php echo $article['m_id']; ?>/">
-                     <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                     <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                      <?php
                      if (!empty($article['m_price'])) {
                         echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

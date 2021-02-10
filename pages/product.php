@@ -6,6 +6,12 @@ require_once('./config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
+if(!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key'])) {
+   $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+   $selVals->execute(array($_SESSION['uuid']));
+   $vals = $selVals->fetch();
+}
+
 if ($_GET['id']) {
    $nameID = $_GET['id'];
    $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0"); 
@@ -95,7 +101,7 @@ if ($_GET['id']) {
    $result->execute(array($nameID));
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
-         if($row['user_id'] == $_SESSION['user_iid']) {
+         if($row['user_id'] == $vals['id']) {
             $allowRate = false;
             break;
          }
@@ -419,7 +425,7 @@ if ($_GET['id']) {
                            </div>
                         </div>';
             }
-            if ($_SESSION['user_iid'] and $allowRate) {
+            if (!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key']) and $allowRate) {
                echo '<div class="row pt-2">
                               <div class="col">
                                  <a class="btn btn-block btn-sm btn-primary" data-toggle="collapse" href="#rate" role="button" aria-expanded="false" aria-controls="rate">Rate this Mod!</a>
@@ -447,14 +453,14 @@ if ($_GET['id']) {
                echo 'Downloads';
             } else {
                echo 'Purchases';
-            } ?>: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($_SESSION['user_permission'] == "-1") {
+            } ?>: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($vals['permission'] == "-1") {
                echo " | <u title='Not seeable for everyone.'>Estimated income: ".($downloads/1000).'€</u>';
             } ?> </small>
 
 
 
             <p class="lead mt-2 mb-3 primary-color text-left">
-            <?php if($_SESSION['user_iid']):?>
+            <?php if(!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key'])):?>
                <div class="report">
                   <a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> <?php echo $lang['report-mod']; ?></a>
                </div>
@@ -551,7 +557,7 @@ if ($_GET['id']) {
          var rating = 5
       }
 
-      window.location.href = "/helper/manage.php?rate=1&id=<?php echo $nameID; ?>_" + rating + "&userid=<?php echo $_SESSION['user_iid'];?>";
+      window.location.href = "/helper/manage.php?rate=1&id=<?php echo $nameID; ?>_" + rating + "&userid=<?php echo $vals['id'];?>";
    }
 </script>
 
@@ -614,10 +620,10 @@ if ($_GET['id']) {
 
                if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                   $mods++;
-                  echo '<div class="col-md-4 d-flex align-items-stretch">
-                                 <div class="card mb-4 shadow-sm rounded shadow1">
+                  echo '<div class="col-md-4">
+                                 <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -640,10 +646,10 @@ if ($_GET['id']) {
                                  </div>
                               </div>';
                } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
-                  echo '<div class="col-md-4 d-flex align-items-stretch">
-                                 <div class="card mb-4 shadow-sm rounded shadow1 '.$do.'">
+                  echo '<div class="col-md-4">
+                                 <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -681,10 +687,10 @@ if ($_GET['id']) {
                   $cat = $row['m_category'];
                   $downloads = $row['m_downloads'];
                   if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
-                     echo '<div class="col-md-4 d-flex align-items-stretch">
-                                    <div class="card mb-4 shadow-sm rounded shadow1">
+                     echo '<div class="col-md-4">
+                                    <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                       <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -705,10 +711,10 @@ if ($_GET['id']) {
                                     </div>
                                  </div>';
                   } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
-                  echo '<div class="col-md-4 d-flex align-items-stretch">
-                                 <div class="card mb-4 shadow-sm rounded shadow1'.$do.'">
+                  echo '<div class="col-md-4">
+                                 <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -876,7 +882,7 @@ if ($_GET['id']) {
                 Your current budget amounts: <?php $ch = curl_init();
 
                   $token = $apiToken;
-                  $userid = $_SESSION['user_id'];
+                  $userid = $vals['id'];
 
                   curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
                   curl_setopt($ch, CURLOPT_POST, 1);
