@@ -15,7 +15,7 @@
                   
 
                   if ($statusvalue == 0) {
-                      echo '<div class="card bg bg-success text text-white rounded mb-3">
+                      echo '<div class="card bg-success text text-white rounded mb-3">
                   <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                      <b>All Systems Operational</b>
                      <div>
@@ -25,7 +25,7 @@
                    </div>
                   </div>';
                   } elseif ($statusvalue == 1) {
-                      echo '<div class="card bg bg-warning text text-white rounded mb-3">
+                      echo '<div class="card bg-warning text text-white rounded mb-3">
                   <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                      <b>Degraded Performance</b>
                      <div>
@@ -35,7 +35,7 @@
                   </div>
                   </div>';
                   } elseif ($statusvalue == 2) {
-                      echo '<div class="card bg bg-primary text text-white rounded mb-3">
+                      echo '<div class="card bg-primary text text-white rounded mb-3">
                   <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                      <b>Partial Outage</b>
                      <div>
@@ -45,7 +45,7 @@
                   </div>
                   </div>';
                   } elseif ($statusvalue == 3) {
-                      echo '<div class="card bg bg-danger text text-white rounded mb-3">
+                      echo '<div class="card bg-danger text text-white rounded mb-3">
                   <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                      <b>Major Outage</b>
                      <div>
@@ -55,7 +55,7 @@
                   </div>
                   </div>';
                   } elseif ($statusvalue == 4) {
-                      echo '<div class="card bg bg-info text text-white rounded mb-3">
+                      echo '<div class="card bg-info text text-white rounded mb-3">
                   <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                      <b>Maintenance</b>
                      <div>
@@ -65,7 +65,7 @@
                   </div>
                   </div>';
                   } elseif ($statusvalue == 5) {
-                      echo '<div class="card bg bg-dark text text-white rounded mb-3">
+                      echo '<div class="card bg-dark text text-white rounded mb-3">
                   <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                      <b>Security Mode</b>
                      <div>
