@@ -539,6 +539,14 @@ function isMobile()
       #myBtn:hover {
          background-color: #17141F;
       }
+
+      #leftBasedAds {
+         left: 0px;
+         position: fixed;
+         text-align: center;
+         top: 0px;
+         z-index: 99;
+      }
    </style>
 </head>
 
@@ -578,17 +586,23 @@ function isMobile()
    <!-- ========== MAIN CONTENT ========== -->
 
    <main>
-      <div id="loader">
-         <?php include('./static.html'); ?>
-      </div>
       <div id="cload">
-         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-         <!-- Vertical-Static-Ads -->
-         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712" data-ad-format="auto" data-full-width-responsive="true"></ins>
-         <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-         </script>
-
+         <div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Vertical-Static-Ads -->
+            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
+            <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+         </div>
+         <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Vertical-Static-Ads -->
+            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
+            <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+         </div>
          <?php
          if (isset($_GET['page'])) {
             $page_names = explode('/', $_GET["page"]);
@@ -608,15 +622,11 @@ function isMobile()
             include("pages/.php");
          }
          ?>
-
       </div>
    </main>
 
    <!-- ========== END MAIN CONTENT ========== -->
-
-
    <?php
-
    if (!(isMobile())) {
       echo '<div id="441135697">
       <script type="text/javascript">
@@ -629,11 +639,7 @@ function isMobile()
       </script>
   </div>';
    }
-
    ?>
-
-
-
    <!-- ========== FOOTER ========== -->
 
    <?php
