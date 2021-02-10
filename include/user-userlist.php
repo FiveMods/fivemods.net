@@ -37,7 +37,7 @@ $result->execute();
                 }
        
                echo '<div class="col-md-3 text-center">
-                   <div class="card text-dark bg-light mb-3 rounded shadow1" style="max-width: 18rem;">
+                   <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
                        '.$insert.'
                        <a href="/user/'.$username.'/">
                        <div class="card-body">

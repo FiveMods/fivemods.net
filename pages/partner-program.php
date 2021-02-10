@@ -6,7 +6,7 @@
                <br><?php echo $lang['partner-program']; ?>
             </h1>
             <p>
-               <a href="#info" class="btn btn-success btn-lg mt-5 mb-5 rounded"><?php echo $lang['see-benefits'];?> &gt;</a>
+               <a href="#info" class="btn btn-success btn-lg mt-5 mb-5 "><?php echo $lang['see-benefits'];?> &gt;</a>
             </p>
             <div class="btn-container-wrapper p-relative d-block  zindex-1">
                <hr>
@@ -69,14 +69,14 @@
                      <span class="d-block mx-1 mx-sm-2 text-small text-white">-</span>
                      <button class="btn btn-light btn-lg" data-toggle="modal" data-target="#conModal">'.$lang['partner-conditions'].'</button>';
                   } else {
-                     echo '<button class="btn btn-light btn-lg rounded">'.$lang['already-in'].'</button>';
+                     echo '<button class="btn btn-light btn-lg">'.$lang['already-in'].'</button>';
                   }
                /*
                } else {
                   echo '<a href="/account/" class="btn btn-light btn-lg rounded">Please activate Two-Factor Authentication</a>';
                }*/    
             } else {
-               echo '<a class="btn btn-light btn-lg rounded" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
+               echo '<a class="btn btn-light btn-lg" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
             } 
             ?>
             </div>
@@ -84,7 +84,7 @@
       </div>
    </div>
 </section>
-<section class="text-dark pt-5 pb-5">
+<section class="bg-white text-dark pt-5 pb-5">
    <div class="container">
       <div class="row text-center">
          <div class="col">
