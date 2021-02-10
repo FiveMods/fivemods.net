@@ -525,6 +525,12 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          object-fit: cover;
       }
 
+      .cover-cat {
+         width: 348px;
+         height: 217px;
+         object-fit: cover;
+      }
+
       body::-webkit-scrollbar {
          width: .5rem;
       }
@@ -576,7 +582,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    </style>
 </head>
 
-<body>
+<body class="bg">
    <!-- Google Tag Manager (noscript) -->
    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XZ6BDR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <!-- End Google Tag Manager (noscript) -->
