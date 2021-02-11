@@ -238,15 +238,6 @@ if ($_GET['id']) {
       text-align: center;
    }
 
-   .emp-product {
-      padding: 8px;
-      margin-top: 15px;
-      margin-bottom: 15px;
-      border-radius: 0.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      /* opacity: 0.6; */
-   }
-
    /*body {font-family: Arial, Helvetica, sans-serif;}
 
     #expandImg {
@@ -362,7 +353,7 @@ if ($_GET['id']) {
 </div> -->
 
 <section class="pt-5 pb-5">
-   <div class="container emp-product shadow1">
+   <div class="container">
       <?php
          if(isset($_SESSION['rated'])) {
       ?>

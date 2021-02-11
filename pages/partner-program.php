@@ -2,13 +2,13 @@
    <div class="container ">
       <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
          <div class="col-12 col-md-12 h-50 ">
-            <h1 class="font-weight-bold   text-white display-2 mb-2 mt-5"> <small>FiveMods</small>
+            <h1 class="font-weight-bold text-white display-2 mb-2 mt-5"> <small>FiveMods</small>
                <br><?php echo $lang['partner-program']; ?>
             </h1>
             <p>
-               <a href="#info" class="btn btn-success btn-lg mt-5 mb-5 "><?php echo $lang['see-benefits'];?> &gt;</a>
+               <a href="#info" class="btn btn-success rounded btn-lg mt-5 mb-5 "><?php echo $lang['see-benefits'];?> &gt;</a>
             </p>
-            <div class="btn-container-wrapper p-relative d-block  zindex-1">
+            <div class="btn-container-wrapper p-relative d-block zindex-1">
                <hr>
             </div>
          </div>
@@ -69,14 +69,14 @@
                      <span class="d-block mx-1 mx-sm-2 text-small text-white">-</span>
                      <button class="btn btn-light btn-lg" data-toggle="modal" data-target="#conModal">'.$lang['partner-conditions'].'</button>';
                   } else {
-                     echo '<button class="btn btn-light btn-lg">'.$lang['already-in'].'</button>';
+                     echo '<button class="btn btn-light rounded btn-lg">'.$lang['already-in'].'</button>';
                   }
                /*
                } else {
                   echo '<a href="/account/" class="btn btn-light btn-lg rounded">Please activate Two-Factor Authentication</a>';
                }*/    
             } else {
-               echo '<a class="btn btn-light btn-lg" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
+               echo '<a class="btn btn-light rounded btn-lg" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
             } 
             ?>
             </div>
@@ -84,7 +84,7 @@
       </div>
    </div>
 </section>
-<section class="bg-white text-dark pt-5 pb-5">
+<section class="text-dark pt-5 pb-5">
    <div class="container">
       <div class="row text-center">
          <div class="col">
