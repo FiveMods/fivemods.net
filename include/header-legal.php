@@ -15,7 +15,7 @@
 
                 if ($_SESSION['language'] == "DE") {
                     echo '<li class="nav-item mr-1">
-                      <a class="nav-link" href="/legal/impressum/">Impressum</a>
+                      <a class="nav-link" href="/impressum/">Impressum</a>
                    </li>';
                 }
 
