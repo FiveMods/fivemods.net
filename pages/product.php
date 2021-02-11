@@ -570,7 +570,7 @@ if ($_GET['id']) {
 
                   <p class="lead pb-0 mb-1"><a href="/user/<?php echo $username; ?>"><img class="pr-3" async=on src="<?php echo $userimg; ?>" height="32" alt="Profile Picture"></a><?php echo $lang['made-by']; ?>
                      <a href="/user/<?php echo $username; ?>"><?php echo $username; ?></a>.
-                     <a href="/user/<?php echo $username; ?>" class="btn btn-xs  btn-sm btn-light btn-rised ml-md-4">Show more </a>
+                     <a href="/user/<?php echo $username; ?>" class="btn btn-xs rounded btn-sm btn-light btn-rised ml-md-4">Show more </a>
                   </p>
                </div>
             </div>
@@ -620,10 +620,10 @@ if ($_GET['id']) {
 
                if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                   $mods++;
-                  echo '<div class="col-md-4">
+                  echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid img-thumbnail cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -646,10 +646,10 @@ if ($_GET['id']) {
                                  </div>
                               </div>';
                } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
-                  echo '<div class="col-md-4">
+                  echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -687,10 +687,10 @@ if ($_GET['id']) {
                   $cat = $row['m_category'];
                   $downloads = $row['m_downloads'];
                   if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
-                     echo '<div class="col-md-4">
+                     echo '<div class="col-md-4 d-flex align-items-stretch">
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                       <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -711,10 +711,10 @@ if ($_GET['id']) {
                                     </div>
                                  </div>';
                   } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
-                  echo '<div class="col-md-4">
+                  echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
