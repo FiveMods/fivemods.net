@@ -544,7 +544,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       }
      
       .bg {
-         background: url('/static-assets/img/background/icon_bg_lighter.png');
+         background: url('/static-assets/img/background/icon_bg_multi_lighter.png');
          background-repeat: repeat;
          background-size: 75%;
       }
