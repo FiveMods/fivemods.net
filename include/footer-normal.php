@@ -1,4 +1,5 @@
-<section class="mt-5 bg-dark">
+<div style="height: 100px;"></div>
+<section class="mt-5 bg-dark" style="line-height: 25px;">
    <footer class="pt-3 pb-3 ">
       <div class="container">
          <div class="row align-items-center text-center">
@@ -21,7 +22,7 @@
                      <a class="nav-link active" href="/"><?php echo $lang['home']; ?></a>
                   </li>
                   <li class="nav-item">
-                     <a class="nav-link" href="/search/"><?php echo $lang['search']; ?></a>
+                     <a class="nav-link" href="/status/"><?php echo $lang['status']; ?></a>
                   </li>
                   <li class="nav-item">
                      <a class="nav-link" href="/help-center/"><?php echo $lang['help-center']; ?></a>
