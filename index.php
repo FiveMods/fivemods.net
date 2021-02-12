@@ -619,9 +619,6 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <main>
       <div id="cload">
-         <?php if(strpos($actual_link, "partner-program") != FALSE &&
-                  strpos($actual_link, "affiliate") != FALSE &&
-                  strpos($actual_link, "legal") != FALSE): ?>
          <div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Vertical-Static-Ads -->
@@ -639,7 +636,6 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
             </script>
          </div>
          <?php
-         endif;
          if (isset($_GET['page'])) {
             $page_names = explode('/', $_GET["page"]);
             if (file_exists("pages/" . $page_names[0] . ".php")) {
