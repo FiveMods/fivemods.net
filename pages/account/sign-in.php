@@ -69,10 +69,10 @@ if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
                                     <a href="<?php echo $dcCallback;?>" class="btn btn-block btn-discord">
                                      <i class="fab fa-discord"></i> &nbsp; <?php echo $lang['login-discord']; ?>
                                    </a>
-                                    <a href="<?php echo $loginURL ?>" class="btn btn-block btn-danger">
+                                    <a href="<?php echo $loginURL ?>" class="btn btn-block btn-danger disabled">
                                         <i class="fab fa-google"></i> &nbsp; <?php echo $lang['login-google']; ?>
                                     </a>
-                                    <a href="https://github.com/login/oauth/authorize?<?php echo http_build_query($params);?>" class="btn btn-block btn-secondary">
+                                    <a href="https://github.com/login/oauth/authorize?<?php echo http_build_query($params);?>" class="btn btn-block btn-secondary disabled">
                                         <i class="fab fa-github"></i> &nbsp;Login with GitHub
                                     </a>
                                 <?php endif; ?>
