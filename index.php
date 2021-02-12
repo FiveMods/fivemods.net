@@ -4,10 +4,6 @@ else ob_start();
 
 session_start();
 
-if ($_SESSION['user_blocked'] == 1) {
-   header('location: /account/logout/?url=banned');
-}
-
 ob_start("minifier");
 function minifier($code)
 {
@@ -42,6 +38,42 @@ function isMobile()
    return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
 }
 
+
+if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
+   if(empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
+      setcookie("f_val", " ", time() - 3600, "/");
+      setcookie("f_key", " ", time() - 3600, "/");
+      header("Location: /account/logout/?url=invalid");
+	}
+   echo '<script>console.log("Logged in");</script>';
+
+   $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+   
+   $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
+   $selToken->execute(array($_COOKIE['f_key']));
+   if($selToken->rowCount() > 0) {
+      $fetch = $selToken->fetch();
+      
+      $timestamp = strtotime($fetch['created_at']);
+      if((($timestamp - 5) > $_COOKIE['f_val']) && (($timestamp + 5) < $_COOKIE['f_val'])) {
+         
+         setcookie("f_val", " ", time() - 3600, "/");
+         setcookie("f_key", " ", time() - 3600, "/");
+         header("Location: /account/logout/?url=invalid");
+         
+      } else {
+         $_SESSION['uuid'] = $fetch['uuid'];
+      }
+   } else {
+      
+      setcookie("f_val", " ", time() - 3600, "/");
+      setcookie("f_key", " ", time() - 3600, "/");
+      header("Location: /account/logout/?url=invalid");
+      
+   }
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-EN" dir="ltr">
@@ -49,7 +81,7 @@ function isMobile()
 <head>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- Start cookieyes banner -->
-   <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script>
+   <!-- <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script> -->
    <!-- End cookieyes banner -->
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -249,7 +281,7 @@ function isMobile()
    <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
    <meta name="coverage" content="Worldwide">
 
-   <meta name="reply-to" content="fivemods.management@gmail.com">
+   <meta name="reply-to" content="contact@fivemods.net">
 
    <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
    <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
@@ -493,6 +525,12 @@ function isMobile()
          object-fit: cover;
       }
 
+      .cover-cat {
+         width: 348px;
+         height: 217px;
+         object-fit: cover;
+      }
+
       body::-webkit-scrollbar {
          width: .5rem;
       }
@@ -504,10 +542,47 @@ function isMobile()
       body::-webkit-scrollbar-thumb {
          background: #ff8637;
       }
+     
+      .bg {
+         background: url('/static-assets/img/background/icon_bg_multi_lighter.png');
+         background-repeat: repeat;
+         background-size: 75%;
+      }
+
+      .shadow1 {
+         box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
+      }
+
+      #myBtn {
+         display: none;
+         position: fixed;
+         bottom: 20px;
+         right: 30px;
+         z-index: 99;
+         font-size: 18px;
+         border: none;
+         outline: none;
+         background-color: #E57C0B;
+         color: white;
+         cursor: pointer;
+         border-radius: 4px;
+      }
+
+      #myBtn:hover {
+         background-color: #17141F;
+      }
+
+      #leftBasedAds {
+         left: 0px;
+         position: fixed;
+         text-align: center;
+         top: 0px;
+         z-index: 99;
+      }
    </style>
 </head>
 
-<body>
+<body class="bg">
    <!-- Google Tag Manager (noscript) -->
    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XZ6BDR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
    <!-- End Google Tag Manager (noscript) -->
@@ -543,11 +618,23 @@ function isMobile()
    <!-- ========== MAIN CONTENT ========== -->
 
    <main>
-      <div id="loader">
-         <?php include('./static.html'); ?>
-      </div>
       <div id="cload">
-
+         <div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Vertical-Static-Ads -->
+            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
+            <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+         </div>
+         <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Vertical-Static-Ads -->
+            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
+            <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+         </div>
          <?php
          if (isset($_GET['page'])) {
             $page_names = explode('/', $_GET["page"]);
@@ -567,15 +654,11 @@ function isMobile()
             include("pages/.php");
          }
          ?>
-
       </div>
    </main>
 
    <!-- ========== END MAIN CONTENT ========== -->
-
-
    <?php
-
    if (!(isMobile())) {
       echo '<div id="441135697">
       <script type="text/javascript">
@@ -588,11 +671,7 @@ function isMobile()
       </script>
   </div>';
    }
-
    ?>
-
-
-
    <!-- ========== FOOTER ========== -->
 
    <?php

@@ -6,6 +6,12 @@ require_once('./config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
+if(!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key'])) {
+   $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+   $selVals->execute(array($_SESSION['uuid']));
+   $vals = $selVals->fetch();
+}
+
 if ($_GET['id']) {
    $nameID = $_GET['id'];
    $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0"); 
@@ -95,7 +101,7 @@ if ($_GET['id']) {
    $result->execute(array($nameID));
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
-         if($row['user_id'] == $_SESSION['user_iid']) {
+         if($row['user_id'] == $vals['id']) {
             $allowRate = false;
             break;
          }
@@ -298,28 +304,8 @@ if ($_GET['id']) {
                               </div>';
                      }
                   ?>
-<<<<<<< HEAD
-               </ol>
-                  <div class="carousel-inner">
-                     <div class="carousel-item active" id="image">
-                        <a href="#imagemodal" data-toggle="modal" data-target="#imagemodal">
-                           <img src="<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
-                        </a>
-                     </div>
-                     <?php
-                        for ($i=1; $i < count($imgArray); $i++) {
-                           echo '<div class="carousel-item" id="image">
-                                    <a href="#imagemodal" data-toggle="modal" data-target="#imagemodal">
-                                       <img src="' . $imgArray[$i] . '" class="d-block w-100 img-fluid" style="width:540px;height:304px;" alt="Mod Picture">
-                                    </a>
-                                 </div>';
-                        }
-                     ?>
-                  </div>
-=======
                </div>
                   <?php if(count($imgArray) > 1):?>
->>>>>>> d229e8f5ba705b5240bfbbe7948775ee59b55c59
                   <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                      <span class="sr-only">Previous</span>
@@ -328,17 +314,7 @@ if ($_GET['id']) {
                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
                      <span class="sr-only">Next</span>
                   </a>
-<<<<<<< HEAD
-               </div> 
-               <div class="modal fade " id="imagemodal" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                           <img class="modal-img" />
-                        </div>
-                  </div>
-=======
                   <?php endif;?>
->>>>>>> d229e8f5ba705b5240bfbbe7948775ee59b55c59
                </div>
             <br><br>
             <?php
@@ -350,7 +326,7 @@ if ($_GET['id']) {
                            </div>
                         </div>';
             }
-            if ($_SESSION['user_iid'] and $allowRate) {
+            if (!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key']) and $allowRate) {
                echo '<div class="row pt-2">
                               <div class="col">
                                  <a class="btn btn-block btn-sm btn-primary" data-toggle="collapse" href="#rate" role="button" aria-expanded="false" aria-controls="rate">Rate this Mod!</a>
@@ -378,14 +354,14 @@ if ($_GET['id']) {
                echo 'Downloads';
             } else {
                echo 'Purchases';
-            } ?>: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($_SESSION['user_permission'] == "-1") {
+            } ?>: <?php echo $downloads . ' | Uploaded: ' . date("d. M Y", strtotime($uploaded)); if ($vals['permission'] == "-1") {
                echo " | <u title='Not seeable for everyone.'>Estimated income: ".($downloads/1000).'€</u>';
             } ?> </small>
 
 
 
             <p class="lead mt-2 mb-3 primary-color text-left">
-            <?php if($_SESSION['user_iid']):?>
+            <?php if(!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key'])):?>
                <div class="report">
                   <a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> <?php echo $lang['report-mod']; ?></a>
                </div>
@@ -482,7 +458,7 @@ if ($_GET['id']) {
          var rating = 5
       }
 
-      window.location.href = "/helper/manage.php?rate=1&id=<?php echo $nameID; ?>_" + rating + "&userid=<?php echo $_SESSION['user_iid'];?>";
+      window.location.href = "/helper/manage.php?rate=1&id=<?php echo $nameID; ?>_" + rating + "&userid=<?php echo $vals['id'];?>";
    }
 </script>
 
@@ -495,7 +471,7 @@ if ($_GET['id']) {
 
                   <p class="lead pb-0 mb-1"><a href="/user/<?php echo $username; ?>"><img class="pr-3" async=on src="<?php echo $userimg; ?>" height="32" alt="Profile Picture"></a><?php echo $lang['made-by']; ?>
                      <a href="/user/<?php echo $username; ?>"><?php echo $username; ?></a>.
-                     <a href="/user/<?php echo $username; ?>" class="btn btn-xs  btn-sm btn-light btn-rised ml-md-4">Show more </a>
+                     <a href="/user/<?php echo $username; ?>" class="btn btn-xs rounded btn-sm btn-light btn-rised ml-md-4">Show more </a>
                   </p>
                </div>
             </div>
@@ -545,10 +521,10 @@ if ($_GET['id']) {
 
                if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                   $mods++;
-                  echo '<div class="col-md-4">
+                  echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid img-thumbnail cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover"  src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
                      echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -571,10 +547,10 @@ if ($_GET['id']) {
                                  </div>
                               </div>';
                } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
-                  echo '<div class="col-md-4">
+                  echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -612,10 +588,10 @@ if ($_GET['id']) {
                   $cat = $row['m_category'];
                   $downloads = $row['m_downloads'];
                   if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
-                     echo '<div class="col-md-4">
+                     echo '<div class="col-md-4 d-flex align-items-stretch">
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                       <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -636,10 +612,10 @@ if ($_GET['id']) {
                                     </div>
                                  </div>';
                   } elseif ($id != $_GET['id'] && $mods < 9 && !empty($m_price)) {
-                  echo '<div class="col-md-4">
+                  echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid img-thumbnail cover" src="' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -807,7 +783,7 @@ if ($_GET['id']) {
                 Your current budget amounts: <?php $ch = curl_init();
 
                   $token = $apiToken;
-                  $userid = $_SESSION['user_id'];
+                  $userid = $vals['id'];
 
                   curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
                   curl_setopt($ch, CURLOPT_POST, 1);
@@ -830,17 +806,6 @@ if ($_GET['id']) {
         </div>
     </div>
 </div>
-<<<<<<< HEAD
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$(function(){
-   $("#image img").on("click",function(){
-      var src = $(this).attr("src");
-      $(".modal-img").prop("src",src);
-   });
-});
-</script>
-=======
 <!-- <script>
 var modal = document.getElementById("myModal");
 
@@ -866,4 +831,3 @@ span.onclick = function() {
 <?php
    $pdo = null;
 ?>
->>>>>>> d229e8f5ba705b5240bfbbe7948775ee59b55c59

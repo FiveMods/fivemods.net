@@ -4,10 +4,18 @@ require_once('./config.php');
 
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-	header('location: /account/logout/');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
 	exit();
+	die();
 }
+
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+$selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+$selVals->execute(array($_SESSION['uuid']));
+$vals = $selVals->fetch();
+
 
 ?>
 <style>
@@ -35,10 +43,10 @@ if ($_GET['r'] == 1) {
    $cookie_name = "rm-rfv";
    $cookie_value = $token;
    setcookie($cookie_name, $cookie_value, time() + (60 * 2), "/"); // 86400 = 1 day
+/*
+   if($vals['oauth_provider'] == 'Discord Inc' && empty($_COOKIE['rm-rfv']) || $vals['oauth_provider'] == 'Discord Inc.' && empty($_COOKIE['rm-rfv'])) {
 
-   if($_SESSION['user_oauth_provider'] == 'Discord Inc' && empty($_COOKIE['rm-rfv']) || $_SESSION['user_oauth_provider'] == 'Discord Inc.' && empty($_COOKIE['rm-rfv'])) {
-
-      $userid = $_SESSION['user_id'];
+      $userid = $vals['id'];
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
@@ -64,9 +72,9 @@ if ($_GET['r'] == 1) {
    </button>
    </div>
    <?php
-   } elseif ($_SESSION['user_oauth_provider'] == 'Google LLC' && empty($_COOKIE['rm-rfv']) || $_SESSION['user_oauth_provider'] == 'Google LLC.' && empty($_COOKIE['rm-rfv'])) {
-    $email = $_SESSION['user_email'];
-    $name = $_SESSION['user_username'];
+   } elseif ($vals['oauth_provider'] == 'Google LLC' && empty($_COOKIE['rm-rfv']) || $vals['oauth_provider'] == 'Google LLC.' && empty($_COOKIE['rm-rfv'])) {*/
+    $email = $vals['email'];
+    $name = $vals['name'];
     $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
         <head>
@@ -279,7 +287,7 @@ if ($_GET['r'] == 1) {
           </center>
         </body>
       </html>';
-    $subject = "FiveMods.net - Account removal for $_SESSION[user_username]";
+    $subject = "FiveMods.net - Account removal for ".$vals['name'];
 
     $headers = array(
         'Authorization: Bearer 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',
@@ -323,10 +331,10 @@ if ($_GET['r'] == 1) {
     echo $response;
     $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Successfully requested! </strong> We send an email to '.$_SESSION['user_email'].', please have a look.
+        <strong>Successfully requested! </strong> We send an email to '.$vals['email'].', please have a look.
       </div>
       ';
-   }
+   //}
 
 }
 
@@ -339,8 +347,8 @@ if (!empty($_POST['token'])) {
         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $pdo->prepare("DELETE FROM user WHERE oauth_uid = ?");
-        $stmt->execute(array($userid));
+        $stmt = $pdo->prepare("DELETE FROM user WHERE uuid = ?");
+        $stmt->execute(array($_SESSION['uuid']));
         echo "Record deleted successfully";
       } catch(PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();

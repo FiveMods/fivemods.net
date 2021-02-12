@@ -1,4 +1,23 @@
 <?php
+
+
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
+}
+
+require_once "./config.php";
+$pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+$selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+$selVals->execute(array($_SESSION['uuid']));
+$vals = $selVals->fetch();
+
+
+
+
+
 include('./include/header-banner.php');
 
 session_start();
@@ -29,7 +48,7 @@ $_SESSION['on2fa'] = FALSE;
                 <h1>Authentication successful</h1>
                 <?php 
                 
-                if ($_SESSION['user_2fa'] == "0") {
+                if ($vals['2fa'] == "0") {
                     echo '<p>To enable the two factor function in the future please click the button below.</p>';
                 }
                 ?>
@@ -38,7 +57,7 @@ $_SESSION['on2fa'] = FALSE;
             <hr>
             <?php
             
-            if ($_SESSION['user_2fa'] == "0") {
+            if ($vals['2fa'] == "0") {
                 echo '<form action="/pages/account/helper/2fa.enable.php" method="post">
                 <input type="text" name="call" value="callFunc" hidden>
                 <button type="submit" class="btn btn-block btn-success" style="text-align: center;">Continue & Enable</button>

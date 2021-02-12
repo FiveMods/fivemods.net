@@ -1,29 +1,42 @@
 <?php
 session_start();
 
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
+}
+
 include_once('../../../config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
+$selToken->execute(array($_COOKIE['f_key']));
+$fetch = $selToken->fetch();
 
-$selectUsername = $pdo->prepare("SELECT * FROM user WHERE name = :name");
-$selectUsername->execute(array("name" => $_SESSION['user_username']));
+$selectUsername = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+$selectUsername->execute(array($fetch['uuid']));
 
-if($selectUsername->rowCount() > 0) {
-    $username = $_SESSION['user_username'] . "-". randomChars(6);
-} else {
-    $username = $_SESSION['user_username'];
+$selFetch = $selectUsername->fetch();
+$username = str_replace(" ", "_", $selFetch['name']);
+
+$nameCheck = $pdo->prepare("SELECT * FROM user WHERE name = ?");
+$nameCheck->execute(array($username));
+
+if(!preg_match("/^[A-Za-z0-9_]{3,24}$/im", $username)) {
+    $username = "User" . "_". randomChars(6);
+} else if($nameCheck->rowCount() > 1) {
+    $username = $username . "_". randomChars(6);
 }
-$_SESSION['user_username'] = $username;
 $insert = $pdo->prepare("UPDATE user SET name = :name WHERE uuid = :uuid");
-$insert->execute(array("name" => $username, "uuid" => $_SESSION['user_uuid']));
+$insert->execute(array("name" => $username, "uuid" => $fetch['uuid']));
 
 $pdo = null;
+
 header("Location: /account/");
 exit();
 die();
-
 
 function randomChars($length) {
     $permitted_chars = '0123456789';

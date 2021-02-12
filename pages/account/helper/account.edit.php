@@ -2,8 +2,10 @@
 
 session_start();
 
-if (empty($_SESSION['user_id'])) {
-  header('location: /logout');
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
 }
 
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -51,11 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
-          $_SESSION['user_username'] = $username2;
-          $_SESSION['user_banner'] = $banner;
           $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
           <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>Successfully changed! </strong> Your profile got successfully updated. Click <a href="/user/'.$_SESSION['user_username'].'">here</a> to see your changes.
+          <strong>Successfully changed! </strong> Your profile got successfully updated. Click <a href="/user/'.$$username2.'">here</a> to see your changes.
         </div>
         ';
         header('location: /account/');

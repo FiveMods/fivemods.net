@@ -87,7 +87,7 @@ include('./include/header-banner.php');
       <div class="input-group input-group-lg mb-4">
          <input name="query" class="form-control" placeholder="<?php echo $lang['searchbar'] ?>" aria-label="<?php echo $lang['searchbar'] ?>" aria-describedby="basic-addon2">
          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" name="submit-search"><?php echo $lang['search'] ?></button>
+            <button class="btn btn-secondary" type="submit" name="submit-search"><?php echo $lang['search'] ?></button>
          </div>
       </div>
       <?php
@@ -230,13 +230,10 @@ include('./include/header-banner.php');
                }
 
                ?>
-               <div class="col-md-4">
-                  <div class="loader-wrapper">
-                     <span class="loader"><span class="loader-inner"></span></span>
-                  </div>
+               <div class="col-md-4 d-flex align-items-stretch">
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid img-thumbnail cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

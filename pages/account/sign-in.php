@@ -1,9 +1,5 @@
 <?php
 
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
-ini_set('max_execution_time', 300);
-
 include('./include/header-banner.php');
 
 require_once('./pages/account/config.php');
@@ -24,6 +20,10 @@ $params = array(
   'response_type' => 'code',
   'state' => $_SESSION['state'],
 );
+
+if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
+    $_SESSION['logoutsuccess'] = "<p style=\"color: red\">You are already logged in!</p>";
+}
 
 ?>
 <style>
@@ -55,6 +55,17 @@ $params = array(
                         <form action="?login=1" method="post" class="mt-4">
                             <div class="form-group">
                                 <div class="input-group">
+                                <?php if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])): ?>
+                                    <a href="#" class="btn btn-block btn-discord disabled">
+                                     <i class="fab fa-discord"></i> &nbsp; <?php echo $lang['login-discord']; ?>
+                                   </a>
+                                    <a href="#" class="btn btn-block btn-danger disabled">
+                                        <i class="fab fa-google"></i> &nbsp; <?php echo $lang['login-google']; ?>
+                                    </a>
+                                    <a href="#" class="btn btn-block btn-secondary disabled">
+                                        <i class="fab fa-github"></i> &nbsp;Login with GitHub
+                                    </a>
+                                <?php else: ?>
                                     <a href="<?php echo $dcCallback;?>" class="btn btn-block btn-discord">
                                      <i class="fab fa-discord"></i> &nbsp; <?php echo $lang['login-discord']; ?>
                                    </a>
@@ -64,6 +75,7 @@ $params = array(
                                     <a href="https://github.com/login/oauth/authorize?<?php echo http_build_query($params);?>" class="btn btn-block btn-secondary">
                                         <i class="fab fa-github"></i> &nbsp;Login with GitHub
                                     </a>
+                                <?php endif; ?>
                                 </div>
                             </div>
                             <p class="text-center mt-4 text-muted">

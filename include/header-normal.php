@@ -206,32 +206,32 @@ $currentPage = $_GET['page'];
          </span>
          <?php
 
-         if (!empty($_SESSION['user_id']) || !empty($_SESSION['user_uuid'])) {
-            echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
+         if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
+            echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary rounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          } else {
-            echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
+            echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary rounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          }
 
          ?>
          <form id="demo-2" action="/search/" method="GET">
-            <input name="query" class="btn btn-outline-primary" id="query" type="search" placeholder="Search">
+            <input name="query" class="btn btn-outline-primary rounded" id="query" type="search" placeholder="Search">
             <label for="query"></label>
             <button type="submit" name="submit-search" hidden></button>
          </form>
          <?php
 
-         if (empty($_SESSION['user_id'])) {
+         if (empty($_COOKIE['f_val']) && empty($_COOKIE['f_key'])) {
             echo '<span class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
-                  <button type="submit" class="btn btn-outline-primary"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] .' <span class="caret"></span></button>
+                  <button type="submit" class="btn btn-outline-primary rounded"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] .' <span class="caret"></span></button>
                   </form>
                </span>';
          } else {
             echo '<form action="/account/" method="post">
-                  <button type="submit" class="btn btn-outline-primary"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
+                  <button type="submit" class="btn btn-outline-primary rounded"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
                   </form>';
             echo '<form action="/account/logout/" method="post">
-                  <button type="submit" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
+                  <button type="submit" class="btn btn-primary rounded"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
                   <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
                   </form>';
          }
