@@ -118,6 +118,11 @@ if($userDB->rowCount() > 0) {
 
 	header("Location: /pages/account/helper/account.check.php");
 }
+function randomChars($length = 25)
+{
+  $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  return substr(str_shuffle($permitted_chars), 0, $length);
+}
 exit();
 die();
 
