@@ -135,8 +135,8 @@ if($_SESSION['access_token']) {
         $sessionInsert = $pdo->prepare("INSERT INTO sessions (uuid, newid) VALUES (?, ?)");
         $sessionInsert->execute(array($v5uuid, $sessionKey));
 
-        $insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, twitter, github, main_ip) VALUES (:sid, '$v5uuid', :id, 'GitHub', :email, :picture, :locale, :description, :twitter, :github, :mainip)");
-        $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => $description, 'twitter' => $twitter, 'github' => $user->login, 'mainip' => $main_ip, 'id' => $user->id, 'locale' => $location));
+        $insertDB = $pdo->prepare("INSERT INTO user (name, sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, twitter, github, main_ip) VALUES (:name, :sid, '$v5uuid', :id, 'GitHub', :email, :picture, :locale, :description, :twitter, :github, :mainip)");
+        $insertDB->execute(array('name' => $user->login,'sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => $description, 'twitter' => $twitter, 'github' => $user->login, 'mainip' => $main_ip, 'id' => $user->id, 'locale' => $location));
 
         $servernameP = $mysqlPayment['servername'];
         $usernameP = $mysqlPayment['username'];

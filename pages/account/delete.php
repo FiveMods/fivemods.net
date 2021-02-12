@@ -347,8 +347,8 @@ if (!empty($_POST['token'])) {
         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $stmt = $pdo->prepare("DELETE FROM user WHERE oauth_uid = ?");
-        $stmt->execute(array($userid));
+        $stmt = $pdo->prepare("DELETE FROM user WHERE uuid = ?");
+        $stmt->execute(array($_SESSION['uuid']));
         echo "Record deleted successfully";
       } catch(PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();

@@ -104,8 +104,8 @@ if($userDB->rowCount() > 0) {
   $sessionInsert = $pdo->prepare("INSERT INTO sessions (uuid, newid) VALUES (?, ?)");
   $sessionInsert->execute(array($v5uuid, $sessionKey));
 
-	$insertDB = $pdo->prepare("INSERT INTO user (sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, main_ip) VALUES (:sid, '$v5uuid', :id, 'Google LLC.', :email, :picture, :locale, :description, :mainip)");
-  $insertDB->execute(array('sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => "No Description Set.", 'mainip' => $main_ip, 'id' => $uid, 'locale' => "-"));
+	$insertDB = $pdo->prepare("INSERT INTO user (name, sid, uuid, oauth_uid, oauth_provider, email, picture, locale, description, main_ip) VALUES (:name, :sid, '$v5uuid', :id, 'Google LLC.', :email, :picture, :locale, :description, :mainip)");
+  $insertDB->execute(array('name' => $uname,'sid' => $sid, 'email' => $email, 'picture' => $fileName, 'description' => "No Description Set.", 'mainip' => $main_ip, 'id' => $uid, 'locale' => "-"));
 
 	$servernameP = $mysqlPayment['servername'];
   $usernameP = $mysqlPayment['username'];
