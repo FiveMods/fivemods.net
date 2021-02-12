@@ -38,7 +38,7 @@ $apiURLBase = 'https://api.github.com/';
 session_start();
 
 // When Github redirects the user back here, there will be a "code" and "state" parameter in the query string
-if($_GET['code']) {
+if(isset($_GET['code'])) {
   // Verify the state matches our stored state
   if(!isset($_GET['state']) || $_SESSION['state'] != $_GET['state']) {
     header('Location: ' . $_SERVER['PHP_SELF']);
@@ -167,7 +167,11 @@ function apiRequest($url, $post=FALSE, $headers=array()) {
   $response = curl_exec($ch);
   return json_decode($response);
 }
-
+function randomChars($length = 25)
+{
+  $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  return substr(str_shuffle($permitted_chars), 0, $length);
+}
 $pdo = null;
 $pdoPayment = null;
 ?>
