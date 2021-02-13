@@ -21,20 +21,22 @@ $selectUsername->execute(array($fetch['uuid']));
 $selFetch = $selectUsername->fetch();
 $username = str_replace(" ", "_", $selFetch['name']);
 
+$nameCheck = $pdo->prepare("SELECT * FROM user WHERE name = ?");
+$nameCheck->execute(array($username));
+
 if(!preg_match("/^[A-Za-z0-9_]{3,24}$/im", $username)) {
     $username = "User" . "_". randomChars(6);
-} else if($selectUsername->rowCount() > 1) {
+} else if($nameCheck->rowCount() > 1) {
     $username = $username . "_". randomChars(6);
 }
-
 $insert = $pdo->prepare("UPDATE user SET name = :name WHERE uuid = :uuid");
 $insert->execute(array("name" => $username, "uuid" => $fetch['uuid']));
 
 $pdo = null;
+
 header("Location: /account/");
 exit();
 die();
-
 
 function randomChars($length) {
     $permitted_chars = '0123456789';
