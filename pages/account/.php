@@ -42,23 +42,23 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user mr-2">
 								<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
 								<circle cx="12" cy="7" r="4"></circle>
-							</svg>Profile Information
+							</svg><?php echo $lang['profile-information']; ?>
 						</a>
 						<a href="#account" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings mr-2">
 								<circle cx="12" cy="12" r="3"></circle>
 								<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-							</svg>Account Settings
+							</svg><?php echo $lang['acc-settings']; ?>
 						</a>
 						<a href="#socials" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2">
 								<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-							</svg> Your Socials
+							</svg> <?php echo $lang['your-socials']; ?>
 						</a>
 						<a href="#security" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield mr-2">
 								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-							</svg>Security
+							</svg><?php echo $lang['security']; ?>
 						</a>
 						<!-- <a href="#notification" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell mr-2">
@@ -70,7 +70,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card mr-2">
 								<rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
 								<line x1="1" y1="10" x2="23" y2="10"></line>
-							</svg>Billing
+							</svg><?php echo $lang['billing-settings']; ?>
 						</a>
 						<a href="#purchased" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart mr-2">
@@ -78,7 +78,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<circle cx="20" cy="21" r="1"></circle>
 								<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
 							</svg>
-							Purchased items
+							<?php echo $lang['purchased-items']; ?>
 						</a>
 						<a href="#uploads" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud mr-2">
@@ -86,7 +86,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<line x1="12" y1="12" x2="12" y2="21"></line>
 								<path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
 								<polyline points="16 16 12 12 8 16"></polyline>
-							</svg>My Uploads
+							</svg><?php echo $lang['my-uploads']; ?>
 						</a>
 					</nav>
 				</div>
@@ -151,29 +151,29 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 				</div>
 				<div class="card-body tab-content">
 					<div class="tab-pane active" id="profile">
-						<h6>PROFILE INFORMATION</h6>
+						<h6><?php echo strtoupper($lang['profile-information']); ?></h6>
 						<hr>
 						<form action="/pages/account/helper/profile.edit.php" method="post">
 							<div class="form-group">
 								<label for="email">Email <a href="#info" class="text text-danger">*</a> </label>
 								<input type="text" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $vals['email']; ?>" required>
-								<small id="emailHelp" class="form-text text-muted">Your email which is used to send you the newest updates and account updates, if you enabled it in the notifications tab.</small>
+								<small id="emailHelp" class="form-text text-muted"><?php echo $lang['email-desc']; ?></small>
 							</div>
 							<div class="form-group">
-								<label for="bio">Description</label>
+								<label for="bio"><?php echo $lang['description']; ?></label>
 								<textarea class="form-control autosize" name="desc" id="textarea" maxlength="100" placeholder="Write something about you" style="overflow: hidden; overflow-wrap: break-word; resize: none; height: 62px;"><?php echo $vals['description']; ?></textarea>
-								<small id="emailHelp" class="form-text text-muted">Maximal characters: 100</small>
+								<small id="emailHelp" class="form-text text-muted"><?php echo $lang['max-characters']; ?>: 100</small>
 							</div>
 							<div class="form-group">
 								<label for="url">Website</label>
 								<input type="text" class="form-control" name="website" id="noSpace" maxlength="64" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" name="website" placeholder="Enter your website address" value="<?php echo $vals['website']; ?>">
 							</div>
 							<div class="form-group">
-								<label for="location">Location</label>
+								<label for="location"><?php echo $lang['location']; ?></label>
 								<input type="text" class="form-control" name="location" id="location" minlength="2" maxlength="48" placeholder="Enter your location" value="<?php echo $vals['locale']; ?>">
 							</div>
 							<div class="form-group small text-muted" id="info">
-								Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
+							<?php echo $lang['fill-fields']; ?> <span class="text text-danger">*</span>
 							</div>
 							<input type="text" name="call" value="callFunc" hidden>
 							<button type="submit" class="btn btn-primary">Save & Update</button>
@@ -182,21 +182,21 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<!-- <p class="mt-4 form-group small text-muted">Mit <span class="text text-danger">*</span> gekennzeichnete Felder sind sogennante Pflichtfelder und müssen ausgefüllt werden.</p> -->
 					</div>
 					<div class="tab-pane fade" id="account">
-						<h6>ACCOUNT SETTINGS</h6>
+						<h6><?php echo strtoupper($lang['acc-settings']); ?></h6>
 						<hr>
 						<form action="/pages/account/helper/account.edit.php" method="post">
 							<div class="form-group">
 								<label for="username">Username <a href="#info" class="text text-danger">*</a></label>
 								<input type="text" class="form-control" id="noSpace2" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
-								<small id="usernameHelp" class="form-text text-muted">After changing your username, your old username becomes available for anyone else to claim.</small>
+								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['username-desc']; ?></small>
 							</div>
 							<div class="form-group">
-								<label for="username">Global banner</label>
+								<label for="username"><?php echo $lang['banner']; ?></label>
 								<input type="text" class="form-control" name="gbanner" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg|webp)" aria-describedby="gbanner" value="<?php echo $vals['banner']; ?>" placeholder="Enter a valid image url to your prefered banner. Resolution: 1900x70">
-								<small id="usernameHelp" class="form-text text-muted">You can change the global banner in the header to your prefered design. Just enter a valid image url.</small>
+								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['banner-desc']; ?></small>
 								<input type="text" name="call" value="callFunc" hidden>
 								<div class="form-group small text-muted mt-3" id="info">
-									Fields marked with <span class="text text-danger">*</span> are mandatory fields and must be filled out.
+								<?php echo $lang['fill-fields']; ?> <span class="text text-danger">*</span>
 								</div>
 								<button type="submit" class="btn btn-primary">Save & Update</button>
 							</div>
@@ -224,14 +224,14 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form action="" method="post">
 							<hr>
 							<div class="form-group">
-								<label class="d-block text-danger">Delete Account</label>
-								<p class="text-muted font-size-sm">Once you delete your account, there is no going back. Please be certain.</p>
+								<label class="d-block text-danger"><?php echo $lang['delete-account']; ?></label>
+								<p class="text-muted font-size-sm"><?php echo $lang['delete-acc-desc']; ?></p>
 							</div>
-							<a href="/account/delete/" class="btn btn-danger" type="button">Delete Account</a>
+							<a href="/account/delete/" class="btn btn-danger" type="button"><?php echo $lang['delete-account']; ?></a>
 						</form>
 					</div>
 					<div class="tab-pane fade" id="socials">
-						<h6>YOUR SOCIALS</h6>
+						<h6><?php echo strtoupper($lang['your-socials']); ?></h6>
 						<hr>
 						<form action="/pages/account/helper/socials.edit.php" method="post">
 							<div class="form-group">
@@ -291,26 +291,26 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<!-- <p class="mt-4 form-group small text-muted">Mit <span class="text text-danger">*</span> gekennzeichnete Felder sind sogennante Pflichtfelder und müssen ausgefüllt werden.</p> -->
 					</div>
 					<div class="tab-pane fade" id="security">
-						<h6>SECURITY SETTINGS</h6>
+						<h6><?php echo strtoupper($lang['security']); ?></h6>
 						<hr>
 						<?php
 
 						if ($vals['2fa'] == "0") {
 							echo '<form>
 							<div class="form-group">
-								<label class="d-block">Two Factor Authentication</label>
+								<label class="d-block">' . $lang['tfa'] . '</label>
 								<a href="/account/two-factor-authentication/" class="btn btn-info">Enable Two-Factor Authentication</a>
-								<p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
+								<p class="small text-muted mt-2">' . $lang['tfa-desc'] . '</p>
 							</div>
 						</form>';
 						} else {
 							echo '<form action="/pages/account/helper/2fa.disable.php" method="post">
 							<div class="form-group">
-							<label class="d-block">Two Factor Authentication</label>
+							<label class="d-block">' . $lang['tfa'] . '</label>
 							<p class="small text-muted mt-2">Two-factor authentication is currenly enabled. this allows you to participate in our partner program and secures your account.</p>
 							<input type="text" name="call" value="callFunc" hidden>
 							<button type="submit" class="btn btn-danger">Disable Two Factor Authentication</button>
-							<p class="small text-muted mt-2">Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.</p>
+							<p class="small text-muted mt-2">' . $lang['tfa-desc'] . '</p>
 						</div>
 						</form>';
 						}
@@ -336,7 +336,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 					</div>
 					<!-- @Oetkher -->
 					<div class="tab-pane fade" id="billing">
-						<h6>BILLING SETTINGS</h6>
+						<h6><?php echo strtoupper($lang['billing-settings']); ?></h6>
 						<hr>
 						<?php
 						$ch = curl_init();
@@ -354,23 +354,23 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						?>
 						<div class="form-group">
 							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
-							<div class="small text-muted mb-3">Your current balance. Terms of Use apply.</div>
+							<div class="small text-muted mb-3"><?php echo $lang['balance-desc']; ?></div>
 						</div>
 						<label class="d-block mb-0">Payments</label>
-						<a href="/payment/deposit" class="btn btn-success" type="button"><i class="fas fa-plus"></i>  Deposit money</a>
+						<a href="/payment/deposit" class="btn btn-success" type="button"><i class="fas fa-plus"></i>  <?php echo $lang['deposit']; ?></a>
                         <hr>
-						<label class="d-block mb-0">Payout</label>
-						<small class="text-danger">IMPORTANT: Minimum payout amount: 10.00€</small>
+						<label class="d-block mb-0"><?php echo $lang['payout']; ?></label>
+						<small class="text-danger"><?php echo $lang['payout-desc']; ?></small>
 						<br>
 						<?php
 						if (floatval($response) > 10.00)
-							echo '<a href="/payment/payout" class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  Request payout</a>';
+							echo '<a href="/payment/payout" class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  ' . $lang['req-payout'] . '</a>';
 						else
-							echo '<button class="btn btn-info" disabled><i class="fab fa-paypal"></i>  Request payout</button>';
+							echo '<button class="btn btn-info" disabled><i class="fab fa-paypal"></i>  ' . $lang['req-payout'] . '</button>';
 						?>
 						<hr>
 						<div class="form-group mb-0">
-							<label class="d-block">Income History</label>
+							<label class="d-block"><?php echo $lang['income-history']; ?></label>
 							<div class="border border-gray-500 bg-gray-200 p-3 text-center font-size-sm">
 
 								<div class="container">
@@ -400,7 +400,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 													</tr>';
 										}
 									} else {
-										echo 'There is no current income.';
+										echo $lang['no-income'];
 									}
 
 									?>
@@ -413,7 +413,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						</div>
 					</div>
 					<div class="tab-pane fade" id="uploads">
-						<h6>MY UPLOADS</h6>
+						<h6><?php echo strtoupper($lang['my-uploads']); ?></h6>
 						<hr>
 						<div class="container">
 							<table class="table">
@@ -490,7 +490,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						</div>
 					</div>
 					<div class="tab-pane fade" id="purchased">
-						<h6>MY PURCHASES</h6>
+						<h6><?php echo strtoupper($lang['purchased-items']); ?></h6>
 						<hr>
 						<div class="container">
 							<table class="table">

@@ -174,11 +174,46 @@
         "sp-sp" => "中文(簡體) - 新加坡", //Chinese (Simplified) - Singapore
         "login-google" => "用 Google 登入" ,
         "login-discord" => "用 Discord 登入",
+        "login-github" => "用 GitHub 登入", // Login via GitHub
         "register-google" => "以 Google 註冊",
         "register-discord" => "以 Discord 註冊",
         "ban-policy" => "封鎖政策",
         "free-download" => "免費下載",
         "description" => "簡介",
+        "dev-settings" => "Developer Settings", // Developer Settings
+        "client-token" => "Client Token", // Client Token
+        "client-secret" => "Client Secret", // Client Secret
+        "generate-token" => "Generate a new Client Secret", // Generate a new Client Secret
+        "token-warning" => "WARNING! With generating a new Client Secret, your old secret cant be used anymore. Are you sure you want to do that?", // WARNING! With generating a new Client Secret, your old secret cant be used anymore. Are you sure you want to do that?
+        "coming-soon" => "Coming soon", // Coming soon
+        "upload-submit1" => "With pressing the submit button down below you accept the following:", // With pressing the submit button down below you accept the following:
+        "upload-submit2" => "Failures can result in a removal of the specific mod or your account.", // Failures can result in a removal of the specific mod or your account.
+        "accept-and-upload" => "Accept & Upload", // Accept & Upload
+        "profile-information" => "Profile Information", // Profile Information
+        "email-desc" => "Your email which is used to send you the newest updates and account updates, if you enabled it in the notifications tab.", // Your email which is used to send you the newest updates and account updates, if you enabled it in the notifications tab.
+        "max-characters" => "Maximal Characters", // Maximal Characters
+        "location" => "Location", // Location
+        "acc-settings" => "Account Settings", // Account Settings
+        "username-desc" => "After changing your username, your old username becomes available for anyone else to claim.", // After changing your username, your old username becomes available for anyone else to claim.
+        "banner" => "Gobal banner", // Gobal banner
+        "banner-desc" => "You can change the global banner in the header to your prefered design. Just enter a valid image url.", // You can change the global banner in the header to your prefered design. Just enter a valid image url.
+        "delete-account" => "Delete Account", // Delete Account
+        "delete-acc-desc" => "Once you delete your account, we are not able to restore it anymore.", // Once you delete your account, we are not able to restore it anymore. 
+        "your-socials" => "Your Socials", // Your Socials
+        "security" => "Security", // Security
+        "tfa" => "Two Factor Authentication", // Two Factor Authentication
+        "enable" => "Enable", // Enable
+        "tfa-desc" => "Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.", // Two-factor authentication adds an additional layer of security to your account by requiring more than just a password to log in.
+        "billing-settings" => "Billing Settings", // Billing Settings
+        "balance-desc" => "Your current balance. Terms of Use apply.", // Your current balance. Terms of Use apply.
+        "deposit" => "Deposit Money", // Deposit Money
+        "payout" => "Payout", // Payout
+        "payout-desc" => "IMPORTANT: Minimum payout amount: 10.00€", // IMPORTANT: Minimum payout amount: 10.00€
+        "req-payout" => "Request Payout", // Request Payout
+        "income-history" => "Income history", // Income history
+        "no-income" => "There is no current income.", // There is no current income.
+        "purchased-items" => "Purchased Items", // Purchased Items
+        "my-uploads" => "My Uploads", // My Uploads
 
     );
 ?>

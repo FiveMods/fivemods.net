@@ -6,7 +6,7 @@
                <br>Affiliate
             </h1>
             <p>
-               <a href="#!" class="btn btn-primary rounded btn-lg mt-5 mb-5 ">Coming soon</a>
+               <a href="#!" class="btn btn-primary rounded btn-lg mt-5 mb-5 "><?php echo $lang['coming-soon']; ?></a>
             </p>
             <div class="btn-container-wrapper p-relative d-block  zindex-1">
                <hr>
