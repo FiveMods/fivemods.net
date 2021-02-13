@@ -73,7 +73,7 @@ if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
                                         <i class="fab fa-google"></i> &nbsp; <?php echo $lang['login-google']; ?>
                                     </a>
                                     <a href="https://github.com/login/oauth/authorize?<?php echo http_build_query($params);?>" class="btn btn-block btn-secondary">
-                                        <i class="fab fa-github"></i> &nbsp;Login with GitHub
+                                        <i class="fab fa-github"></i> &nbsp; <?php echo $lang['login-github']; ?>
                                     </a>
                                 <?php endif; ?>
                                 </div>
