@@ -162,6 +162,7 @@
         "it-it" => "Italian - Italy", //Italian - Italy
         "gr-gr" => "Greek - Greece", //Greek - Greece
         "nl-nl" => "Dutch - Netherlands", //Dutch - Netherlands
+        "no-no" => "Norwegian - Norway", // Norwegian - Norway
         "en-gb" => "English - Great Britain", //English - Great Britain
         "ru-ru" => "Russian - Russia", //Russian - Russia
         "pl-pl" => "Polish - Poland",

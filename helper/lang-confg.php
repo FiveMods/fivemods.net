@@ -23,6 +23,8 @@
             require_once "languages/PL.php";
         } elseif ($_SESSION['language'] == "NL") {
             require_once "languages/NL.php";
+        } elseif ($_SESSION['language'] == "NO") {
+            require_once "languages/NO.php";
         } else {
             require_once "languages/US.php";
         }

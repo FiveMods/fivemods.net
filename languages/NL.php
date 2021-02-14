@@ -162,6 +162,7 @@
         "it-it" => "Italiaans - Italië", //Italian - Italy
         "gr-gr" => "Grieks - Griekenland", //Greek - Greece
         "nl-nl" => "Nederlands - Nederland", //Dutch - Netherlands
+        "no-no" => "Norwegian - Norway", // Norwegian - Norway
         "en-gb" => "Engels - Verenigd Koningkrijk", //English - Great Britain
         "ru-ru" => "Russisch - Rusland", //Russian - Russia
         "pl-pl" => "Pools -Polen",

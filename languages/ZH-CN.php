@@ -160,6 +160,7 @@
         "it-it" => "意大利文 - 意大利", //Italian - Italy
         "gr-gr" => "希腊文 - 希腊", //Greek - Greece
         "nl-nl" => "荷兰文 - 荷兰", //Dutch - Netherlands
+        "no-no" => "Norwegian - Norway", // Norwegian - Norway
         "en-gb" => "英文 - 英国", //English - Great Britain
         "ru-ru" => "俄文 - 俄罗斯", //Russian - Russia
         "pl-pl" => "抛光 - 波兰",

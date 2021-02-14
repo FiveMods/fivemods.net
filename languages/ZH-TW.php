@@ -162,6 +162,7 @@
         "it-it" => "意大利文 - 意大利", //Italian - Italy
         "gr-gr" => "希臘文 - 希臘", //Greek - Greece
         "nl-nl" => "荷蘭文 - 荷蘭", //Dutch - Netherlands
+        "no-no" => "Norwegian - Norway", // Norwegian - Norway
         "en-gb" => "英文 - 英國", //English - Great Britain
         "ru-ru" => "俄文 - 俄羅斯", //Russian - Russia
         "pl-pl" => "抛光 - 波兰",
