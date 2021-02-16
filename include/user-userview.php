@@ -190,7 +190,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    <div class="row">
       <div class="col-md-4">
          <div class="profile-img">
-            <img src="<?php echo $picture; ?>" class="rounded img-fluid" alt="<?php echo $username; ?>-Profile Picture" />
+            <img src="https://img-cdn.fivemods.net/unsafe/229x229/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $picture; ?>" class="rounded img-fluid" alt="<?php echo $username; ?>-Profile Picture" />
          </div>
       </div>
       <div class="col-md-6">
@@ -378,7 +378,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
             <div class="col-md-4 d-flex align-items-stretch">
                <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                   <a href="/product/<?php echo $article['m_id']; ?>/">
-                     <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                     <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                      <?php
                      if (!empty($article['m_price'])) {
                         echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

@@ -42,13 +42,13 @@ $sites = ceil($total / $perPage);
 
 
 if (isset($_SESSION['downloadMod'])) {
-   $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
-   $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
-   while ($row = $downloadMod->fetch()) {
-      $downloadLink = $row['m_downloadlink'];
-   }
-   header("Location: $downloadLink");
-   unset($_SESSION['downloadMod']);
+    $downloadMod = $pdo->prepare("SELECT m_downloadlink FROM mods WHERE m_id = :id");
+    $downloadMod->execute(array("id" => $_SESSION['lastDownload']));
+    while ($row = $downloadMod->fetch()) {
+        $downloadLink = $row['m_downloadlink'];
+    }
+    header("Location: $downloadLink");
+    unset($_SESSION['downloadMod']);
 }
 
 
@@ -92,7 +92,7 @@ if (isset($_SESSION['downloadMod'])) {
                                     <div class="col-md-4 mb-3">
                                         <a href="/search/?query=Vehicles&cat=1&submit-search=">
                                             <div class="card container-img rounded shadow1">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['vehicles']; ?>-348px-217px-cover" title="<?php echo $lang['vehicles']; ?>" src="https://wallpaperaccess.com/full/2192755.jpg">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['vehicles']; ?>-348px-217px-cover" title="<?php echo $lang['vehicles']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://wallpaperaccess.com/full/2192755.jpg">
                                                 <div class="text-block">
                                                     <h4><?php echo $lang['vehicles']; ?></h4>
                                                 </div>
@@ -102,7 +102,7 @@ if (isset($_SESSION['downloadMod'])) {
                                     <div class="col-md-4 mb-3">
                                         <a href="/search/?query=Maps&cat=1&submit-search=">
                                             <div class="card container-img rounded shadow1">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['maps']; ?>-348px-217px-cover" title="<?php echo $lang['maps']; ?>" src="https://media.sketchfab.com/models/fe9ddaaea413487395b9f0656fd0afd7/thumbnails/36fefca8f37d405689ed7f618dc39857/62c7f8001ffc4936ab905945ad9264dd.jpeg">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['maps']; ?>-348px-217px-cover" title="<?php echo $lang['maps']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://media.sketchfab.com/models/fe9ddaaea413487395b9f0656fd0afd7/thumbnails/36fefca8f37d405689ed7f618dc39857/62c7f8001ffc4936ab905945ad9264dd.jpeg">
                                                 <div class="text-block">
                                                     <h4><?php echo $lang['maps']; ?></h4>
                                                 </div>
@@ -112,7 +112,7 @@ if (isset($_SESSION['downloadMod'])) {
                                     <div class="col-md-4 mb-3">
                                         <a href="/search/?query=Weapons&cat=1&submit-search=">
                                             <div class="card container-img rounded shadow1">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['weapons']; ?>-348px-217px-cover" title="<?php echo $lang['weapons']; ?>" src="https://img.gta5-mods.com/q95/images/real-weapons-v-animated/46f77a-20161130020713_1.jpg">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['weapons']; ?>-348px-217px-cover" title="<?php echo $lang['weapons']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://img.gta5-mods.com/q95/images/real-weapons-v-animated/46f77a-20161130020713_1.jpg">
                                                 <div class="text-block">
                                                     <h4><?php echo $lang['weapons']; ?></h4>
                                                 </div>
@@ -126,7 +126,7 @@ if (isset($_SESSION['downloadMod'])) {
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
                                             <a href="/search/?query=Peds&cat=1&submit-search=">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['peds']; ?>-348px-217px-cover" title="<?php echo $lang['peds']; ?>" src="https://libertycity.net/uploads/download/gta5_newskins/fulls/an4ttg7sk621gulo1957qdc9u0/15388334076961_32d199-grand-theft-auto-v-screenshot.jpg">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['peds']; ?>-348px-217px-cover" title="<?php echo $lang['peds']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://libertycity.net/uploads/download/gta5_newskins/fulls/an4ttg7sk621gulo1957qdc9u0/15388334076961_32d199-grand-theft-auto-v-screenshot.jpg">
                                                 <div class="text-block">
                                                     <h4><?php echo $lang['peds']; ?></h4>
                                                 </div>
@@ -136,7 +136,7 @@ if (isset($_SESSION['downloadMod'])) {
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
                                             <a href="/search/?query=Liveries&cat=1&submit-search=">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['liveries']; ?>-348px-217px-cover" title="<?php echo $lang['liveries']; ?>" src="https://wallpapercave.com/wp/wp3949177.png">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['liveries']; ?>-348px-217px-cover" title="<?php echo $lang['liveries']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://wallpapercave.com/wp/wp3949177.png">
                                                 <div class="text-block">
                                                     <h4><?php echo $lang['liveries']; ?></h4>
                                                 </div>
@@ -209,7 +209,7 @@ if (isset($_SESSION['downloadMod'])) {
                     <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
                             <a href="/product/<?php echo $article['m_id']; ?>/">
-                                <img class="card-img-top img-fluid cover rounded" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                                <img class="card-img-top img-fluid cover rounded" async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
 
                             </a>
                             <div class="card-body">

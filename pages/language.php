@@ -78,6 +78,10 @@ if (isset($_GET['is'])) {
     } 
 }
 
+if (!empty($_GET['callbackURI'])) {
+    header('location: '. $_GET['callbackURI']);
+}
+
 if ($_SESSION['selfselect'] == '1') {
     $cookie_name = "language_preference";
     $cookie_value = $_SESSION['selfselectlang'];
@@ -87,7 +91,7 @@ if ($_SESSION['selfselect'] == '1') {
 ?>
 <section class="mb-0 mt-5">
     <section class="container pt-4 my-md-5 pt-md-5 text-center border-top">
-        <?php echo $_SESSION['langupdate']; unset($_SESSION['langupdate']); ?>
+        <?php echo $_SESSION['langupdate'];?>
         <div class="row">
             <div class="col-6 col-md" style="text-align: left;">
                 <h5><?php echo $lang['europe']; ?></h5>
@@ -161,3 +165,4 @@ if ($_SESSION['selfselect'] == '1') {
         <small>We are happy about any help with our translations - via <a href="/ref?rdc=https://github.com/FiveMods">GitHub</a>.</small>
     </section>
 </section>
+<?php unset($_SESSION['langupdate']); ?>

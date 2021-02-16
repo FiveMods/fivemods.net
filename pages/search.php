@@ -192,7 +192,7 @@ include('./include/header-banner.php');
             <div class="col-md-4">
                <div class="card mb-4 shadow-sm">
                   <a href="/user/<?php echo $display_users['name']; ?>/">
-                  <img class="card-img-top img-fluid small mt-3 border border-success rounded-circle" src="<?php echo $display_users['picture']; ?>" alt="<?php echo $display_users['name']; ?>-IMAGE">
+                  <img class="card-img-top img-fluid small mt-3 border border-success rounded-circle" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $display_users['picture']; ?>" alt="<?php echo $display_users['name']; ?>-IMAGE">
                   </a>
                   <hr>
                   <div class="card-body">
@@ -233,7 +233,7 @@ include('./include/header-banner.php');
                <div class="col-md-4 d-flex align-items-stretch">
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
-                        <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                        <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
                         <?php 
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';

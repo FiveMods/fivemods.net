@@ -41,7 +41,7 @@ $result->execute();
                        '.$insert.'
                        <a href="/user/'.$username.'/">
                        <div class="card-body">
-                           <p class="card-text"><img src="'.$userimg.'" width="75px" class="img-fluid rounded" alt="'.$username.'-Profile Picture"></img></p>
+                           <p class="card-text"><img src="https://img-cdn.fivemods.net/unsafe/75x75/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/'.$userimg.'" class="img-fluid rounded" alt="'.$username.'-Profile Picture"></img></p>
                        </div>
                        <a href="/user/'.$username.'/" class="btn btn-primary btn-block btn-sm">'.$lang['visit']. ' '.$username.'</a>
                    </div>

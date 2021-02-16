@@ -70,7 +70,7 @@
                      <input type="text" name="contact" value="1" hidden>
                      <input type="text" name="userid" value="1" hidden>
                      <button type="submit" class="btn btn-primary">'.$lang['submit'].'</button> <br>
-                     <span style="font-size: 10px;">With pressing the button "'.$lang['submit'].'" you confirm our <a href="/ban-policy/">'.$lang['ban-policy'].'</a> as well as our <a href="/terms-of-service/">'.$lang['terms-of-service'].'</a>.</span>
+                     <span style="font-size: 10px;">With pressing the button "'.$lang['submit'].'" you confirm our <a href="/legal/account-policy/">'.$lang['account-policy'].'</a> as well as our <a href="/terms-of-service/">'.$lang['terms-of-service'].'</a>.</span>
                   </div>
                </div>
             </form>

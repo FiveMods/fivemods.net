@@ -14,10 +14,10 @@ $rdc = $CurPageURL;
 $currentPage = $_GET['page'];
 
 ?>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark f-bg-dark fixed-top">
    <div class="container">
       <a class="navbar-brand mr-4" href="/">
-         <img src="/static-assets/img/brand-side.png" alt="Brand Logo" width="111.9px" height="40px">
+         <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-side.png" alt="Brand Logo" width="111.9px" height="40px">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
