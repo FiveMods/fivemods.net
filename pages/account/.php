@@ -221,6 +221,28 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<p class="font-size-sm text-muted">You are using <b><?php echo $vals['oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
+                        <form action="/pages/account/helper/apikey.req.php" method="post">
+                            <hr>
+							<div class="form-group">
+								<label for="username">Current API key</label>
+								<input type="text" class="form-control" aria-describedby="usernameHelp" value="<?php echo $api_key; ?>" disabled>
+								<small id="usernameHelp" class="form-text text-muted"><?php echo $api_key_exp; ?></small>
+							</div>
+							<div class="form-group">
+                                <h6>Request a new API key</h6><br>
+
+								<label for="username">Expires in</label>
+								<select class="form-control" name="key-exp" aria-describedby="gbanner" required>
+                                    <option value="1209600">2 Weeks</option>
+                                    <option value="2592000">1 Month</option>
+                                    <option value="7776000">3 Months</option>
+                                    <option value="15552000">6 Months</option>
+                                </select>
+								<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden><br>
+								<button type="submit" class="btn btn-primary">Request</button>
+							</div>
+						</form>
+                        
 						<form action="" method="post">
 							<hr>
 							<div class="form-group">

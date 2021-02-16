@@ -152,7 +152,6 @@ if ($_GET['id']) {
 
 
 ?>
-
 <style>
    code {
       margin-bottom: 1em;
@@ -237,9 +236,7 @@ if ($_GET['id']) {
    .center {
       text-align: center;
    }
-
-   /*body {font-family: Arial, Helvetica, sans-serif;}
-
+   
     #expandImg {
     border-radius: 5px;
     cursor: pointer;
@@ -248,109 +245,13 @@ if ($_GET['id']) {
 
     #expandImg:hover {opacity: 0.7;}
 
-    .modal {
-    display: none; 
-    position: fixed;  
-    z-index: 1; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.9); 
-    }
+   /* Modal Img */
+   .modal-img {
+      width: 200%;
+      height: auto;
+   }
 
-
-    .modal-content {
-    position: relative;
-    top: 15%;
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    z-index: 10;
-    }
-
-
-    #caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-    }
-
-
-    .modal-content, #caption {  
-    -webkit-animation-name: zoom;
-    -webkit-animation-duration: 0.6s;
-    animation-name: zoom;
-    animation-duration: 0.6s;
-    }
-
-    @-webkit-keyframes zoom {
-    from {-webkit-transform:scale(0)} 
-    to {-webkit-transform:scale(1)}
-    }
-
-    @keyframes zoom {
-    from {transform:scale(0)} 
-    to {transform:scale(1)}
-    }
-
-   
-    .close {
-    position: absolute;
-    top: 100px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    }
-
-    .close:hover,
-    .close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-    }
-
-    @media only screen and (max-width: 700px){
-        .modal-content {
-            width: 100%;
-        }
-    }
-*/
 </style>
-
-<!-- <div id="myModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="img01">
-  <div id="imgCarousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
-        <?php
-        /*for ($i=1; $i < count($imgArray); $i++) {
-            echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
-        }*/
-        ?>
-    </ol>
-        <a class="carousel-control-prev" href="#imgCarousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#imgCarousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-</div> -->
 
 <section class="pt-5 pb-5">
    <div class="container">
@@ -415,7 +316,6 @@ if ($_GET['id']) {
                   </a>
                   <?php endif;?>
                </div>
-
             <br><br>
             <?php
 
