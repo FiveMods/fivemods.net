@@ -19,7 +19,7 @@ if($headerVals->rowCount() > 0) {
     overflow: hidden;
     background-size: cover;
     background-position: center;
-    background-image: url('<?php echo $banner; ?>');
+    background-image: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/<?php echo $banner; ?>');
 }
 </style>
 <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-light blinker fill">

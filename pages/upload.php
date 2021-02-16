@@ -266,21 +266,21 @@ function randomChars($length)
                            </div>
                            <div class="tab-pane fade" id="card-pill-3" role="tabpanel" aria-labelledby="card-tab-3">
                               <!-- Header -->
-                              <h2 class="center"><?php echo $lang['nearly-done']; ?></h2><br>
+                              <h2 class="text-center"><?php echo $lang['nearly-done']; ?></h2><br>
                               <div class="alert alert-warning final-upload" role="alert">
-                                 <p>With pressing the submit button down below you accept the following: </p>
+                                 <p><?php echo $lang['upload-submit1']; ?> </p>
                                  <div class="text-center">
                                     <a href="/upload-policy/"><?php echo $lang['upload-policy']; ?></a>
                                  </div>
                                  <p>
-                                    Failures can result in a removal of the specific mod or your account.
+                                 <?php echo $lang['upload-submit2']; ?>
                                  </p>
                               </div>
                               <br>
                               <!-- End Header -->
                               <div class="form-group d-flex justify-content-center">
                                  <input name="uploadMod" value="1" hidden>
-                                 <button type="submit" class="btn btn-primary" style="margin-right: 5px;">Accept & Upload</button>
+                                 <button type="submit" class="btn btn-primary" style="margin-right: 5px;"><?php echo $lang['accept-and-upload']; ?> </button>
                                  <button type="reset" class="btn btn-danger">Reset</button>
                               </div>
                            </div>

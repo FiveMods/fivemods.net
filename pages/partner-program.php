@@ -20,7 +20,7 @@
       <div class="row text-center pb-md-4 justify-content-sm-center ">
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-dollar-sign fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>
-            <h3 class="h4 mt-2 mb-3"></h3>
+            <h3 class="h4 mt-2 mb-3"><?php echo $lang['benefit1'];?></h3>
          </div>
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-percentage fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>

@@ -67,7 +67,19 @@ if (isset($_GET['is'])) {
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
       </div>';
+    } elseif ($_GET['is'] == "NO") {
+        $_SESSION['selfselect'] = "1";
+        $_SESSION['selfselectlang'] = "NO";
+        header('location: ./');
+        $_SESSION['langupdate'] = '<div class="alert alert-success mb-5" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
+      </div>';
     } 
+}
+
+if (!empty($_GET['callbackURI'])) {
+    header('location: '. $_GET['callbackURI']);
 }
 
 if ($_SESSION['selfselect'] == '1') {
@@ -79,7 +91,7 @@ if ($_SESSION['selfselect'] == '1') {
 ?>
 <section class="mb-0 mt-5">
     <section class="container pt-4 my-md-5 pt-md-5 text-center border-top">
-        <?php echo $_SESSION['langupdate']; unset($_SESSION['langupdate']); ?>
+        <?php echo $_SESSION['langupdate'];?>
         <div class="row">
             <div class="col-6 col-md" style="text-align: left;">
                 <h5><?php echo $lang['europe']; ?></h5>
@@ -107,6 +119,9 @@ if ($_SESSION['selfselect'] == '1') {
                     </li>
                     <li>
                         <!-- <s class="text-muted" href="?is=RU"><span class="flag-icon flag-icon-ru"></span> <?php echo $lang['ru-ru']; ?></s> -->
+                    </li>
+                    <li>
+                        <a class="text-muted" href="?is=NO"><span class="flag-icon flag-icon-no"></span> <?php echo $lang['no-no']; ?></a>
                     </li>
                     <li>
                         <a class="text-muted" href="?is=PL"><span class="flag-icon flag-icon-pl"></span> <?php echo $lang['pl-pl']; ?></a>
@@ -146,7 +161,8 @@ if ($_SESSION['selfselect'] == '1') {
             </div>
         </div>
         <hr>
-        <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/huskyy/">Huskyy</a> for translating the polish version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
+        <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/Huskyy/">Huskyy</a> for translating the polish version, <a href="/user/Fredney/">Fredney</a> for translating the norwegian version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
         <small>We are happy about any help with our translations - via <a href="/ref?rdc=https://github.com/FiveMods">GitHub</a>.</small>
     </section>
 </section>
+<?php unset($_SESSION['langupdate']); ?>

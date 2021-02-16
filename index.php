@@ -23,11 +23,11 @@ include('./helper/lang-confg.php');
 // include('./helper/geo-vpn.sub.php');
 
 if (empty($_GET['fm_design']) == "orange") {
-   $css_banner  = '/static-assets/img/banner.png';
+   $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
    $css_search = '#ff8637';
-   $brand_down = '/static-assets/img/brand-down.png';
-   $brand_side = '/static-assets/img/brand-side.png';
-   $favicon = '/static-assets/img/fivemods-favicon.png';
+   $brand_down = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-down.png';
+   $brand_side = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-side.png';
+   $favicon = 'https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/fivemods-favicon.png';
    $css_text = 'text text-gray';
 }
 
@@ -39,39 +39,36 @@ function isMobile()
 }
 
 
-if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
-   if(empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
+if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
+   if (empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
       setcookie("f_val", " ", time() - 3600, "/");
       setcookie("f_key", " ", time() - 3600, "/");
       header("Location: /account/logout/?url=invalid");
-	}
+   }
    echo '<script>console.log("Logged in");</script>';
 
    $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-   
+
    $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
    $selToken->execute(array($_COOKIE['f_key']));
-   if($selToken->rowCount() > 0) {
+   if ($selToken->rowCount() > 0) {
       $fetch = $selToken->fetch();
-      
+
       $timestamp = strtotime($fetch['created_at']);
-      if((($timestamp - 5) > $_COOKIE['f_val']) && (($timestamp + 5) < $_COOKIE['f_val'])) {
-         
+      if ((($timestamp - 5) > $_COOKIE['f_val']) && (($timestamp + 5) < $_COOKIE['f_val'])) {
+
          setcookie("f_val", " ", time() - 3600, "/");
          setcookie("f_key", " ", time() - 3600, "/");
          header("Location: /account/logout/?url=invalid");
-         
       } else {
          $_SESSION['uuid'] = $fetch['uuid'];
       }
    } else {
-      
+
       setcookie("f_val", " ", time() - 3600, "/");
       setcookie("f_key", " ", time() - 3600, "/");
       header("Location: /account/logout/?url=invalid");
-      
    }
-
 }
 
 ?>
@@ -147,7 +144,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   
+
    <meta http-equiv="content-language" content="en" />
    <meta http-equiv="Pragma" content="no-cache">
    <meta http-equiv="Cache-Control" content="no-cache">
@@ -181,7 +178,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 
       echo '
-         <title>'.$m_name.' - FiveMods.net</title>
+         <title>' . $m_name . ' - FiveMods.net</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
          <meta property="og:title" content="' . $m_name . '">
@@ -212,13 +209,13 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:title" content="FiveM & FiveMods Service Status">
          <meta property="og:description" content="Your page for the current FiveM and FiveMods outages">
          <meta property="og:site_name" content="FiveMods.net">
-         <meta property="og:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">
+         <meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/32x32/filters:format(webp):quality(95)/https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">
      
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
          <meta name="twitter:title" content="FiveM & FiveMods Service Status">
          <meta name="twitter:description" content="Your page for the current FiveM and FiveMods outages">
-         <meta name="twitter:image" content="https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
+         <meta name="twitter:image" content="https://img-cdn.fivemods.net/unsafe/32x32/filters:format(webp):quality(95)/https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
    } elseif (strpos($actual_link, 'user') != FALSE) {
 
       $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
@@ -241,7 +238,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
       echo '
-         <title>'.$user_username.' - FiveMods.net</title>
+         <title>' . $user_username . ' - FiveMods.net</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -261,8 +258,8 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta name="twitter:description" content="' . $user_description . '">
          <meta name="twitter:image" content="' . $user_picture . '">';
    } else {
-      echo '<meta property="og:image" content="https://fivemods.net/static-assets/img/brand-down.png">';
-      echo '<title>'.$lang['title'].'</title>';
+      echo '<meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/brand-down.png">';
+      echo '<title>' . $lang['title'] . '</title>';
    }
 
    ?>
@@ -305,35 +302,35 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <?php
    if (!empty($_COOKIE['fm_design'])) {
       if ($_COOKIE['fm_design'] == "dark") {
-         echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css-dark/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css-dark/style.css">';
          $css_text = 'text text-muted';
          $darkmode = 'bg-dark';
       } elseif ($_COOKIE['fm_design'] == "normal") {
-         echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css/style.css">';
          $css_text = 'text text-muted';
       } elseif (empty($_COOKIE['fm_design'])) {
-         echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css/style.css">';
          $css_text = 'text text-muted';
       }
    } else {
-      echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
+      echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css/style.css">';
       $css_text = 'text text-muted';
    }
    ?>
 
    <link rel="icon" href="<?php echo $favicon; ?>">
 
-   <link rel="apple-touch-icon" href="/static-assets/img/apple-touch-icon/apple-touch-icon.png" />
-   <link rel="apple-touch-icon" sizes="57x57" href="/static-assets/img/apple-touch-icon/apple-touch-icon-57x57.png" />
-   <link rel="apple-touch-icon" sizes="72x72" href="/static-assets/img/apple-touch-icon/apple-touch-icon-72x72.png" />
-   <link rel="apple-touch-icon" sizes="76x76" href="/static-assets/img/apple-touch-icon/apple-touch-icon-76x76.png" />
-   <link rel="apple-touch-icon" sizes="114x114" href="/static-assets/img/apple-touch-icon/apple-touch-icon-114x114.png" />
-   <link rel="apple-touch-icon" sizes="120x120" href="/static-assets/img/apple-touch-icon/apple-touch-icon-120x120.png" />
-   <link rel="apple-touch-icon" sizes="144x144" href="/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
-   <link rel="apple-touch-icon" sizes="152x152" href="/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
-   <link rel="apple-touch-icon" sizes="180x180" href="/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
+   <link rel="apple-touch-icon" href="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon.png" />
+   <link rel="apple-touch-icon" sizes="57x57" href="https://img-cdn.fivemods.net/unsafe/57x57/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-57x57.png" />
+   <link rel="apple-touch-icon" sizes="72x72" href="https://img-cdn.fivemods.net/unsafe/72x72/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-72x72.png" />
+   <link rel="apple-touch-icon" sizes="76x76" href="https://img-cdn.fivemods.net/unsafe/76x76/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-76x76.png" />
+   <link rel="apple-touch-icon" sizes="114x114" href="https://img-cdn.fivemods.net/unsafe/114x114/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-114x114.png" />
+   <link rel="apple-touch-icon" sizes="120x120" href="https://img-cdn.fivemods.net/unsafe/120x120/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-120x120.png" />
+   <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
+   <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
+   <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
 
-   <link rel="stylesheet" href="/static-assets/css/style-adj.css">
+   <link rel="stylesheet" href="https://www.fivemods.net/static-assets/css/style-adj.css">
 
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -426,7 +423,7 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       }
 
       input[type=search] {
-         background: <?php echo $css_search; ?> url('/static-assets/img/search-16x16.png') no-repeat 9px center;
+         background: <?php echo $css_search; ?> url('https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/search-16x16.png') no-repeat 9px center;
          padding: 9px 10px 9px 12px;
          -webkit-transition: all .5s;
          -moz-transition: all .5s;
@@ -542,9 +539,16 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       body::-webkit-scrollbar-thumb {
          background: #ff8637;
       }
-     
+
       .bg {
-         background: url('/static-assets/img/background/icon_bg_multi_lighter.png');
+         background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_multi_lighter.png');
+         background-repeat: repeat;
+         background-size: 75%;
+      }
+
+      .f-bg-dark {
+         background: url('/static-assets/img/background/icon_bg_dark_darkest.png');
+         /* background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png'); */
          background-repeat: repeat;
          background-size: 75%;
       }
@@ -578,6 +582,23 @@ if(isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          text-align: center;
          top: 0px;
          z-index: 99;
+      }
+
+      .fst {
+         font-size: 8px;
+         color: gray;
+         line-height: -50px;
+         display: block;
+      }
+
+      .vr {
+         display: inline;
+         height: 100%;
+         width: 1px;
+         border: 1px inset;
+         margin: 5px;
+         background-color: #605f62;
+         color: #605f62;
       }
    </style>
 </head>
