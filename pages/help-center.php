@@ -152,7 +152,7 @@ if ($rating == 1) {
                      $by = $row['name'];
                      $helpful2 = $row['good'];
                      $nothelpful2 = $row['bad'];
-                     $feedback = 'Was this article helpful? <a href="?r='.$id.'&v=1"><i class="far fa-thumbs-up"></i></a> ('.$helpful2.') | <a href="?r='.$id.'&v=0"><i class="far fa-thumbs-down"></i></a> ('.$nothelpful2.')';
+                     $feedback = 'Was this article helpful? <a href="?r='.$id.'&v=1"><i class="far fa-thumbs-up"></i></a> ('.$helpful2.')';
                      if ($_SESSION['control'] == 1) {
                         $feedback = 'Thank you for your feedback!';
                      }
