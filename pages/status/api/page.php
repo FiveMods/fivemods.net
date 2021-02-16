@@ -39,7 +39,7 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
     <b>All Systems Operational</b>
     <div>
     <!-- <button class="btn btn-outline-light rounded" title="Join Newsletter" onclick="location.reload();"><i class="far fa-newspaper"></i></button> -->
-    <!-- <button class="btn btn-outline-light rounded" title="Refresh Statuspage" onclick="location.reload();"><i class="fas fa-redo"></i></button> -->
+    <button id="btnRefresh" class="btn btn-outline-light rounded" title="Refresh Statuspage"><i class="fas fa-redo"></i></button>
     </div>
 </div>
 </div>';
@@ -49,7 +49,7 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
     <b>Security Mode</b>
     <div>
     <!-- <button class="btn btn-outline-light rounded" title="Join Newsletter" onclick="location.reload();"><i class="far fa-newspaper"></i></button> -->
-    <!-- <button class="btn btn-outline-light rounded" title="Refresh Statuspage" onclick="location.reload();"><i class="fas fa-redo"></i></button> -->
+    <button id="btnRefresh" class="btn btn-outline-light rounded" title="Refresh Statuspage"><i class="fas fa-redo"></i></button>
     </div>
 </div>
 </div>';
@@ -59,7 +59,7 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
     <b>Maintenance</b>
     <div>
     <!-- <button class="btn btn-outline-light rounded" title="Join Newsletter" onclick="location.reload();"><i class="far fa-newspaper"></i></button> -->
-    <!-- <button class="btn btn-outline-light rounded" title="Refresh Statuspage" onclick="location.reload();"><i class="fas fa-redo"></i></button> -->
+    <button id="btnRefresh" class="btn btn-outline-light rounded" title="Refresh Statuspage"><i class="fas fa-redo"></i></button>
     </div>
 </div>
 </div>';
@@ -69,17 +69,17 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
     <b>Major Outage</b>
     <div>
     <!-- <button class="btn btn-outline-light rounded" title="Join Newsletter" onclick="location.reload();"><i class="far fa-newspaper"></i></button> -->
-    <!-- <button class="btn btn-outline-light rounded" title="Refresh Statuspage" onclick="location.reload();"><i class="fas fa-redo"></i></button> -->
+    <button id="btnRefresh" class="btn btn-outline-light rounded" title="Refresh Statuspage"><i class="fas fa-redo"></i></button>
     </div>
 </div>
 </div>';
 } elseif ($main == 2 || $updown == 2 || $discord == 2 || $google == 2 || $github == 2 || $advertisement == 2 || $cookies == 2 || $location == 2 || $payment == 2) {
     echo '<div class="card bg-primary text text-white rounded mb-3">
-<div class="card-body d-flex justify-content-between" style="font-size:19px;">
+<div class="card-body d-flex justify-content-between btnRefresh" style="font-size:19px;">
     <b>Partial Outage</b>
     <div>
     <!-- <button class="btn btn-outline-light rounded" title="Join Newsletter" onclick="location.reload();"><i class="far fa-newspaper"></i></button> -->
-    <!-- <button class="btn btn-outline-light rounded" title="Refresh Statuspage" onclick="location.reload();"><i class="fas fa-redo"></i></button> -->
+    <button id="btnRefresh" class="btn btn-outline-light rounded" title="Refresh Statuspage"><i class="fas fa-redo"></i></button>
     </div>
 </div>
 </div>';
@@ -89,7 +89,7 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
     <b>Degraded Performance</b>
     <div>
     <!-- <button class="btn btn-outline-light rounded" title="Join Newsletter" onclick="location.reload();"><i class="far fa-newspaper"></i></button> -->
-    <!-- <button class="btn btn-outline-light rounded" title="Refresh Statuspage" onclick="location.reload();"><i class="fas fa-redo"></i></button> -->
+    <button id="btnRefresh" class="btn btn-outline-light rounded" title="Refresh Statuspage"><i class="fas fa-redo"></i></button>
     </div>
 </div>
 </div>';
@@ -412,45 +412,45 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
             } elseif ($cookies == 1) {
                 echo '<div class="col">
                 <div class="card rounded">
-                <div class="card-body d-flex justify-content-between border-bottom border-success">
+                <div class="card-body d-flex justify-content-between border-bottom border-warning">
                     <span><b>FiveMods Cookie & Session Service</b> <i class="far fa-question-circle" title="Status for the FiveMods cookie and session service. Important for login and account features."></i></span>
-                    <span><i class="fas fa-check text text-success"></i></span>
+                    <span><i class="fas fa-battery-quarter text text-warning"></i></span>
                 </div>
                 </div>
             </div>';
             } elseif ($cookies == 2) {
                 echo '<div class="col">
                 <div class="card rounded">
-                <div class="card-body d-flex justify-content-between border-bottom border-success">
+                <div class="card-body d-flex justify-content-between border-bottom border-primary">
                     <span><b>FiveMods Cookie & Session Service</b> <i class="far fa-question-circle" title="Status for the FiveMods cookie and session service. Important for login and account features."></i></span>
-                    <span><i class="fas fa-check text text-success"></i></span>
+                    <span><i class="fas fa-exclamation-triangle text text-primary"></i></span>
                 </div>
                 </div>
             </div>';
             } elseif ($cookies == 3) {
                 echo '<div class="col">
                 <div class="card rounded">
-                <div class="card-body d-flex justify-content-between border-bottom border-success">
+                <div class="card-body d-flex justify-content-between border-bottom border-danger">
                     <span><b>FiveMods Cookie & Session Service</b> <i class="far fa-question-circle" title="Status for the FiveMods cookie and session service. Important for login and account features."></i></span>
-                    <span><i class="fas fa-check text text-success"></i></span>
+                    <span><i class="fas fa-times text text-danger"></i></span>
                 </div>
                 </div>
             </div>';
             } elseif ($cookies == 4) {
                 echo '<div class="col">
                 <div class="card rounded">
-                <div class="card-body d-flex justify-content-between border-bottom border-success">
+                <div class="card-body d-flex justify-content-between border-bottom border-info">
                     <span><b>FiveMods Cookie & Session Service</b> <i class="far fa-question-circle" title="Status for the FiveMods cookie and session service. Important for login and account features."></i></span>
-                    <span><i class="fas fa-check text text-success"></i></span>
+                    <span><i class="fas fa-wrench text text-info"></i></span>
                 </div>
                 </div>
             </div>';
             } elseif ($cookies == 5) {
                 echo '<div class="col">
                 <div class="card rounded">
-                <div class="card-body d-flex justify-content-between border-bottom border-success">
+                <div class="card-body d-flex justify-content-between border-bottom border-purple">
                     <span><b>FiveMods Cookie & Session Service</b> <i class="far fa-question-circle" title="Status for the FiveMods cookie and session service. Important for login and account features."></i></span>
-                    <span><i class="fas fa-check text text-success"></i></span>
+                    <span><i class="fas fa-lock text text-purple"></i></span>
                 </div>
                 </div>
             </div>';
@@ -458,22 +458,178 @@ if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 
             ?>
         </div>
         <div class="row mt-2">
-            <div class="col">
+            <?php
+            if ($location == 0) {
+                echo '<div class="col">
                 <div class="card rounded">
                 <div class="card-body d-flex justify-content-between border-bottom border-success">
                     <span><b>FiveMods Location & GeoIP Service</b> <i class="far fa-question-circle" title="Status for the GeoIP and Location serivice. Important for login and account features."></i></span>
                     <span><i class="fas fa-check text text-success"></i></span>
                 </div>
                 </div>
-            </div>
-            <div class="col">
+            </div>';
+            } elseif ($location == 1) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-warning">
+                    <span><b>FiveMods Location & GeoIP Service</b> <i class="far fa-question-circle" title="Status for the GeoIP and Location serivice. Important for login and account features."></i></span>
+                    <span><i class="fas fa-battery-quarter text text-warning"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($location == 2) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-primary">
+                    <span><b>FiveMods Location & GeoIP Service</b> <i class="far fa-question-circle" title="Status for the GeoIP and Location serivice. Important for login and account features."></i></span>
+                    <span><i class="fas fa-exclamation-triangle text text-primary"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($location == 3) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-danger">
+                    <span><b>FiveMods Location & GeoIP Service</b> <i class="far fa-question-circle" title="Status for the GeoIP and Location serivice. Important for login and account features."></i></span>
+                    <span><i class="fas fa-times text text-danger"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($location == 4) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-info">
+                    <span><b>FiveMods Location & GeoIP Service</b> <i class="far fa-question-circle" title="Status for the GeoIP and Location serivice. Important for login and account features."></i></span>
+                    <span><i class="fas fa-wrench text text-info"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($location == 5) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-purple">
+                    <span><b>FiveMods Location & GeoIP Service</b> <i class="far fa-question-circle" title="Status for the GeoIP and Location serivice. Important for login and account features."></i></span>
+                    <span><i class="fas fa-lock text text-purple"></i></span>
+                </div>
+                </div>
+            </div>';
+            }
+            if ($payment == 0) {
+                echo '<div class="col">
                 <div class="card rounded">
                 <div class="card-body d-flex justify-content-between border-bottom border-success">
                     <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
                     <span><i class="fas fa-check text text-success"></i></span>
                 </div>
                 </div>
-            </div>
+            </div>';
+            } elseif ($payment == 1) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-warning">
+                    <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                    <span><i class="fas fa-battery-quarter text text-warning"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($payment == 2) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-primary">
+                    <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                    <span><i class="fas fa-exclamation-triangle text text-primary"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($payment == 3) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-danger">
+                    <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                    <span><i class="fas fa-times text text-danger"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($payment == 4) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-info">
+                    <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                    <span><i class="fas fa-wrench text text-info"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($payment == 5) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-purple">
+                    <span><b>FiveMods Payment and Invoice Service</b> <i class="far fa-question-circle" title="Status for the Payment and Invoice service"></i></span>
+                    <span><i class="fas fa-lock text text-purple"></i></span>
+                </div>
+                </div>
+            </div>';
+            }
+            
+            ?>
+        </div>
+        <div class="row mt-2">
+            <?php
+            if ($github == 0) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-success">
+                    <span><b>FiveMods Github Login Authorization</b> <i class="far fa-question-circle" title="Exclusive Github login service."></i></span>
+                    <span><i class="fas fa-check text text-success"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($github == 1) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-warning">
+                    <span><b>FiveMods Github Login Authorization</b> <i class="far fa-question-circle" title="Exclusive Github login service."></i></span>
+                    <span><i class="fas fa-battery-quarter text text-warning"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($github == 2) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-primary">
+                    <span><b>FiveMods Github Login Authorization</b> <i class="far fa-question-circle" title="Exclusive Github login service."></i></span>
+                    <span><i class="fas fa-exclamation-triangle text text-primary"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($github == 3) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-danger">
+                    <span><b>FiveMods Github Login Authorization</b> <i class="far fa-question-circle" title="Exclusive Github login service."></i></span>
+                    <span><i class="fas fa-times text text-danger"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($github == 4) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-info">
+                    <span><b>FiveMods Github Login Authorization</b> <i class="far fa-question-circle" title="Exclusive Github login service."></i></span>
+                    <span><i class="fas fa-wrench text text-info"></i></span>
+                </div>
+                </div>
+            </div>';
+            } elseif ($github == 5) {
+                echo '<div class="col">
+                <div class="card rounded">
+                <div class="card-body d-flex justify-content-between border-bottom border-purple">
+                    <span><b>FiveMods Github Login Authorization</b> <i class="far fa-question-circle" title="Exclusive Github login service."></i></span>
+                    <span><i class="fas fa-lock text text-purple"></i></span>
+                </div>
+                </div>
+            </div>';
+            }
+            ?>
         </div>
         
         <div class="mt-5">
