@@ -475,33 +475,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          color: black;
       }
 
-      .loader-wrapper {
-         width: 100%;
-         height: 100%;
-         position: absolute;
-         top: 0;
-         left: 0;
-         <?php if ($_COOKIE['fm_design'] == "dark") {
-            echo "background-color: #1B1B2F;";
-         } else {
-            echo "background-color: #fff;";
-         } ?>display: flex;
-         justify-content: center;
-         align-items: center;
-      }
-
-      .loader {
-         display: inline-block;
-         width: 7px;
-         height: 7px;
-         position: relative;
-         <?php if ($_COOKIE['fm_design'] == "normal") {
-            echo "border: 4px solid #1B1B2F;";
-         } else {
-            echo "border: 4px solid #fff;";
-         } ?>animation: loader 2s infinite ease;
-      }
-
       .space-16 {
          letter-spacing: 16px;
       }
@@ -553,6 +526,13 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          background-size: 75%;
       }
 
+      .f-bg-dark-login {
+         background: url('/static-assets/img/background/icon_bg_dark_darker.png');
+         /* background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png'); */
+         background-repeat: repeat;
+         background-size: 200%;
+      }
+
       .shadow1 {
          box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
       }
@@ -599,6 +579,15 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          margin: 5px;
          background-color: #605f62;
          color: #605f62;
+      }
+
+      .emp-login {
+         padding: 3%;
+         margin-top: 3%;
+         margin-bottom: 3%;
+         border-radius: 0.5rem;
+         background: rgba(255, 255, 255, 0.6);
+         /* opacity: 0.6; */
       }
    </style>
 </head>
