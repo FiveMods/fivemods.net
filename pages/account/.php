@@ -221,6 +221,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<p class="font-size-sm text-muted">You are using <b><?php echo $vals['oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
+						<!--
                         <form action="/pages/account/helper/apikey.req.php" method="post">
                             <hr>
 							<div class="form-group">
@@ -242,7 +243,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<button type="submit" class="btn btn-primary">Request</button>
 							</div>
 						</form>
-                        
+                        -->
 						<form action="" method="post">
 							<hr>
 							<div class="form-group">
