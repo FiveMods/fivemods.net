@@ -17,6 +17,26 @@ $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
 $selVals->execute(array($_SESSION['uuid']));
 $vals = $selVals->fetch();
 
+$stmt = $conn->prepare("SELECT * FROM status_key WHERE userid = :uuid AND active=1");
+$stmt->execute(array('uuid' => $_SESSION['uuid']));
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $api_key = $row['apikey'];
+        $key_exp = $row['expiration_date'];
+    }
+}
+
+$date = date("U");
+$checkdate = $key_exp - $date;
+
+$api_key_exp = 'Expires in: ' . date("n", $checkdate) . ' Months ' . date("j", $checkdate) . ' Days';
+
+if (empty($_SESSION['api_key'])) {
+    $_SESSION['api_key'] = 'You don\'t have an API key!';
+}
+
 
 if ($vals['blocked'] == 1) {
 	header('location: /account/logout/?url=banned');
@@ -221,7 +241,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<p class="font-size-sm text-muted">You are using <b><?php echo $vals['oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
-						<!--
+						
                         <form action="/pages/account/helper/apikey.req.php" method="post">
                             <hr>
 							<div class="form-group">
@@ -239,11 +259,11 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
                                     <option value="7776000">3 Months</option>
                                     <option value="15552000">6 Months</option>
                                 </select>
-								<input type="text" name="id" value="<?php echo $_SESSION['user_id']; ?>" hidden><br>
+								<input type="text" name="id" value="<?php echo $_SESSION['uuid']; ?>" hidden><br>
 								<button type="submit" class="btn btn-primary">Request</button>
 							</div>
 						</form>
-                        -->
+                        
 						<form action="" method="post">
 							<hr>
 							<div class="form-group">

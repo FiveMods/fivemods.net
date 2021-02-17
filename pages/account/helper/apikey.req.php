@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("SELECT * FROM status_key WHERE userid='$userid' AND active = 1");
-    $stmt->execute();
+    $stmt = $conn->prepare("SELECT * FROM status_key WHERE uuid=:uuid AND active = 1");
+    $stmt->execute(array('uuid' => $_SESSION['uuid']));
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
@@ -39,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     $api_key = rand_string(20);
     $active = 1;
 
-    $stmt = $conn->prepare("INSERT INTO status_key (userid, apikey, expiration_date, active) VALUES ('$userid', '$api_key', '$key_exp', '$active')");
-    $stmt->execute();
+    $stmt = $conn->prepare("INSERT INTO status_key (uuid, apikey, expiration_date, active) VALUES (:uuid, '$api_key', '$key_exp', '$active')");
+    $stmt->execute(array('uuid' => $_SESSION['uuid']));
 
     $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>

@@ -26,8 +26,8 @@ $fivem = $decinput['status']['0']['fivem']['0'];
 $date = date("U");
 $array = array();
 
-$stmt = $conn->prepare("SELECT * FROM status_key WHERE apikey = '$key'");
-$stmt->execute();
+$stmt = $conn->prepare("SELECT * FROM status_key WHERE apikey = :key");
+$stmt->execute(array('key' => $key));
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
@@ -71,8 +71,8 @@ function fivemodsstatus($fmcheck) {
     
     global $conn, $main, $updown, $discord, $google, $github, $advertisement, $cookies, $location, $payment, $array;
 
-    $stmt = $conn->prepare("SELECT * FROM fm_status WHERE status_name = '$fmcheck'");
-    $stmt->execute();
+    $stmt = $conn->prepare("SELECT * FROM fm_status WHERE status_name = :fmcheck");
+    $stmt->execute(array('fmcheck' => $fmcheck));
     $result = $stmt->get_result();
 
     if ($fmcheck == 'main') {
