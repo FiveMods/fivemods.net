@@ -117,8 +117,6 @@
                            } elseif ($lowercaseLang == "zh-hk") {
                               echo 'hk';
                            }
-                        } elseif (empty($_SESSION['language_preference'])) {
-                           echo strtolower($country);
                         } else {
                            echo strtolower($_COOKIE['language_preference']);
                         }
