@@ -2,28 +2,28 @@
 
 include('./include/header-banner.php');
 
-// require_once('./pages/account/config.php');
+require_once('./pages/account/config.php');
 
-// $loginURL = $gClient->createAuthUrl();
+$loginURL = $gClient->createAuthUrl();
 
 
-// if ($_GET['rdC'] == "main") {
-//     echo '<meta http-equiv="refresh" content="2;url=/" />';
-// }
+if ($_GET['rdC'] == "main") {
+    echo '<meta http-equiv="refresh" content="2;url=/" />';
+}
 
-// $_SESSION['state'] = hash('sha256', microtime(TRUE).rand().$_SERVER['REMOTE_ADDR']);
+$_SESSION['state'] = hash('sha256', microtime(TRUE).rand().$_SERVER['REMOTE_ADDR']);
 
-// $params = array(
-//   'client_id' => '48abb0467b4aa1c0fa9f',
-//   'redirect_uri' => 'https://fivemods.net/pages/account/git-callback.php',
-//   'scope' => 'user:email',
-//   'response_type' => 'code',
-//   'state' => $_SESSION['state'],
-// );
+$params = array(
+  'client_id' => '48abb0467b4aa1c0fa9f',
+  'redirect_uri' => 'https://fivemods.net/pages/account/git-callback.php',
+  'scope' => 'user:email',
+  'response_type' => 'code',
+  'state' => $_SESSION['state'],
+);
 
-// if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
-//     $_SESSION['logoutsuccess'] = "<p style=\"color: red\">You are already logged in!</p>";
-// }
+if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
+    $_SESSION['logoutsuccess'] = "<p style=\"color: red\">You are already logged in!</p>";
+}
 
 ?>
 <style>
