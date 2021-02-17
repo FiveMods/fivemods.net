@@ -1,5 +1,3 @@
-<style>
-</style>
 <section class="mb-0 mt-5">
    <div class="footer text-white">
       <div class="pt-5 pb-5 f-bg-dark">
@@ -107,11 +105,23 @@
                         <a href="/ref?rdc=https://twitter.com/five_mods" title="Twitter" role="button" class="text-white rounded m-2">
                            <i class="fab fa-twitter fa-lg color-light" aria-hidden="true"></i>
                         </a>
-                        <a class="dropdown-toggle text-white mr-2" title="Language select" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-<?php if (empty($_SESSION['language'])) {
-                                                                                                                                                                                          echo strtolower($_SESSION['selfselectlang']);
-                                                                                                                                                                                       } else {
-                                                                                                                                                                                          echo strtolower($_SESSION['language']);
-                                                                                                                                                                                       } ?>"> </span></a>
+                        <a class="dropdown-toggle text-white mr-2" title="Language select" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-<?php 
+                        
+
+                        if (strpos($_COOKIE['language_preference'], "ZH-") !== FALSE) {
+                           $lowercaseLang = strtolower($_COOKIE['language_preference']);
+                           if ($lowercaseLang == "zh-tw") {
+                              echo 'tw';
+                           } elseif ($lowercaseLang == "zh-cn") {
+                              echo 'cn';
+                           } elseif ($lowercaseLang == "zh-hk") {
+                              echo 'hk';
+                           }
+                        } else {
+                           echo strtolower($_COOKIE['language_preference']);
+                        }
+
+                        ?>"> </span></a>
                         <div class="dropdown-menu" aria-labelledby="languages">
                            <a class="dropdown-item" href="/language/?is=DE&callbackURI=<?php echo $_SERVER['REQUEST_URI'] . "&sID=" . $_COOKIE['PHPSESSID'] . "&cSl=" . strtolower($_SESSION['selfselectlang']) . "-" . $_SESSION['selfselectlang']; ?>" title="<?php echo $lang['de-de']; ?>"><span class="flag-icon flag-icon-de"> </span> <?php echo $lang['de-de']; ?></a>
                            <a class="dropdown-item" href="/language/?is=NL&callbackURI=<?php echo $_SERVER['REQUEST_URI'] . "&sID=" . $_COOKIE['PHPSESSID'] . "&cSl=" . strtolower($_SESSION['selfselectlang']) . "-" . $_SESSION['selfselectlang']; ?>" title="<?php echo $lang['nl-nl']; ?>"><span class="flag-icon flag-icon-nl"> </span> <?php echo $lang['nl-nl']; ?></a>
