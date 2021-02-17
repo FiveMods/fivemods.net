@@ -2,7 +2,10 @@
 
 require_once "./config.php";
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
+$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 include('./include/header-banner.php');
 
 session_start();
