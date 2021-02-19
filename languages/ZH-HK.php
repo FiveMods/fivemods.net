@@ -187,7 +187,7 @@
         "generate-token" => "製造一個新嘅客戶端秘密代碼", // Generate a new Client Secret
         "token-warning" => "睇住啊! 當你選擇製造一個新嘅客戶端秘密代碼嘅時候，你舊嘅秘密代碼會失效。你真係要咁做？", // WARNING! With generating a new Client Secret, your old secret cant be used anymore. Are you sure you want to do that?
         "coming-soon" => "即將來臨！", // Coming soon
-        "upload-submit1" => "當你撳咗上傳制", // With pressing the submit button down below you accept the following:
+        "upload-submit1" => "當你撳咗上傳制之後，即係代表你同意以下條款：", // With pressing the submit button down below you accept the following:
         "upload-submit2" => "如果你唔配合呢啲條款，我哋可能會移除部分模組或者你嘅帳戶。", // Failures can result in a removal of the specific mod or your account.
         "accept-and-upload" => "同意兼上傳", // Accept & Upload
         "profile-information" => "個人賬戶資訊", // Profile Information
