@@ -100,7 +100,7 @@
         "social-media" => "社交媒體",
         "activity" => "活動",
         "report-profile" => "檢舉個人資料",
-        "report-mod" => "報告國防部",
+        "report-mod" => "舉報模組",
         "joined-at" => "加入日期為",
         "total-downloads" => "總下載量",
         "published-mods" => "已出版的模組",
