@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once('../config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
@@ -8,11 +9,10 @@ if(!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
     $manageVals = $pdo->prepare("SELECT id FROM user WHERE uuid = ?");
     $manageVals->execute(array($_SESSION['uuid']));
     if($manageVals->rowCount() > 0) {
-       $mvals = $headerVals->fetch();
-       $uid = $hvals['id'];
+       $mvals = $manageVals->fetch();
+       $uid = $mvals['id'];
     }
 }
-require_once('../config.php');
 
 $servernameP = $mysqlPayment['servername'];
 $usernameP = $mysqlPayment['username'];
@@ -33,7 +33,7 @@ if (htmlspecialchars($_POST['contact'])) {
     uploadMod();
 } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
     downloadMod($pdo, $pdoPayment);
-} elseif (htmlspecialchars($_GET['purchase']) and htmlspecialchars($_GET['o'])) {
+} elseif (isset($_GET['purchase']) and isset($_GET['o'])) {
     purchaseMod($pdo, $pdoPayment, $uid);
 } else {
     header('Location: ../error/400/403');
@@ -221,11 +221,11 @@ function downloadMod($pdo, $pdoPayment)
 
 function purchaseMod($pdo, $pdoPayment, $uid)
 {
+    echo "<h1>CURRENTLY DISABLED</h1>";
+    /*
     session_start();
 
     $fivemodsuuid = "5b3107fd-3dfe-43ae-b8f6-028560184861";
-
-    require_once "./config.php";
 
     if (empty($uid)) {
         header('location: /account/');
@@ -379,4 +379,5 @@ function purchaseMod($pdo, $pdoPayment, $uid)
         exit();
         die();
     }
+    */
 }
