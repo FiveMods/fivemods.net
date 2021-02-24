@@ -207,7 +207,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form action="/pages/account/helper/account.edit.php" method="post">
 							<div class="form-group">
 								<label for="username">Username <a href="#info" class="text text-danger">*</a></label>
-								<input type="text" class="form-control" id="noSpace2" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
+								<input disabled type="text" class="form-control" id="username" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
 								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['username-desc']; ?></small>
 							</div>
 							<div class="form-group">

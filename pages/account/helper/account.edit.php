@@ -21,14 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $username2 = htmlspecialchars($_POST['username']);
         $banner = htmlspecialchars($_POST['gbanner']);
         $tochange = htmlspecialchars($_POST['id']);
-
+        
         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
         $userDB = $pdo->prepare("SELECT * FROM user WHERE name = :username");
         $userDB->execute(array('username' => $username2));
-
+        
+        
         if($userDB->rowCount() > 0) {
-
+          echo "taken";
+          
           session_start();
           $_SESSION['success'] = '<div class="alert alert-danger" id="success-alert">
           <button type="button" class="close" data-dismiss="alert">x</button>
@@ -40,9 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           die();
           
         }
-
+        
 
         try {
+          require_once('../../../config.php');
           $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
           // set the PDO error mode to exception
@@ -65,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         }
         
         $pdo = null;
+        
     }
 
     if(htmlspecialchars($_POST['call']) == "callFunc") {
