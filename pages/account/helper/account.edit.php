@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
           // set the PDO error mode to exception
           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-          $stmt = $pdo->prepare("UPDATE user SET name = :name, banner = :banner WHERE oauth_uid = :uid");
-          $stmt->execute(array("name" => $username2, "banner" => $banner, "uid" => $tochange));
+          $stmt = $pdo->prepare("UPDATE user SET name = :name, banner = :banner WHERE uuid = :uuid");
+          $stmt->execute(array("name" => $username2, "banner" => $banner, "uuid" => $_SESSION['uuid']));
         
           echo $stmt->rowCount() . " records UPDATED successfully";
           session_start();
