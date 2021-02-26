@@ -158,6 +158,7 @@
         "it-it" => "Italiensk - Italia", //Italian - Italy
         "gr-gr" => "Gresk - Hellas", //Greek - Greece
         "nl-nl" => "Nederlandsk - Nederland", //Dutch - Netherlands
+	"de-ch" => "Sveitsisk tysk - Sveits", //Swiss German - Switzerland
         "no-no" => "Norsk Bokmål - Norge", //Norwegian - Norway
         "en-gb" => "Engelsk - Storbritannia", //English - Great Britain
         "ru-ru" => "Russisk - Russland", //Russian - Russia
