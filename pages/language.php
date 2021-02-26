@@ -5,13 +5,21 @@ include('./include/header-banner.php');
 if (isset($_GET['is'])) {
     if ($_GET['is'] == "DE") {
         $_SESSION['selfselect'] = "1";
-        $_SESSION['selfselectlang'] = "DE";
+        $_SESSION['selfselectlang'] = "DE-DE";
         header('location: ./');
         $_SESSION['langupdate'] = '<div class="alert alert-success mb-5" id="success-alert">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
       </div>';
-    } elseif ($_GET['is'] == "NL") {
+    } elseif ($_GET['is'] == "CH") {
+        $_SESSION['selfselect'] = "1";
+        $_SESSION['selfselectlang'] = "DE-CH";
+        header('location: ./');
+        $_SESSION['langupdate'] = '<div class="alert alert-success mb-5" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
+      </div>';
+    }  elseif ($_GET['is'] == "NL") {
         $_SESSION['selfselect'] = "1";
         $_SESSION['selfselectlang'] = "NL";
         header('location: ./');
@@ -98,6 +106,9 @@ if ($_SESSION['selfselect'] == '1') {
                 <ul class="list-unstyled">
                     <li>
                         <a class="text-muted" href="?is=DE"><span class="flag-icon flag-icon-de"></span> <?php echo $lang['de-de']; ?></a>
+                    </li>
+                    <li>
+                        <a class="text-muted" href="?is=CH"><span class="flag-icon flag-icon-ch"></span> <?php echo $lang['de-ch']; ?></a>
                     </li>
                     <li>
                         <!-- <s class="text-muted" href="?is=FR"><span class="flag-icon flag-icon-fr"></span> <?php echo $lang['fr-fr']; ?></s> -->

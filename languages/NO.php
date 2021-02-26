@@ -152,6 +152,7 @@
         "nearly-done" => "Nesten ferdig", //Almost finished
         "europe" => "Europa", //Europe
         "de-de" => "Tysk - Tyskland", //German - Germany
+        "de-ch" => "Swiss German - Switzerland", //Swiss German - Switzerland
         "fr-fr" => "Fransk - Frankrike", //French - France
         "es-es" => "Spansk - Spania", //Spanish - Spain
         "it-it" => "Italiensk - Italia", //Italian - Italy
