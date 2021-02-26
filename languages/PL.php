@@ -157,6 +157,7 @@
         "nearly-done" => "Prawię skończone", //Almost finished
         "europe" => "Europa", //Europe
         "de-de" => "Niemiecki - Niemcy", //German - Germany
+        "de-ch" => "Swiss German - Switzerland", //Swiss German - Switzerland
         "fr-fr" => "Francuski - Francja", //French - France
         "es-es" => "Hiszpański - Hiszpania", //Spanish - Spain
         "it-it" => "Włoski - Włochy", //Italian - Italy

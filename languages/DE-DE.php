@@ -178,6 +178,7 @@
         "nearly-done" => "Du bist fast fertig",
         "europe" => "Europa", //Europe
         "de-de" => "Deutsch - Deutschland", //German - Germany
+        "de-ch" => "Schweizerdeutsch - Schweiz", //Swiss German - Switzerland
         "fr-fr" => "Französisch - Frankreich", //French - France
         "es-es" => "Spanisch - Spanien", //Spanish - Spain
         "it-it" => "Italienisch - Italien", //Italian - Italy

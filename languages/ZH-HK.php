@@ -155,6 +155,7 @@
         "nearly-done" => "就快完成架啦！", //Almost finished
         "europe" => "歐洲", //Europe
         "de-de" => "德文 - 德國", //German - Germany
+        "de-ch" => "Swiss German - Switzerland", //Swiss German - Switzerland
         "fr-fr" => "法文 - 法國", //French - France
         "es-es" => "西班牙文 - 西班牙", //Spanish - Spain
         "it-it" => "意大利文 - 意大利", //Italian - Italy
