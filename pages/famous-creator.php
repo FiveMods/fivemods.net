@@ -1,3 +1,24 @@
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
 <?php include('./include/header-banner.php'); ?>
 <section class="text-dark pt-5 pb-5">
    <div class="container">

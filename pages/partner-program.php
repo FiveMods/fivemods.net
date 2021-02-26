@@ -57,9 +57,9 @@
             <p class="lead mb-3 text-white"><?php echo $lang['partner-text2'];?></p>
             <div class="d-flex align-items-center">
             <?php
-            
+
             if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
-               
+
                $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
                $selVals->execute(array($_SESSION['uuid']));
                $vals = $selVals->fetch();
@@ -74,10 +74,10 @@
                /*
                } else {
                   echo '<a href="/account/" class="btn btn-light btn-lg rounded">Please activate Two-Factor Authentication</a>';
-               }*/    
+               }*/
             } else {
                echo '<a class="btn btn-light rounded btn-lg" href="/account/sign-in/">'.$lang['login-to-part'].'</a>';
-            } 
+            }
             ?>
             </div>
          </div>
@@ -93,7 +93,7 @@
       </div>
       <div class="row text-center mt-md-5">
       <?php
-      
+
          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
          $result = $pdo->prepare("SELECT name, picture FROM user WHERE premium = 1 ORDER BY totaldownloads DESC");
@@ -180,6 +180,6 @@
   </div>
 </div>
 </section>
-<?php 
+<?php
    $pdo = null;
 ?>
