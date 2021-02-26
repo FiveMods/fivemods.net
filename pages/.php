@@ -1,3 +1,26 @@
+
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+
 <?php
 
 require_once('./config.php');
@@ -250,9 +273,8 @@ if (isset($_SESSION['downloadMod'])) {
         </div>
     </section>
     <div class="centerBasedFooterAd" style="text-align: center; bottom: 35%;">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <!-- Footer-Block-Ads -->
-        <ins class="adsbygoogle" style="display:inline-block;width:820px;height:175px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
+        <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>

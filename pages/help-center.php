@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include('./include/header-banner.php');
 require_once('./config.php');
@@ -51,16 +51,16 @@ if ($rating == 1) {
 
    // Was helpful -> good
    $helpfulrate = $helpful+1;
-   
+
    $stmt = $pdo->prepare("UPDATE faq SET good = ? WHERE f_id = ?");
    $stmt->execute(array($helpfulrate, $ratedid));
-   
+
    header('location: /help-center/#'.$ratedid);
 
    $_SESSION['control'] = 1;
 
 } elseif ($rating == 0) {
-   
+
    // Was not helpful -> bad
    $nothelpfulrate = $nothelpful+1;
 
@@ -68,7 +68,7 @@ if ($rating == 1) {
    $stmt->execute(array($nothelpfulrate, $ratedid));
    header('location: /help-center/#'.$ratedid);
 
-   $_SESSION['control'] = 1; 
+   $_SESSION['control'] = 1;
 
 }
 }
@@ -178,6 +178,14 @@ if ($rating == 1) {
       </div>
    </div>
 </section>
+
+<div class="centerBasedFooterAd" style="text-align: center; bottom: 35%;">
+    <!-- Footer-Block-Ads -->
+    <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
 <?php
    $pdo = null;
 ?>

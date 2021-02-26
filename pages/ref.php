@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
@@ -34,7 +34,7 @@ if (isset($_GET['rdc'])) {
                 <h2 class="fas fa-exclamation-triangle text-danger"></h2>
                 <h3 class="pb-2 h3 mt-1 text-danger">'.$link.'</h3>
                 <p class="lead">This site is external and we <b>can\'t guarantee the safety</b>, always make sure to be on a website <b>using a SSL certificate</b>.</p>
-                <h5>This link grabs personal information, <b>we won\'t redirect you</b>.</h5> 
+                <h5>This link grabs personal information, <b>we won\'t redirect you</b>.</h5>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@ if (isset($_GET['rdc'])) {
     echo $output1;
 
 
-    } else { 
+    } else {
 
         if (strpos($ref, 'https://') !==false) {
             $link = $ref;
@@ -83,7 +83,7 @@ if (isset($_GET['rdc'])) {
     echo $output1;
 
     }
-    
+
 } else {
 
     $output1 = '<section class="pt-5 pb-5">
@@ -106,13 +106,13 @@ if (isset($_GET['rdc'])) {
     include('./include/header-banner.php');
     echo $output1;
 
-    
+
 }
 
-function getHost($Address) { 
-    $parseUrl = parse_url(trim($Address)); 
-    return trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2))); 
-} 
+function getHost($Address) {
+    $parseUrl = parse_url(trim($Address));
+    return trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2)));
+}
 
 function giveHost($host_with_subdomain) {
     $array = explode(".", $host_with_subdomain);
@@ -121,3 +121,11 @@ function giveHost($host_with_subdomain) {
 
 
 ?>
+
+<div class="centerBasedFooterAd" style="text-align: center; bottom: 35%;">
+    <!-- Footer-Block-Ads -->
+    <ins class="adsbygoogle" style="display:inline-block;width:820px;height:207px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>

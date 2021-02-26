@@ -1,10 +1,31 @@
-<?php include('./include/header-banner.php'); ?> 
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<?php include('./include/header-banner.php'); ?>
 <div class="container mt-5">
    <div class="col">
       <div class="row">
          <div class="col mb-5">
             <div class="e-profile" id="status">
-            <?php 
+            <?php
             // Statusvalues:
             // 0 = Operational
             // 1 = Degraded Performance
@@ -97,7 +118,7 @@
             }
 
 
-            ?>               
+            ?>
             <div class="ml-4 mr-4 mb-4 d-flex justify-content-between">
             <span><i class="fas fa-check text text-success pr-1"></i> Operational</span>
             <span><i class="fas fa-battery-quarter text text-warning pr-1"></i> Degraded Performance</span>
@@ -284,7 +305,7 @@
                             </div>
                             </div>
                         </div>';
-                        } 
+                        }
                         if ($google == 0) {
                             echo '<div class="col">
                             <div class="card rounded">
@@ -568,7 +589,7 @@
                             </div>
                         </div>';
                         }
-                        
+
                         ?>
                     </div>
                     <div class="row mt-2">
@@ -630,26 +651,26 @@
                         }
                         ?>
                     </div>
-                    
+
                     <div class="mt-5">
                         <p>FiveM Services</p>
                         <hr>
                     </div>
                     <?php
-                        // Initialize an URL to the variable 
-                        $url = array('https://servers.fivem.net/servers','https://fivem.net','https://fivem.net','https://fivem.net','https://runtime.fivem.net/artifacts/fivem/','https://keymaster.fivem.net'); 
-                        ?> 
+                        // Initialize an URL to the variable
+                        $url = array('https://servers.fivem.net/servers','https://fivem.net','https://fivem.net','https://fivem.net','https://runtime.fivem.net/artifacts/fivem/','https://keymaster.fivem.net');
+                        ?>
                     <div class="row mt-2">
-                        <?php 
+                        <?php
                             //////////////////////
                             // FiveM Serverlist //
                             //////////////////////
                             $title1="Status for the FiveM Serverlist, showing all servers of fivem with tags.";
-                            // Use get_headers() function 
-                            $headers = @get_headers($url[0]); 
-                            // Use condition to check the existence of URL 
-                            if($headers && strpos( $headers[0], '200')) { 
-                            $status = "URL Exist"; 
+                            // Use get_headers() function
+                            $headers = @get_headers($url[0]);
+                            // Use condition to check the existence of URL
+                            if($headers && strpos( $headers[0], '200')) {
+                            $status = "URL Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-success">
@@ -660,7 +681,7 @@
                             </div>';
                             $statusvalue = $statusvalue;
                             } elseif ($headers && strpos( $headers[0], '302')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-warning">
@@ -671,7 +692,7 @@
                             </div>';
                             $statusvalue = $statusvalue+1;
                             } elseif ($headers && strpos( $headers[0], '403')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-dark">
@@ -681,8 +702,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+5;
-                            } else { 
-                            $status = "URL Doesn't Exist"; 
+                            } else {
+                            $status = "URL Doesn't Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-danger">
@@ -692,17 +713,17 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+3;
-                            } 
-                            
+                            }
+
                             ///////////////////////////////////////
                             // FiveM Login Authorization Service //
-                            ///////////////////////////////////////        
+                            ///////////////////////////////////////
                             $title2="Status for the FiveM Login Authorization Service, checking the login process into servers.";
-                            // Use get_headers() function 
-                            $headers = @get_headers($url[1]); 
-                            // Use condition to check the existence of URL 
-                            if($headers && strpos( $headers[0], '200')) { 
-                            $status = "URL Exist"; 
+                            // Use get_headers() function
+                            $headers = @get_headers($url[1]);
+                            // Use condition to check the existence of URL
+                            if($headers && strpos( $headers[0], '200')) {
+                            $status = "URL Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-success">
@@ -713,7 +734,7 @@
                             </div>';
                             $statusvalue = $statusvalue;
                             } elseif ($headers && strpos( $headers[0], '302')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-warning">
@@ -724,7 +745,7 @@
                             </div>';
                             $statusvalue = $statusvalue+1;
                             } elseif ($headers && strpos( $headers[0], '403')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-dark">
@@ -734,8 +755,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+5;
-                            } else { 
-                            $status = "URL Doesn't Exist"; 
+                            } else {
+                            $status = "URL Doesn't Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-danger">
@@ -745,21 +766,21 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+3;
-                            } 
-                            
+                            }
+
                             ?>
                     </div>
                     <div class="row mt-2">
-                        <?php 
+                        <?php
                             /////////////////////////////////////
                             // FiveM Main Ingame Accessibility //
                             /////////////////////////////////////
                             $title3="Status for the accessibility for the ingame content.";
-                            // Use get_headers() function 
-                            $headers = @get_headers($url[2]); 
-                            // Use condition to check the existence of URL 
-                            if($headers && strpos( $headers[0], '200')) { 
-                            $status = "URL Exist"; 
+                            // Use get_headers() function
+                            $headers = @get_headers($url[2]);
+                            // Use condition to check the existence of URL
+                            if($headers && strpos( $headers[0], '200')) {
+                            $status = "URL Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-success">
@@ -770,7 +791,7 @@
                             </div>';
                             $statusvalue = $statusvalue;
                             } elseif ($headers && strpos( $headers[0], '302')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-warning">
@@ -781,7 +802,7 @@
                             </div>';
                             $statusvalue = $statusvalue+1;
                             } elseif ($headers && strpos( $headers[0], '403')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-dark">
@@ -791,8 +812,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+5;
-                            } else { 
-                            $status = "URL Doesn't Exist"; 
+                            } else {
+                            $status = "URL Doesn't Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-danger">
@@ -802,17 +823,17 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+3;
-                            } 
-                            
+                            }
+
                             ///////////////////
                             // FiveM Website //
-                            ///////////////////        
+                            ///////////////////
                             $title4="Status for the general FiveM website.";
-                            // Use get_headers() function 
-                            $headers = @get_headers($url[3]); 
-                            // Use condition to check the existence of URL 
-                            if($headers && strpos( $headers[0], '200')) { 
-                            $status = "URL Exist"; 
+                            // Use get_headers() function
+                            $headers = @get_headers($url[3]);
+                            // Use condition to check the existence of URL
+                            if($headers && strpos( $headers[0], '200')) {
+                            $status = "URL Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-success">
@@ -823,7 +844,7 @@
                             </div>';
                             $statusvalue = $statusvalue;
                             } elseif ($headers && strpos( $headers[0], '302')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-warning">
@@ -834,7 +855,7 @@
                             </div>';
                             $statusvalue = $statusvalue+1;
                             } elseif ($headers && strpos( $headers[0], '403')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-dark">
@@ -844,8 +865,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+5;
-                            } else { 
-                            $status = "URL Doesn't Exist"; 
+                            } else {
+                            $status = "URL Doesn't Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-danger">
@@ -855,21 +876,21 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+3;
-                            } 
-                            
+                            }
+
                             ?>
                     </div>
                     <div class="row mt-2">
-                        <?php 
+                        <?php
                             /////////////////////
                             // FiveM Artifacts //
                             /////////////////////
                             $title5="Status fot the FiveM server artifacts, linux and windows.";
-                            // Use get_headers() function 
-                            $headers = @get_headers($url[4]); 
-                            // Use condition to check the existence of URL 
-                            if($headers && strpos( $headers[0], '200')) { 
-                            $status = "URL Exist"; 
+                            // Use get_headers() function
+                            $headers = @get_headers($url[4]);
+                            // Use condition to check the existence of URL
+                            if($headers && strpos( $headers[0], '200')) {
+                            $status = "URL Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-success">
@@ -880,7 +901,7 @@
                             </div>';
                             $statusvalue = $statusvalue;
                             } elseif ($headers && strpos( $headers[0], '302')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-warning">
@@ -891,7 +912,7 @@
                             </div>';
                             $statusvalue = $statusvalue+1;
                             } elseif ($headers && strpos( $headers[0], '403')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-dark">
@@ -901,8 +922,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+5;
-                            } else { 
-                            $status = "URL Doesn't Exist"; 
+                            } else {
+                            $status = "URL Doesn't Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                                 <div class="card-body d-flex justify-content-between border-bottom border-danger">
@@ -912,17 +933,17 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+3;
-                            } 
-                            
+                            }
+
                             /////////////////////
                             // FiveM Keymaster //
-                            /////////////////////      
+                            /////////////////////
                             $title6="Status for the FiveM keymaster, required to create a server.";
-                            // Use get_headers() function 
-                            $headers = @get_headers($url[5]); 
-                            // Use condition to check the existence of URL 
-                            if($headers && strpos( $headers[0], '200')) { 
-                            $status = "URL Exist"; 
+                            // Use get_headers() function
+                            $headers = @get_headers($url[5]);
+                            // Use condition to check the existence of URL
+                            if($headers && strpos( $headers[0], '200')) {
+                            $status = "URL Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-success">
@@ -933,7 +954,7 @@
                             </div>';
                             $statusvalue = $statusvalue;
                             } elseif ($headers && strpos( $headers[0], '302')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-warning">
@@ -944,7 +965,7 @@
                             </div>';
                             $statusvalue = $statusvalue+1;
                             } elseif ($headers && strpos( $headers[0], '403')) {
-                            $status = "URL Directing"; 
+                            $status = "URL Directing";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-dark">
@@ -954,8 +975,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+5;
-                            } else { 
-                            $status = "URL Doesn't Exist"; 
+                            } else {
+                            $status = "URL Doesn't Exist";
                             echo '<div class="col">
                             <div class="card rounded">
                             <div class="card-body d-flex justify-content-between border-bottom border-danger">
@@ -965,8 +986,8 @@
                             </div>
                             </div>';
                             $statusvalue = $statusvalue+3;
-                            } 
-                            
+                            }
+
                             ?>
                     </div>
                 </div>

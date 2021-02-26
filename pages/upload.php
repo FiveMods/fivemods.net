@@ -1,3 +1,24 @@
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
 <?php
 session_start();
 include('./include/header-banner.php');
@@ -11,7 +32,7 @@ if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
 require_once('./config.php');
 
    $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-   
+
    $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
    $selVals->execute(array($_SESSION['uuid']));
    $vals = $selVals->fetch();
@@ -74,12 +95,12 @@ if (isset($_POST['uploadMod'])) {
 
    $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :requiredMod, :download, :price, :approved, :approvedby)");
    $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
-   
+
    $_SESSION['upload'] = 1;
 
 
    if($vals['premium'] == 1) {
-      
+
       $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_picture = :pic");
       $stmt->execute(array("name" => $title, "pic" => $pictures));
       $statement = $stmt->fetch();
@@ -299,28 +320,28 @@ function randomChars($length)
    });
 
    function picchange(evt) {
-      
-      var files = evt.target.files; 
+
+      var files = evt.target.files;
 
       var fragments = [];
-      
+
       for (var i = 0, f; f = files[i]; i++) {
          fragments.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
                         f.size, ' bytes</li>');
-      }          
+      }
    document.getElementById('pictureOutput').innerHTML = '<ul>' + fragments.join('') + '</ul>';
    }
 
    function uploadChange(evt) {
-      
-      var files = evt.target.files; 
+
+      var files = evt.target.files;
 
       var fragments = [];
-      
+
       for (var i = 0, f; f = files[i]; i++) {
          fragments.push('-> <strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
             (f.size / 1000000).toString().slice(0, 4) , ' MB');
-      }          
+      }
    document.getElementById('uploadOutput').innerHTML = fragments.join('');
    }
 
