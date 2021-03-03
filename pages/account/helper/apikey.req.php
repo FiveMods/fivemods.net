@@ -3,7 +3,7 @@ session_start();
 
 require_once '../../../config.php';
 
-if (empty($_SESSION['user_id'])) {
+if (empty($_SESSION['uuid'])) {
     header('location: /logout');
 }
 
