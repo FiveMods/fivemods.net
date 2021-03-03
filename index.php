@@ -77,6 +77,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 <head>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <!-- Start cookieyes banner -->
    <!-- <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script> -->
    <!-- End cookieyes banner -->
@@ -185,7 +186,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:description" content="' . $m_desc . '">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="' . $imgArray[0] . '">
-      
+
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
          <meta name="twitter:title" content="' . $m_name . '">
@@ -197,20 +198,20 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    } elseif (strpos($actual_link, 'status') != FALSE) {
 
       echo '
-         <title>Statuspage - FiveMods.net</title>   
+         <title>Statuspage - FiveMods.net</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
          <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-     
+
          <meta property="og:type" content="website">
          <meta property="og:url" content="https://fivemods.net/status/">
          <meta property="og:title" content="FiveM & FiveMods Service Status">
          <meta property="og:description" content="Your page for the current FiveM and FiveMods outages">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/32x32/filters:format(webp):quality(95)/https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">
-     
+
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
          <meta name="twitter:title" content="FiveM & FiveMods Service Status">
@@ -244,14 +245,14 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta name="msapplication-navbutton-color" content="#FF8637">
          <meta name="apple-mobile-web-app-capable" content="yes">
          <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
-      
+
          <meta property="og:type" content="website">
          <meta property="og:url" content="https://fivemods.net/user/' . $user_username . '">
          <meta property="og:title" content="' . $user_username . '">
          <meta property="og:description" content="' . $user_description . '">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="' . $user_picture . '">
-      
+
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@five_mods">
          <meta name="twitter:title" content="' . $user_username . '">
@@ -564,6 +565,14 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          z-index: 99;
       }
 
+      #leftBasedAds {
+         right: 0px;
+         position: fixed;
+         text-align: center;
+         top: 0px;
+         z-index: 99;
+      }
+
       .fst {
          font-size: 8px;
          color: gray;
@@ -629,22 +638,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <main>
       <div id="cload">
-         <div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Vertical-Static-Ads -->
-            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
-            <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-         </div>
-         <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Vertical-Static-Ads -->
-            <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="4017762712"></ins>
-            <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-         </div>
+
+
+         <!--
+
+         -->
          <?php
          if (isset($_GET['page'])) {
             $page_names = explode('/', $_GET["page"]);

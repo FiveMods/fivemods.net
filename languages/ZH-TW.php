@@ -100,7 +100,7 @@
         "social-media" => "社交媒體",
         "activity" => "活動",
         "report-profile" => "檢舉個人資料",
-        "report-mod" => "報告國防部",
+        "report-mod" => "舉報模組",
         "joined-at" => "加入日期為",
         "total-downloads" => "總下載量",
         "published-mods" => "已出版的模組",
@@ -157,6 +157,7 @@
         "nearly-done" => "即將完成", //Almost finished
         "europe" => "歐洲", //Europe
         "de-de" => "德文 - 德國", //German - Germany
+        "de-ch" => "德文(瑞士) - 瑞士", //Swiss German - Switzerland
         "fr-fr" => "法文 - 法國", //French - France
         "es-es" => "西班牙文 - 西班牙", //Spanish - Spain
         "it-it" => "意大利文 - 意大利", //Italian - Italy

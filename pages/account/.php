@@ -2,10 +2,7 @@
 
 require_once "./config.php";
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+
 include('./include/header-banner.php');
 
 session_start();
@@ -20,9 +17,9 @@ $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
 $selVals->execute(array($_SESSION['uuid']));
 $vals = $selVals->fetch();
 
-$stmt = $conn->prepare("SELECT * FROM status_key WHERE userid = :uuid AND active=1");
+$stmt = $pdo->prepare("SELECT * FROM status_key WHERE userid = :uuid AND active=1");
 $stmt->execute(array('uuid' => $_SESSION['uuid']));
-$result = $stmt->get_result();
+$result = $stmt->fetch();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -210,7 +207,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 						<form action="/pages/account/helper/account.edit.php" method="post">
 							<div class="form-group">
 								<label for="username">Username <a href="#info" class="text text-danger">*</a></label>
-								<input type="text" class="form-control" id="noSpace2" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
+								<input type="text" class="form-control" id="username" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
 								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['username-desc']; ?></small>
 							</div>
 							<div class="form-group">
@@ -244,7 +241,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<p class="font-size-sm text-muted">You are using <b><?php echo $vals['oauth_provider']; ?></b> as login provider. To change your provider please create a ticket in our <a href="/ref?rdc=https://discord.com/invite/AGvh9HX">discord</a> or send us a <a href="mailto://contact@fivemods.net?subject=FiveMods.net%20Login%20provider%20change">mail</a>.</p>
 							</div>
 						</form>
-						
+
                         <form action="/pages/account/helper/apikey.req.php" method="post">
                             <hr>
 							<div class="form-group">
@@ -266,7 +263,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<button type="submit" class="btn btn-primary">Request</button>
 							</div>
 						</form>
-                        
+
 						<form action="" method="post">
 							<hr>
 							<div class="form-group">
@@ -422,7 +419,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<div class="container">
 
 									<?php
-									
+
 									$result = $pdo->prepare("SELECT * FROM user LEFT JOIN mods ON user.id = mods.m_authorid WHERE mods.m_authorid = ?");
 									$result->execute(array($vals['id']));
 
@@ -552,7 +549,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<tbody>
 									<?php
 
-									
+
 
 									$status = '<svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle text text-success"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>';
 
@@ -569,7 +566,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 													<td>' . $status . '</td>
 													<td>' . $row['price'] . '€</td>
 													<td>
-														<form action="/helper/manage.php?o=index&purchase='. $row['p_id'] . '" method="post">													
+														<form action="/helper/manage.php?o=index&purchase='. $row['p_id'] . '" method="post">
 														<button type="submit" class="btn btn-sm btn-outline-info"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line>
 														</svg></button></form>
 													</td>
@@ -634,7 +631,13 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 		});
 	});
 </script>
-
+<div class="centerBasedFooterAd" style="text-align: center; bottom: 35%;">
+    <!-- Footer-Block-Ads -->
+    <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
 <?php
 	$pdo = null;
 ?>

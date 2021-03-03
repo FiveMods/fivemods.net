@@ -1,4 +1,26 @@
-<?php 
+
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<?php
 
 require_once('./config.php');
 
@@ -14,7 +36,7 @@ $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
 
 if (isset($_GET['submit-search'])) {
    $search = htmlspecialchars($_GET['query']);
-} 
+}
 $searchDB = "%".$search."%";
 
 // Query
@@ -41,7 +63,7 @@ $cat = htmlspecialchars(htmlspecialchars($_GET['query']));
 
 // Get tags content
 $tags = $dbpdo->prepare("
-   SELECT * 
+   SELECT *
    FROM tags
    WHERE category = ?
    ORDER BY tag ASC
@@ -54,7 +76,7 @@ $tags = $tags->fetchAll(PDO::FETCH_ASSOC);
 $user = htmlspecialchars(htmlspecialchars($_GET['query']));
 
 $display_user = $dbpdo->prepare("
-   SELECT * 
+   SELECT *
    FROM user
    WHERE name = ? OR uuid = ?
    LIMIT 1
@@ -94,31 +116,31 @@ include('./include/header-banner.php');
 
       // input misspelled word
       $input = htmlspecialchars(htmlspecialchars($_GET['query']));
-      
+
       // array of words to check against
       include('./helper/search-completer.php');
-      
+
       // no shortest distance found, yet
       $shortest = -1;
-      
+
       // loop through words to find the closest
       foreach ($words as $word) {
-      
+
          // calculate the distance between the input word,
          // and the current word
          $lev = levenshtein($input, $word);
-      
+
          // check for an exact match
          if ($lev == 0) {
-      
+
             // closest word is this one (exact match)
             $closest = $word;
             $shortest = 0;
-      
+
             // break out of the loop; we've found an exact match
             break;
          }
-      
+
          // if this distance is less than the next found shortest
          // distance, OR if a next shortest word has not yet been found
          if ($lev <= $shortest || $shortest < 0) {
@@ -127,15 +149,15 @@ include('./include/header-banner.php');
             $shortest = $lev;
          }
       }
-      
+
       // calculate the percentage of the words combined (not sure if it works with an array (F in chat))
       $perc = similar_text($input, $words, $percent);
 
       // echo "Input word: $input\n";
       if (!$shortest == 0 xor $percent>="35") {
          echo '<p style="margin-top:-20px;"><i>'.$lang['did-you-mean'].' <a href="?query='.$closest.'&submit-search="><u>'.$closest.'</u></a> ?</i></p>';
-      }       
-      
+      }
+
       ?>
    </form>
       <?php
@@ -148,7 +170,7 @@ include('./include/header-banner.php');
          }
 
          if (isset($_GET['cat']) == 1) {
-            
+
             $db = "SELECT * FROM tags WHERE category = '' ORDER BY tag ASC";
             $stmt = $dbpdo->prepare("SELECT * FROM tags WHERE category = :cat ORDER BY tag ASC");
             $stmt->execute(array("cat" => $cat));
@@ -160,7 +182,7 @@ include('./include/header-banner.php');
                }
                echo '</h5>
                      <hr>';
-            } 
+            }
          }
       ?>
      <br>
@@ -172,7 +194,7 @@ include('./include/header-banner.php');
          <li class="page-item <?php if($site <= 1) { echo 'disabled'; } elseif ($total == 0) { echo 'disabled'; } ?>">
          <a class="page-link" href="?query=<?php echo htmlspecialchars($_GET['query']); ?>&site=<?php echo $site-1; ?>&max=<?php echo $perPage; ?>&submit-search=#product"><?php echo $lang['previous']; ?></a>
          </li>
-         <?php 
+         <?php
          for($x = 1; $x <= $sites; $x++): ?>
             <li class="page-item <?php if($site === $x) { echo 'active'; } elseif ($total == 0) { echo 'disabled'; } ?>"><a class="page-link" href="?query=<?php echo htmlspecialchars($_GET['query']); ?>&site=<?php echo $x; ?>&max=<?php echo $perPage; ?>&submit-search=#product"><?php echo $x; ?></a></li>
          <?php endfor; ?>
@@ -234,10 +256,10 @@ include('./include/header-banner.php');
                   <div class="card mb-4 shadow-sm <?php echo $do; ?>">
                      <a href="/product/<?php echo $article['m_id']; ?>/">
                         <img class="card-img-top img-fluid rounded shadow1 cover" async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
-                        <?php 
+                        <?php
                         if (!empty($article['m_price'])) {
                            echo '<small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>';
-                        } 
+                        }
                         ?>
                         <small class="badge badge-primary ml-2" style="font-size:9px;"><i class="fas fa-tag mr-1"></i> <?php echo $article['m_category']; ?> </small>
                         <?php
@@ -254,8 +276,8 @@ include('./include/header-banner.php');
                         </a>
                         <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
                         <div class="d-flex justify-content-between align-items-center">
-                           <?php 
-                           
+                           <?php
+
                            if (empty($article['m_price'])) {
                               echo '<div class="btn-group">
                               <form action="/helper/manage.php?o=index&download='.$article['m_id'].'" method="post">

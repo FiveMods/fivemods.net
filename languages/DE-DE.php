@@ -6,7 +6,7 @@
         "home" => "Start",
 		"other-services" => "Andere Services",
         "famous-creator" => "Bekannte Ersteller",
-        "title-maker" => "Title Erstellen",
+        "title-maker" => "Titel Erstellen",
         "server-exchange" => "Serverbörse",
         "server-list" => "Serverliste",
         "server-staff" => "Server sucht Team",
@@ -144,7 +144,7 @@
         "copr-ident" => "Unternehmensidentität",
         "about-text1" => "Willkommen bei FiveMods, deiner Webseite für die neuesten und aktuellsten Mods, Scripts, Peds, Fahrzeuge und noch vielem mehr.",
         "about-text2" => "FiveMods.net ist nicht mit Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM oder dem CitizenFX-Kollektiv verbunden.",
-        "about-text3" => 'FiveMods.net ist nicht mit <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a> oder <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> in verbindung zu bringen.',
+        "about-text3" => 'FiveMods.net ist nicht mit <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a> oder <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> in Verbindung zu bringen.',
         "about-corp" => "Hier findest du unsere Unternehmensidentität.",
         "about-legal" => "Rechtliche, sowie wichtige Informationen werden unter folgenden Links gefunden.",
         "fivem-download" => "Downloade FiveM",
@@ -153,7 +153,7 @@
         "fivem-art-win" => "Artifakte (Windows)",
         "fivem-keymaster" => "FiveM Keymaster",
         "fivem-website" => "FiveM Webseite",
-        "fivem-discord" => "Fivem Discord",
+        "fivem-discord" => "FiveM Discord",
         "fivem-docs" => "FiveM Dokumentation",
         "fivem-forum" => "FiveM Forum",
         "banned" => "GEBANNT",
@@ -178,6 +178,7 @@
         "nearly-done" => "Du bist fast fertig",
         "europe" => "Europa", //Europe
         "de-de" => "Deutsch - Deutschland", //German - Germany
+        "de-ch" => "Schweizerdeutsch - Schweiz", //Swiss German - Switzerland
         "fr-fr" => "Französisch - Frankreich", //French - France
         "es-es" => "Spanisch - Spanien", //Spanish - Spain
         "it-it" => "Italienisch - Italien", //Italian - Italy

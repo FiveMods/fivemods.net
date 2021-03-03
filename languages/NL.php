@@ -157,7 +157,7 @@
         "nearly-done" => "Bijna klaar", //Almost finished
         "europe" => "Europa", //Europe
         "de-de" => "Duits - Duitsland", //German - Germany
-	"de-ch" => "Zwitsers Duits - Zwitserland",
+        "de-ch" => "Swiss German - Switzerland", //Swiss German - Switzerland
         "fr-fr" => "Frans - Frankrijk", //French - France
         "es-es" => "Spaans - Spanje", //Spanish - Spain
         "it-it" => "Italiaans - Italië", //Italian - Italy

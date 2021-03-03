@@ -1,11 +1,32 @@
-<?php 
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+  <!-- Vertical Test -->
+  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
+       data-ad-client="ca-pub-9727102575141971"
+       data-ad-slot="2716933531"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>
+<?php
 
 require_once('./config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
 
-include('./include/header-banner.php'); 
+include('./include/header-banner.php');
 
 echo '<section class="pt-5 pb-5">
     <div class="container">
@@ -29,13 +50,13 @@ $result->execute();
                 } else {
                     $insert = '<div class="card-header">'.$username.'</div>';
                 }
-       
+
                 if (empty($userimg)) {
                     $userimg = "./static-assets/img/";
                 } else {
                     $userimg = $row['picture'];
                 }
-       
+
                echo '<div class="col-md-3 text-center">
                    <div class="card text-dark bg-light mb-3 rounded shadow1" style="max-width: 18rem;">
                        '.$insert.'
@@ -47,7 +68,7 @@ $result->execute();
                    </div>
                </a>
            </div>';
-             }   
+             }
          } else {
              echo '';
          }
@@ -58,4 +79,4 @@ $result->execute();
    echo '</div>
    </div>
 </section>';
-?>          
+?>

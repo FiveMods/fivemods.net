@@ -7,10 +7,10 @@
     } else {
         $_SESSION['language'] = $countryCode;
 
-        if ($_SESSION['language'] == "DE") {
-            require_once "languages/DE.php";
+        if ($_SESSION['language'] == "DE-DE") {
+            require_once "languages/DE-DE.php";
         } elseif ($_SESSION['language'] == "CH") {
-            require_once "languages/DE.php";
+            require_once "languages/DE-CH.php";
         } elseif ($_SESSION['language'] == "TW") {
             require_once "languages/ZH-TW.php";
         } elseif ($_SESSION['language'] == "CN") {

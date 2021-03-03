@@ -152,6 +152,7 @@
         "nearly-done" => "", //Almost finished
         "europe" => "", //Europe
         "de-de" => "", //German - Germany
+        "de-ch" => "", //Swiss German - Switzerland
         "fr-fr" => "", //French - France
         "es-es" => "", //Spanish - Spain
         "it-it" => "", //Italian - Italy
