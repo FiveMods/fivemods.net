@@ -91,10 +91,10 @@
         "did-you-mean" => "Bedoelde je:", //Did you mean:
         "you-searched" => "Je hebt gezocht naar:", //You searched for:
         "fivem-support-yes" => "Vragen? Stel ze!", //Questions? Ask!
-        "fivem-support-subline" => "", //Just search for your question and we'll see if we can find an answer.
+        "fivem-support-subline" => "Stel je vraag en wij gaan proberen een antwoord te vinden.", //Just search for your question and we'll see if we can find an answer.
         "go" => "Gaan", //Go
         "faq" => "Vaak Gestelde Vragen", //Frequently Asked Questions (FAQ)
-        "upgrade-acc" => "", //Upgrade your account with our partner program.
+        "upgrade-acc" => "Upgrade je account met ons Partner Programma", //Upgrade your account with our partner program.
         "about" => "Over",
         "about-us" => "Over ons",
         "social-media" => "Sociale Media",
@@ -157,6 +157,7 @@
         "nearly-done" => "Bijna klaar", //Almost finished
         "europe" => "Europa", //Europe
         "de-de" => "Duits - Duitsland", //German - Germany
+	"de-ch" => "Zwitsers Duits - Zwitserland",
         "fr-fr" => "Frans - Frankrijk", //French - France
         "es-es" => "Spaans - Spanje", //Spanish - Spain
         "it-it" => "Italiaans - Italië", //Italian - Italy
