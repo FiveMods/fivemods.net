@@ -1,6 +1,6 @@
 <?php
-    $email = "hajek.ph@gmail.com";
-    $name = "Philipp";
+    $email = "management@fivemods.net";
+    $name = "FiveMods Management";
     $body = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
         <head>
