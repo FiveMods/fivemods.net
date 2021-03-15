@@ -1,24 +1,19 @@
-
 <div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
 
 
-  <!-- Vertical Test -->
-  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
-       data-ad-client="ca-pub-9727102575141971"
-       data-ad-slot="2716933531"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
 <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
 
-  <!-- Vertical Test -->
-  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
-       data-ad-client="ca-pub-9727102575141971"
-       data-ad-slot="2716933531"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 </div>
 
 <?php
@@ -36,11 +31,11 @@ $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
 
 // Query
 $articles = $pdo->prepare("
-   SELECT SQL_CALC_FOUND_ROWS *
-   FROM mods
-   LEFT JOIN user ON mods.m_authorid = user.id
-   ORDER BY m_id DESC
-   LIMIT {$start}, {$perPage};
+ SELECT SQL_CALC_FOUND_ROWS *
+ FROM mods
+ LEFT JOIN user ON mods.m_authorid = user.id
+ ORDER BY m_id DESC
+ LIMIT {$start}, {$perPage};
 ");
 
 $articles->execute();
@@ -48,12 +43,12 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
 // Query 2
 $most = $pdo->prepare("
-   SELECT SQL_CALC_FOUND_ROWS *
-   FROM mods
-   LEFT JOIN user ON mods.m_authorid = user.id
-   WHERE m_approved = 0 AND m_blocked = 0
-   ORDER BY m_downloads DESC
-   LIMIT 0, 4;
+ SELECT SQL_CALC_FOUND_ROWS *
+ FROM mods
+ LEFT JOIN user ON mods.m_authorid = user.id
+ WHERE m_approved = 0 AND m_blocked = 0
+ ORDER BY m_downloads DESC
+ LIMIT 0, 4;
 ");
 
 $most->execute();
@@ -245,19 +240,19 @@ if (isset($_SESSION['downloadMod'])) {
 
                                     if (empty($article['m_price'])) {
                                         echo '<div class="btn-group">
-                              <form action="/helper/manage.php?o=index&download=' . $article['m_id'] . '" method="post">
-                                 <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</button>
-                              </form>
-                              <button type="button" class="btn btn-sm btn-success" title="' . number_format($article['m_downloads']) . ' downloads">' . $donwloads . $suffix . ' <i class="fas fa-download"></i></button>
-                           </div>';
+                            <form action="/helper/manage.php?o=index&download=' . $article['m_id'] . '" method="post">
+                               <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</button>
+                            </form>
+                            <button type="button" class="btn btn-sm btn-success" title="' . number_format($article['m_downloads']) . ' downloads">' . $donwloads . $suffix . ' <i class="fas fa-download"></i></button>
+                         </div>';
                                     } else {
                                         echo '<div class="btn-group">
 
-                              <form action="/product/' . $article['m_id'] . '/" method="post">
-                                 <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
-                              </form>
-                              <button type="button" class="btn btn-sm btn-info" title="' . $article['m_price'] . '€">' . $article['m_price'] . '€</button>
-                           </div>';
+                            <form action="/product/' . $article['m_id'] . '/" method="post">
+                               <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
+                            </form>
+                            <button type="button" class="btn btn-sm btn-info" title="' . $article['m_price'] . '€">' . $article['m_price'] . '€</button>
+                         </div>';
                                     }
 
                                     ?>
