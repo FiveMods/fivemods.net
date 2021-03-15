@@ -1,4 +1,4 @@
-User-agent: *
+User-agent: Googlebot
 
 Allow: /
 Allow: /index.php
@@ -56,5 +56,8 @@ Disallow: /account/delete/*
 Disallow: /composer.lock
 Disallow: /composer.json
 Disallow: /.htaccess
+
+User-agent: *
+Allow: /
 
 Sitemap: https://fivemods.net/sitemap.xml

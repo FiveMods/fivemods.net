@@ -345,7 +345,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <script src="https://htmlstream.com/front/assets/js/vendor.min.js"></script>
    <script src="https://htmlstream.com/front/assets/js/theme.min.js"></script> -->
 
-   <script src="https://images.dmca.com/Badges/DMCABadgeHelper.min.js"> </script>
    <script>
       function swapStyleSheet(sheet) {
          document.getElementById('pagestyle').setAttribute('href', sheet);
