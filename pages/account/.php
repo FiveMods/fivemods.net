@@ -3,6 +3,11 @@
 require_once "./config.php";
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
+$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
+if ($conn->connect_error) {
+	die("Connection failed: " . $conn->connect_error);
+}
+
 include('./include/header-banner.php');
 
 session_start();
@@ -17,9 +22,12 @@ $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
 $selVals->execute(array($_SESSION['uuid']));
 $vals = $selVals->fetch();
 
-$stmt = $pdo->prepare("SELECT * FROM status_key WHERE userid = :uuid AND active=1");
-$stmt->execute(array('uuid' => $_SESSION['uuid']));
-$result = $stmt->fetch();
+$one = 1;
+
+$stmt = $conn->prepare("SELECT * FROM status_key WHERE uuid = ? AND active = ?");
+$stmt->bind_param("ss", $_SESSION['uuid'], $one);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
