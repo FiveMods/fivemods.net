@@ -3,6 +3,11 @@
 require_once "./config.php";
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
+$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
+if ($conn->connect_error) {
+	die("Connection failed: " . $conn->connect_error);
+}
+
 include('./include/header-banner.php');
 
 session_start();
@@ -17,24 +22,24 @@ $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
 $selVals->execute(array($_SESSION['uuid']));
 $vals = $selVals->fetch();
 
-$stmt = $pdo->prepare("SELECT * FROM status_key WHERE userid = :uuid AND active=1");
-$stmt->execute(array('uuid' => $_SESSION['uuid']));
-$result = $stmt->fetch();
+$one = 1;
+
+$stmt = $conn->prepare("SELECT * FROM status_key WHERE uuid = ? AND active = ?");
+$stmt->bind_param("ss", $_SESSION['uuid'], $one);
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $api_key = $row['apikey'];
         $key_exp = $row['expiration_date'];
     }
-}
-
-$date = date("U");
-$checkdate = $key_exp - $date;
-
-$api_key_exp = 'Expires in: ' . date("n", $checkdate) . ' Months ' . date("j", $checkdate) . ' Days';
-
-if (empty($_SESSION['api_key'])) {
-    $_SESSION['api_key'] = 'You don\'t have an API key!';
+	$date = date("U");
+	$checkdate = $key_exp - $date;
+	$api_key_exp = 'Expires in: ' . date("n", $checkdate) . ' Months ' . date("j", $checkdate) . ' Days';
+} else {
+	$api_key_exp = 'You don\'t have an API key!';
+	$api_key = 'You don\'t have an API key!';
 }
 
 
