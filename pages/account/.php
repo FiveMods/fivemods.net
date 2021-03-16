@@ -26,15 +26,12 @@ if ($result->num_rows > 0) {
         $api_key = $row['apikey'];
         $key_exp = $row['expiration_date'];
     }
-}
-
-$date = date("U");
-$checkdate = $key_exp - $date;
-
-$api_key_exp = 'Expires in: ' . date("n", $checkdate) . ' Months ' . date("j", $checkdate) . ' Days';
-
-if (empty($_SESSION['api_key'])) {
-    $_SESSION['api_key'] = 'You don\'t have an API key!';
+	$date = date("U");
+	$checkdate = $key_exp - $date;
+	$api_key_exp = 'Expires in: ' . date("n", $checkdate) . ' Months ' . date("j", $checkdate) . ' Days';
+} else {
+	$api_key_exp = 'You don\'t have an API key!';
+	$api_key = 'You don\'t have an API key!';
 }
 
 
