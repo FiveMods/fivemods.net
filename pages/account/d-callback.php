@@ -52,8 +52,8 @@ if ($_SESSION['dc_access_token']) {
 
     $uid = $user->id;
 
-    $userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = $uid");
-    $userDB->execute();
+    $userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = ?");
+    $userDB->execute(array($uid));
 
     if($userDB->rowCount() > 0) {
     	$userFetch = $userDB->fetch();

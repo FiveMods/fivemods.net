@@ -60,8 +60,8 @@ if(isset($_GET['code'])) {
 if($_SESSION['access_token']) {
     $user = apiRequest($apiURLBase . 'user');
 
-    $userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = $user->id");
-    $userDB->execute();
+    $userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = ?");
+    $userDB->execute(array($user->id));
 
     if($userDB->rowCount() > 0) {
 
