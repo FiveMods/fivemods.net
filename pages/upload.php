@@ -278,12 +278,14 @@ function randomChars($length)
                               </div>
                               <br>
                               <!-- Price suggestion -->
+                              <!--
                               <div>
                                  <label for="price">Price suggestion</label>
                                  <input type="number" class="form-control" id="price" name="price" value="" placeholder="Use this if you want your mod to be sold on FiveMods. Payment Policy applies." max="5">
                                  <div class="valid-feedback">Looks good!</div>
                                  <div class="invalid-feedback">You have to use a number between 0 and 5</div>
                               </div>
+                              -->
                            </div>
                            <div class="tab-pane fade" id="card-pill-3" role="tabpanel" aria-labelledby="card-tab-3">
                               <!-- Header -->
