@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // If login request got cancled
 if ($_GET['error'] == "access_denied") {
     header('location: /account/logout/');
@@ -24,8 +26,6 @@ define('OAUTH2_CLIENT_SECRET', $dcoauthsecret);
 $authorizeURL = 'https://discordapp.com/api/oauth2/authorize';
 $tokenURL = 'https://discordapp.com/api/oauth2/token';
 $apiURLBase = 'https://discordapp.com/api/users/@me';
-
-session_start();
 
 
 if (isset($_GET['code'])) {
