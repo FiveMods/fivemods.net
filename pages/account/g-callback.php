@@ -36,8 +36,8 @@ $dbname = $mysql['dbname'];
 $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = $uid");
-$userDB->execute();
+$userDB = $pdo->prepare("SELECT * FROM user WHERE oauth_uid = ?");
+$userDB->execute(array($uid));
 
 if($userDB->rowCount() > 0) {
 	$userFetch = $userDB->fetch();
