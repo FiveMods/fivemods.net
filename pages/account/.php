@@ -97,14 +97,14 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<line x1="1" y1="10" x2="23" y2="10"></line>
 							</svg><?php echo $lang['billing-settings']; ?>
 						</a>
-						<a href="#purchased" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
+						<!-- <a href="#purchased" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart mr-2">
 								<circle cx="9" cy="21" r="1"></circle>
 								<circle cx="20" cy="21" r="1"></circle>
 								<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
 							</svg>
 							<?php echo $lang['purchased-items']; ?>
-						</a>
+						</a> -->
 						<a href="#uploads" data-toggle="tab" class="nav-item nav-link has-icon nav-link-faded">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud mr-2">
 								<polyline points="16 16 12 12 8 16"></polyline>
@@ -157,13 +157,13 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 									<line x1="1" y1="10" x2="23" y2="10"></line>
 								</svg></a>
 						</li>
-						<a href="#purchased" data-toggle="tab" class="nav-link has-icon">
+						<!-- <a href="#purchased" data-toggle="tab" class="nav-link has-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart mr-2">
 								<circle cx="9" cy="21" r="1"></circle>
 								<circle cx="20" cy="21" r="1"></circle>
 								<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
 							</svg>
-						</a>
+						</a> -->
 						<li class="nav-item">
 							<a href="#uploads" data-toggle="tab" class="nav-link has-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload-cloud mr-2">
 									<polyline points="16 16 12 12 8 16"></polyline>
@@ -404,8 +404,8 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
 							<div class="small text-muted mb-3"><?php echo $lang['balance-desc']; ?></div>
 						</div>
-						<label class="d-block mb-0">Payments</label>
-						<a href="/payment/deposit" class="btn btn-success" type="button"><i class="fas fa-plus"></i>  <?php echo $lang['deposit']; ?></a>
+						<!-- <label class="d-block mb-0">Payments</label>
+						<a href="/payment/deposit" class="btn btn-success" type="button"><i class="fas fa-plus"></i>  <?php echo $lang['deposit']; ?></a> -->
                         <hr>
 						<label class="d-block mb-0"><?php echo $lang['payout']; ?></label>
 						<small class="text-danger"><?php echo $lang['payout-desc']; ?></small>
@@ -537,7 +537,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 							</table>
 						</div>
 					</div>
-					<div class="tab-pane fade" id="purchased">
+					<!-- <div class="tab-pane fade" id="purchased">
 						<h6><?php echo strtoupper($lang['purchased-items']); ?></h6>
 						<hr>
 						<div class="container">
@@ -592,7 +592,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								</tbody>
 							</table>
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
