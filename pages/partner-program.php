@@ -38,7 +38,7 @@
          </div>
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-cogs fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>
-            <h3 class="h4 mt-2 mb-3"><?php echo $lang['benefit5'];?></h3>
+            <h3 class="h4 mt-2 mb-3">Enhanced customization</h3>
          </div>
          <div class="col-12  col-md-4 m-auto">
             <i class="fas fa-tachometer-alt fa-3x mb-3 mt-3 text-primary" aria-hidden="true"></i>
