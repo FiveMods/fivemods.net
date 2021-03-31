@@ -1,6 +1,7 @@
-# ErrorDocument 404
-
 Header set X-FRAME-OPTIONS: SAMEORIGIN
+
+# Force backslash policy
+RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
 RedirectMatch 403 ^/config.php$
 RedirectMatch 403 ^/account/config.php$
