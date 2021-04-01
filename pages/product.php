@@ -156,7 +156,7 @@ if ($_GET['id']) {
    code {
       margin-bottom: 1em;
       padding: 12px 8px;
-      padding-bottom: 20px !ie7;
+      padding-bottom: 20px !important;
       width: 650px !important;
       max-height: 600px;
       overflow: auto;
@@ -524,11 +524,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover"  src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
-                                    <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
-                  for ($i = 0; $i < count($tags); $i++) {
-                     echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
-                  }
+                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover"  src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">';
                   echo '</a>
                                     <div class="card-body">
                                        <a href="/product/' . $id . '/" class="text text-dark">
