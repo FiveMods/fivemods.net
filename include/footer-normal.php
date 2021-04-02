@@ -102,7 +102,7 @@
                         <a href="/discord/" role="button" title="Discord" class="text-white rounded m-2">
                            <i class="fab fa-discord fa-lg color-light" aria-hidden="true"></i>
                         </a>
-                        <a href="/ref?rdc=https://twitter.com/five_mods" title="Twitter" role="button" class="text-white rounded m-2">
+                        <a href="/ref?rdc=https://twitter.com/FiveModsNET" title="Twitter" role="button" class="text-white rounded m-2">
                            <i class="fab fa-twitter fa-lg color-light" aria-hidden="true"></i>
                         </a>
                         <a class="dropdown-toggle text-white mr-2" title="Language select" id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-<?php 
