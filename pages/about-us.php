@@ -301,9 +301,10 @@ $pdo = null;
                <i class="far fa-2x fa-gem text-primary  rounded p-3"></i>
             </div>
             <div class="featured-list-content pl-4">
-               <h3>Sell mods</h3>
+               <h3>Community</h3>
                <p>
-                  If you decide to sell your work, we are the perfect choice. With our PayPal integration it's really easy to buy mods on our page.
+                  <!-- If you decide to sell your work, we are the perfect choice. With our PayPal integration it's really easy to buy mods on our page. -->
+               We are an open source project and want to contribute to the fivem community. Therefore we are very community based.
                </p>
             </div>
             </dd>
