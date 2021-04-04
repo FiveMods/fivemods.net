@@ -20,7 +20,7 @@ function minifier($code)
 
 include('./helper/lang-confg.php');
 
-// include('./helper/geo-vpn.sub.php');
+include('./helper/geo-vpn.sub.php');
 
 if (empty($_GET['fm_design']) == "orange") {
    $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
@@ -32,6 +32,12 @@ if (empty($_GET['fm_design']) == "orange") {
 }
 
 require_once('./config.php');
+
+$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password']);
+
+if ($conn->connect_error) {
+   header('location: /lock/');
+}
 
 function isMobile()
 {
@@ -78,9 +84,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <head>
    <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-   <!-- Start cookieyes banner -->
-   <!-- <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/b2f06fda03f99c6d3075a941.js"></script> -->
-   <!-- End cookieyes banner -->
 
    <!-- Global site tag (gtag.js) - Google Analytics -->
    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
@@ -132,19 +135,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       window._mNHandle.queue = window._mNHandle.queue || [];
       medianet_versionId = "3121199";
    </script>
-   <script src="https://contextual.media.net/dmedianet.js?cid=8CUHCHBR2" async="async"></script>
-
-   <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-   <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
-
-   <!-- <script data-ad-client="pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
 
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
    <meta http-equiv="content-language" content="en" />
    <meta http-equiv="Pragma" content="no-cache">
@@ -161,15 +157,20 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
       $url = $actual_link;
       $parts = explode('/', $url);
-      $urlNumber = $parts[count($parts) - 2];
 
-      $selMod = $pdo->prepare("SELECT * FROM mods WHERE m_id = :mid");
-      $selMod->execute(array("mid" => $urlNumber));
+      if(substr($actual_link , -1)=='/'){
+         $urlNumber1 = $parts[count($parts) - 2];
+      } else {
+         $urlNumber1 = $parts[count($parts) - 1];
+      }   
+      
+      $selMod1 = $pdo->prepare("SELECT * FROM mods WHERE m_id = :mid");
+      $selMod1->execute(array("mid" => $urlNumber1));
 
-      $fetchMod = $selMod->fetch();
-      $m_name = $fetchMod['m_name'];
-      $m_picture = $fetchMod['m_picture'];
-      $m_desc = $fetchMod['m_description'];
+      $fetchMod1 = $selMod1->fetch();
+      $m_name = $fetchMod1['m_name'];
+      $m_picture = $fetchMod1['m_picture'];
+      $m_desc = $fetchMod1['m_description'];
 
       $imgArray = explode(" ", $m_picture);
 
@@ -181,20 +182,20 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '
          <title>' . $m_name . ' - FiveMods.net</title>
          <meta property="og:type" content="website">
-         <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber . '">
+         <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber1 . '">
          <meta property="og:title" content="' . $m_name . '">
          <meta property="og:description" content="' . $m_desc . '">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="' . $imgArray[0] . '">
 
          <meta name="twitter:card" content="summary_large_image">
-         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:site" content="@FiveModsNET">
          <meta name="twitter:title" content="' . $m_name . '">
          <meta name="twitter:description" content="' . $m_desc . '">
          <meta name="twitter:image" content="' . $imgArray[0] . '">
          ';
 
-      echo '<script>console.log("Control numb.: ' . $urlNumber . '");</script>';
+      echo '<script>console.log("Control numb.: ' . $urlNumber1 . '");</script>';
    } elseif (strpos($actual_link, 'status') != FALSE) {
 
       echo '
@@ -208,30 +209,32 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:type" content="website">
          <meta property="og:url" content="https://fivemods.net/status/">
          <meta property="og:title" content="FiveM & FiveMods Service Status">
-         <meta property="og:description" content="Your page for the current FiveM and FiveMods outages">
+         <meta property="og:description" content="Your page for the current FiveM & FiveMods outages">
          <meta property="og:site_name" content="FiveMods.net">
-         <meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/32x32/filters:format(webp):quality(95)/https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">
 
          <meta name="twitter:card" content="summary_large_image">
-         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:site" content="@FiveModsNET">
          <meta name="twitter:title" content="FiveM & FiveMods Service Status">
-         <meta name="twitter:description" content="Your page for the current FiveM and FiveMods outages">
-         <meta name="twitter:image" content="https://img-cdn.fivemods.net/unsafe/32x32/filters:format(webp):quality(95)/https://www.shareicon.net/data/256x256/2017/02/24/879486_green_512x512.png">';
+         <meta name="twitter:description" content="Your page for the current FiveM & FiveMods outages">';
    } elseif (strpos($actual_link, 'user') != FALSE) {
 
       $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
       $url = $actual_link;
       $parts = explode('/', $url);
-      $urlName = $parts[count($parts) - 1];
+      if(substr($actual_link , -1)=='/'){
+         $urlName = $parts[count($parts) - 2];
+      } else {
+         $urlName = $parts[count($parts) - 1];
+      } 
 
       $selName = $pdo->prepare("SELECT * FROM user WHERE `name` = :uname");
       $selName->execute(array("uname" => $urlName));
 
       $fetchMod = $selName->fetch();
       $user_username = $fetchMod['name'];
-      $user_description = $fetchMod['picture'];
-      $user_picture = $fetchMod['description'];
+      $user_picture = $fetchMod['picture'];
+      $user_description = $fetchMod['description'];
 
       echo '<script>console.log("Username: ' . $user_username . '");</script>';
       echo '<script>console.log("User desc.: ' . $user_description . '");</script>';
@@ -254,7 +257,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:image" content="' . $user_picture . '">
 
          <meta name="twitter:card" content="summary_large_image">
-         <meta name="twitter:site" content="@five_mods">
+         <meta name="twitter:site" content="@FiveModsNET">
          <meta name="twitter:title" content="' . $user_username . '">
          <meta name="twitter:description" content="' . $user_description . '">
          <meta name="twitter:image" content="' . $user_picture . '">';
@@ -272,11 +275,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="author" content="FiveMods" />
    <meta name="publisher" content="FiveMods" />
    <meta name="organisation" content="FiveMods" />
-   <meta name="copyright" content="Copyright (c) 2020 - 2021 FiveMods" />
+   <meta name="copyright" content="Copyright (c) 2020-2021 FiveMods" />
    <meta name="generator" content="Atom, Visual Studio Code" />
-   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free, fivem store" />
+   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free" />
    <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
-   <meta name="page-type" content="Website, Landingpage, Homepage, Platform" />
+   <meta name="page-type" content="Website, Landingpage, Homepage, Platform, Community" />
    <meta name="coverage" content="Worldwide">
 
    <meta name="reply-to" content="contact@fivemods.net">
@@ -291,6 +294,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
 
    <meta name="websiteStage" content="live" />
+   <meta name="websiteVersion" content="v1.1.0.5-a.1" />
 
    <meta name="DC.Language" content="en" />
    <meta name="DC.Creator" content="FiveMods" />
@@ -484,19 +488,19 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       }
 
       .cover {
-         width: 348px;
+         /* width: 348px; */
          height: 196px;
          object-fit: cover;
       }
 
       .cover-sm {
-         width: 253px;
+         /* width: 253px; */
          height: 143px;
          object-fit: cover;
       }
 
       .cover-cat {
-         width: 348px;
+         /* width: 348px; */
          height: 217px;
          object-fit: cover;
       }
@@ -596,6 +600,10 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          border-radius: 0.5rem;
          background: rgba(255, 255, 255, 0.6);
          /* opacity: 0.6; */
+      }
+
+      form {
+         margin-block-end: 0em !important;
       }
    </style>
 </head>

@@ -74,6 +74,10 @@ while ($row = $statement->fetch()) {
    }
 }
 
+if (empty($username)) {
+   header('location: /');
+}
+
 
 $statement = $pdo->prepare("SELECT m_name, COUNT(m_authorid) FROM mods RIGHT JOIN user ON user.id = mods.m_authorid WHERE user.name=? AND m_approved='0' AND m_blocked='0' ORDER BY m_name");
 $statement->execute(array($uname));
