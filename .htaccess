@@ -51,6 +51,10 @@ RewriteRule ^(account/delete/([a-zA-Z0-9-/]+))$ ./account/?delete=$2 [L,QSA]
 RewriteRule ^(account/logout*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/logout*)$ ./index.php?page=$1 [L,QSA]
 
+# Lock
+RewriteRule ^(lock*/)$ ./lock.php [L,QSA]
+RewriteRule ^(lock*)$ ./lock.php [L,QSA]
+
 # Account check
 RewriteRule ^(account/check*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/check*)$ ./index.php?page=$1 [L,QSA]

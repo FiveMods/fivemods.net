@@ -18,7 +18,7 @@
                   <ul class="list-unstyled list-light">
                      <?php 
                      
-                     if ($_SESSION['language'] == "DE") {
+                     if ($_SESSION['language'] == "DE" || $_SESSION['language'] == "DE-DE" || $_SESSION['language'] == "de-DE") {
                         echo '<li>
                         <a href="/impressum/">Impressum</a>
                      </li>';
@@ -117,8 +117,17 @@
                            } elseif ($lowercaseLang == "zh-hk") {
                               echo 'hk';
                            }
-                        } else {
+                        } elseif (strpos($_COOKIE['language_preference'], "DE-") !== FALSE) {
+                           $lowercaseLang = strtolower($_COOKIE['language_preference']);
+                           if ($lowercaseLang == "de-de") {
+                              echo 'de';
+                           } elseif ($lowercaseLang == "de-ch") {
+                              echo 'ch';
+                           }
+                        } elseif (!empty($_COOKIE['language_preference'])) {
                            echo strtolower($_COOKIE['language_preference']);
+                        } else {
+                           echo 'us';
                         }
 
                         ?>"> </span></a>
