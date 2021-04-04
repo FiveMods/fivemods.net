@@ -20,7 +20,7 @@ function minifier($code)
 
 include('./helper/lang-confg.php');
 
-include('./helper/geo-vpn.sub.php');
+// include('./helper/geo-vpn.sub.php');
 
 if (empty($_GET['fm_design']) == "orange") {
    $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
