@@ -230,7 +230,7 @@ $currentPage = $_GET['page'];
             echo '<form action="/account/" method="post">
                   <button type="submit" class="btn btn-outline-primary rounded"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
                   </form>';
-            echo '<form action="/account/logout/" method="post">
+            echo '<form action="/account/logout/" method="post" class="pl-1">
                   <button type="submit" class="btn btn-primary rounded"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
                   <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
                   </form>';
