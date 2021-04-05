@@ -16,10 +16,10 @@
         <div class="cards-overlay">
             <div class="container">
                 <div class="row d-flex equal">
-                    <div class=" col-sm-6 col-md-3 mb-4">
+                    <div class="col-sm-6 col-md-3 mb-4">
                         <a href="/legal/privacy-policy/">
                             <div class="card h-100 border-0 shadow1 emp-card">
-                                <div class="card-img-top">
+                                <div class="card-img-top mt-2 pt-1">
                                     <img src="/static-assets/img/svg/legal/privacy.svg" class="img-fluid mx-auto d-block" width="100px" alt="<?php echo $lang['privacy-policy']; ?>-IMG">
                                 </div>
                                 <div class="card-body text-center">
@@ -33,7 +33,7 @@
                     <div class=" col-sm-6 col-md-3 mb-4">
                         <a href="/legal/legal-notice/">
                             <div class="card h-100 border-0 shadow1 emp-card">
-                                <div class="card-img-top">
+                                <div class="card-img-top mt-2 pt-1">
                                     <img src="/static-assets/img/svg/legal/terms.svg" class="img-fluid mx-auto d-block" width="100px" alt="<?php echo $lang['legal-notice']; ?>-IMG">
                                 </div>
                                 <div class="card-body text-center">
@@ -47,7 +47,7 @@
                     <div class=" col-sm-6 col-md-3 mb-4">
                         <a href="/legal/terms-of-service/">
                             <div class="card h-100 border-0 shadow1 emp-card">
-                                <div class="card-img-top mt-2 pt-1">
+                                <div class="card-img-top mt-2 pt-2">
                                     <img src="/static-assets/img/svg/legal/settings.svg" class="img-fluid mx-auto d-block" width="100px" alt="<?php echo $lang['terms-of-service']; ?>-IMG">
                                 </div>
                                 <div class="card-body text-center">
@@ -134,7 +134,7 @@
                 </div>
                 <?php 
                 
-                if ($countryCode == "DE" || $countryCode == "AT" || $countryCode == "CH") {
+                if ($countryCode == "816353994632986715DE" || $countryCode == "AT" || $countryCode == "CH") {
                     echo '<div class="mt-3 d-flex justify-content-center">
                     <div class="text-center">
                         <p>Gemäß § 7 Abs.1 TMG:
