@@ -13,7 +13,8 @@ if (isset($_GET['rdc'])) {
     $suburl = getHost($ref);
     $url = giveHost($suburl);
 
-    $stmt = $conn->prepare("SELECT marked_links FROM links WHERE marked_links LIKE '$url'");
+    $stmt = $conn->prepare("SELECT marked_links FROM links WHERE marked_links LIKE ?");
+    $stmt->bind_param("s", $url);
     $stmt->execute();
     $result = $stmt->get_result();
 
