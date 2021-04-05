@@ -22,14 +22,12 @@ include('./helper/lang-confg.php');
 
 // include('./helper/geo-vpn.sub.php');
 
-if (empty($_GET['fm_design']) == "orange") {
    $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
    $css_search = '#ff8637';
    $brand_down = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-down.png';
    $brand_side = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-side.png';
    $favicon = 'https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/fivemods-favicon.png';
    $css_text = 'text text-gray';
-}
 
 require_once('./config.php');
 
@@ -170,13 +168,9 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       $fetchMod1 = $selMod1->fetch();
       $m_name = $fetchMod1['m_name'];
       $m_picture = $fetchMod1['m_picture'];
-      $m_desc = $fetchMod1['m_description'];
+      $m_desc = preg_replace("/\"/", "\'", $fetchMod1['m_description']);
 
       $imgArray = explode(" ", $m_picture);
-
-
-      echo '<script>console.log("Mod name: ' . $m_name . '");</script>';
-      echo '<script>console.log("Mod pic: ' . $imgArray[0] . '");</script>';
 
 
       echo '
@@ -187,7 +181,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:description" content="' . $m_desc . '">
          <meta property="og:site_name" content="FiveMods.net">
          <meta property="og:image" content="' . $imgArray[0] . '">
-
+      
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@FiveModsNET">
          <meta name="twitter:title" content="' . $m_name . '">
