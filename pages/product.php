@@ -152,6 +152,14 @@ if ($_GET['id']) {
 
 
 ?>
+
+
+<!-- Some things for the modal -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
 <style>
    code {
       margin-bottom: 1em;
@@ -237,18 +245,25 @@ if ($_GET['id']) {
       text-align: center;
    }
    
-    #expandImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-    }
+   .imageHeight {
+    max-height: 460px;
+    object-fit: cover;
+    -o-object-fit: cover;
+   }
 
-    #expandImg:hover {opacity: 0.7;}
+   .carousel.slide {
+      max-height: 460px;
+   }
 
-   /* Modal Img */
-   .modal-img {
-      width: 200%;
-      height: auto;
+   @media (max-width:767px) {
+      .imageHeight {
+         max-height: 260px;
+         object-fit: cover;
+         -o-object-fit: cover;
+      }
+      .carousel.slide {
+         max-height: 260px;
+      }
    }
 
 </style>
@@ -288,21 +303,29 @@ if ($_GET['id']) {
             <ol class="carousel-indicators">
                <li data-target="#imgCarousel" data-slide-to="0" class="active"></li>
                <?php
-               for ($i=1; $i < count($imgArray); $i++) {
-                  echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
+               if (count($imgArray) > 1) {
+                  for ($i=1; $i < count($imgArray); $i++) {
+                     echo '<li data-target="#imgCarousel" data-slide-to="' . $i . '"></li>';
+                  }
                }
                ?>
             </ol>
                <div class="carousel-inner">
                   <div class="carousel-item active">
-                     <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                     <a href="#carousel4" data-slide-to="0">
+                        <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                     </a>
                   </div>
                   <?php
+                  if (count($imgArray) > 1) {
                      for ($i=1; $i < count($imgArray); $i++) {
                         echo '<div class="carousel-item">
-                                 <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                                 <a href="#carousel4" data-slide-to="' . $i . '">
+                                    <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                                 </a>
                               </div>';
                      }
+                  }     
                   ?>
                </div>
                   <?php if(count($imgArray) > 1):?>
@@ -317,6 +340,56 @@ if ($_GET['id']) {
                   <?php endif;?>
                </div>
             <br><br>
+            <div id="block4">
+               <div id="lightbox4" class="modal fade" role="dialog" style="display: none;" aria-hidden="true">
+                  <div class="modal-dialog modal-xl modalCenter" role="document">
+                        <!--modal-xl modal-lg-->
+                        <div class="modal-content">
+                           <div class="modal-body">
+                              <div class="carousel slide" data-ride="carousel" id="carousel4" data-interval="false">
+                                    <ol class="carousel-indicators">
+                                       <?php
+                                       echo '<li data-target="#carousel4" data-slide-to="0" class="pointer car_item active"></li>';
+
+                                       if (count($imgArray) > 1) {
+                                          for ($i=1; $i < count($imgArray); $i++) {
+                                             echo '<li data-target="#carousel4" data-slide-to="' . $i .'" class="pointer car_item"></li>';
+                                          }
+                                       }
+                                       
+                                       ?>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                    <?php
+                                       echo '<div class="carousel-item">                                                  
+                                          <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[0] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                                       </div>';
+                                       
+                                       if (count($imgArray) > 1) {
+                                          for ($i=1; $i < count($imgArray); $i++) {
+                                             echo '<div class="carousel-item">                                                  
+                                                      <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                                                   </div>';
+                                          }
+                                       }                             
+                                       
+                                       ?>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel4" role="button" data-slide="prev">
+                                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel4" role="button" data-slide="next">
+                                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    </a>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+               </div>
+            </div>
+         
+      
+
             <?php
 
             if (!empty($changelog)) {
