@@ -66,6 +66,14 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
         }
     });
 </script>
+<style>
+h6.mb-0.key {
+	filter: blur(5px);
+}
+h6.mb-0.key:hover {
+	filter: none;
+}
+</style>
 <div class="container mt-5 mb-5">
 	<?php echo $_SESSION['success'];
 	//unset($_SESSION['success']); ?>
@@ -235,7 +243,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
                             <hr>
 							<div class="form-group">
 								<label for="username">Current API key</label>
-								<input type="text" class="form-control" aria-describedby="usernameHelp" value="<?php echo $api_key; ?>" disabled>
+								<input type="text" class="form-control key" aria-describedby="usernameHelp" value="<?php echo $api_key; ?>" disabled>
 								<small id="usernameHelp" class="form-text text-muted"><?php echo $api_key_exp; ?></small>
 							</div>
 							<div class="form-group">
@@ -357,7 +365,7 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 								<ul class="list-group list-group-sm">
 									<li class="list-group-item has-icon">
 										<div>
-											<h6 class="mb-0"><?php echo $city; ?> | <?php echo $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?></h6>
+											<h6 class="mb-0 key"><?php echo $city; ?> | <?php echo $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?></h6>
 											<small class="text-muted">Your current session seen in <?php echo $countryName; ?>.</small>
 										</div>
 										<!-- <button class="btn btn-light btn-sm ml-auto" type="button">More info</button> -->

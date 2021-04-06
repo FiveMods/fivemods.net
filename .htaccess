@@ -245,6 +245,10 @@ RewriteRule ^(terms-of-service*)$ /legal/terms-of-service/ [L,QSA]
 RewriteRule ^(upload*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(upload*)$ ./index.php?page=$1 [L,QSA]
 
+# Upload2 rdc. 
+RewriteRule ^(upload2*/)$ ./index.php?page=$1 [L,QSA]
+RewriteRule ^(upload2*)$ ./index.php?page=$1 [L,QSA]
+
 # Affiliate rdc. 
 RewriteRule ^(affiliate*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(affiliate*)$ ./index.php?page=$1 [L,QSA]
