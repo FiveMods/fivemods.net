@@ -24,7 +24,7 @@ $username = str_replace(" ", "_", $selFetch['name']);
 $nameCheck = $pdo->prepare("SELECT * FROM user WHERE name = ?");
 $nameCheck->execute(array($username));
 
-if(!preg_match("/^[A-Za-z0-9_]{3,24}$/im", $username)) {
+if(!preg_match("/^[A-Za-z0-9_-]{3,50}$/im", $username)) {
     $username = "User" . "_". randomChars(6);
 } else if($nameCheck->rowCount() > 1) {
     $username = $username . "_". randomChars(6);
