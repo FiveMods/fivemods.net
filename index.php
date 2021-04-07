@@ -24,9 +24,9 @@ include('./helper/lang-confg.php');
 
    $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
    $css_search = '#ff8637';
-   $brand_down = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-down.png';
-   $brand_side = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand/fivemods_brand_text_primary_white_5600x2000.svg';
-   $favicon = 'https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand/fivemods_brand_icon_watermark_primary_1500x1500.svg';
+   $brand_down = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
+   $brand_side = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
+   $favicon = 'https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
    $css_text = 'text text-gray';
 
 require_once('./config.php');
@@ -256,7 +256,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta name="twitter:description" content="' . $user_description . '">
          <meta name="twitter:image" content="' . $user_picture . '">';
    } else {
-      echo '<meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/brand-down.png">';
+      echo '<meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png">';
       echo '<title>' . $lang['title'] . '</title>';
    }
 
@@ -319,15 +319,15 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <link rel="icon" href="<?php echo $favicon; ?>">
 
-   <link rel="apple-touch-icon" href="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon.png" />
-   <link rel="apple-touch-icon" sizes="57x57" href="https://img-cdn.fivemods.net/unsafe/57x57/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-57x57.png" />
-   <link rel="apple-touch-icon" sizes="72x72" href="https://img-cdn.fivemods.net/unsafe/72x72/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-72x72.png" />
-   <link rel="apple-touch-icon" sizes="76x76" href="https://img-cdn.fivemods.net/unsafe/76x76/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-76x76.png" />
-   <link rel="apple-touch-icon" sizes="114x114" href="https://img-cdn.fivemods.net/unsafe/114x114/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-114x114.png" />
-   <link rel="apple-touch-icon" sizes="120x120" href="https://img-cdn.fivemods.net/unsafe/120x120/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-120x120.png" />
-   <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
-   <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
-   <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://www.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
+   <link rel="apple-touch-icon" href="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="57x57" href="https://img-cdn.fivemods.net/unsafe/57x57/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="72x72" href="https://img-cdn.fivemods.net/unsafe/72x72/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="76x76" href="https://img-cdn.fivemods.net/unsafe/76x76/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="114x114" href="https://img-cdn.fivemods.net/unsafe/114x114/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="120x120" href="https://img-cdn.fivemods.net/unsafe/120x120/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
 
    <link rel="stylesheet" href="https://www.fivemods.net/static-assets/css/style-adj.css">
 
@@ -337,11 +337,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-
-   <!-- <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/vendor.min.css">
-   <link rel="stylesheet" href="https://htmlstream.com/front/assets/css/theme.min.css?v=1.0">
-   <script src="https://htmlstream.com/front/assets/js/vendor.min.js"></script>
-   <script src="https://htmlstream.com/front/assets/js/theme.min.js"></script> -->
 
    <script>
       function swapStyleSheet(sheet) {
@@ -494,7 +489,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       }
 
       .cover-cat {
-         /* width: 348px; */
+         width: fit-content;
          height: 217px;
          object-fit: cover;
       }

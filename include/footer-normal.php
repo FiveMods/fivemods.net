@@ -4,8 +4,8 @@
          <div class="container">
             <div class="row">
                <div class="col-xs-6 col-sm-3">
-                  <a href="#">
-                     <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-side.png" height="40px" alt="">
+                  <a href="/">
+                     <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" loading="lazy" alt="fivemods_brand_text_primary_white_280x100_footer_normal" width="112px" height="40px">
                   </a>
                   <hr style="background-color:#605f62;margin-right:25%;margin-top:10%;">
                   <address class="color-light-20 mt-4">
