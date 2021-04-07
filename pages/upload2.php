@@ -32,7 +32,7 @@ include('./include/header-banner.php');
                     <div class="row">
                         <div class="col-lg-5 mx-auto">
 
-                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload_brand.svg" loading="lazy" alt="FiveMods upload brand" width="200" class="d-block mx-auto mb-4 rounded-pill">
+                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
                                 <h6 class="text-center mb-4 text-muted">
                                     Upload your resource here
