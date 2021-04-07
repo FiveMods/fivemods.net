@@ -588,11 +588,7 @@ if ($_GET['id']) {
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
                                        <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
-                                       <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
-                     for ($i = 0; $i < count($tags); $i++) {
-                        echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
-                     }
-                     echo '</a>
+                                       </a>
                                        <div class="card-body">
                                           <a href="/product/' . $id . '/" class="text text-dark">
                                              <h5 class="card-topic">' . $name . '</h5>
