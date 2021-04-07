@@ -25,10 +25,10 @@ $currentPage = $_GET['page'];
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
          <span class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item mr-1">
-               <a class="nav-link" href="/"><?php echo $lang['home']; ?></a>
+               <a class="nav-link text-white" href="/"><?php echo $lang['home']; ?></a>
             </li>
             <li class="nav-item dropdown has-megamenu">
-               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> <?php echo $lang['categories']; ?> </a>
+               <a class="nav-link text-white dropdown-toggle" href="#" data-toggle="dropdown"> <?php echo $lang['categories']; ?> </a>
                <div class="dropdown-menu megamenu <?php echo $darkmode; ?>" role="menu">
                   <div class="row">
                      <div class="col-md-navbar">
@@ -157,7 +157,7 @@ $currentPage = $_GET['page'];
                <!-- End Dropdown Menu -->
             </li>
             <div class="nav-item dropdown show">
-               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <a class="nav-link text-white dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkCommunity" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $lang['community']; ?>
                </a>
 
@@ -185,7 +185,7 @@ $currentPage = $_GET['page'];
                      </div>
                   </div> -->
             <div class="nav-item dropdown show">
-               <a class="nav-link dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkFiveM" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <a class="nav-link text-white dropdown-toggle" style="color:rgba(255, 255, 255, 0.5);" href="#" id="dropdownMenuLinkFiveM" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <?php echo $lang['fivem-stuff']; ?> Links
                </a>
 
