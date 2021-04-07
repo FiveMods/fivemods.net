@@ -214,9 +214,11 @@ $currentPage = $_GET['page'];
 
          ?>
          <form id="demo-2" action="/search/" method="GET">
-            <input name="query" class="btn btn-outline-primary rounded" id="query" type="search" placeholder="Search">
-            <label for="query"></label>
-            <button type="submit" name="submit-search" hidden></button>
+            <div class="ui-widget">
+               <input name="query" class="btn btn-outline-primary rounded" id="query" type="search" placeholder="Search">
+               <label for="query"></label>
+               <button type="submit" name="submit-search" hidden></button>
+            </div>
          </form>
          <?php
 
@@ -236,11 +238,7 @@ $currentPage = $_GET['page'];
                   </form>';
          }
          ?>
-         <!-- ' . $lang['log-out'] . '  -->
       </div>
    </div>
    </div>
 </nav>
-<!-- <form action="/account/sign-up/" method="post">
-                  <button type="submit" class="btn btn-outline-primary"><i class="fas fa-plus-circle"></i> ' . $lang['register'] . ' <span class="caret"></span></button>
-                  </form> -->
