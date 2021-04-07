@@ -62,43 +62,43 @@ $currentPage = $_GET['page'];
             <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownLbl" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $lang['fivem-stuff']; ?> Links </a>
                <div class="dropdown-menu dropdown-menu-right w-auto shadow p-0" id="navbarDropdown" aria-labelledby="navbarDropdownLbl">
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="https://themestr.app/customize">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://fivem.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-download'] ?></h5> Download FiveM from the official website.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="http://bootstrap.themes.guide/how-to.html">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://github.com/tabarra/txAdmin">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-txadmin'] ?></h5> The official txAdmin GitHub repositories.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="http://bootstrap4.guide/cn/starter-templates">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-art-lin'] ?></h5> Download the official FiveM linux artifacts.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="http://bootstrap4.guide">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-art-win'] ?></h5> Download the official FiveM windows artifacts.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="https://themesguide.github.io/top-hat/dist/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://keymaster.fivem.net/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-keymaster'] ?></h5> Register an official FiveM keymaster.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="https://themesguide.github.io/top-hat/dist/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://www.fivem.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-website'] ?></h5> The official FiveM website.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" target="new" rel="nofollow" href="https://themesguide.github.io/top-hat/dist/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://discord.com/invite/fivem">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-discord'] ?></h5> The official FiveM discord.
