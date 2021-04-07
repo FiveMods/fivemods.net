@@ -2,7 +2,9 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
 else ob_start();
 
-session_start();
+if (!empty($_COOKIE['CONSENT'])) {
+   session_start();
+}
 
 ob_start("minifier");
 function minifier($code)
@@ -22,10 +24,9 @@ include('./helper/lang-confg.php');
 
 // include('./helper/geo-vpn.sub.php');
 
-$css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
-$css_search = '#ff8637';
-$brand_down = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
-$brand_side = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
+// $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
+// $brand_down = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
+// $brand_side = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
 $favicon = 'https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
 $css_text = 'text text-gray';
 
@@ -80,60 +81,14 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <html lang="en-EN" dir="ltr">
 
 <head>
-   <script data-ad-client="ca-pub-9727102575141971" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+   
+   <?php 
+   
+   if (!empty($_COOKIE['CONSENT'])) {
+      include('/include/gStatics.html');
+   }
 
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-180288055-1"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-         dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'UA-180288055-1');
-   </script>
-
-   <!-- Global site tag (gtag.js) - Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-151024992-2"></script>
-   <script>
-      window.dataLayer = window.dataLayer || [];
-
-      function gtag() {
-         dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-
-      gtag('config', 'UA-151024992-2');
-   </script>
-
-   <!-- Google Tag Manager -->
-   <script>
-      (function(w, d, s, l, i) {
-         w[l] = w[l] || [];
-         w[l].push({
-            'gtm.start': new Date().getTime(),
-            event: 'gtm.js'
-         });
-         var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != 'dataLayer' ? '&l=' + l : '';
-         j.async = true;
-         j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-         f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-5XZ6BDR');
-   </script>
-   <!-- End Google Tag Manager -->
-
-   <script type="text/javascript">
-      window._mNHandle = window._mNHandle || {};
-      window._mNHandle.queue = window._mNHandle.queue || [];
-      medianet_versionId = "3121199";
-   </script>
-   <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
+   ?>
 
    <meta name="google-site-verification" content="y4DUwdQzwqMiFlyNI8b_gGicaNOP-j_ERFP8MVoKLP0" />
 
@@ -278,9 +233,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <meta name="reply-to" content="contact@fivemods.net">
 
-   <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
-   <meta name='dmca-site-verification' content='MmRJNFlJeTBxbHRDT1k2cndkeko3dz090' />
-
    <meta name="msapplication-config" content="none">
    <meta name="theme-color" content="#FF8637">
    <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -295,8 +247,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="DC.Publisher" content="FiveMods" />
    <meta name="DC.Rights" content="FiveMods" />
    <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
-
-   <meta name="detectify-verification" content="9017bbff64caea301ceb67335deb6a86" />
 
    <?php
    if (!empty($_COOKIE['fm_design'])) {
@@ -331,6 +281,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <link rel="stylesheet" href="https://www.fivemods.net/static-assets/css/style-adj.css">
    <link rel="stylesheet" href="/static-assets/css/logo-animation.css">
+   <link rel="stylesheet" href="/static-assets/css/index.css">
 
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -353,268 +304,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          console.log("Content: loaded");
       });
    </script>
-   <!-- Plugins -->
-   <style>
-      html {
-         scroll-behavior: smooth;
-      }
-
-      @media all and (min-width: 992px) {
-         .navbar .has-megamenu {
-            position: static !important;
-         }
-
-         .navbar .megamenu {
-            left: 0;
-            right: 0;
-            width: 100%;
-            padding: 20px;
-         }
-
-         .navbar .nav-link {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-         }
-      }
-
-      .heading-navbar {
-         color: black;
-      }
-
-      .col-md-navbar {
-         padding-left: 7%;
-         padding-right: 7%;
-         -webkit-box-flex: 0;
-         -ms-flex: 0 0 13%;
-         flex: 0 0 13%;
-         max-width: 13%
-      }
-
-      .carousel-pic {
-         width: 120px;
-         height: 90px;
-      }
-
-      .container-search {
-         max-width: 600px;
-         margin: 50px auto
-      }
-
-      input {
-         outline: none;
-      }
-
-      input[type=search] {
-         -webkit-appearance: textfield;
-         -webkit-box-sizing: content-box;
-         font-family: inherit;
-         font-size: 100%;
-      }
-
-      input::-webkit-search-decoration,
-      input::-webkit-search-cancel-button {
-         display: none;
-      }
-
-      input[type=search] {
-         background: <?php echo $css_search; ?> url('https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/search-16x16.png') no-repeat 9px center;
-         padding: 9px 10px 9px 12px;
-         -webkit-transition: all .5s;
-         -moz-transition: all .5s;
-         transition: all .5s;
-      }
-
-      input[type=search]:focus {
-         width: 130px;
-      }
-
-
-      input:-moz-placeholder {
-         color: #999;
-      }
-
-      input::-webkit-input-placeholder {
-         color: #999;
-      }
-
-      /* Demo 2 */
-      #demo-2 input[type=search] {
-         width: 15px;
-         height: 15px;
-         padding-left: 10px;
-         color: transparent;
-         cursor: pointer;
-      }
-
-      #demo-2 input[type=search]:focus {
-         width: 130px;
-         padding-left: 32px;
-         color: white;
-         cursor: auto;
-      }
-
-      #demo-2 input:-moz-placeholder {
-         color: transparent;
-      }
-
-      #demo-2 input::-webkit-input-placeholder {
-         color: transparent;
-      }
-
-      .smallButton {
-         margin-left: 25px;
-      }
-
-      .profile {
-         color: black;
-      }
-
-      .space-16 {
-         letter-spacing: 16px;
-      }
-
-      .center {
-         text-align: center;
-      }
-
-      .cover {
-         /* width: 348px; */
-         height: 196px;
-         object-fit: cover;
-      }
-
-      .cover-sm {
-         /* width: 253px; */
-         height: 143px;
-         object-fit: cover;
-      }
-
-      .cover-cat {
-         width: fit-content;
-         height: 217px;
-         object-fit: cover;
-      }
-
-      body::-webkit-scrollbar {
-         width: .5rem;
-      }
-
-      body::-webkit-scrollbar-track {
-         background: #17141f;
-      }
-
-      body::-webkit-scrollbar-thumb {
-         background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
-      }
-
-      .bg {
-         background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_multi_lighter.png');
-         background-repeat: repeat;
-         background-size: 75%;
-      }
-
-      .f-bg-dark {
-         background: url('/static-assets/img/background/icon_bg_dark_darkest.png');
-         /* background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png'); */
-         background-repeat: repeat;
-         background-size: 75%;
-      }
-
-      .f-bg-dark-login {
-         background: url('/static-assets/img/background/icon_bg_dark_darker.png');
-         /* background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png'); */
-         background-repeat: repeat;
-         background-size: 200%;
-      }
-
-      .shadow1 {
-         box-shadow: 0 5px 10px rgba(154, 160, 185, .05), 0 15px 40px rgba(166, 173, 201, .2);
-      }
-
-      #myBtn {
-         display: none;
-         position: fixed;
-         bottom: 20px;
-         right: 30px;
-         z-index: 99;
-         font-size: 18px;
-         border: none;
-         outline: none;
-         background-color: #E57C0B;
-         color: white;
-         cursor: pointer;
-         border-radius: 4px;
-      }
-
-      #myBtn:hover {
-         background-color: #17141F;
-      }
-
-      #leftBasedAds {
-         left: 0px;
-         position: fixed;
-         text-align: center;
-         top: 0px;
-         z-index: 99;
-      }
-
-      #leftBasedAds {
-         right: 0px;
-         position: fixed;
-         text-align: center;
-         top: 0px;
-         z-index: 99;
-      }
-
-      .fst {
-         font-size: 8px;
-         color: gray;
-         line-height: -50px;
-         display: block;
-      }
-
-      .vr {
-         display: inline;
-         height: 100%;
-         width: 1px;
-         border: 1px inset;
-         margin: 5px;
-         background-color: #605f62;
-         color: #605f62;
-      }
-
-      .emp-login {
-         padding: 3%;
-         margin-top: 3%;
-         margin-bottom: 3%;
-         border-radius: 0.5rem;
-         background: rgba(255, 255, 255, 0.6);
-         /* opacity: 0.6; */
-      }
-
-      form {
-         margin-block-end: 0em !important;
-      }
-
-      #preloader {
-         position: fixed;
-         background: #17141F;
-         display: grid;
-         place-items: center;
-         height: 100vh;
-         width: 100vw;
-         z-index: 99999;
-         -ms-overflow-style: none;
-         scrollbar-width: none;
-         overflow: hidden;
-
-      }
-      
-      #preloader::-webkit-scrollbar {
-         display: none; 
-         overflow: hidden;
-      }
-   </style>
 </head>
 
 <body class="bg">
@@ -652,12 +341,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    }
 
    $_SESSION['preLoad'] = True;
-
-   ?>
-   <!-- Google Tag Manager (noscript) -->
-   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5XZ6BDR" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-   <!-- End Google Tag Manager (noscript) -->
-   <?php
 
    if (strpos($_GET['page'], "upload-policy") !== FALSE) {
       include('./include/header-legal.php');
