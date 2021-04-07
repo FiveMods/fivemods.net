@@ -75,9 +75,9 @@ if ($_GET['id']) {
          // Links
          $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/', "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>", $description);
          
-         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$2\" alt=\"$2\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$1\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$2\" style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$1\" loading=lazy style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$2\" loading=lazy style=\"max-width: 100%;\">", $description);
 
          $description = preg_replace('/\[url\](.+)\[\/url\]/', "<a href=\"/ref?rdc=$1\">$1</a>", $description);
          $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
@@ -295,12 +295,12 @@ if ($_GET['id']) {
             </ol>
                <div class="carousel-inner">
                   <div class="carousel-item active">
-                     <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                     <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" loading="lazy" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
                   </div>
                   <?php
                      for ($i=1; $i < count($imgArray); $i++) {
                         echo '<div class="carousel-item">
-                                 <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
+                                 <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" loading="lazy" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
                               </div>';
                      }
                   ?>
@@ -469,7 +469,7 @@ if ($_GET['id']) {
             <div class="card bg-transparent text-light text-center border-0">
                <div class="card-body pt-3 pb-1">
 
-                  <p class="lead pb-0 mb-1"><a href="/user/<?php echo $username; ?>"><img class="pr-3" async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $userimg; ?>" height="32" alt="Profile Picture"></a><?php echo $lang['made-by']; ?>
+                  <p class="lead pb-0 mb-1"><a href="/user/<?php echo $username; ?>"><img class="pr-3" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $userimg; ?>" height="32" alt="Profile Picture"></a><?php echo $lang['made-by']; ?>
                      <a href="/user/<?php echo $username; ?>"><?php echo $username; ?></a>.
                      <a href="/user/<?php echo $username; ?>" class="btn btn-xs rounded btn-sm btn-light btn-rised ml-md-4">Show more </a>
                   </p>
@@ -524,7 +524,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm ">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover"  src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">';
+                                    <img loading=lazy class="card-img-top img-fluid rounded shadow1 cover"  src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">';
                   echo '</a>
                                     <div class="card-body">
                                        <a href="/product/' . $id . '/" class="text text-dark">
@@ -546,7 +546,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img loading=lazy class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -587,7 +587,7 @@ if ($_GET['id']) {
                      echo '<div class="col-md-4 d-flex align-items-stretch">
                                     <div class="card mb-4 shadow-sm">
                                        <a href="/product/' . $id . '/">
-                                       <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
+                                       <img loading=lazy class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
                                        <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                      for ($i = 0; $i < count($tags); $i++) {
                         echo '<small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $tags[$i] . ' </small>';
@@ -611,7 +611,7 @@ if ($_GET['id']) {
                   echo '<div class="col-md-4 d-flex align-items-stretch">
                                  <div class="card mb-4 shadow-sm '.$do.'">
                                     <a href="/product/' . $id . '/">
-                                    <img async=on class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
+                                    <img loading=lazy class="card-img-top img-fluid rounded shadow1 cover" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $img . '" alt="' . $img . '-Image (display)">
                                     <small class="badge badge-info ml-2" style="font-size:9px;">Paid product</small>
                                     <small class="badge badge-primary ml-2" style="font-size:9px;margin-top: 10px; margin-bottom: -10px"><i class="fas fa-tag mr-1"></i> ' . $cat . ' </small>';
                   for ($i = 0; $i < count($tags); $i++) {
@@ -738,12 +738,12 @@ if ($_GET['id']) {
                <div class="carousel-inner">
                   <div class="carousel-item active">
                      <a href="#" data-toggle="modal" data-target="#myModal">
-                        <img async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" class="img-fluid" alt="Mod Picture">
+                        <img loading=lazy src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" class="img-fluid" alt="Mod Picture">
                   </div>
                   <?php
                   for ($i = 1; $i < count($imgArray); $i++) {
                      echo '<div class="carousel-item">
-                                 <img async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" class="img-fluid" alt="Mod Picture">
+                                 <img loading=lazy src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/' . $imgArray[$i] . '" class="img-fluid" alt="Mod Picture">
                               </div>';
                   }
                   ?>

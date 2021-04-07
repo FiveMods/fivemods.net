@@ -604,6 +604,15 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          height: 100vh;
          width: 100vw;
          z-index: 99999;
+         -ms-overflow-style: none;
+         scrollbar-width: none;
+         overflow: hidden;
+
+      }
+      
+      #preloader::-webkit-scrollbar {
+         display: none; 
+         overflow: hidden;
       }
    </style>
 </head>
