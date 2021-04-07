@@ -802,6 +802,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       // add padding top to show content behind navbar
       $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
    </script>
+   <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+
 </body>
 
 </html>

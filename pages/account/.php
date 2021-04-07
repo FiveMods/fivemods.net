@@ -207,16 +207,6 @@ h6.mb-0.key:hover {
 								<input type="text" class="form-control" id="username" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
 								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['username-desc']; ?></small>
 							</div>
-							<div class="form-group">
-								<label for="username"><?php echo $lang['banner']; ?></label>
-								<input type="text" class="form-control" name="gbanner" pattern="(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg|webp)" aria-describedby="gbanner" value="<?php echo $vals['banner']; ?>" placeholder="Enter a valid image url to your prefered banner. Resolution: 1900x70">
-								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['banner-desc']; ?></small>
-								<input type="text" name="call" value="callFunc" hidden>
-								<div class="form-group small text-muted mt-3" id="info">
-								<?php echo $lang['fill-fields']; ?> <span class="text text-danger">*</span>
-								</div>
-								<button type="submit" class="btn btn-primary">Save & Update</button>
-							</div>
 						</form>
 						<?php
 
