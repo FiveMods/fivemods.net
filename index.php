@@ -25,8 +25,8 @@ include('./helper/lang-confg.php');
    $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
    $css_search = '#ff8637';
    $brand_down = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-down.png';
-   $brand_side = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-side.png';
-   $favicon = 'https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/fivemods-favicon.png';
+   $brand_side = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand/fivemods_brand_text_primary_white_5600x2000.svg';
+   $favicon = 'https://img-cdn.fivemods.net/unsafe/16x16/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand/fivemods_brand_icon_watermark_primary_1500x1500.svg';
    $css_text = 'text text-gray';
 
 require_once('./config.php');
