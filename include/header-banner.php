@@ -14,12 +14,12 @@ if($headerVals->rowCount() > 0) {
 
 <style>
 .fill {
-    min-height: 17vh;
+    min-height: 7vh;
     transform: scale(1,1);
     overflow: hidden;
     background-size: cover;
     background-position: center;
-    background-image: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/<?php echo $banner; ?>');
+    background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
 }
 </style>
 <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-light blinker fill">
