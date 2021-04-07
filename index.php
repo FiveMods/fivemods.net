@@ -504,7 +504,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       }
 
       body::-webkit-scrollbar-thumb {
-         background: #ff8637;
+         background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
       }
 
       .bg {
