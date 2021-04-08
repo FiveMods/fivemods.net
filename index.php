@@ -429,7 +429,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    ?>
    <!-- ========== END FOOTER ========== -->
 
-   <div class="modal hide fade in mt-5 pt-5" id="reqPur" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal hide fade in mt-5 pt-5" id="cCO" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
          <div class="modal-content shadow-lg" style="border-radius: 15px;">
             <div class="modal-body">
@@ -495,7 +495,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <script type="text/javascript">
        $(document).ready(function(){
-            $('#reqPur').modal('<?php
+            $('#cCO').modal('<?php
             
             if (strpos($_GET['page'], "terms-of-service") !== FALSE && $_GET['CC'] == "hide") {
                echo 'hide';
