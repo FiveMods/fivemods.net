@@ -55,30 +55,38 @@ include('./include/header-banner.php');
                         </div>
                     </div>
                 </div>
-            </section>';
+            </section>
+            <a href="?w=1">next page (dev)</a>';
             } elseif ($_GET['w'] == 1) {
-                # code...
+                echo '<section>
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="col-lg-5 mx-auto">
+                            <h4 class="text-center pb-4">Upload images</h4>
+                            <div id="fmUpload"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <a href="/upload2">previous page (dev)</a>
+            <a href="?w=2">next page (dev)</a>';
+            } elseif ($_GET['w'] == 2) {
+                echo '';
+
+            } elseif ($_GET['w'] == 3) {
+                echo '';
             }
 
             ?>
-    <!-- <div class="container">
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-center">
-                <div class="card p-3">
-                    <div id="fmUpload"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+    
     <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
     <script>
         var uppy = Uppy.Core()
             .use(Uppy.Dashboard, {
                 inline: true,
                 target: '#fmUpload',
-                height: 270
+                height: 200
             })
             .use(Uppy.Tus, {
                 endpoint: 'https://storage.fivemods.net/upload/img/ext/?id=?'
@@ -87,5 +95,5 @@ include('./include/header-banner.php');
         uppy.on('complete', (result) => {
             console.log('Upload complete! We’ve uploaded these files:', result.successful)
         })
-    </script> -->
+    </script>
 </section>
