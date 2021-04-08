@@ -242,9 +242,9 @@ h6.mb-0.key:hover {
 								<label for="username">Expires in</label>
 								<select class="form-control" name="key-exp" aria-describedby="gbanner" required>
                                     <option value="1209600">2 Weeks</option>
-                                    <option value="2592000">1 Month</option>
-                                    <option value="7776000">3 Months</option>
-                                    <option value="15552000">6 Months</option>
+                                    <option value="2419200">1 Month</option>
+                                    <option value="7257600">3 Months</option>
+                                    <option value="14515200">6 Months</option>
                                 </select>
 								<input type="text" name="id" value="<?php echo $_SESSION['uuid']; ?>" hidden><br>
 								<button type="submit" class="btn btn-primary">Request</button>
