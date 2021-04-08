@@ -2,6 +2,13 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
 else ob_start();
 
+if ($_GET['CC'] == "given") {
+   $cookie_name = "CONSENT";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+   header('location: /');
+}
+
 if (!empty($_COOKIE['CONSENT'])) {
    session_start();
 }
@@ -81,9 +88,9 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <html lang="en-EN" dir="ltr">
 
 <head>
-   
-   <?php 
-   
+
+   <?php
+
    if (!empty($_COOKIE['CONSENT'])) {
       include('/include/gStatics.html');
    }
@@ -307,38 +314,40 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 </head>
 
 <body class="bg">
-   <?php 
-   
-   if (!$_SESSION['preLoad'] || empty($_SESSION['preLoad'])) {
-      echo '<div id="preloader">
-      <svg width="280" height="100" viewBox="0 0 280 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-         <g id="fivemods">
-            <path id="mods" d="M147.168 73L147.104 43.304L132.384 67.88H128.672L113.952 43.688V73H106.016V28.2H112.864L130.656 57.896L148.128 28.2H154.976L155.04 73H147.168ZM181.733 73.448C178.277 73.448 175.162 72.7013 172.389 71.208C169.616 69.7147 167.44 67.6453 165.861 65C164.325 62.312 163.557 59.2827 163.557 55.912C163.557 52.5413 164.325 49.5333 165.861 46.888C167.44 44.2427 169.616 42.1733 172.389 40.68C175.162 39.1867 178.277 38.44 181.733 38.44C185.232 38.44 188.368 39.1867 191.141 40.68C193.914 42.1733 196.069 44.2427 197.605 46.888C199.184 49.5333 199.973 52.5413 199.973 55.912C199.973 59.2827 199.184 62.312 197.605 65C196.069 67.6453 193.914 69.7147 191.141 71.208C188.368 72.7013 185.232 73.448 181.733 73.448ZM181.733 66.6C184.677 66.6 187.109 65.6187 189.029 63.656C190.949 61.6933 191.909 59.112 191.909 55.912C191.909 52.712 190.949 50.1307 189.029 48.168C187.109 46.2053 184.677 45.224 181.733 45.224C178.789 45.224 176.357 46.2053 174.437 48.168C172.56 50.1307 171.621 52.712 171.621 55.912C171.621 59.112 172.56 61.6933 174.437 63.656C176.357 65.6187 178.789 66.6 181.733 66.6ZM241.095 25.512V73H233.415V68.584C232.092 70.2053 230.45 71.4213 228.487 72.232C226.567 73.0427 224.434 73.448 222.087 73.448C218.802 73.448 215.836 72.7227 213.191 71.272C210.588 69.8213 208.54 67.7733 207.047 65.128C205.554 62.44 204.807 59.368 204.807 55.912C204.807 52.456 205.554 49.4053 207.047 46.76C208.54 44.1147 210.588 42.0667 213.191 40.616C215.836 39.1653 218.802 38.44 222.087 38.44C224.348 38.44 226.418 38.824 228.295 39.592C230.172 40.36 231.772 41.512 233.095 43.048V25.512H241.095ZM223.047 66.6C224.967 66.6 226.695 66.1733 228.231 65.32C229.767 64.424 230.983 63.1653 231.879 61.544C232.775 59.9227 233.223 58.0453 233.223 55.912C233.223 53.7787 232.775 51.9013 231.879 50.28C230.983 48.6587 229.767 47.4213 228.231 46.568C226.695 45.672 224.967 45.224 223.047 45.224C221.127 45.224 219.399 45.672 217.863 46.568C216.327 47.4213 215.111 48.6587 214.215 50.28C213.319 51.9013 212.871 53.7787 212.871 55.912C212.871 58.0453 213.319 59.9227 214.215 61.544C215.111 63.1653 216.327 64.424 217.863 65.32C219.399 66.1733 221.127 66.6 223.047 66.6ZM262.121 73.448C259.347 73.448 256.638 73.0853 253.993 72.36C251.347 71.6347 249.235 70.7173 247.657 69.608L250.729 63.528C252.265 64.552 254.099 65.384 256.233 66.024C258.409 66.6213 260.542 66.92 262.633 66.92C267.411 66.92 269.801 65.6613 269.801 63.144C269.801 61.9493 269.182 61.1173 267.945 60.648C266.75 60.1787 264.809 59.7307 262.121 59.304C259.305 58.8773 257.001 58.3867 255.209 57.832C253.459 57.2773 251.923 56.3173 250.601 54.952C249.321 53.544 248.681 51.6027 248.681 49.128C248.681 45.8853 250.025 43.304 252.713 41.384C255.443 39.4213 259.113 38.44 263.721 38.44C266.067 38.44 268.414 38.7173 270.761 39.272C273.107 39.784 275.027 40.488 276.521 41.384L273.449 47.464C270.547 45.7573 267.283 44.904 263.657 44.904C261.31 44.904 259.518 45.2667 258.281 45.992C257.086 46.6747 256.489 47.592 256.489 48.744C256.489 50.024 257.129 50.9413 258.409 51.496C259.731 52.008 261.758 52.4987 264.489 52.968C267.219 53.3947 269.459 53.8853 271.209 54.44C272.958 54.9947 274.451 55.9333 275.689 57.256C276.969 58.5787 277.609 60.456 277.609 62.888C277.609 66.088 276.222 68.648 273.449 70.568C270.675 72.488 266.899 73.448 262.121 73.448Z" fill="white" />
-            <g id="five">
-               <path id="Polygon 1" d="M49 0.57735C49.6188 0.220084 50.3812 0.220085 51 0.57735L92.3013 24.4227C92.9201 24.7799 93.3013 25.4402 93.3013 26.1547V73.8453C93.3013 74.5598 92.9201 75.2201 92.3013 75.5774L51 99.4227C50.3812 99.7799 49.6188 99.7799 49 99.4226L7.69873 75.5773C7.07993 75.2201 6.69873 74.5598 6.69873 73.8453V26.1547C6.69873 25.4402 7.07993 24.7799 7.69873 24.4226L49 0.57735Z" fill="url(#paint0_linear)" />
-               <g id="5" filter="url(#filter0_d)">
-                  <path d="M47.832 45.544C54.1467 45.544 58.8187 46.7813 61.848 49.256C64.8773 51.688 66.392 55.016 66.392 59.24C66.392 61.928 65.7307 64.36 64.408 66.536C63.0853 68.712 61.1013 70.44 58.456 71.72C55.8107 73 52.5467 73.64 48.664 73.64C45.464 73.64 42.3707 73.192 39.384 72.296C36.3973 71.3573 33.88 70.0773 31.832 68.456L35.352 61.992C37.016 63.3573 39 64.4453 41.304 65.256C43.6507 66.024 46.0613 66.408 48.536 66.408C51.48 66.408 53.784 65.8107 55.448 64.616C57.1547 63.3787 58.008 61.6933 58.008 59.56C58.008 57.256 57.0907 55.528 55.256 54.376C53.464 53.1813 50.3707 52.584 45.976 52.584H35.16L37.464 28.2H63.768V35.176H44.504L43.544 45.544H47.832Z" fill="white" />
+   <?php
+
+   if ($_GET['preL'] == 0) {
+      if (!$_SESSION['preLoad'] || empty($_SESSION['preLoad'])) {
+         echo '<div id="preloader">
+         <svg width="280" height="100" viewBox="0 0 280 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="fivemods">
+               <path id="mods" d="M147.168 73L147.104 43.304L132.384 67.88H128.672L113.952 43.688V73H106.016V28.2H112.864L130.656 57.896L148.128 28.2H154.976L155.04 73H147.168ZM181.733 73.448C178.277 73.448 175.162 72.7013 172.389 71.208C169.616 69.7147 167.44 67.6453 165.861 65C164.325 62.312 163.557 59.2827 163.557 55.912C163.557 52.5413 164.325 49.5333 165.861 46.888C167.44 44.2427 169.616 42.1733 172.389 40.68C175.162 39.1867 178.277 38.44 181.733 38.44C185.232 38.44 188.368 39.1867 191.141 40.68C193.914 42.1733 196.069 44.2427 197.605 46.888C199.184 49.5333 199.973 52.5413 199.973 55.912C199.973 59.2827 199.184 62.312 197.605 65C196.069 67.6453 193.914 69.7147 191.141 71.208C188.368 72.7013 185.232 73.448 181.733 73.448ZM181.733 66.6C184.677 66.6 187.109 65.6187 189.029 63.656C190.949 61.6933 191.909 59.112 191.909 55.912C191.909 52.712 190.949 50.1307 189.029 48.168C187.109 46.2053 184.677 45.224 181.733 45.224C178.789 45.224 176.357 46.2053 174.437 48.168C172.56 50.1307 171.621 52.712 171.621 55.912C171.621 59.112 172.56 61.6933 174.437 63.656C176.357 65.6187 178.789 66.6 181.733 66.6ZM241.095 25.512V73H233.415V68.584C232.092 70.2053 230.45 71.4213 228.487 72.232C226.567 73.0427 224.434 73.448 222.087 73.448C218.802 73.448 215.836 72.7227 213.191 71.272C210.588 69.8213 208.54 67.7733 207.047 65.128C205.554 62.44 204.807 59.368 204.807 55.912C204.807 52.456 205.554 49.4053 207.047 46.76C208.54 44.1147 210.588 42.0667 213.191 40.616C215.836 39.1653 218.802 38.44 222.087 38.44C224.348 38.44 226.418 38.824 228.295 39.592C230.172 40.36 231.772 41.512 233.095 43.048V25.512H241.095ZM223.047 66.6C224.967 66.6 226.695 66.1733 228.231 65.32C229.767 64.424 230.983 63.1653 231.879 61.544C232.775 59.9227 233.223 58.0453 233.223 55.912C233.223 53.7787 232.775 51.9013 231.879 50.28C230.983 48.6587 229.767 47.4213 228.231 46.568C226.695 45.672 224.967 45.224 223.047 45.224C221.127 45.224 219.399 45.672 217.863 46.568C216.327 47.4213 215.111 48.6587 214.215 50.28C213.319 51.9013 212.871 53.7787 212.871 55.912C212.871 58.0453 213.319 59.9227 214.215 61.544C215.111 63.1653 216.327 64.424 217.863 65.32C219.399 66.1733 221.127 66.6 223.047 66.6ZM262.121 73.448C259.347 73.448 256.638 73.0853 253.993 72.36C251.347 71.6347 249.235 70.7173 247.657 69.608L250.729 63.528C252.265 64.552 254.099 65.384 256.233 66.024C258.409 66.6213 260.542 66.92 262.633 66.92C267.411 66.92 269.801 65.6613 269.801 63.144C269.801 61.9493 269.182 61.1173 267.945 60.648C266.75 60.1787 264.809 59.7307 262.121 59.304C259.305 58.8773 257.001 58.3867 255.209 57.832C253.459 57.2773 251.923 56.3173 250.601 54.952C249.321 53.544 248.681 51.6027 248.681 49.128C248.681 45.8853 250.025 43.304 252.713 41.384C255.443 39.4213 259.113 38.44 263.721 38.44C266.067 38.44 268.414 38.7173 270.761 39.272C273.107 39.784 275.027 40.488 276.521 41.384L273.449 47.464C270.547 45.7573 267.283 44.904 263.657 44.904C261.31 44.904 259.518 45.2667 258.281 45.992C257.086 46.6747 256.489 47.592 256.489 48.744C256.489 50.024 257.129 50.9413 258.409 51.496C259.731 52.008 261.758 52.4987 264.489 52.968C267.219 53.3947 269.459 53.8853 271.209 54.44C272.958 54.9947 274.451 55.9333 275.689 57.256C276.969 58.5787 277.609 60.456 277.609 62.888C277.609 66.088 276.222 68.648 273.449 70.568C270.675 72.488 266.899 73.448 262.121 73.448Z" fill="white" />
+               <g id="five">
+                  <path id="Polygon 1" d="M49 0.57735C49.6188 0.220084 50.3812 0.220085 51 0.57735L92.3013 24.4227C92.9201 24.7799 93.3013 25.4402 93.3013 26.1547V73.8453C93.3013 74.5598 92.9201 75.2201 92.3013 75.5774L51 99.4227C50.3812 99.7799 49.6188 99.7799 49 99.4226L7.69873 75.5773C7.07993 75.2201 6.69873 74.5598 6.69873 73.8453V26.1547C6.69873 25.4402 7.07993 24.7799 7.69873 24.4226L49 0.57735Z" fill="url(#paint0_linear)" />
+                  <g id="5" filter="url(#filter0_d)">
+                     <path d="M47.832 45.544C54.1467 45.544 58.8187 46.7813 61.848 49.256C64.8773 51.688 66.392 55.016 66.392 59.24C66.392 61.928 65.7307 64.36 64.408 66.536C63.0853 68.712 61.1013 70.44 58.456 71.72C55.8107 73 52.5467 73.64 48.664 73.64C45.464 73.64 42.3707 73.192 39.384 72.296C36.3973 71.3573 33.88 70.0773 31.832 68.456L35.352 61.992C37.016 63.3573 39 64.4453 41.304 65.256C43.6507 66.024 46.0613 66.408 48.536 66.408C51.48 66.408 53.784 65.8107 55.448 64.616C57.1547 63.3787 58.008 61.6933 58.008 59.56C58.008 57.256 57.0907 55.528 55.256 54.376C53.464 53.1813 50.3707 52.584 45.976 52.584H35.16L37.464 28.2H63.768V35.176H44.504L43.544 45.544H47.832Z" fill="white" />
+                  </g>
                </g>
             </g>
-         </g>
-         <defs>
-            <filter id="filter0_d" x="27.832" y="26.2" width="42.56" height="53.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-               <feFlood flood-opacity="0" result="BackgroundImageFix" />
-               <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-               <feOffset dy="2" />
-               <feGaussianBlur stdDeviation="2" />
-               <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-               <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
-               <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
-            </filter>
-            <linearGradient id="paint0_linear" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
-               <stop stop-color="#E57C0B" />
-               <stop offset="1" stop-color="#E94057" />
-            </linearGradient>
-         </defs>
-      </svg>
-   </div>';
-   }
+            <defs>
+               <filter id="filter0_d" x="27.832" y="26.2" width="42.56" height="53.44" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                  <feOffset dy="2" />
+                  <feGaussianBlur stdDeviation="2" />
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+               </filter>
+               <linearGradient id="paint0_linear" x1="50" y1="0" x2="50" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#E57C0B" />
+                  <stop offset="1" stop-color="#E94057" />
+               </linearGradient>
+            </defs>
+         </svg>
+      </div>';
+      }
+   } 
 
    $_SESSION['preLoad'] = True;
 
@@ -395,23 +404,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       </div>
    </main>
 
-   <!-- ========== END MAIN CONTENT ========== -->
-   <?php
-   if (!(isMobile())) {
-      echo '<div id="441135697">
-      <script type="text/javascript">
-          try {
-              window._mNHandle.queue.push(function (){
-                  window._mNDetails.loadTag("441135697", "970x90", "441135697");
-              });
-          }
-          catch (error) {}
-      </script>
-  </div>';
-   }
-   ?>
-   <!-- ========== FOOTER ========== -->
-
    <?php
 
    if (strpos($_GET['page'], "upload-policy") !== FALSE) {
@@ -437,18 +429,91 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    ?>
    <!-- ========== END FOOTER ========== -->
 
+   <div class="modal hide fade in mt-5 pt-5" id="reqPur" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+         <div class="modal-content shadow-lg" style="border-radius: 15px;">
+            <div class="modal-body">
+               <div class="d-flex justify-content-center mt-4 mb-4">
+                  <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_gradient_281x100.svg" loading="lazy" height="48px" alt="FiveMods logo silent">
+               </div>
+               <h4 class="text-center baqlu">FiveMods.net uses cookies</h4>
+               <!-- <hr> -->
+               <div class="d-flex justify-content-start">
+                  <div class="mt-2 pl-4 pr-4">
+                     <article class="ymA4Y">
+                        <p>FiveMods.net uses <a href="https://us.norton.com/internetsecurity-privacy-what-are-cookies.html" rel="nofollow noopener noreferrer" target="_blank">cookies</a> and data for the following:</p>
+                        <ul>
+                           <li>Provide and operate services, e.g. check faults and take measures against spam, fraud or abuse</li>
+                           <li>Collect data on audience interactions and website statistics to understand how our services are used</li>
+                           <li>Adjust your visit experience e.g. changing language or design</li>
+                        </ul>
+                        <p>If you agree, we also use cookies and data for the following:</p>
+                        <ul>
+                           <li>Improve the quality of our services and develop new services</li>
+                           <li>Show personalized or general ads on FiveMods.net and affiliated services, depending on your settings</li>
+                           <li>Deliver advertising and measure the effectiveness of advertising</li>
+                           <li>General security and logging </li>
+                        </ul>
+                        <p>The selection of non-personalized content and ads may be based on what content you are viewing and where you are located (ad delivery is based on general location). Personalized content and ads may also be based on this, but in addition, they may also be based on activities such as searches on FiveMods.net and activities on affiliated services. Personalized content and ads include things like more relevant results and recommendations and ads tailored to your interests.</p>
+                        <p>To disable some or all cookies for other purposes - if needed, <a href="/cookie-consent/?CC=hide&preL=1">visit us here</a> at any time.</p>
+                        <p>If you have any questions about FiveMods.net and the use of cookies, <br> please contact us by email at <a href="mailto://contact@fivemods.net">contact@fivemods.net</a>. </p>
+                     </article>
+                  </div>
+               </div>
+               <div class="d-flex justify-content-center pt-3 mb-1">
+
+                  <a href="https://fivem.net" rel="nofollow noopener noreferrer" class="btn btn-primary mr-1">Decline</a>
+                  <a href="?CC=given" class="btn btn-primary ml-1">Accept</a>
+
+               </div>
+               <div class="d-flex justify-content-center pt-3 mb-1">
+
+                  <a href="/terms-of-service/?CC=hide&preL=1" class="text-muted mr-1"><?php echo $lang['terms-of-service']; ?></a>
+                  -
+                  <a href="/privacy-policy/?CC=hide&preL=1" class="text-muted ml-1"><?php echo $lang['privacy-policy']; ?></a>
+
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </div>
+
+   
+
    <!-- jQuery is required -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous"></script>
 
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+   <script type="text/javascript">
+       $(document).ready(function(){
+            $('#reqPur').modal('<?php
+            
+            if (strpos($_GET['page'], "terms-of-service") !== FALSE && $_GET['CC'] == "hide") {
+               echo 'hide';
+            } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE && $_GET['CC'] == "hide") {
+               echo 'hide';
+            } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE && $_GET['CC'] == "hide") {
+               echo 'hide';
+            } elseif (!empty($_COOKIE['CONSENT'])) {
+               echo 'hide';
+            } else {
+               echo 'show';
+            }
+
+            ?>');
+        }); 
+   </script>
    <script type="text/javascript">
       $(document).ready(function() {
          $('#preloader').delay(2500).fadeOut('slow');
       });
    </script>
-   <script>
+   <script type="text/javascript">
       /* Author: AdGlare Ad Server (https://www.adglare.com) */
       function hasAdblock() {
          var t = document.createElement('div');
@@ -481,11 +546,10 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          document.getElementById("myOverlay").style.display = "none";
       }
    </script>
-   <script>
+   <script type="text/javascript">
       // add padding top to show content behind navbar
       $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
    </script>
-   <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
 
 </body>
 

@@ -257,3 +257,27 @@ html {
     display: none; 
     overflow: hidden;
  }
+
+ .ymA4Y {
+   font-family: arial,sans-serif;
+   font-style: normal;
+   font-weight: normal;
+   font-size: 14px;
+   line-height: 20px;
+   letter-spacing: 0.2px;
+   color: #70757a;
+   white-space: normal;
+   text-align: left;
+ }
+
+ .baqlu {
+   text-align: center;
+   text-transform: none;
+   color: #202124;
+   font-family: arial,sans-serif;
+   font-size: 24px;
+   font-weight: 400;
+   letter-spacing: 0;
+   margin: 24px auto 18px auto;
+   padding: 0 20px;
+ }
