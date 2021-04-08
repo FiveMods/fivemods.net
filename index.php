@@ -92,7 +92,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <?php
 
    if (!empty($_COOKIE['CONSENT'])) {
-      include('/include/gStatics.html');
+      include('./include/gStatics.html');
    }
 
    ?>
