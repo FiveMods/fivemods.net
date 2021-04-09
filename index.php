@@ -6,7 +6,10 @@ if ($_GET['CC'] == "given") {
    $cookie_name = "CONSENT";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
-   header('location: /');
+
+   $rdcURI = $_GET['rdcURI'];
+   header('location: '.$rdcURI);
+
 }
 
 if (!empty($_COOKIE['CONSENT'])) {
@@ -463,7 +466,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
                <div class="d-flex justify-content-center pt-3 mb-1">
 
                   <a href="https://fivem.net" rel="nofollow noopener noreferrer" class="btn btn-primary mr-1">Decline</a>
-                  <a href="?CC=given" class="btn btn-primary ml-1">Accept</a>
+                  <a href="?CC=given&rdcURI=<?php echo $actual_link; ?>?preL=1" class="btn btn-primary ml-1">Accept</a>
 
                </div>
                <div class="d-flex justify-content-center pt-3 mb-1">
