@@ -20,9 +20,7 @@ include('./include/header-banner.php');
         display: none;
     }
 </style>
-<div class="progress">
-    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
+
 <section class="pt-5 pb-5">
     <?php
 
@@ -31,6 +29,9 @@ include('./include/header-banner.php');
                 <div class="container p-5">
                     <div class="row">
                         <div class="col-lg-5 mx-auto">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
 
                             <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 

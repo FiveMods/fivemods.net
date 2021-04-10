@@ -243,11 +243,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <meta name="reply-to" content="contact@fivemods.net">
 
-   <meta name="msapplication-config" content="none">
-   <meta name="theme-color" content="#FF8637">
-   <meta name="msapplication-navbutton-color" content="#FF8637">
-   <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637">
+   <meta name="msapplication-config" content="none" />
+   <meta name="theme-color" content="#FF8637" />
+   <meta name="msapplication-navbutton-color" content="#FF8637" />
+   <meta name="apple-mobile-web-app-capable" content="yes" />
+   <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637" />
 
    <meta name="websiteStage" content="live" />
    <meta name="websiteVersion" content="v1.1.0.5-a.1" />
