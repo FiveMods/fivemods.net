@@ -250,8 +250,8 @@ include('./include/header-banner.php');
                                 <form action="upload_file.php" id="img-upload-form" method="post" enctype="multipart/form-data">
                                     <p>
                                         <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                            <label for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow">Take me back to my profile
-                                            </label>
+                                            <a href="/account/" for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow">Take me back to my profile
+                                            </a>
                                         </div>
                                     </p>
                                     <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
@@ -263,7 +263,7 @@ include('./include/header-banner.php');
                             Failures can result in a removal of the specific mod or your account.
                         </h6>
                         <div class="d-flex justify-content-center">
-                            <a href="#" class="text-center text-muted" style="font-size: 10px;">
+                            <a href="/upload/" class="text-center text-muted" style="font-size: 10px;">
                                 <u>Upload more</u>
                             </a>
                         </div>
