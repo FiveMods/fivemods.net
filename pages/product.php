@@ -92,6 +92,8 @@ if ($_GET['id']) {
          $description = preg_replace('/\:cool\:/', "😎", $description);
          $description = preg_replace('/\:lol\:|\:joy\:/', "😂", $description);
 
+         $description = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $description);
+
       }
    } else {
       header('location: /');
@@ -152,6 +154,9 @@ if ($_GET['id']) {
 
 
 ?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.js" integrity="sha512-7KzSt4AJ9bLchXCRllnyYUDjfhO2IFEWSa+a5/3kPGQbr+swRTorHQfyADAhSlVHCs1bpFdB1447ZRzFyiiXsg==" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.1/baguetteBox.min.css" integrity="sha512-NVt7pmp5f+3eWRPO1h4A1gCf4opn4r5z2wS1mi7AaVcTzE9wDJ6RzMqSygjDzYHLp+mAJ2/qzXXDHar6IQwddQ==" crossorigin="anonymous" />
+
 <style>
    code {
       margin-bottom: 1em;
@@ -293,7 +298,7 @@ if ($_GET['id']) {
                }
                ?>
             </ol>
-               <div class="carousel-inner">
+               <div class="carousel-inner gallary">
                   <div class="carousel-item active">
                      <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" loading="lazy" class="d-block w-100 img-fluid cover" style="width:540px;height:304px;" alt="Mod Picture">
                   </div>
@@ -731,7 +736,7 @@ if ($_GET['id']) {
                   }
                   ?>
                </ol>
-               <div class="carousel-inner">
+               <div class="carousel-inner gallary">
                   <div class="carousel-item active">
                      <a href="#" data-toggle="modal" data-target="#myModal">
                         <img loading=lazy src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $imgArray[0]; ?>" class="img-fluid" alt="Mod Picture">
@@ -819,6 +824,11 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 </script> -->
+<script>
+
+baguetteBox.run('.gallary');
+
+</script>
 
 <?php
    $pdo = null;
