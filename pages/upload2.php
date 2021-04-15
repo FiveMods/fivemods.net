@@ -64,236 +64,235 @@ include('./include/header-banner.php');
     }
 </style>
 
+
 <section class="pt-5 pb-5">
-    <?php
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mx-auto">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-modupload-tab" data-toggle="pill" href="#pills-modupload" role="tab" aria-controls="pills-modupload" aria-selected="false">Mod Upload</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-form-tab" data-toggle="pill" href="#pills-form" role="tab" aria-controls="pills-form" aria-selected="false">Form</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-done-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-done" aria-selected="false">Done</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-    if (empty($_GET['w'])) {
-        echo '<section>
-                <div class="container p-5">
-                    <div class="row">
-                        <div class="col-lg-5 mx-auto">
-                            <!--<div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>-->
+    <form action="upload_file.php" class="was-validated" id="img-upload-form" method="post" enctype="multipart/form-data">
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <section>
+                    <div class="container p-5">
+                        <div class="row">
+                            <div class="col-lg-5 mx-auto">
+                                <!--<div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>-->
 
-                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+                                <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
-                                <h6 class="text-center mb-4 text-muted">
-                                    Upload your resource here
-                                </h6>
+                                    <h6 class="text-center mb-4 text-muted">
+                                        Upload your resource here
+                                    </h6>
 
-                                <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                    <label for="fileUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
-                                        <input id="fileUpload" type="file">
-                                    </label>
+                                    <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                        <label for="fmUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
+                                            <input id="fmUpload" type="file" accept=".zip, .7z, .rar, .tar, .tar.gz" required>
+                                        </label>
+                                    </div>
+                                    <!-- End -->
+
+                                    <div class="text-center mb-4 text-muted border p-2" id="uploadPreview">
+                                    
+                                    </div>
+                                    <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
+                                        You have to upload a .zip, .7z, .rar, .tar or .tar.gz file.
+                                    </h6>
                                 </div>
-                                <!-- End -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="tab-pane fade" id="pills-modupload" role="tabpanel" aria-labelledby="pills-modupload-tab">
+                <section>
+                    <div class="container p-5">
+                        <div class="row">
+                            <div class="col-lg-5 mx-auto">
 
-                                <div class="text-center mb-4 text-muted border p-2">
-                                <i class="far fa-file-archive pr-2"></i> my_uploaded_mod.zip
+                                <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/gallery.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+
+                                    <h6 class="text-center mb-4 text-muted">
+                                        Upload your images here
+                                    </h6>
+
+                                    <div class="grid-x grid-padding-x">
+                                        <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
+                                            <p>
+                                                <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                                    <label for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for images ...
+                                                        <input class="show-for-sr" type="file" id="upload_imgs" name="upload_imgs[]" accept=".jpg, .png, .jpeg, .webp" multiple />
+                                                    </label>
+                                                </div>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
+                                        You have to upload images in the format .png, .jpg, .jpeg or .webp. Max. 10 images
+                                    </h6>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="/upload2" class="text-center text-muted" style="font-size: 10px;">
+                                            <u>Go back to file upload</u>
+                                        </a>
+                                    </div>
                                 </div>
-                                <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
-                                    You have to upload a .zip, .7z, .rar, .tar or .tar.gz file.
-                                </h6>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <a href="?w=1">next page (dev)</a>';
-    } elseif ($_GET['w'] == 1) {
-        echo '<section>
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-lg-5 mx-auto">
+                </section>
+                <section class="pt-3 pb-3">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden p-3 bg-white shadow rounded-lg" id="img_preview" aria-live="polite">
+                                <div class="card-img-top shadow"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="tab-pane fade" id="pills-form" role="tabpanel" aria-labelledby="pills-form-tab">
+                <section>
+                    <div class="container p-5">
+                        <div class="row">
+                            <div class="col-lg-10 mx-auto">
 
-                    <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/gallery.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+                                <div class="p-5 bg-white shadow rounded-lg">
 
-                        <h6 class="text-center mb-4 text-muted">
-                            Upload your images here
-                        </h6>
-
-                        <div class="grid-x grid-padding-x">
-                            <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
-                                <form action="upload_file.php" id="img-upload-form" method="post" enctype="multipart/form-data">
-                                    <p>
-                                        <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                            <label for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for images ...
-                                                <input class="show-for-sr" type="file" id="upload_imgs" name="upload_imgs[]" multiple />
-                                            </label>
-                                        </div>
-                                    </p>
+                                <form autocomplete="off" class="was-validated" method="post" action="/upload" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="title">Title <span class="text text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter your mod title.." required>
+                                        <small id="title" class="form-text text-muted">The title has to be at least 10 and max. 75 characters long.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Description <span class="text text-danger">*</span></label>
+                                        <textarea class="form-control" id="description" name="description" value="" placeholder="Enter an exciting description.." rows="5" minlength="150" required></textarea>
+                                        <small id="title" class="form-text text-muted">The description has to be at least 150 characters long.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Select a category <span class="text text-danger">*</span></label>
+                                        <select class="form-control custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
+                                            <option value="" disabled selected>Choose category..</option>
+                                            <option value="Scripts">Scripts</option>
+                                            <option value="Vehicles">Vehicles</option>
+                                            <option value="Weapons">Weapons</option>
+                                            <option value="Peds">Peds</option>
+                                            <option value="Maps">Maps</option>
+                                            <option value="Liveries">Liveries</option>
+                                            <option value="Misc">Misc</option>
+                                        </select>
+                                        <small id="title" class="form-text text-muted">You have to select a category.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Set some tags <span class="text text-danger">*</span></label>
+                                        <select id="choices-multiple-remove-button" placeholder="Select up to 20 tags" multiple>
+                                            <option value="HTML">HTML</option>
+                                            <option value="Jquery">Jquery</option>
+                                            <option value="CSS">CSS</option>
+                                            <option value="Bootstrap 3">Bootstrap 3</option>
+                                            <option value="Bootstrap 4">Bootstrap 4</option>
+                                            <option value="Java">Java</option>
+                                            <option value="Javascript">Javascript</option>
+                                            <option value="Angular">Angular</option>
+                                            <option value="Python">Python</option>
+                                            <option value="Hybris">Hybris</option>
+                                            <option value="SQL">SQL</option>
+                                            <option value="NOSQL">NOSQL</option>
+                                            <option value="NodeJS">NodeJS</option>
+                                        </select>
+                                        <small id="title" class="form-text text-muted">You have to set at least one tag.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Required resource</label>
+                                        <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
+                                        <small id="title" class="form-text text-muted">Not required</small>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button id ="submitBtn" class="btn btn-primary" style="padding:10px 20px 10px;border-radius:7px;font-size: 16px;">Upload <i class="fas fa-upload pl-1"></i></button>
+                                    </div>
                                 </form>
+
+                                </div>
                             </div>
                         </div>
-                        <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
-                            You have to upload images in the format .png, .jpg, .jpeg or .webp. Max. 10 images
-                        </h6>
-                        <div class="d-flex justify-content-center">
-                            <a href="/upload2" class="text-center text-muted" style="font-size: 10px;">
-                                <u>Go back to file upload</u>
-                            </a>
-                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="pt-3 pb-3">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden p-3 bg-white shadow rounded-lg" id="img_preview" aria-live="polite">
-                <div class="card-img-top shadow"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-            <a href="/upload2">previous page (dev)</a>
-            <a href="?w=2">next page (dev)</a>';
-    } elseif ($_GET['w'] == 2) {
-        echo '<section>
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-
-                    <div class="p-5 bg-white shadow rounded-lg">
-
-                    <form autocomplete="off" class="was-validated" method="post" action="/upload" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="title">Title <span class="text text-danger">*</span></label>
-                            <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter your mod title.." required>
-                            <small id="title" class="form-text text-muted">The title has to be at least 10 and max. 75 characters long.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Description <span class="text text-danger">*</span></label>
-                            <textarea class="form-control" id="description" name="description" value="" placeholder="Enter an exciting description.." rows="5" minlength="150" required></textarea>
-                            <small id="title" class="form-text text-muted">The description has to be at least 150 characters long.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Select a category <span class="text text-danger">*</span></label>
-                            <select class="form-control custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
-                                <option value="" disabled selected>Choose category..</option>
-                                <option value="Scripts">Scripts</option>
-                                <option value="Vehicles">Vehicles</option>
-                                <option value="Weapons">Weapons</option>
-                                <option value="Peds">Peds</option>
-                                <option value="Maps">Maps</option>
-                                <option value="Liveries">Liveries</option>
-                                <option value="Misc">Misc</option>
-                            </select>
-                            <small id="title" class="form-text text-muted">You have to select a category.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Set some tags <span class="text text-danger">*</span></label>
-                            <select id="choices-multiple-remove-button" placeholder="Select up to 20 tags" multiple>
-                                <option value="HTML">HTML</option>
-                                <option value="Jquery">Jquery</option>
-                                <option value="CSS">CSS</option>
-                                <option value="Bootstrap 3">Bootstrap 3</option>
-                                <option value="Bootstrap 4">Bootstrap 4</option>
-                                <option value="Java">Java</option>
-                                <option value="Javascript">Javascript</option>
-                                <option value="Angular">Angular</option>
-                                <option value="Python">Python</option>
-                                <option value="Hybris">Hybris</option>
-                                <option value="SQL">SQL</option>
-                                <option value="NOSQL">NOSQL</option>
-                                <option value="NodeJS">NodeJS</option>
-                            </select>
-                            <small id="title" class="form-text text-muted">You have to set at least one tag.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="title">Required resource</label>
-                            <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
-                            <small id="title" class="form-text text-muted">Not required</small>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary" style="padding:10px 20px 10px;border-radius:7px;font-size: 16px;">Upload <i class="fas fa-upload pl-1"></i></button>
-                        </div>
-                    </form>
-
+                </section>
+                <section class="pt-3 pb-3">
+                    <div class="container">
+                    <div class="row row-grid">
+                        <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
                     </div>
-                </div>
+                    </div>
+                </section>
             </div>
-        </div>
-    </section>
-    <section class="pt-3 pb-3">
-        <div class="container">
-          <div class="row row-grid">
-            <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
-          </div>
-        </div>
-      </section>
-            <a href="?w=1">previous page (dev)</a>
-            <a href="?w=3">next page (dev)</a>';
-    } elseif ($_GET['w'] == 3) {
-        echo '<section>
-        <div class="container p-5">
-            <div class="row">
-                <div class="col-lg-5 mx-auto">
+            <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="pills-done-tab">
+                <section>
+                    <div class="container p-5">
+                        <div class="row">
+                            <div class="col-lg-5 mx-auto">
 
-                    <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload-check.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+                                <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload-check.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
-                        <h6 class="text-center mb-4 text-muted">
-                        <!-- vlt randomizer mit kleinen sprüchen rein machen idk wäre nice ig -->
-                            Done? That wasn\'t too hard.
-                        </h6>
+                                    <h6 class="text-center mb-4 text-muted">
+                                    <!-- vlt randomizer mit kleinen sprüchen rein machen idk wäre nice ig -->
+                                        Done? That wasn\'t too hard.
+                                    </h6>
 
-                        <div class="grid-x grid-padding-x">
-                            <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
-                                <form action="upload_file.php" id="img-upload-form" method="post" enctype="multipart/form-data">
-                                    <p>
-                                        <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                            <a href="/account/" for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow">Take me back to my profile
-                                            </a>
+                                    <div class="grid-x grid-padding-x">
+                                        <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
+                                                <p>
+                                                    <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                                        <a href="/account/" for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow">Take me back to my profile
+                                                        </a>
+                                                    </div>
+                                                </p>
+                                                <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
                                         </div>
-                                    </p>
-                                    <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
-                                </form>
+                                    </div>
+                                    <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
+                                        With uploading an resource you agree to our <a href="/upload-policy/">Upload policy</a>.
+                                        Failures can result in a removal of the specific mod or your account.
+                                    </h6>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="/upload/" class="text-center text-muted" style="font-size: 10px;">
+                                            <u>Upload more</u>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
-                            With uploading an resource you agree to our <a href="/upload-policy/">Upload policy</a>.
-                            Failures can result in a removal of the specific mod or your account.
-                        </h6>
-                        <div class="d-flex justify-content-center">
-                            <a href="/upload/" class="text-center text-muted" style="font-size: 10px;">
-                                <u>Upload more</u>
-                            </a>
-                        </div>
                     </div>
-                </div>
+                </section>
+                <section class="pt-3 pb-3">
+                    <div class="container">
+                    <div class="row row-grid">
+                        <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+                    </div>
+                    </div>
+                </section>
             </div>
+
         </div>
-    </section>
-    <section class="pt-3 pb-3">
-        <div class="container">
-          <div class="row row-grid">
-            <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
-          </div>
-        </div>
-      </section>
-            <a href="?w=2">previous page (dev)</a>';
-    }
-
-    ?>
-
-    <script src="https://transloadit.edgly.net/releases/uppy/v1.6.0/uppy.min.js"></script>
-    <script>
-        var uppy = Uppy.Core()
-            .use(Uppy.Dashboard, {
-                inline: true,
-                target: '#fmUpload',
-                height: 200
-            })
-            .use(Uppy.Tus, {
-                endpoint: 'https://storage.fivemods.net/upload/img/ext/?id=?'
-            }) //you can put upload URL here, where you want to upload images
-
-        uppy.on('complete', (result) => {
-            console.log('Upload complete! We’ve uploaded these files:', result.successful)
-        })
-    </script>
+    </form>
 </section>
 <script>
     $(document).ready(function() {
@@ -310,6 +309,16 @@ include('./include/header-banner.php');
 </script>
 <!-- Kp habs ausm internet kopiert müsste man dann anpassen wenn man es auch verwenden möchte. -->
 <script>
+
+    $('#fmUpload').on("change", function() {
+        $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + event.target.files[0]['name']);
+    });
+
+    $('#submitBtn').on("click", function() {
+        console.log($('#fmUpload'));
+    });
+
+
     var imgUpload = document.getElementById('upload_imgs'),
         imgPreview = document.getElementById('img_preview'),
         imgUploadForm = document.getElementById('img-upload-form'),

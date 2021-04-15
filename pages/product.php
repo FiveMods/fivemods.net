@@ -75,9 +75,10 @@ if ($_GET['id']) {
          // Links
          $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/', "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>", $description);
          
-         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif|jpe?g|bmp|png))/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$1\" loading=lazy style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/\"$2\" loading=lazy style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(jpe?g|bmp|png))/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
+            $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif))/', "<img src=\"$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$1\" loading=lazy style=\"max-width: 100%;\">", $description);
+         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$2\" loading=lazy style=\"max-width: 100%;\">", $description);
 
          $description = preg_replace('/\[url\](.+)\[\/url\]/', "<a href=\"/ref?rdc=$1\">$1</a>", $description);
          $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
