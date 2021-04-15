@@ -21,14 +21,6 @@ include('./include/header-banner.php');
         display: none;
     }
 
-    .quote-imgs-thumbs {
-        background: #eee;
-        border: 1px solid #ccc;
-        border-radius: 0.25rem;
-        margin: 1.5rem 0;
-        padding: 0.75rem;
-    }
-
     .quote-imgs-thumbs--hidden {
         display: none;
     }
@@ -38,9 +30,10 @@ include('./include/header-banner.php');
         border: 1px solid #777;
         border-radius: 0.25rem;
         box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
-        margin-right: 1rem;
+        margin: .5rem;
         max-width: 140px;
-        padding: 0.25rem;
+        max-height: 94px;
+        /* padding: 0.15rem; */
     }
     .choices__list--multiple .choices__item {
         display: inline-block;
@@ -83,7 +76,7 @@ include('./include/header-banner.php');
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>-->
 
-                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
                                 <h6 class="text-center mb-4 text-muted">
                                     Upload your resource here
@@ -130,7 +123,6 @@ include('./include/header-banner.php');
                                             </label>
                                         </div>
                                     </p>
-                                    <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
                                 </form>
                             </div>
                         </div>
@@ -138,7 +130,7 @@ include('./include/header-banner.php');
                             You have to upload images in the format .png, .jpg, .jpeg or .webp. Max. 10 images
                         </h6>
                         <div class="d-flex justify-content-center">
-                            <a href="#" class="text-center text-muted" style="font-size: 10px;">
+                            <a href="/upload2" class="text-center text-muted" style="font-size: 10px;">
                                 <u>Go back to file upload</u>
                             </a>
                         </div>
@@ -149,8 +141,10 @@ include('./include/header-banner.php');
     </section>
     <section class="pt-3 pb-3">
         <div class="container">
-          <div class="row row-grid">
-            <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+          <div class="row d-flex justify-content-center">
+            <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden p-3 bg-white shadow rounded-lg" id="img_preview" aria-live="polite">
+                <div class="card-img-top shadow"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -178,7 +172,7 @@ include('./include/header-banner.php');
                         <div class="form-group">
                             <label for="title">Select a category <span class="text text-danger">*</span></label>
                             <select class="form-control custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
-                                <option value="" disabled selected>Choose category...</option>
+                                <option value="" disabled selected>Choose category..</option>
                                 <option value="Scripts">Scripts</option>
                                 <option value="Vehicles">Vehicles</option>
                                 <option value="Weapons">Weapons</option>
@@ -210,7 +204,7 @@ include('./include/header-banner.php');
                         </div>
                         <div class="form-group">
                             <label for="title">Required resource</label>
-                            <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an addition url..">
+                            <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
                             <small id="title" class="form-text text-muted">Not required</small>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -334,7 +328,7 @@ include('./include/header-banner.php');
             imgPreview.classList.remove('quote-imgs-thumbs--hidden');
             previewTitle = document.createElement('p');
             previewTitle.style.fontWeight = 'bold';
-            previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
+            previewTitleText = document.createTextNode('');
             previewTitle.appendChild(previewTitleText);
             imgPreview.appendChild(previewTitle);
         }

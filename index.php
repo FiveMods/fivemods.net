@@ -2,14 +2,35 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
 else ob_start();
 
+if ($_POST['prefCcGiven'] == 1) {
+   echo '<script>console.log("prefCcGiven: 1")</script>';
+   header('location: /?cc=given&prel=1');
+   $cookie_name = "CONSENT";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+}
+
+if ($_POST['functional'] == "on") {
+   $cookie_name = "functional";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+} elseif ($_POST['statistical'] == "on") {
+   $cookie_name = "statistical";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+} elseif ($_POST['thirdparty'] == "on") {
+   $cookie_name = "thirdparty";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+}
+
 if ($_GET['cc'] == "given") {
    $cookie_name = "CONSENT";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
 
    $rdcURI = $_GET['rdcURI'];
-   header('location: '.$rdcURI);
-
+   header('location: ' . $rdcURI);
 }
 
 if (!empty($_COOKIE['CONSENT'])) {
@@ -94,7 +115,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <?php
 
-   if (!empty($_COOKIE['CONSENT'])) {
+   if (!empty($_COOKIE['CONSENT']) && $_COOKIE['statistical'] == 1) {
       include('./include/gStatics.html');
    }
 
@@ -204,7 +225,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          echo '<title>User - FiveMods.net</title>';
       } else {
 
-      echo '
+         echo '
          <title>' . $user_username . ' - FiveMods.net</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
@@ -355,7 +376,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          </svg>
       </div>';
       }
-   } 
+   }
 
    $_SESSION['preLoad'] = True;
 
@@ -436,6 +457,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    # Include cookie modal now from other file
    include('./include/cModal.html');
+   include('./include/cModalManage.html');
 
    ?>
    <!-- ========== END FOOTER ========== -->
@@ -453,24 +475,38 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
    <script type="text/javascript">
-       $(document).ready(function(){
-            $('#cCO').modal('<?php
-            
-            if (strpos($_GET['page'], "terms-of-service") !== FALSE && $_GET['cc'] == "hide") {
-               echo 'hide';
-            } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE && $_GET['cc'] == "hide") {
-               echo 'hide';
-            } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE && $_GET['cc'] == "hide") {
-               echo 'hide';
-            } elseif (!empty($_COOKIE['CONSENT'])) {
-               echo 'hide';
-            } else {
-               echo 'show';
-            }
+      $(document).ready(function() {
+         $('#cCO').modal('<?php
 
-            ?>');
-        }); 
+         if (strpos($_GET['page'], "terms-of-service") !== FALSE && $_GET['cc'] == "hide") {
+            echo 'hide';
+         } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE && $_GET['cc'] == "hide") {
+            echo 'hide';
+         } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE && $_GET['cc'] == "hide") {
+            echo 'hide';
+         } elseif (!empty($_COOKIE['CONSENT'])) {
+            echo 'hide';
+         } elseif ($_GET['cc'] == "manage") {
+            echo 'hide';
+         } else {
+            echo 'show';
+         }
+
+         ?>');
+      });
    </script>
+   <?php
+
+   if ($_GET['cc'] == "manage") {
+      echo '<script>
+      $(document).ready(function(){
+         jQuery.noConflict(); 
+         $(\'#cCM\').modal(\'show\'); 
+      });
+   </script>';
+   }
+
+   ?>
    <script type="text/javascript">
       $(document).ready(function() {
          $('#preloader').delay(2500).fadeOut('slow');
