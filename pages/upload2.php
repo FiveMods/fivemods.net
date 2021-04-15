@@ -21,14 +21,6 @@ include('./include/header-banner.php');
         display: none;
     }
 
-    .quote-imgs-thumbs {
-        background: #eee;
-        border: 1px solid #ccc;
-        border-radius: 0.25rem;
-        margin: 1.5rem 0;
-        padding: 0.75rem;
-    }
-
     .quote-imgs-thumbs--hidden {
         display: none;
     }
@@ -38,9 +30,10 @@ include('./include/header-banner.php');
         border: 1px solid #777;
         border-radius: 0.25rem;
         box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
-        margin-right: 1rem;
+        margin: .5rem;
         max-width: 140px;
-        padding: 0.25rem;
+        max-height: 94px;
+        /* padding: 0.15rem; */
     }
     .choices__list--multiple .choices__item {
         display: inline-block;
@@ -130,7 +123,6 @@ include('./include/header-banner.php');
                                             </label>
                                         </div>
                                     </p>
-                                    <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
                                 </form>
                             </div>
                         </div>
@@ -149,11 +141,9 @@ include('./include/header-banner.php');
     </section>
     <section class="pt-3 pb-3">
         <div class="container">
-          <div class="row">
-            <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite" >
-                <div class="card">
-                    <div class="card-img-top" alt="Card image cap"></div>
-                </div>
+          <div class="row d-flex justify-content-center">
+            <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden p-3 bg-white shadow rounded-lg" id="img_preview" aria-live="polite">
+                <div class="card-img-top shadow"></div>
             </div>
           </div>
         </div>
