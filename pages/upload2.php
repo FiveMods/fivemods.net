@@ -83,7 +83,7 @@ include('./include/header-banner.php');
                                 <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>-->
 
-                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
                                 <h6 class="text-center mb-4 text-muted">
                                     Upload your resource here
@@ -138,7 +138,7 @@ include('./include/header-banner.php');
                             You have to upload images in the format .png, .jpg, .jpeg or .webp. Max. 10 images
                         </h6>
                         <div class="d-flex justify-content-center">
-                            <a href="#" class="text-center text-muted" style="font-size: 10px;">
+                            <a href="/upload2" class="text-center text-muted" style="font-size: 10px;">
                                 <u>Go back to file upload</u>
                             </a>
                         </div>
@@ -149,8 +149,12 @@ include('./include/header-banner.php');
     </section>
     <section class="pt-3 pb-3">
         <div class="container">
-          <div class="row row-grid">
-            <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+          <div class="row">
+            <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite" >
+                <div class="card">
+                    <div class="card-img-top" alt="Card image cap"></div>
+                </div>
+            </div>
           </div>
         </div>
       </section>
@@ -334,7 +338,7 @@ include('./include/header-banner.php');
             imgPreview.classList.remove('quote-imgs-thumbs--hidden');
             previewTitle = document.createElement('p');
             previewTitle.style.fontWeight = 'bold';
-            previewTitleText = document.createTextNode(totalFiles + ' Total Images Selected');
+            previewTitleText = document.createTextNode('');
             previewTitle.appendChild(previewTitleText);
             imgPreview.appendChild(previewTitle);
         }
