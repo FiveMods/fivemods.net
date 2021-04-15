@@ -172,7 +172,7 @@ include('./include/header-banner.php');
                         <div class="form-group">
                             <label for="title">Select a category <span class="text text-danger">*</span></label>
                             <select class="form-control custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
-                                <option value="" disabled selected>Choose category...</option>
+                                <option value="" disabled selected>Choose category..</option>
                                 <option value="Scripts">Scripts</option>
                                 <option value="Vehicles">Vehicles</option>
                                 <option value="Weapons">Weapons</option>
@@ -204,7 +204,7 @@ include('./include/header-banner.php');
                         </div>
                         <div class="form-group">
                             <label for="title">Required resource</label>
-                            <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an addition url..">
+                            <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
                             <small id="title" class="form-text text-muted">Not required</small>
                         </div>
                         <div class="d-flex justify-content-center">
