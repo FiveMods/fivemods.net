@@ -2,12 +2,16 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
 else ob_start();
 
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
 if ($_POST['prefCcGiven'] == 1) {
    echo '<script>console.log("prefCcGiven: 1")</script>';
-   header('location: /?cc=given&prel=1');
+   header('location: /?cc=given&rdcURI=<?php echo $actual_link; ?>?prel=1');
    $cookie_name = "CONSENT";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+
+   header('location: /?prel=1&pri=all');
 }
 
 if ($_POST['functional'] == "on") {
@@ -137,8 +141,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 
    <?php
-
-   $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
    if (strpos($actual_link, 'product') != FALSE) {
 
