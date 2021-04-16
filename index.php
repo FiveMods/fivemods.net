@@ -30,7 +30,7 @@ if ($_GET['cc'] == "given") {
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
 
    $rdcURI = $_GET['rdcURI'];
-   header('location: ' . $rdcURI);
+   header('location: ' . $rdcURI. '&pri=all');
 }
 
 if (!empty($_COOKIE['CONSENT'])) {
@@ -115,8 +115,13 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <?php
 
-   if (!empty($_COOKIE['CONSENT']) && $_GET['pri'] == "all" || $_COOKIE['statistical'] == 1) {
-      include('./include/gStatics.html');
+   if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
+      include('./include/gStatics.html');  
+   }
+
+   if ($_GET['pri'] == "all") {
+      include('./include/gStatics.html'); 
+      echo '<script>console.log("Pri: all");</script>';
    }
 
    ?>
