@@ -72,6 +72,7 @@ include('./include/header-banner.php');
     </div>
 </div>
 <section class="pt-5 pb-5">
+    <!--
     <div class="container">
         <div class="row">
             <div class="col-lg-5 mx-auto">
@@ -92,7 +93,7 @@ include('./include/header-banner.php');
             </div>
         </div>
     </div>
-
+    -->
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <section>
