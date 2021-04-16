@@ -14,11 +14,11 @@ if ($_POST['functional'] == "on") {
    $cookie_name = "functional";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
-} elseif ($_POST['statistical'] == "on") {
+} if ($_POST['statistical'] == "on") {
    $cookie_name = "statistical";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
-} elseif ($_POST['thirdparty'] == "on") {
+} if ($_POST['thirdparty'] == "on") {
    $cookie_name = "thirdparty";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
@@ -115,7 +115,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <?php
 
-   if (!empty($_COOKIE['CONSENT']) && $_COOKIE['statistical'] == 1) {
+   if (!empty($_COOKIE['CONSENT']) && $_GET['pri'] == "all" || $_COOKIE['statistical'] == 1) {
       include('./include/gStatics.html');
    }
 
