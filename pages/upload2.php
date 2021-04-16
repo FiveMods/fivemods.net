@@ -62,8 +62,14 @@ include('./include/header-banner.php');
         opacity: .75;
         border-radius: 0;
     }
+    
+
+
 </style>
 
+<div class="progress">
+    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;height:50%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
 
 <section class="pt-5 pb-5">
     <div class="container">
@@ -87,7 +93,6 @@ include('./include/header-banner.php');
         </div>
     </div>
 
-    <form action="upload_file.php" class="was-validated" id="img-upload-form" method="post" enctype="multipart/form-data">
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <section>
@@ -106,7 +111,7 @@ include('./include/header-banner.php');
 
                                     <div class="custom-file overflow-hidden rounded-pill mb-5">
                                         <label for="fmUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
-                                            <input id="fmUpload" type="file" accept=".zip, .7z, .rar, .tar, .tar.gz" required>
+                                            <input id="fmUpload" type="file" name="files[]" accept=".zip, .7z, .rar, .tar, .tar.gz" required>
                                         </label>
                                     </div>
                                     <!-- End -->
@@ -177,7 +182,7 @@ include('./include/header-banner.php');
 
                                 <div class="p-5 bg-white shadow rounded-lg">
 
-                                <form autocomplete="off" class="was-validated" method="post" action="/upload" enctype="multipart/form-data">
+                                <form action="upload_file.php" class="was-validated" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="title">Title <span class="text text-danger">*</span></label>
                                         <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter your mod title.." required>
@@ -190,7 +195,7 @@ include('./include/header-banner.php');
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Select a category <span class="text text-danger">*</span></label>
-                                        <select class="form-control custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
+                                        <select class="form-control custom-select" id="category" name="category" required>
                                             <option value="" disabled selected>Choose category..</option>
                                             <option value="Scripts">Scripts</option>
                                             <option value="Vehicles">Vehicles</option>
@@ -292,7 +297,6 @@ include('./include/header-banner.php');
             </div>
 
         </div>
-    </form>
 </section>
 <script>
     $(document).ready(function() {
@@ -314,21 +318,104 @@ include('./include/header-banner.php');
         $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + event.target.files[0]['name']);
     });
 
-    $('#submitBtn').on("click", function() {
-        console.log($('#fmUpload'));
+    $('#submitBtn').on("click", function(evt) {
+        
+        evt.preventDefault ();/*
+        const files = document.querySelector('[type=file]').files;
+        const formData = new FormData();
+        
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            formData.append('files[]', file)
+        }
+        
+        fetch ("/helper/mod.upload.php", {
+            method: "POST",
+            body: formData,
+        }).then ((response) => {
+            console.log (response);
+            if (response.status === 200) {
+            }
+        });
+        
+
+        
+        const input = $('#fmUpload');
+        const progressBarFill = document.querySelector("#progressBar > .progress-bar-fill");
+        //const progressBarText = progressBarFill.querySelector(".progress-bar-text");
+        evt.preventDefault();
+
+        const files = document.querySelector('[type=file]').files;
+        const formData = new FormData();
+        
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            formData.append('files[]', file)
+        }
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", "/helper/mod.upload.php");
+        xhr.upload.addEventListener("progress", e => {
+            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+
+            progressBarFill.style.width = percent.toFixed(2) + "%";
+            //progressBarText.textContent = percent.toFixed(2) + "%";
+        })
+
+        xhr.setRequestHeader("Content-Type", "multipart/form-data");
+        xhr.send(formData);
+        */
+
+        const files = document.querySelector('[type=file]').files;
+        const formData = new FormData();
+        
+        for (let i = 0; i < files.length; i++) {
+            let file = files[i];
+            formData.append('files[]', file)
+        }
+
+
+        $.ajax({
+            xhr: function() {
+                var xhr = new window.XMLHttpRequest();
+                xhr.upload.addEventListener("progress", function(e) {
+                    if (e.lengthComputable) {
+                        var percentComplete = ((e.loaded / e.total) * 100);
+                        $(".progress-bar").width(percentComplete + '%');
+                        $(".progress-bar").html(percentComplete + '%');
+                    }
+                }, false)
+                return xhr;
+            },
+            type: 'POST',
+            url: '/helper/mod.upload.php',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $(".progress-bar").width('0%');
+            },
+            error: function() {
+                console.log("error");
+            },
+            success: function(res) {
+                if(res == "ok") {
+                    console.log("uploaded");
+                } else {
+                    console.log("failed");
+                }
+            }
+        });
     });
 
 
     var imgUpload = document.getElementById('upload_imgs'),
         imgPreview = document.getElementById('img_preview'),
-        imgUploadForm = document.getElementById('img-upload-form'),
         totalFiles, previewTitle, previewTitleText, img;
 
     imgUpload.addEventListener('change', previewImgs, false);
-    imgUploadForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Images Uploaded! (not really, but it would if this was on your website)');
-    }, false);
 
     function previewImgs(event) {
         totalFiles = imgUpload.files.length;
