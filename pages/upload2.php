@@ -444,6 +444,7 @@ include('./include/header-banner.php');
     imgUpload.addEventListener('change', previewImgs, false);
 
     function previewImgs(event) {
+        
         totalFiles = imgUpload.files.length;
 
         if (!!totalFiles) {
