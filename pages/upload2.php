@@ -66,11 +66,11 @@ include('./include/header-banner.php');
 
 
 </style>
-
-<div class="progress">
-    <div class="progress-bar bg-success" role="progressbar" style="width: 0%;height:50%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+<div class="row">
+    <div class="container">
+        <div id="status-bar"></div>
+    </div>
 </div>
-
 <section class="pt-5 pb-5">
     <div class="container">
         <div class="row">
@@ -99,9 +99,9 @@ include('./include/header-banner.php');
                     <div class="container p-5">
                         <div class="row">
                             <div class="col-lg-5 mx-auto">
-                                <!--<div class="progress">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;height:35%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>-->
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
 
                                 <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
@@ -111,7 +111,7 @@ include('./include/header-banner.php');
 
                                     <div class="custom-file overflow-hidden rounded-pill mb-5">
                                         <label for="fmUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
-                                            <input id="fmUpload" type="file" name="files[]" accept=".zip, .7z, .rar, .tar, .tar.gz" required>
+                                            <input id="fmUpload" type="file" name="files[]" accept=".zip, .7z, .rar, .tar or .tar.gz" required>
                                         </label>
                                     </div>
                                     <!-- End -->
@@ -122,6 +122,7 @@ include('./include/header-banner.php');
                                     <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
                                         You have to upload a .zip, .7z, .rar, .tar or .tar.gz file.
                                     </h6>
+                                    <button id ="submitUpload" class="btn btn-success btn-block rounded">Save & Continue</button>
                                 </div>
                             </div>
                         </div>
@@ -318,7 +319,7 @@ include('./include/header-banner.php');
         $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + event.target.files[0]['name']);
     });
 
-    $('#submitBtn').on("click", function(evt) {
+    $('#submitUpload').on("click", function(evt) {
         
         evt.preventDefault ();/*
         const files = document.querySelector('[type=file]').files;
@@ -367,47 +368,71 @@ include('./include/header-banner.php');
         xhr.send(formData);
         */
 
-        const files = document.querySelector('[type=file]').files;
+        const files = document.querySelector('#fmUpload[type=file]').files;
         const formData = new FormData();
-        
-        for (let i = 0; i < files.length; i++) {
-            let file = files[i];
-            formData.append('files[]', file)
-        }
-
-
-        $.ajax({
-            xhr: function() {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function(e) {
-                    if (e.lengthComputable) {
-                        var percentComplete = ((e.loaded / e.total) * 100);
-                        $(".progress-bar").width(percentComplete + '%');
-                        $(".progress-bar").html(percentComplete + '%');
-                    }
-                }, false)
-                return xhr;
-            },
-            type: 'POST',
-            url: '/helper/mod.upload.php',
-            data: formData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function() {
-                $(".progress-bar").width('0%');
-            },
-            error: function() {
-                console.log("error");
-            },
-            success: function(res) {
-                if(res == "ok") {
-                    console.log("uploaded");
-                } else {
-                    console.log("failed");
-                }
+        if(files.length > 0) {
+            
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                formData.append('files[]', file)
             }
-        });
+
+
+            $.ajax({
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    xhr.upload.addEventListener("progress", function(e) {
+                        if (e.lengthComputable) {
+                            var percentComplete = ((e.loaded / e.total) * 100);
+                            $(".progress-bar").width(percentComplete + '%');
+                            $(".progress-bar").html(percentComplete + '%');
+                        }
+                    }, false)
+                    return xhr;
+                },
+                type: 'POST',
+                url: '/helper/mod.upload.php',
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend: function() {
+                    $(".progress-bar").width('0%');
+                },
+                error: function() {
+                    console.log("error");
+                },
+                success: function(res) {
+                    if(res == "ERR_EXT") {
+                        err = 1;
+                        errtext = "Stop trying to break things.";
+                    } else if(res == "ERR_BIG") {
+                        err = 1;
+                        errtext = "Your file is too powerful (100MB upload limit reached)";
+                    } else {
+                        err = 0;
+                    }
+                    if(err == 1) {
+                        $('#status-bar').html("  <div class=\"alert alert-danger\">" +
+                                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                        "<strong>Error! </strong>" + errtext +
+                                    "</div>");
+                    } else if (res == "SUCCESS"){
+                        setTimeout(() => {
+                            $('#pills-home').hide("slow")
+                            $('#pills-modupload').tab("show")
+                        }, 1000);
+                    } else {
+                        alert("Something went wrong. If this message keeps occuring, please message our support team.")
+                    }
+                }
+            });
+        } else {
+            $('#status-bar').html("  <div class=\"alert alert-danger\">" +
+                                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                        "<strong>Error! </strong> You didn't upload a file!" +
+                                    "</div>");
+        }
     });
 
 

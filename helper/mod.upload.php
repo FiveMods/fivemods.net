@@ -1,6 +1,6 @@
 <?php
 
-$errors = [];
+$status = [];
 
 $path = "../localstorage/upload/";
 
@@ -15,16 +15,16 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
     $selToken->execute(array($_COOKIE['f_key']));
     if ($selToken->rowCount() == 0) {
-        $errors[] = "Not logged in";
+        $status[] = "Not logged in";
     } 
 } else {
-    $errors[] = "Not logged in";
+    $status[] = "Not logged in";
 }
 
 if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 	if (isset($_FILES['files'])) {
 
-        if(count($_FILES ["files"]["tmp_name"]) > 1) $errors[] = "Too many files.";
+        if(count($_FILES ["files"]["tmp_name"]) > 1) $status[] = "Too many files.";
 		else {
             $file_name = strtolower(reset(explode('.', $_FILES['files']['name'][0])));
 			$file_ext = strtolower(end(explode('.', $_FILES['files']['name'][0])));
@@ -32,16 +32,17 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 			$file = $path . $file_name . "-" . randomChars() . "." . $file_ext;
 			
 			if (!in_array($file_ext, $extensions)) {
-				$errors[] = "Extension not allowed";
-			}else if ($_FILES['files']['size'][0] > 2097152) {
-				$errors[] = "More than 100mb";
+				$status[] = "ERR_EXT";
+			}else if ($_FILES['files']['size'][0] > 100000000) {
+				$status[] = "ERR_BIG";
 			}
 			
-			if (empty($errors)) {
+			if (empty($status)) {
 				move_uploaded_file($_FILES['files']['tmp_name'][0], $file);
+                $status[] = "SUCCESS";
 			}
 		}
-		if ($errors) print_r($errors);
+		if ($status) print_r($status[0]);
 	}
 }
 
