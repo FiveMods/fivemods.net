@@ -2,9 +2,9 @@
 
 $status = [];
 
-$path = "../localstorage/upload/";
+$path = "../localstorage/upload/mods/";
 
-$extensions = ["zip", "7z", "rar", "tar", "tar.gz"];
+$extensions = ["zip", "7z", "rar", "tar", "tar.gz", "ZIP", "7Z", "RAR", "TAR", "TAR.GZ"];
 
 
 require_once('../config.php');
@@ -15,10 +15,14 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
     $selToken->execute(array($_COOKIE['f_key']));
     if ($selToken->rowCount() == 0) {
-        $status[] = "Not logged in";
+        $status[] = "NOT_LOGGED_IN";
+		exit();
+		die();
     } 
 } else {
-    $status[] = "Not logged in";
+    $status[] = "NOT_LOGGED_IN";
+	exit();
+	die();
 }
 
 if ($_SERVER ["REQUEST_METHOD"] === "POST") {

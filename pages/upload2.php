@@ -101,7 +101,7 @@ include('./include/header-banner.php');
                         <div class="row">
                             <div class="col-lg-5 mx-auto">
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar pg-mods bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
 
                                 <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
@@ -135,6 +135,9 @@ include('./include/header-banner.php');
                     <div class="container p-5">
                         <div class="row">
                             <div class="col-lg-5 mx-auto">
+                                <div class="progress">
+                                    <div class="progress-bar pg-pics bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
 
                                 <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/gallery.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
 
@@ -146,8 +149,8 @@ include('./include/header-banner.php');
                                         <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
                                             <p>
                                                 <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                                    <label for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for images ...
-                                                        <input class="show-for-sr" type="file" id="upload_imgs" name="upload_imgs[]" accept=".jpg, .png, .jpeg, .webp" multiple />
+                                                    <label for="fmPicupload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for images ...
+                                                        <input class="show-for-sr" type="file" id="fmPicupload" name="fmPicupload[]" accept=".jpg, .png, .jpeg, .webp" multiple />
                                                     </label>
                                                 </div>
                                             </p>
@@ -156,11 +159,7 @@ include('./include/header-banner.php');
                                     <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
                                         You have to upload images in the format .png, .jpg, .jpeg or .webp. Max. 10 images
                                     </h6>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="/upload2" class="text-center text-muted" style="font-size: 10px;">
-                                            <u>Go back to file upload</u>
-                                        </a>
-                                    </div>
+                                    <button id ="submitPictures" class="btn btn-success btn-block rounded">Save & Continue</button>
                                 </div>
                             </div>
                         </div>
@@ -267,10 +266,6 @@ include('./include/header-banner.php');
                                     <div class="grid-x grid-padding-x">
                                         <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
                                                 <p>
-                                                    <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                                        <a href="/account/" for="upload_imgs" class="file-upload btn btn-primary btn-block rounded-pill shadow">Take me back to my profile
-                                                        </a>
-                                                    </div>
                                                 </p>
                                                 <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
                                         </div>
@@ -313,131 +308,219 @@ include('./include/header-banner.php');
 
     });
 </script>
-<!-- Kp habs ausm internet kopiert müsste man dann anpassen wenn man es auch verwenden möchte. -->
 <script>
 
     $('#fmUpload').on("change", function() {
         $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + event.target.files[0]['name']);
     });
 
+    const modExtensions = ["zip", "7z", "rar", "tar", "tar.gz", "ZIP", "7Z", "RAR", "TAR", "TAR.GZ"];
+    var stop = false;
+
     $('#submitUpload').on("click", function(evt) {
-        
-        evt.preventDefault ();/*
-        const files = document.querySelector('[type=file]').files;
-        const formData = new FormData();
-        
-        for (let i = 0; i < files.length; i++) {
-            let file = files[i];
-            formData.append('files[]', file)
-        }
-        
-        fetch ("/helper/mod.upload.php", {
-            method: "POST",
-            body: formData,
-        }).then ((response) => {
-            console.log (response);
-            if (response.status === 200) {
-            }
-        });
-        
-
-        
-        const input = $('#fmUpload');
-        const progressBarFill = document.querySelector("#progressBar > .progress-bar-fill");
-        //const progressBarText = progressBarFill.querySelector(".progress-bar-text");
-        evt.preventDefault();
-
-        const files = document.querySelector('[type=file]').files;
-        const formData = new FormData();
-        
-        for (let i = 0; i < files.length; i++) {
-            let file = files[i];
-            formData.append('files[]', file)
-        }
-
-        const xhr = new XMLHttpRequest();
-
-        xhr.open("POST", "/helper/mod.upload.php");
-        xhr.upload.addEventListener("progress", e => {
-            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
-
-            progressBarFill.style.width = percent.toFixed(2) + "%";
-            //progressBarText.textContent = percent.toFixed(2) + "%";
-        })
-
-        xhr.setRequestHeader("Content-Type", "multipart/form-data");
-        xhr.send(formData);
-        */
+        evt.preventDefault ();
+        $('#submitUpload').prop('disabled', true)
+        $('#fmUpload').prop('disabled', true)
 
         const files = document.querySelector('#fmUpload[type=file]').files;
         const formData = new FormData();
         if(files.length > 0) {
             
-            for (let i = 0; i < files.length; i++) {
-                let file = files[i];
-                formData.append('files[]', file)
+            if(files[0]['size'] > 100000000) {
+                $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                        "<strong>Error! </strong> Your file is too powerful (100MB upload limit reached)!</div>");
+                $('#submitUpload').prop('disabled', false)
+                $('#fmUpload').prop('disabled', false)
+                stop = true;
+            } else if(modExtensions.indexOf(files[0]['name'].split(".")[files[0]['name'].split(".").length - 1]) == -1) {
+                $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                        "<strong>Error! </strong> Stop trying to break things!</div>");
+                $('#submitUpload').prop('disabled', false)
+                $('#fmUpload').prop('disabled', false)
+                stop = true;
+
             }
 
-
-            $.ajax({
-                xhr: function() {
-                    var xhr = new window.XMLHttpRequest();
-                    xhr.upload.addEventListener("progress", function(e) {
-                        if (e.lengthComputable) {
-                            var percentComplete = ((e.loaded / e.total) * 100);
-                            $(".progress-bar").width(percentComplete + '%');
-                            $(".progress-bar").html(percentComplete + '%');
+            formData.append('files[]', files[0])
+            
+            if(!stop) {
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(e) {
+                            if (e.lengthComputable) {
+                                var percentComplete = ((e.loaded / e.total) * 100);
+                                $(".pg-mods").width(percentComplete + '%');
+                                $(".pg-mods").html(percentComplete + '%');
+                            }
+                        }, false)
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: '/helper/mod.modupload.php',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $(".pg-mods").width('0%');
+                    },
+                    error: function() {
+                        console.log("error");
+                    },
+                    success: function(res) {
+                        if(res == "ERR_EXT") {
+                            err = 1;
+                            errtext = "Stop trying to break things.";
+                        } else if(res == "ERR_BIG") {
+                            err = 1;
+                            errtext = "Your file is too powerful (100MB upload limit reached)";
+                        } else if(res == "NOT_LOGGED_IN") {
+                            window.location.replace("https://fivemods.net/logout/url=invalid");
+                        } else {
+                            err = 0;
                         }
-                    }, false)
-                    return xhr;
-                },
-                type: 'POST',
-                url: '/helper/mod.upload.php',
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                beforeSend: function() {
-                    $(".progress-bar").width('0%');
-                },
-                error: function() {
-                    console.log("error");
-                },
-                success: function(res) {
-                    if(res == "ERR_EXT") {
-                        err = 1;
-                        errtext = "Stop trying to break things.";
-                    } else if(res == "ERR_BIG") {
-                        err = 1;
-                        errtext = "Your file is too powerful (100MB upload limit reached)";
-                    } else {
-                        err = 0;
+                        if(err == 1) {
+                            $('#status-bar').html("  <div class=\"alert alert-danger\">" +
+                                            "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                            "<strong>Error! </strong>" + errtext +
+                                        "</div>");
+                            $('#submitUpload').prop('disabled', false)
+                            $('#fmUpload').prop('disabled', false)
+                        } else if (res == "SUCCESS"){
+                            setTimeout(() => {
+                                $('#pills-home').hide("slow")
+                                $('#pills-modupload').tab("show")
+                            }, 1000);
+                        } else {
+                            alert("Something went wrong. If this message keeps occuring, please message our support team.")
+                            $('#submitUpload').prop('disabled', false)
+                            $('#fmUpload').prop('disabled', false)
+                        }
                     }
-                    if(err == 1) {
-                        $('#status-bar').html("  <div class=\"alert alert-danger\">" +
-                                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
-                                        "<strong>Error! </strong>" + errtext +
-                                    "</div>");
-                    } else if (res == "SUCCESS"){
-                        setTimeout(() => {
-                            $('#pills-home').hide("slow")
-                            $('#pills-modupload').tab("show")
-                        }, 1000);
-                    } else {
-                        alert("Something went wrong. If this message keeps occuring, please message our support team.")
-                    }
-                }
-            });
+                });
+            }
         } else {
             $('#status-bar').html("  <div class=\"alert alert-danger\">" +
                                         "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
                                         "<strong>Error! </strong> You didn't upload a file!" +
                                     "</div>");
         }
+        
+    });
+
+    picExtensions = ["png", "jpg", "webp", "jpeg", "PNG", "JPG", "WEBP", "JPEG"];
+
+    $('#submitPictures').on("click", function(evt) {
+        evt.preventDefault();
+        //$('#submitPictures').prop('disabled', true)
+        //$('#fmPicupload').prop('disabled', true)
+
+        const files = document.querySelector('#fmPicupload[type=file]').files;
+        const formData = new FormData();
+
+        var stop = false;
+
+        if(files.length > 0) {
+            
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+
+                if(files.length > 10) {
+                    $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                            "<strong>Error! </strong> You uploaded more than 10 pictures!</div>");
+                    $('#submitPictures').prop('disabled', false)
+                    $('#fmPicupload').prop('disabled', false)
+                    stop = true;
+                } else if(file['size'] > 100000000) {
+                    $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                            "<strong>Error! </strong> Your file is too powerful (100MB upload limit reached)!</div>");
+                    $('#submitPictures').prop('disabled', false)
+                    $('#fmPicupload').prop('disabled', false)
+                    stop = true;
+                } else if(picExtensions.indexOf(file['name'].split(".")[file['name'].split(".").length - 1]) == -1) {
+                    console.log("Name: " + file['name'] + ", Ending: " + file['name'].split(".")[file['name'].split(".").length - 1])
+                    $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                            "<strong>Error! </strong> One of your attached files has an unvalid file ending!</div>");
+                    $('#submitPictures').prop('disabled', false)
+                    $('#fmPicupload').prop('disabled', false)
+                    stop = true;
+
+                }
+
+                formData.append('files[]', file)
+            }
+            if(!stop) {
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(e) {
+                            if (e.lengthComputable) {
+                                var percentComplete = ((e.loaded / e.total) * 100);
+                                $(".pg-pics").width(percentComplete + '%');
+                                $(".pg-pics").html(percentComplete + '%');
+                            }
+                        }, false)
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: '/helper/mod.picupload.php',
+                    data: formData,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function() {
+                        $(".pg-pics").width('0%');
+                    },
+                    error: function() {
+                        console.log("error");
+                    },
+                    success: function(res) {
+                        if(res == "ERR_EXT") {
+                            err = 1;
+                            errtext = "Stop trying to break things.";
+                        } else if(res == "ERR_BIG") {
+                            err = 1;
+                            errtext = "Your file is too powerful (100MB upload limit reached)";
+                        } else if(res == "NOT_LOGGED_IN") {
+                            window.location.replace("https://fivemods.net/logout/url=invalid");
+                        } else if(res == "ERR_TOO_MANY") {
+                            err = 1;
+                            errtext = "The upload limit is 10 pictures.";
+                        } else {
+                            err = 0;
+                        }
+                        if(err == 1) {
+                            $('#status-bar').html("  <div class=\"alert alert-danger\">" +
+                                            "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                            "<strong>Error! </strong>" + errtext +
+                                        "</div>");
+                            $('#submitPictures').prop('disabled', false)
+                            $('#fmPicupload').prop('disabled', false)
+                        } else if (res == "SUCCESS"){
+                            setTimeout(() => {
+                                $('#pills-modupload').hide("slow")
+                                $('#pills-form').tab("show")
+                            }, 1000);
+                        } else {
+                            alert("Something went wrong. If this message keeps occuring, please message our support team.")
+                            $('#submitPictures').prop('disabled', false)
+                            $('#fmPicupload').prop('disabled', false)
+                        }
+                        
+                    }
+                });
+            }
+        } else {
+            $('#status-bar').html("  <div class=\"alert alert-danger\">" +
+                                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+                                        "<strong>Error! </strong> You have to upload at least <b>1</b> picture!" +
+                                    "</div>");
+        }
     });
 
 
-    var imgUpload = document.getElementById('upload_imgs'),
+    var imgUpload = document.getElementById('fmPicupload'),
         imgPreview = document.getElementById('img_preview'),
         totalFiles, previewTitle, previewTitleText, img;
 
