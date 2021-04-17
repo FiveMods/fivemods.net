@@ -4,6 +4,10 @@ else ob_start();
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+if (!empty($_GET['directPage'])) {
+   header('location: '.$_GET['directPage'].'?prel=1');
+}
+
 if ($_POST['prefCcGiven'] == 1) {
    echo '<script>console.log("prefCcGiven: 1")</script>';
    header('location: /?cc=given&rdcURI=<?php echo $actual_link; ?>?prel=1');
@@ -40,7 +44,7 @@ if ($_GET['cc'] == "given") {
 if (!empty($_COOKIE['CONSENT'])) {
    session_start();
 }
-/*
+
 ob_start("minifier");
 function minifier($code)
 {
@@ -54,7 +58,7 @@ function minifier($code)
    $code = preg_replace($search, $replace, $code);
    return $code;
 }
-*/
+
 include('./helper/lang-confg.php');
 
 // include('./helper/geo-vpn.sub.php');
