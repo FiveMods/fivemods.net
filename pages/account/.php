@@ -12,11 +12,11 @@ include('./include/header-banner.php');
 
 session_start();
 
-// if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
-// 	header("location: /account/logout/");
-// 	exit();
-// 	die();
-// }
+if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
+	header("location: /account/logout/");
+	exit();
+	die();
+}
 
 $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
 $selVals->execute(array($_SESSION['uuid']));
