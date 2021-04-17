@@ -40,7 +40,7 @@ if ($_GET['cc'] == "given") {
 if (!empty($_COOKIE['CONSENT'])) {
    session_start();
 }
-/*
+
 ob_start("minifier");
 function minifier($code)
 {
@@ -54,7 +54,7 @@ function minifier($code)
    $code = preg_replace($search, $replace, $code);
    return $code;
 }
-*/
+
 include('./helper/lang-confg.php');
 
 // include('./helper/geo-vpn.sub.php');
