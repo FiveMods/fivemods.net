@@ -4,6 +4,10 @@ else ob_start();
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
+if (!empty($_GET['directPage'])) {
+   header('location: '.$_GET['directPage'].'?prel=1');
+}
+
 if ($_POST['prefCcGiven'] == 1) {
    echo '<script>console.log("prefCcGiven: 1")</script>';
    header('location: /?cc=given&rdcURI=<?php echo $actual_link; ?>?prel=1');
