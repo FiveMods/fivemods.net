@@ -61,11 +61,8 @@ function minifier($code)
 
 include('./helper/lang-confg.php');
 
-// include('./helper/geo-vpn.sub.php');
+include('./helper/geo-vpn.sub.php');
 
-// $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
-// $brand_down = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
-// $brand_side = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
 $favicon = 'https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
 $css_text = 'text text-gray';
 
@@ -117,7 +114,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en-EN" dir="ltr">
+<html lang="en" dir="ltr">
 
 <head>
 
@@ -139,9 +136,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <meta http-equiv="content-language" content="en" />
-   <meta http-equiv="Pragma" content="no-cache">
-   <meta http-equiv="Cache-Control" content="no-cache">
+   <meta http-equiv="pragma" content="no-cache">
+   <meta http-equiv="cache-control" content="no-cache">
 
 
    <?php
@@ -346,7 +342,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       $("#loader").show();
       $("#cload").hide();
       $(document).ready(function() {
-         // $("#cload").show();
          $("#loader").hide();
          console.log("Content: loaded");
       });

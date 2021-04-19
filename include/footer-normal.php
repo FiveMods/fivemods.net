@@ -87,6 +87,9 @@
                      <li>
                         <a href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
                      </li>
+                     <li>
+                        <a href="/language/"><?php echo $lang['language']; ?></a>
+                     </li>
                   </ul>
                </div>
             </div>
