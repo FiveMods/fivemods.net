@@ -15,12 +15,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
     $selToken->execute(array($_COOKIE['f_key']));
     if ($selToken->rowCount() == 0) {
-        $errors[] = "NOT_LOGGED_IN";
+		print_r("NOT_LOGGED_IN");
 		exit();
 		die();
     } 
 } else {
-    $errors[] = "NOT_LOGGED_IN";
+    print_r("NOT_LOGGED_IN");
 	exit();
 	die();
 }

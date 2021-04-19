@@ -183,7 +183,7 @@ include('./include/header-banner.php');
 
                                 <div class="p-5 bg-white shadow rounded-lg">
 
-                                <form action="upload_file.php" class="was-validated" method="post" enctype="multipart/form-data">
+                                <form action="upload_file.php" id="form-upload" class="was-validated" method="post" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="title">Title <span class="text text-danger">*</span></label>
                                         <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter your mod title.." required>
@@ -376,7 +376,9 @@ include('./include/header-banner.php');
                             err = 1;
                             errtext = "Your file is too powerful (100MB upload limit reached)";
                         } else if(res == "NOT_LOGGED_IN") {
-                            window.location.replace("https://fivemods.net/logout/url=invalid");
+                            err = 1;
+                            errtext = "Your are not logged in";
+                            window.location.replace("https://fivemods.net/logout?url=invalid");
                         } else {
                             err = 0;
                         }
@@ -405,6 +407,8 @@ include('./include/header-banner.php');
                                         "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
                                         "<strong>Error! </strong> You didn't upload a file!" +
                                     "</div>");
+            $('#submitUpload').prop('disabled', false)
+            $('#fmUpload').prop('disabled', false)
         }
         
     });
@@ -483,7 +487,9 @@ include('./include/header-banner.php');
                             err = 1;
                             errtext = "Your file is too powerful (100MB upload limit reached)";
                         } else if(res == "NOT_LOGGED_IN") {
-                            window.location.replace("https://fivemods.net/logout/url=invalid");
+                            err = 1;
+                            errtext = "Your are not logged in";
+                            window.location.replace("https://fivemods.net/logout?url=invalid");
                         } else if(res == "ERR_TOO_MANY") {
                             err = 1;
                             errtext = "The upload limit is 10 pictures.";
@@ -516,8 +522,31 @@ include('./include/header-banner.php');
                                         "<button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
                                         "<strong>Error! </strong> You have to upload at least <b>1</b> picture!" +
                                     "</div>");
+            $('#submitPictures').prop('disabled', false)
+            $('#fmPicupload').prop('disabled', false)
         }
     });
+
+    $('#form-upload').on("submit", function(evt) {
+        evt.preventDefault();
+        console.log($('#choices-multiple-remove-button').val());
+        $.ajax({
+            type: 'POST',
+            url: '/helper/mod.upload.php',
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            error: function() {
+                console.log("error");
+            },
+            success: function(res) {
+                console.log(res);
+
+            }
+        });
+                
+    })
 
 
     var imgUpload = document.getElementById('fmPicupload'),
@@ -527,7 +556,7 @@ include('./include/header-banner.php');
     imgUpload.addEventListener('change', previewImgs, false);
 
     function previewImgs(event) {
-        
+        $('#img_preview').html(" ");
         totalFiles = imgUpload.files.length;
 
         if (!!totalFiles) {
