@@ -66,6 +66,8 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 
     $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+
+    print_r("SUCCESS");
 }
 
 function randomChars($length = 6)
