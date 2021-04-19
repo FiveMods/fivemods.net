@@ -62,15 +62,15 @@ while ($row = $statement->fetch()) {
    }
 
    if ($perms == "-1") {
-      $rank = ' <small class="badge badge-danger" style="font-size: 12px;">Owner</small>';
+      $rank = ' <small class="profile-badge badge-owner"">Owner</small>';
    } elseif ($perms == "1024") {
-      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Helper</small>';
+      $rank = ' <small class="profile-badge badge-helper"">Helper</small>';
    } elseif ($perms == "2048") {
-      $rank = ' <small class="badge badge-info" style="font-size: 12px;">Developer</small>';
+      $rank = ' <small class="profile-badge badge-dev"">Developer</small>';
    } elseif ($perms == "4096") {
-      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Staff Member</small>';
+      $rank = ' <small class="profile-badge badge-staff"">Staff Member</small>';
    } elseif ($perms == "8192") {
-      $rank = ' <small class="badge badge-success" style="font-size: 12px;">Staff Management</small>';
+      $rank = ' <small class="profile-badge badge-mgmt"">Management</small>';
    }
 }
 
@@ -108,6 +108,50 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <style>
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+   :root {
+      --badge-owner-color: #E91E63;
+      --badge-helper-color: #FF8637;
+      --badge-dev-color: #14A992;
+      --badge-staff-color: #F7FF03;
+      --badge-mgmt-color: #ED4545;
+   }
+
+   .profile-badge {
+      padding: 4px 8px;
+      border: solid 1px;
+      border-radius: 50px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+   }
+
+   .badge-owner {
+      color: var(--badge-owner-color);
+      border-color: var(--badge-owner-color);
+   }
+
+   .badge-helper {
+      color: var(--badge-helper-color);
+      border-color: var(--badge-helper-color);
+   }
+
+   .badge-dev {
+      color: var(--badge-dev-color);
+      border-color: var(--badge-dev-color);
+   }
+
+   .badge-staff {
+      color: var(--badge-staff-color);
+      border-color: var(--badge-staff-color);
+   }
+
+   .badge-mgmt {
+      color: var(--badge-mgmt-color);
+      border-color: var(--badge-mgmt-color);
+   }
+
    .emp-profile {
       padding: 3%;
       margin-top: 3%;
@@ -119,9 +163,13 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
    .profile-img {
       text-align: center;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
    }
 
    .profile-img img {
+      border-radius: 50%;
       width: 70%;
    }
 
@@ -193,12 +241,12 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    <div class="row">
       <div class="col-md-4">
          <div class="profile-img">
-            <img src="https://img-cdn.fivemods.net/unsafe/229x229/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $picture; ?>" class="rounded img-fluid" alt="<?php echo $username; ?>-Profile Picture" />
+            <img src="https://img-cdn.fivemods.net/unsafe/229x229/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $picture; ?>" alt="<?php echo $username; ?>-Profile Picture" />
          </div>
       </div>
       <div class="col-md-6">
          <div class="profile-head">
-            <h4><?php echo $banned . '' . $line . '' . $username . '' . $rank; ?></h4>
+            <h4 class="profile-top"><?php echo $banned . '' . $line . '' . $username . '' . $rank; ?></h4>
 
             <?php
 
