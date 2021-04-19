@@ -3,7 +3,7 @@ session_start();
 
 $status = [];
 
-$path = "../../storage-html/uploads/pics/";
+$path = "/var/www/fivemods/storage-html/uploads/pics/";
 
 $extensions = ["png", "jpg", "webp", "jpeg", "PNG", "JPG", "WEBP", "JPEG"];
 

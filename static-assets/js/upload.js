@@ -41,8 +41,8 @@ $('#submitUpload').on("click", function(evt) {
                     xhr.upload.addEventListener("progress", function(e) {
                         if (e.lengthComputable) {
                             var percentComplete = ((e.loaded / e.total) * 100);
-                            $(".pg-mods").width(percentComplete + '%');
-                            $(".pg-mods").html(percentComplete + '%');
+                            $(".pg-mods").width(Math.round(percentComplete) + '%');
+                            $(".pg-mods").html(Math.round(percentComplete) + '%');
                         }
                     }, false)
                     return xhr;
@@ -156,8 +156,8 @@ $('#submitPictures').on("click", function(evt) {
                     xhr.upload.addEventListener("progress", function(e) {
                         if (e.lengthComputable) {
                             var percentComplete = ((e.loaded / e.total) * 100);
-                            $(".pg-pics").width(percentComplete + '%');
-                            $(".pg-pics").html(percentComplete + '%');
+                            $(".pg-pics").width(Math.round(percentComplete) + '%');
+                            $(".pg-pics").html(Math.round(percentComplete) + '%');
                         }
                     }, false)
                     return xhr;

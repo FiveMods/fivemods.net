@@ -1,9 +1,9 @@
 <?php
 session_start();
-$modPathTemp = "../../storage-html/uploads/mods/";
-$picPathTemp = "../../storage-html/uploads/pics/";
+$modPathTemp = "/var/www/fivemods/storage-html/uploads/mods/";
+$picPathTemp = "/var/www/fivemods/storage-html/uploads/pics/";
 
-$path = "../../storage-html/uploads/";
+$path = "/var/www/fivemods/storage-html/uploads/";
 $url = "https://storage.fivemods.net/uploads/";
 
 require_once('../config.php');
