@@ -122,6 +122,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       padding: 4px 8px;
       border: solid 1px;
       border-radius: 50px;
+      margin-left: 10px;
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-size: 13px;
@@ -182,6 +183,11 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       border-radius: 0;
       font-size: 15px;
       background: #212529b8;
+   }
+
+   .profile-top {
+      display: flex;
+      align-items: center;
    }
 
    .profile-img .file input {
