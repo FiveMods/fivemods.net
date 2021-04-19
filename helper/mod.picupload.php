@@ -3,7 +3,7 @@ session_start();
 
 $status = [];
 
-$path = "../localstorage/upload/pictures/";
+$path = "../../storage-html/uploads/pics/";
 
 $extensions = ["png", "jpg", "webp", "jpeg", "PNG", "JPG", "WEBP", "JPEG"];
 
