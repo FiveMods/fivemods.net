@@ -61,7 +61,7 @@ function minifier($code)
 
 include('./helper/lang-confg.php');
 
-include('./helper/geo-vpn.sub.php');
+// include('./helper/geo-vpn.sub.php');
 
 $favicon = 'https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
 $css_text = 'text text-gray';
