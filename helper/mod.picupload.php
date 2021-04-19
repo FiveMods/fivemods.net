@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $status = [];
 
@@ -26,6 +27,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 }
 
 if ($_SERVER ["REQUEST_METHOD"] === "POST") {
+
+	if(!isset($_POST['id'])) {
+		print_r("ERR_NO_ID");
+		exit();
+		die();
+	}
 	if (isset($_FILES['files'])) {
 		$errors = [];
 		$all_files = count ($_FILES ["files"]["tmp_name"]);
@@ -56,7 +63,7 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 				$file_tmp = $_FILES['files']['tmp_name'][$i];
 				$file_ext = strtolower(end(explode('.', $_FILES['files']['name'][$i])));
 
-				$file = $path . $file_name . "-" . randomChars() . "." . $file_ext;
+				$file = $path . $_POST['id'] . "-" . randomChars() . "." . $file_ext;
 
 				move_uploaded_file($file_tmp, $file);
 			}

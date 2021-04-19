@@ -190,7 +190,7 @@ include('./include/header-banner.php');
                                         <small id="title" class="form-text text-muted">The title has to be at least 10 and max. 75 characters long.</small>
                                     </div>
                                     <div class="form-group">
-                                        <label for="title">Description <span class="text text-danger">*</span></label>
+                                        <label for="description">Description <span class="text text-danger">*</span></label>
                                         <textarea class="form-control" id="description" name="description" value="" placeholder="Enter an exciting description.." rows="5" minlength="150" required></textarea>
                                         <small id="title" class="form-text text-muted">The description has to be at least 150 characters long.</small>
                                     </div>
@@ -229,7 +229,7 @@ include('./include/header-banner.php');
                                     </div>
                                     <div class="form-group">
                                         <label for="title">Required resource</label>
-                                        <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
+                                        <input type="text" class="form-control" id="required" name="required" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
                                         <small id="title" class="form-text text-muted">Not required</small>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -310,15 +310,17 @@ include('./include/header-banner.php');
 </script>
 <script>
 
+    const id = randomChars(15);
+
     $('#fmUpload').on("change", function() {
         $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + event.target.files[0]['name']);
     });
 
     const modExtensions = ["zip", "7z", "rar", "tar", "tar.gz", "ZIP", "7Z", "RAR", "TAR", "TAR.GZ"];
     var stop = false;
-
     $('#submitUpload').on("click", function(evt) {
-        evt.preventDefault ();
+        evt.preventDefault();
+        stop = false;
         $('#submitUpload').prop('disabled', true)
         $('#fmUpload').prop('disabled', true)
 
@@ -342,6 +344,7 @@ include('./include/header-banner.php');
             }
 
             formData.append('files[]', files[0])
+            formData.append('id', id)
             
             if(!stop) {
                 $.ajax({
@@ -379,6 +382,9 @@ include('./include/header-banner.php');
                             err = 1;
                             errtext = "Your are not logged in";
                             window.location.replace("https://fivemods.net/logout?url=invalid");
+                        } else if(res == "ERR_NO_ID") {
+                            err = 1;
+                            errtext = "We are missing some backend information, please relog the page and do the upload procedure again.";
                         } else {
                             err = 0;
                         }
@@ -391,6 +397,7 @@ include('./include/header-banner.php');
                             $('#fmUpload').prop('disabled', false)
                         } else if (res == "SUCCESS"){
                             setTimeout(() => {
+                                $('#status-bar').html(" ");
                                 $('#pills-home').hide("slow")
                                 $('#pills-modupload').tab("show")
                             }, 1000);
@@ -417,13 +424,12 @@ include('./include/header-banner.php');
 
     $('#submitPictures').on("click", function(evt) {
         evt.preventDefault();
-        //$('#submitPictures').prop('disabled', true)
-        //$('#fmPicupload').prop('disabled', true)
+        stop = false;
+        $('#submitPictures').prop('disabled', true)
+        $('#fmPicupload').prop('disabled', true)
 
         const files = document.querySelector('#fmPicupload[type=file]').files;
         const formData = new FormData();
-
-        var stop = false;
 
         if(files.length > 0) {
             
@@ -454,6 +460,7 @@ include('./include/header-banner.php');
 
                 formData.append('files[]', file)
             }
+            formData.append('id', id)
             if(!stop) {
                 $.ajax({
                     xhr: function() {
@@ -493,6 +500,9 @@ include('./include/header-banner.php');
                         } else if(res == "ERR_TOO_MANY") {
                             err = 1;
                             errtext = "The upload limit is 10 pictures.";
+                        } else if(res == "ERR_NO_ID") {
+                            err = 1;
+                            errtext = "We are missing some backend information, please relog the page and do the upload procedure again.";
                         } else {
                             err = 0;
                         }
@@ -505,6 +515,7 @@ include('./include/header-banner.php');
                             $('#fmPicupload').prop('disabled', false)
                         } else if (res == "SUCCESS"){
                             setTimeout(() => {
+                                $('#status-bar').html(" ");
                                 $('#pills-modupload').hide("slow")
                                 $('#pills-form').tab("show")
                             }, 1000);
@@ -528,8 +539,23 @@ include('./include/header-banner.php');
     });
 
     $('#form-upload').on("submit", function(evt) {
+
+        const formData = new FormData();
+        var title = $('#title').val();
+        var description = $('#description').val();
+        var category = $('#category').val();
+        var tags = $('#choices-multiple-remove-button').val();
+        var required = $('#required').val();
+        
+        formData.append('id', id)
+        formData.append('title', title)
+        formData.append('description', description)
+        formData.append('category', category)
+        formData.append('tags', tags)
+        formData.append('required', required)
+
+
         evt.preventDefault();
-        console.log($('#choices-multiple-remove-button').val());
         $.ajax({
             type: 'POST',
             url: '/helper/mod.upload.php',
@@ -542,7 +568,7 @@ include('./include/header-banner.php');
             },
             success: function(res) {
                 console.log(res);
-
+                alert("Success");
             }
         });
                 
@@ -574,5 +600,15 @@ include('./include/header-banner.php');
             img.classList.add('img-preview-thumb');
             imgPreview.appendChild(img);
         }
+    }
+
+    function randomChars(length) {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
     }
 </script>

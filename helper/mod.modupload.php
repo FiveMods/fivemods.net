@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $status = [];
 
@@ -28,12 +29,18 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 	if (isset($_FILES['files'])) {
 
+		if(!isset($_POST['id'])) {
+			print_r("ERR_NO_ID");
+			exit();
+			die();
+		}
+
         if(count($_FILES ["files"]["tmp_name"]) > 1) $status[] = "Too many files.";
 		else {
             $file_name = strtolower(reset(explode('.', $_FILES['files']['name'][0])));
 			$file_ext = strtolower(end(explode('.', $_FILES['files']['name'][0])));
 
-			$file = $path . $file_name . "-" . randomChars() . "." . $file_ext;
+			$file = $path . $_POST['id'] . "-" . randomChars() . "." . $file_ext;
 			
 			if (!in_array($file_ext, $extensions)) {
 				$status[] = "ERR_EXT";
