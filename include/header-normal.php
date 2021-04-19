@@ -14,6 +14,13 @@ $rdc = $CurPageURL;
 $currentPage = $_GET['page'];
 
 ?>
+<style>
+
+.fmrounded {
+   border-radius: 17px;
+}
+
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark f-bg-dark fixed-top">
    <div class="container">
       <a class="navbar-brand mr-4" href="/">
@@ -62,7 +69,7 @@ $currentPage = $_GET['page'];
             <li class="nav-item dropdown">
                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownLbl" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $lang['fivem-stuff']; ?> Links </a>
                <div class="dropdown-menu dropdown-menu-right w-auto shadow p-0" id="navbarDropdown" aria-labelledby="navbarDropdownLbl">
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://fivem.net">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://fivem.net?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-download'] ?></h5> Download FiveM from the official website.
@@ -74,25 +81,25 @@ $currentPage = $_GET['page'];
                         <h5 class="mb-0"><?php echo $lang['fivem-txadmin'] ?></h5> The official txAdmin GitHub repositories.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-art-lin'] ?></h5> Download the official FiveM linux artifacts.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-art-win'] ?></h5> Download the official FiveM windows artifacts.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://keymaster.fivem.net/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://keymaster.fivem.net/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-keymaster'] ?></h5> Register an official FiveM keymaster.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://www.fivem.net">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://www.fivem.net/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-website'] ?></h5> The official FiveM website.
@@ -110,15 +117,15 @@ $currentPage = $_GET['page'];
          <?php
 
          if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
-            echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary rounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
+            echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary fmrounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          } else {
-            echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary rounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
+            echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary fmrounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          }
 
          ?>
          <form id="demo-2" action="/search/" method="GET">
             <div class="ui-widget">
-               <input name="query" class="btn btn-outline-primary rounded" id="query" type="search" placeholder="Search">
+               <input name="query" class="btn btn-outline-primary fmrounded" id="query" type="search" placeholder="Search">
                <label for="query"></label>
                <button type="submit" name="submit-search" hidden></button>
             </div>
@@ -128,15 +135,15 @@ $currentPage = $_GET['page'];
          if (empty($_COOKIE['f_val']) && empty($_COOKIE['f_key'])) {
             echo '<span class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
-                  <button type="submit" class="btn btn-outline-primary rounded"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] . ' <span class="caret"></span></button>
+                  <button type="submit" class="btn btn-outline-primary fmrounded"><i class="fas fa-sign-in-alt"></i> ' . $lang['log-in'] . ' <span class="caret"></span></button>
                   </form>
                </span>';
          } else {
             echo '<form action="/account/" method="post">
-                  <button type="submit" class="btn btn-outline-primary rounded"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
+                  <button type="submit" class="btn btn-outline-primary fmrounded"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
                   </form>';
             echo '<form action="/account/logout/" method="post" class="pl-1">
-                  <button type="submit" class="btn btn-primary rounded"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
+                  <button type="submit" class="btn btn-primary fmrounded"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
                   <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
                   </form>';
          }

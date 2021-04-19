@@ -2,14 +2,43 @@
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
 else ob_start();
 
-if ($_GET['CC'] == "given") {
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+if (!empty($_GET['directPage'])) {
+   header('location: '.$_GET['directPage'].'?prel=1');
+}
+
+if ($_POST['prefCcGiven'] == 1) {
+   echo '<script>console.log("prefCcGiven: 1")</script>';
+   header('location: /?cc=given&rdcURI=<?php echo $actual_link; ?>?prel=1');
+   $cookie_name = "CONSENT";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+
+   header('location: /?prel=1&pri=all');
+}
+
+if ($_POST['functional'] == "on") {
+   $cookie_name = "functional";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+} if ($_POST['statistical'] == "on") {
+   $cookie_name = "statistical";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+} if ($_POST['thirdparty'] == "on") {
+   $cookie_name = "thirdparty";
+   $cookie_value = "1";
+   setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
+}
+
+if ($_GET['cc'] == "given") {
    $cookie_name = "CONSENT";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
 
    $rdcURI = $_GET['rdcURI'];
-   header('location: '.$rdcURI);
-
+   header('location: ' . $rdcURI. '&pri=all');
 }
 
 if (!empty($_COOKIE['CONSENT'])) {
@@ -34,9 +63,6 @@ include('./helper/lang-confg.php');
 
 // include('./helper/geo-vpn.sub.php');
 
-// $css_banner  = 'https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/banner.png';
-// $brand_down = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
-// $brand_side = 'https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg';
 $favicon = 'https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
 $css_text = 'text text-gray';
 
@@ -88,14 +114,19 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en-EN" dir="ltr">
+<html lang="en" dir="ltr">
 
 <head>
 
    <?php
 
-   if (!empty($_COOKIE['CONSENT'])) {
-      include('./include/gStatics.html');
+   if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
+      include('./include/gStatics.html');  
+   }
+
+   if ($_GET['pri'] == "all") {
+      include('./include/gStatics.html'); 
+      echo '<script>console.log("Pri: all");</script>';
    }
 
    ?>
@@ -105,14 +136,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <meta http-equiv="content-language" content="en" />
-   <meta http-equiv="Pragma" content="no-cache">
-   <meta http-equiv="Cache-Control" content="no-cache">
+   <meta http-equiv="pragma" content="no-cache">
+   <meta http-equiv="cache-control" content="no-cache">
 
 
    <?php
-
-   $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
    if (strpos($actual_link, 'product') != FALSE) {
 
@@ -200,7 +228,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '<script>console.log("User img.: ' . $user_picture . '");</script>';
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
-      echo '
+      if (empty($user_username)) {
+         echo '<title>User - FiveMods.net</title>';
+      } else {
+
+         echo '
          <title>' . $user_username . ' - FiveMods.net</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
@@ -220,6 +252,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta name="twitter:title" content="' . $user_username . '">
          <meta name="twitter:description" content="' . $user_description . '">
          <meta name="twitter:image" content="' . $user_picture . '">';
+      }
    } else {
       echo '<meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png">';
       echo '<title>' . $lang['title'] . '</title>';
@@ -249,8 +282,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="apple-mobile-web-app-capable" content="yes" />
    <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637" />
 
-   <meta name="websiteStage" content="live" />
-   <meta name="websiteVersion" content="v1.1.0.5-a.1" />
+   <meta name="stage" content="live" />
+   <meta name="version" content="v1.2.6.5-stable" />
 
    <meta name="DC.Language" content="en" />
    <meta name="DC.Creator" content="FiveMods" />
@@ -309,7 +342,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       $("#loader").show();
       $("#cload").hide();
       $(document).ready(function() {
-         // $("#cload").show();
          $("#loader").hide();
          console.log("Content: loaded");
       });
@@ -319,7 +351,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <body class="bg">
    <?php
 
-   if ($_GET['preL'] == 0) {
+   if ($_GET['prel'] == 0) {
       if (!$_SESSION['preLoad'] || empty($_SESSION['preLoad'])) {
          echo '<div id="preloader">
          <svg width="280" height="100" viewBox="0 0 280 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -350,7 +382,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          </svg>
       </div>';
       }
-   } 
+   }
 
    $_SESSION['preLoad'] = True;
 
@@ -429,60 +461,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       include('./include/footer-normal.php');
    }
 
+   # Include cookie modal now from other file
+   include('./include/cModal.html');
+   include('./include/cModalManage.html');
+
    ?>
    <!-- ========== END FOOTER ========== -->
-
-   <div class="modal hide fade in mt-5 pt-5" id="cCO" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-         <div class="modal-content shadow-lg" style="border-radius: 15px;">
-            <div class="modal-body">
-               <div class="d-flex justify-content-center mt-4 mb-4">
-                  <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_gradient_281x100.svg" loading="lazy" height="48px" alt="FiveMods logo silent">
-               </div>
-               <h4 class="text-center baqlu">FiveMods.net uses cookies</h4>
-               <!-- <hr> -->
-               <div class="d-flex justify-content-start">
-                  <div class="mt-2 pl-4 pr-4">
-                     <article class="ymA4Y">
-                        <p>FiveMods.net uses <a href="https://us.norton.com/internetsecurity-privacy-what-are-cookies.html" rel="nofollow noopener noreferrer" target="_blank">cookies</a> and data for the following:</p>
-                        <ul>
-                           <li>Provide and operate services, e.g. check faults and take measures against spam, fraud or abuse</li>
-                           <li>Collect data on audience interactions and website statistics to understand how our services are used</li>
-                           <li>Adjust your visit experience e.g. changing language or design</li>
-                        </ul>
-                        <p>If you agree, we also use cookies and data for the following:</p>
-                        <ul>
-                           <li>Improve the quality of our services and develop new services</li>
-                           <li>Show personalized or general ads on FiveMods.net and affiliated services, depending on your settings</li>
-                           <li>Deliver advertising and measure the effectiveness of advertising</li>
-                           <li>General security and logging </li>
-                        </ul>
-                        <p>The selection of non-personalized content and ads may be based on what content you are viewing and where you are located (ad delivery is based on general location). Personalized content and ads may also be based on this, but in addition, they may also be based on activities such as searches on FiveMods.net and activities on affiliated services. Personalized content and ads include things like more relevant results and recommendations and ads tailored to your interests.</p>
-                        <p>To disable some or all cookies for other purposes - if needed, <a href="/cookie-consent/?CC=hide&preL=1">visit us here</a> at any time.</p>
-                        <p>If you have any questions about FiveMods.net and the use of cookies, <br> please contact us by email at <a href="mailto://contact@fivemods.net">contact@fivemods.net</a>. </p>
-                     </article>
-                  </div>
-               </div>
-               <div class="d-flex justify-content-center pt-3 mb-1">
-
-                  <a href="https://fivem.net" rel="nofollow noopener noreferrer" class="btn btn-primary mr-1">Decline</a>
-                  <a href="?CC=given&rdcURI=<?php echo $actual_link; ?>?preL=1" class="btn btn-primary ml-1">Accept</a>
-
-               </div>
-               <div class="d-flex justify-content-center pt-3 mb-1">
-
-                  <a href="/terms-of-service/?CC=hide&preL=1" class="text-muted mr-1"><?php echo $lang['terms-of-service']; ?></a>
-                  -
-                  <a href="/privacy-policy/?CC=hide&preL=1" class="text-muted ml-1"><?php echo $lang['privacy-policy']; ?></a>
-
-               </div>
-
-            </div>
-         </div>
-      </div>
-   </div>
-
-   
 
    <!-- jQuery is required -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -497,24 +481,38 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
    <script type="text/javascript">
-       $(document).ready(function(){
-            $('#cCO').modal('<?php
-            
-            if (strpos($_GET['page'], "terms-of-service") !== FALSE && $_GET['CC'] == "hide") {
-               echo 'hide';
-            } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE && $_GET['CC'] == "hide") {
-               echo 'hide';
-            } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE && $_GET['CC'] == "hide") {
-               echo 'hide';
-            } elseif (!empty($_COOKIE['CONSENT'])) {
-               echo 'hide';
-            } else {
-               echo 'show';
-            }
+      $(document).ready(function() {
+         $('#cCO').modal('<?php
 
-            ?>');
-        }); 
+         if (strpos($_GET['page'], "terms-of-service") !== FALSE && $_GET['cc'] == "hide") {
+            echo 'hide';
+         } elseif (strpos($_GET['page'], "privacy-policy") !== FALSE && $_GET['cc'] == "hide") {
+            echo 'hide';
+         } elseif (strpos($_GET['page'], "cookie-consent") !== FALSE && $_GET['cc'] == "hide") {
+            echo 'hide';
+         } elseif (!empty($_COOKIE['CONSENT'])) {
+            echo 'hide';
+         } elseif ($_GET['cc'] == "manage") {
+            echo 'hide';
+         } else {
+            echo 'show';
+         }
+
+         ?>');
+      });
    </script>
+   <?php
+
+   if ($_GET['cc'] == "manage") {
+      echo '<script>
+      $(document).ready(function(){
+         jQuery.noConflict(); 
+         $(\'#cCM\').modal(\'show\'); 
+      });
+   </script>';
+   }
+
+   ?>
    <script type="text/javascript">
       $(document).ready(function() {
          $('#preloader').delay(2500).fadeOut('slow');

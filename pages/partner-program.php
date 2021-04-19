@@ -173,7 +173,7 @@
          <ul>
             <li><?php echo $lang['partner-condition1'];?></li>
             <li><b>5+</b> <?php echo $lang['partner-condition2'];?></li>
-            <li><b>100+</b> <?php echo $lang['partner-condition3'];?></li>
+            <li><b>250+</b> <?php echo $lang['partner-condition3'];?></li>
          </ul>
       </div>
     </div>

@@ -123,7 +123,6 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
    .profile-img img {
       width: 70%;
-      height: 100%;
    }
 
    .profile-img .file {
