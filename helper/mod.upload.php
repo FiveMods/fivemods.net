@@ -1,10 +1,10 @@
 <?php
 session_start();
-$modPathTemp = "../localstorage/upload/mods/";
-$picPathTemp = "../localstorage/upload/pictures/";
+$modPathTemp = "../../storage-html/uploads/mods/";
+$picPathTemp = "../../storage-html/uploads/pics/";
 
-$path = "../localstorage/upload/";
-$url = "https://storage.fivemods.net/upload/mods/";
+$path = "../../storage-html/uploads/";
+$url = "https://storage.fivemods.net/uploads/";
 
 require_once('../config.php');
 if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
