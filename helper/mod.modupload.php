@@ -3,7 +3,7 @@ session_start();
 
 $status = [];
 
-$path = "../../storage-html/uploads/mods/";
+$path = "/var/www/fivemods/storage-html/uploads/mods/";
 
 $extensions = ["zip", "7z", "rar", "tar", "tar.gz", "ZIP", "7Z", "RAR", "TAR", "TAR.GZ"];
 
