@@ -168,6 +168,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       border-radius: 1rem;
       background: rgba(255, 255, 255, 0.6);
       display: flex;
+      flex-direction: row;
       /* opacity: 0.6; */
    }
 
@@ -182,6 +183,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    .profile-img img {
       border-radius: 50%;
       width: 70%;
+      max-width: 200px;
    }
 
    .left-col-container {
@@ -253,6 +255,16 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
    .partner-button {
       border-radius: 2px !important;
+   }
+
+   @media screen and (max-width: 768px) {
+      .emp-profile {
+         flex-direction: column;
+      }
+
+      .profile-img {
+         margin: 0 0 30px 0;
+      }
    }
 
 </style>
