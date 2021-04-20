@@ -92,7 +92,7 @@ if ($_SESSION['uuid'] == $uuid && $blocked == 0) {
 } elseif (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
    $repbtn = '<a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> ' . $lang['report-profile'] . '</a>';
 } else {
-   $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
+   $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report</a>';
 }
 
 
