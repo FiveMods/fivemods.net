@@ -274,11 +274,12 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
          } elseif ($blocked == 1) {
             echo '<small><p class="text text-danger">' . $lang['you-are-banned'] . ' <a href="#" class="text text-danger"><u>' . $lang['whybanned'] . '</u></a></p></small>';
          }
-         ?>
+         
+         if (!$blocked == 1) {
+            echo '
          <div class="user-description">
             <hr>
-            <div class="socials">
-            <?php
+            <div class="socials">';
             if (!empty($discord)) {
                echo '<a href="/ref?rdc=https://discord.gg/' . $discord . '" role="button" class="fab fa-discord social-button"></a>';
             }
@@ -294,26 +295,20 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
             if (!empty($github)) {
                echo '<a href="/ref?rdc=https://github.com/' . $github . '" role="button" class="fab fa-github fa-md social-button"></a>';
             }
-            ?>
+            echo '
             </div>
-            <?php
-
-            if (!$blocked == 1) {
-               echo '<p>' . $description . '</p>';
-            } else {
-               echo '';
+            <p>' . $description . '</p></div>';
             }
             ?>
-         </div>
       </div>
+      <?php
+      if ($blocked == 1) {
+         echo '';
+      } else {
+         echo '
       <div class="user-about">
-         <h5 clas="user-about-title"><?php echo $lang['about'] ?></h5>
+         <h5 clas="user-about-title">' . $lang['about'] . '</h5>
          <hr>
-         <?php
-         if ($blocked == 1) {
-            echo '';
-         } else {
-            echo '
             <div class="user-about-content">
                <div class="tab-content profile-tab" id="myTabContent">
                   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -367,10 +362,10 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
                      </div>
                   </div>
                </div>
-            </div>';
-         }
-         ?>
-      </div>
+            </div>
+      </div>';
+   }
+   ?>
    </div>
    <div class="right-col-container">
       <?php
