@@ -181,7 +181,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
    .profile-img img {
       border-radius: 50%;
-      width: 229px;
+      width: 70%;
    }
 
    .left-col-container {
@@ -194,6 +194,8 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
    .right-col-container {
       flex: 2;
+      display: flex;
+      justify-content: center;
    }
 
    .user-description {
@@ -206,10 +208,11 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    }
 
    .user-about {
-      margin-top: 2rem;
+      margin-top: 2.5rem;
    }
    
    .social-button {
+      margin-right: 1rem;
       text-decoration: none !important;
    }
 
@@ -222,7 +225,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    }
 
    .socials {
-      margin: 6px 0;
+      margin: 6px 0 8px 0;
    }
    
    .profile-tab label {
