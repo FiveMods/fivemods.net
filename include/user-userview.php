@@ -95,7 +95,7 @@ if ($_SESSION['uuid'] == $uuid && $blocked == 0) {
    $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report</a>';
 }
 
-
+// test
 // Query
 $articles = $pdo->prepare('
    SELECT SQL_CALC_FOUND_ROWS *
