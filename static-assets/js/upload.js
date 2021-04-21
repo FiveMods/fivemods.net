@@ -1,5 +1,25 @@
 const id = randomChars(15);
 
+var uploadMod = null;
+
+$("html").on("drop", function(e) { e.preventDefault(); e.stopPropagation(); });
+
+$("html").on("dragover", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+});
+
+$('html').on('drop', function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var file = e.originalEvent.dataTransfer.files;
+
+    $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + file[0]['name']);
+    uploadMod = file[0];
+});
+
+
 $('#fmUpload').on("change", function() {
     $('#uploadPreview').html("<i class=\"far fa-file-archive pr-2\"></i> " + event.target.files[0]['name']);
 });
@@ -14,15 +34,22 @@ $('#submitUpload').on("click", function(evt) {
 
     const files = document.querySelector('#fmUpload[type=file]').files;
     const formData = new FormData();
-    if(files.length > 0) {
+    
+    if(uploadMod != null) {
+        file = uploadMod;
+    } else {
+        file = files[0]
+    }
+
+    if(file != null) {
         
-        if(files[0]['size'] > 100000000) {
+        if(file['size'] > 100000000) {
             $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
                                     "<strong>Error! </strong> Your file is too powerful (100MB upload limit reached)!</div>");
             $('#submitUpload').prop('disabled', false)
             $('#fmUpload').prop('disabled', false)
             stop = true;
-        } else if(modExtensions.indexOf(files[0]['name'].split(".")[files[0]['name'].split(".").length - 1]) == -1) {
+        } else if(modExtensions.indexOf(file['name'].split(".")[file['name'].split(".").length - 1]) == -1) {
             $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
                                     "<strong>Error! </strong> Stop trying to break things!</div>");
             $('#submitUpload').prop('disabled', false)
@@ -31,7 +58,7 @@ $('#submitUpload').on("click", function(evt) {
 
         }
 
-        formData.append('files[]', files[0])
+        formData.append('files[]', file)
         formData.append('id', id)
         
         if(!stop) {
