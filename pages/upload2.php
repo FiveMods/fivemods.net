@@ -153,7 +153,7 @@ include('./include/header-banner.php');
             <section>
                 <div class="container p-5">
                     <div class="row">
-                        <div class="col-lg-5 mx-auto">
+                        <div class="col-lg-5 mx-auto uploadDiv">
                             <div class="progress mb-2 ml-1 mr-1 rounded">
                                 <div class="progress-bar pg-mods bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
@@ -391,4 +391,5 @@ include('./include/header-banner.php');
 
     });
 </script>
+
 <script src="https://fivemods.net/static-assets/js/upload.js"></script>
