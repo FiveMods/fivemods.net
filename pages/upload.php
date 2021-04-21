@@ -265,19 +265,19 @@ include('./include/header-banner.php');
                                     <div class="form-group">
                                         <label for="title">Set some tags <span class="text text-danger">*</span></label>
                                         <select id="choices-multiple-remove-button" placeholder="Select up to 20 tags" multiple>
-                                            <option value="HTML">HTML</option>
-                                            <option value="Jquery">Jquery</option>
-                                            <option value="CSS">CSS</option>
-                                            <option value="Bootstrap 3">Bootstrap 3</option>
-                                            <option value="Bootstrap 4">Bootstrap 4</option>
-                                            <option value="Java">Java</option>
-                                            <option value="Javascript">Javascript</option>
-                                            <option value="Angular">Angular</option>
-                                            <option value="Python">Python</option>
-                                            <option value="Hybris">Hybris</option>
-                                            <option value="SQL">SQL</option>
-                                            <option value="NOSQL">NOSQL</option>
-                                            <option value="NodeJS">NodeJS</option>
+                                            <?php
+                                            require_once('config.php');
+                                            $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+                                            $selVals = $pdo->prepare("SELECT * FROM tags");
+                                            $selVals->execute();
+                                            $vals = $selVals->fetchAll();
+
+                                            foreach ($vals as $value) {
+                                                echo '<option value="' . $value['tag'] . '">' . $value['tag'] . '</option>';
+                                            }
+                                            
+
+                                            ?>
                                         </select>
                                         <small id="title" class="form-text text-muted">You have to set at least one tag.</small>
                                     </div>
@@ -384,8 +384,8 @@ include('./include/header-banner.php');
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true,
             maxItemCount: 20,
-            searchResultLimit: 20,
-            renderChoiceLimit: 20
+            searchResultLimit: 100,
+            renderChoiceLimit: 100
         });
 
 
