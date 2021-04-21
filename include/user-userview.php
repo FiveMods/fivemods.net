@@ -62,15 +62,17 @@ while ($row = $statement->fetch()) {
    }
 
    if ($perms == "-1") {
-      $rank = ' <small class="badge badge-danger" style="font-size: 12px;">Owner</small>';
+      $rank = ' <small class="profile-badge badge-owner"">Owner</small>';
    } elseif ($perms == "1024") {
-      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Helper</small>';
+      $rank = ' <small class="profile-badge badge-helper"">Helper</small>';
    } elseif ($perms == "2048") {
-      $rank = ' <small class="badge badge-info" style="font-size: 12px;">Developer</small>';
+      $rank = ' <small class="profile-badge badge-dev"">Developer</small>';
    } elseif ($perms == "4096") {
-      $rank = ' <small class="badge badge-primary" style="font-size: 12px;">Staff Member</small>';
+      $rank = ' <small class="profile-badge badge-staff"">Staff Member</small>';
    } elseif ($perms == "8192") {
-      $rank = ' <small class="badge badge-success" style="font-size: 12px;">Staff Management</small>';
+      $rank = ' <small class="profile-badge badge-cm"">Community Manager</small>';
+   } elseif ($perms == "16384") {
+      $rank = ' <small class="profile-badge badge-mgmt"">Management</small>';
    }
 }
 
@@ -90,10 +92,10 @@ if ($_SESSION['uuid'] == $uuid && $blocked == 0) {
 } elseif (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
    $repbtn = '<a href="#" class="text text-danger" style="font-size:12px;" data-toggle="modal" data-target="#reportModal"><i class="fas fa-exclamation-triangle"></i> ' . $lang['report-profile'] . '</a>';
 } else {
-   $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report.</a>';
+   $repbtn = '<a href="/account/sign-in/" class="text text-danger" style="font-size:12px;"><i class="fas fa-exclamation-triangle"></i> Login to report</a>';
 }
 
-
+// test
 // Query
 $articles = $pdo->prepare('
    SELECT SQL_CALC_FOUND_ROWS *
@@ -108,77 +110,126 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <style>
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+   :root {
+      --badge-owner-color: #E91E63;
+      --badge-helper-color: #20C581;
+      --badge-dev-color: #3498DB;
+      --badge-staff-color: #E88017;
+      --badge-mgmt-color: #ED4545;
+      --badge-cm-color: #ED6F45;
+   }
+
+   .profile-badge {
+      padding: 4px 8px;
+      border: solid 1px;
+      border-radius: 50px;
+      margin-left: 10px;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+   }
+
+   .badge-owner {
+      color: var(--badge-owner-color);
+      border-color: var(--badge-owner-color);
+   }
+
+   .badge-helper {
+      color: var(--badge-helper-color);
+      border-color: var(--badge-helper-color);
+   }
+
+   .badge-dev {
+      color: var(--badge-dev-color);
+      border-color: var(--badge-dev-color);
+   }
+
+   .badge-staff {
+      color: var(--badge-staff-color);
+      border-color: var(--badge-staff-color);
+   }
+
+   .badge-cm {
+      color: var(--badge-cm-color);
+      border-color: var(--badge-cm-color);
+   }
+
+   .badge-mgmt {
+      color: var(--badge-mgmt-color);
+      border-color: var(--badge-mgmt-color);
+   }
+
    .emp-profile {
       padding: 3%;
       margin-top: 3%;
       margin-bottom: 3%;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
       background: rgba(255, 255, 255, 0.6);
+      display: flex;
+      flex-direction: row;
       /* opacity: 0.6; */
    }
 
    .profile-img {
+      margin-right: 30px;
       text-align: center;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 120px;
    }
 
    .profile-img img {
+      border-radius: 50%;
       width: 70%;
+      max-width: 200px;
    }
 
-   .profile-img .file {
-      position: relative;
-      overflow: hidden;
-      margin-top: -20%;
-      width: 70%;
-      border: none;
-      border-radius: 0;
-      font-size: 15px;
-      background: #212529b8;
+   .left-col-container {
+      flex: 4;
    }
 
-   .profile-img .file input {
-      position: absolute;
-      opacity: 0;
-      right: 0;
-      top: 0;
+   .mid-col-container {
+      flex: 6;
    }
 
-   .profile-edit-btn {
-      border: none;
-      border-radius: 1.5rem;
-      width: 70%;
-      padding: 2%;
-      font-weight: 600;
-      color: #6c757d;
-      cursor: pointer;
+   .right-col-container {
+      flex: 2;
+      display: flex;
+      justify-content: center;
    }
 
-   .proile-rating {
-      font-size: 12px;
-      color: #818182;
-      margin-top: 5%;
+   .user-description {
+      margin: 14px 0;
    }
 
-   .proile-rating span {
-      color: #495057;
-      font-size: 15px;
-      font-weight: 600;
+   .profile-top {
+      display: flex;
+      align-items: center;
    }
 
-   .profile-head .nav-tabs {
-      margin-bottom: 5%;
+   .user-about {
+      margin-top: 2.5rem;
+   }
+   
+   .social-button {
+      margin-right: 1rem;
+      text-decoration: none !important;
    }
 
-   .profile-head .nav-tabs .nav-link {
-      font-weight: 600;
-      border: none;
+   .social-button:hover {
+      color: #3C344F;
    }
 
-   .profile-head .nav-tabs .nav-link.active {
-      border: none;
-      border-bottom: 2px solid #0062cc;
+   hr {
+      margin: 8px 0;
    }
 
+   .socials {
+      margin: 6px 0 8px 0;
+   }
+   
    .profile-tab label {
       font-weight: 600;
    }
@@ -187,160 +238,167 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
       font-weight: 600;
       color: #ff8637;
    }
+   
+   .join-partner {
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .join-partner p {
+      margin: 0 !important;
+   }
+
+   .user-about h5 {
+      font-size: 19px !important;
+   }
+
+   .partner-button {
+      border-radius: 2px !important;
+   }
+
+   @media screen and (max-width: 768px) {
+      .emp-profile {
+         flex-direction: column;
+      }
+
+      .profile-img {
+         margin: 0 0 30px 0;
+      }
+   }
+
 </style>
 <?php include('./include/header-banner.php'); ?>
 <div class="container emp-profile shadow1">
-   <div class="row">
-      <div class="col-md-4">
-         <div class="profile-img">
-            <img src="https://img-cdn.fivemods.net/unsafe/229x229/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $picture; ?>" class="rounded img-fluid" alt="<?php echo $username; ?>-Profile Picture" />
-         </div>
+   <div class="left-col-container">
+      <div class="profile-img">
+         <img src="https://img-cdn.fivemods.net/unsafe/229x229/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo $picture; ?>" alt="<?php echo $username; ?>-Profile Picture" />
       </div>
-      <div class="col-md-6">
-         <div class="profile-head">
-            <h4><?php echo $banned . '' . $line . '' . $username . '' . $rank; ?></h4>
-
-            <?php
-
-            if ($premium == 1 && $blocked == 0) {
-               echo '<small><i class="fas fa-crown" title="Premium content creator"></i> Premium Content Creator</small>';
-            } elseif ($blocked == 1) {
-               echo '<small><p class="text text-danger">' . $lang['you-are-banned'] . ' <a href="#" class="text text-danger"><u>' . $lang['whybanned'] . '</u></a></p></small>';
-            }
-            ?>
-            <div class="pt-2">
-               <hr>
-               <?php
-
-               if (!$blocked == 1) {
-                  echo '<p>' . $description . '</p>';
-               } else {
-                  echo '';
-               }
-
-               if (!empty($discord)) {
-                  echo '<a href="/ref?rdc=https://discord.gg/' . $discord . '" role="button" class="fab fa-discord text-primary "></a>';
-               }
-               if (!empty($twitter)) {
-                  echo '<a href="/ref?rdc=https://twitter.com/' . $twitter . '" role="button" class="fab fa-twitter fa-md text-primary smallButton"></a>';
-               }
-               if (!empty($instagram)) {
-                  echo '<a href="/ref?rdc=https://instagram.com/' . $instagram . '" role="button" class="fab fa-instagram fa-md text-primary smallButton"></a>';
-               }
-               if (!empty($youtube)) {
-                  echo '<a href="/ref?rdc=https://youtube.com/' . $youtube . '" role="button" class="fab fa-youtube fa-md text-primary smallButton"></a>';
-               }
-               if (!empty($github)) {
-                  echo '<a href="/ref?rdc=https://github.com/' . $github . '" role="button" class="fab fa-github fa-md text-primary smallButton"></a>';
-               }
-               ?>
-            </div>
-            <div class="pt-5">
-            </div>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-               <li class="nav-item">
-                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><?php echo $lang['about'] ?></a>
-               </li>
-            </ul>
-         </div>
-      </div>
-      <div class="col-md-2">
+   </div>
+   <div class="mid-col-container">
+      <div class="profile-head">
+         <h4 class="profile-top"><?php echo $banned . '' . $line . '' . $username . '' . $rank; ?></h4>
 
          <?php
 
-         if ($blocked == 0) {
-            echo $repbtn;
-            echo $editbtn;
+         if ($premium == 1 && $blocked == 0) {
+            echo '<small><i class="fas fa-crown" title="Premium content creator"></i> Premium Content Creator</small>';
          } elseif ($blocked == 1) {
-            $repbtn = "";
-            $editbtn = "";
-            echo '';
+            echo '<small><p class="text text-danger">' . $lang['you-are-banned'] . ' <a href="#" class="text text-danger"><u>' . $lang['whybanned'] . '</u></a></p></small>';
          }
-
-         ?>
+         
+         if (!$blocked == 1) {
+            echo '
+         <div class="user-description">
+            <hr>
+            <div class="socials">';
+            if (!empty($discord)) {
+               echo '<a href="/ref?rdc=https://discord.gg/' . $discord . '" role="button" class="fab fa-discord social-button"></a>';
+            }
+            if (!empty($twitter)) {
+               echo '<a href="/ref?rdc=https://twitter.com/' . $twitter . '" role="button" class="fab fa-twitter fa-md social-button"></a>';
+            }
+            if (!empty($instagram)) {
+               echo '<a href="/ref?rdc=https://instagram.com/' . $instagram . '" role="button" class="fab fa-instagram fa-md social-button"></a>';
+            }
+            if (!empty($youtube)) {
+               echo '<a href="/ref?rdc=https://youtube.com/' . $youtube . '" role="button" class="fab fa-youtube fa-md social-button"></a>';
+            }
+            if (!empty($github)) {
+               echo '<a href="/ref?rdc=https://github.com/' . $github . '" role="button" class="fab fa-github fa-md social-button"></a>';
+            }
+            echo '
+            </div>
+            <p>' . $description . '</p></div>';
+            }
+            ?>
       </div>
-   </div>
-   <?php
-
-   if ($blocked == 1) {
-      echo '';
-   } else {
-      echo '<div class="row">
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-8">
-         <div class="tab-content profile-tab" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>' . $lang['username'] . '</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>' . $username . '</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>' . $lang['joined-at'] . '</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>' . $created . '</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>Website</label>
-                  </div>
-                  <div class="col-md-6">
-                     <a href="/ref/?rdc=' . $website . '"><p>' . $website . '</p></a>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>' . $lang['published-mods'] . '</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>' . $publishedmods . '</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>Total Downloads</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>' . $totaldownloads . '</p>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-md-6">
-                     <label>Location</label>
-                  </div>
-                  <div class="col-md-6">
-                     <p>' . $location . '</p>
+      <?php
+      if ($blocked == 1) {
+         echo '';
+      } else {
+         echo '
+      <div class="user-about">
+         <h5 clas="user-about-title">' . $lang['about'] . '</h5>
+         <hr>
+            <div class="user-about-content">
+               <div class="tab-content profile-tab" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label>' . $lang['username'] . '</label>
+                        </div>
+                        <div class="col-md-6">
+                           <p>' . $username . '</p>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label>' . $lang['joined-at'] . '</label>
+                        </div>
+                        <div class="col-md-6">
+                           <p>' . $created . '</p>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label>Website</label>
+                        </div>
+                        <div class="col-md-6">
+                           <a href="/ref/?rdc=' . $website . '"><p>' . $website . '</p></a>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label>' . $lang['published-mods'] . '</label>
+                        </div>
+                        <div class="col-md-6">
+                           <p>' . $publishedmods . '</p>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label>Total Downloads</label>
+                        </div>
+                        <div class="col-md-6">
+                           <p>' . $totaldownloads . '</p>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                           <label>Location</label>
+                        </div>
+                        <div class="col-md-6">
+                           <p>' . $location . '</p>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-      </div>
-   </div>';
+      </div>';
    }
    ?>
-</div>
-<section class="pt-1 pb-1 bg-dark">
-   <div class="container-fluid">
-      <div class="row d-flex">
-         <div class="col-md-12">
-            <div class="card bg-transparent text-light text-center border-0">
-               <div class="card-body pt-3 pb-1">
-                  <p class="lead pb-0 mb-1"><?php echo $lang['join-partner']; ?>
-                     <a href="/partner-program/" class="btn btn-xs  btn-sm btn-light btn-rised ml-md-4"><?php echo $lang['click-here']; ?></a>
-                  </p>
-               </div>
-            </div>
-         </div>
-      </div>
    </div>
+   <div class="right-col-container">
+      <?php
+      if ($blocked == 0) {
+         echo $repbtn;
+         echo $editbtn;
+      } elseif ($blocked == 1) {
+         $repbtn = "";
+         $editbtn = "";
+         echo '';
+      }
+      ?>
+   </div>
+   
+</div>
+<section class="join-partner bg-dark">
+   <p class="lead pb-0 mb-1 text-light"><?php echo $lang['join-partner']; ?>
+      <a href="/partner-program/" class="btn btn-xs btn-sm btn-light btn-rised ml-md-4 partner-button"><?php echo $lang['click-here']; ?></a>
+   </p>
 </section>
+
 <?php if(!empty($articles)): ?>
 <section class="">
    <footer class="pt-5 pb-3">
