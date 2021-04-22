@@ -10,11 +10,18 @@ if($headerVals->rowCount() > 0) {
 } else {
    $banner = $css_banner;
 }
+
+if (empty($_SESSION['uuid'])) {
+   $h = "7";
+} else {
+   $h = "12";
+}
+
 ?>
 
 <style>
 .fill {
-    height: 12vh;
+    height: <?php echo $h; ?>vh;
     transform: scale(1,1);
     overflow: hidden;
     background-size: cover;
