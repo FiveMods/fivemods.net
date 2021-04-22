@@ -20,6 +20,12 @@ $currentPage = $_GET['page'];
    border-radius: 17px;
 }
 
+@media (min-width: 992px) {
+   .navbar .nav-link {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+   }
+}
 </style>
 <nav class="navbar navbar-expand-lg navbar-dark f-bg-dark fixed-top">
    <div class="container">

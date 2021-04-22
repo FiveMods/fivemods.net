@@ -14,7 +14,7 @@ if($headerVals->rowCount() > 0) {
 
 <style>
 .fill {
-    height: 7vh;
+    height: 12vh;
     transform: scale(1,1);
     overflow: hidden;
     background-size: cover;
