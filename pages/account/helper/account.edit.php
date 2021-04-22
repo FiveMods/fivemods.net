@@ -1,82 +1,50 @@
-<?php 
-
+<?php
 session_start();
+require_once('../../../config.php');
+if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
-if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
-	header("location: /account/logout/");
+    $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+    $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
+    $selToken->execute(array($_COOKIE['f_key']));
+    if ($selToken->rowCount() == 0) {
+		print_r("NOT_LOGGED_IN");
+		exit();
+		die();
+    } 
+} else {
+    print_r("NOT_LOGGED_IN");
 	exit();
 	die();
 }
 
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    echo "Not allowed!";
-    header('location: /');
-    exit();
-  } else {
+if ($_SERVER ["REQUEST_METHOD"] === "POST") {
+    if(isset($_POST['username']) || empty($_POST['username'])) {
 
+      if(strlen($_POST['username']) >= 3 && strlen($_POST['username']) <= 35) {
+        if(!preg_match('/\W/', $_POST['username'])) {
 
-    function editAccount() {
-      require_once('../../../config.php');
+          $stmt = $pdo->prepare("UPDATE user SET name = ? WHERE uuid = ?");
+          $stmt->execute(array($_POST['username'], $_SESSION['uuid']));
 
-        $username2 = htmlspecialchars($_POST['username']);
-        $banner = htmlspecialchars($_POST['gbanner']);
-        $tochange = htmlspecialchars($_POST['id']);
-        
-        $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
-        $userDB = $pdo->prepare("SELECT * FROM user WHERE name = :username");
-        $userDB->execute(array('username' => $username2));
-        
-        
-        if($userDB->rowCount() > 0) {
-          echo "taken";
-          
-          session_start();
-          $_SESSION['success'] = '<div class="alert alert-danger" id="success-alert">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>Error! </strong> Your selected username is already taken!
-        </div>
-        ';
-          header('location: /account/');
+          print_r("SUCCESS");
+        } else {
+          print_r("ERR_REGEX");
           exit();
           die();
-          
         }
-        
-
-        try {
-          require_once('../../../config.php');
-          $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
-          // set the PDO error mode to exception
-          $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        
-          $stmt = $pdo->prepare("UPDATE user SET name = :name, banner = :banner WHERE uuid = :uuid");
-          $stmt->execute(array("name" => $username2, "banner" => $banner, "uuid" => $_SESSION['uuid']));
-        
-          echo $stmt->rowCount() . " records UPDATED successfully";
-          session_start();
-          $_SESSION['success'] = '<div class="alert alert-success" id="success-alert">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>Successfully changed! </strong> Your profile got successfully updated. Click <a href="/user/'.$$username2.'">here</a> to see your changes.
-        </div>
-        ';
-        header('location: /account/');
-        } catch(PDOException $e) {
-          echo "X";
-          header('location: /account/');
-        }
-        
-        $pdo = null;
-        
-    }
-
-    if(htmlspecialchars($_POST['call']) == "callFunc") {
-        editAccount();
+      } else {
+        print_r("ERR_LEN");
         exit();
         die();
+      }
+    } else {
+      print_r("ERR_EMPTY");
+      exit();
+      die();
     }
 
-  }
+}
+
 
 ?>
