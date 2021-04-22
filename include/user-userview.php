@@ -175,7 +175,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    }
 
    .emp-profile {
-      padding: 3%;
+      padding: 3vw;
       margin-top: 3%;
       margin-bottom: 3%;
       border-radius: 1rem;
@@ -186,7 +186,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    }
 
    .profile-img {
-      margin-right: 30px;
+      margin-right: 3vw;
       text-align: center;
       position: sticky;
       position: -webkit-sticky;
@@ -268,7 +268,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
    }
 
    .socials {
-      margin: 6px 0 8px 0;
+      margin: 6px 0 16px 0;
    }
    
    .profile-tab label {
