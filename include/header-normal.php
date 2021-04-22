@@ -132,6 +132,14 @@ $currentPage = $_GET['page'];
          </form>
          <?php
 
+         require_once('./config.php');
+
+         $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+
+         $getV = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
+         $getV->execute(array($_SESSION['uuid']));
+         $res = $getV->fetch();
+                  
          if (empty($_COOKIE['f_val']) && empty($_COOKIE['f_key'])) {
             echo '<span class="nav navbar-nav navbar-right">
                   <form action="/account/sign-in/" method="post">
@@ -139,14 +147,40 @@ $currentPage = $_GET['page'];
                   </form>
                </span>';
          } else {
-            echo '<form action="/account/" method="post">
-                  <button type="submit" class="btn btn-outline-primary fmrounded"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
-                  </form>';
-            echo '<form action="/account/logout/" method="post" class="pl-1">
-                  <button type="submit" class="btn btn-primary fmrounded"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
-                  <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
-                  </form>';
+            echo '<span class="dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navProfileFM1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="https://img-cdn.fivemods.net/unsafe/35x35/filters:format(webp):quality(100):sharpen(0.2,0.5,true)/'.$res['picture'].'" class="img-fluid rounded" alt="'.$res['name'].'-Profile Picture"></img> '.$res['name'].'</a>
+            <div class="dropdown-menu dropdown-menu-right w-auto shadow p-0" id="navbarDropdown" aria-labelledby="navProfileFM1">
+               <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/account/">
+                  <div class="flex-shrink-1 text-center px-2"></div>
+                  <div class="pl-0">
+                     <h5 class="mb-0"><i class="fas fa-user-cog pr-2"></i> Settings</h5>
+                  </div>
+               </a>
+               <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/user/'.$res['name'].'/">
+                  <div class="flex-shrink-1 text-center px-2"></div>
+                  <div class="pl-0">
+                     <h5 class="mb-0"><i class="far fa-user pr-2"></i> My profile</h5>
+                  </div>
+               </a>
+               <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/logout/">
+                  <div class="flex-shrink-1 text-center px-2"></div>
+                  <div class="pl-0">
+                     <h5 class="mb-0"><i class="fas fa-sign-out-alt pr-2"></i> Logout</h5>
+                  </div>
+               </a>
+            </div>
+         </span>';
          }
+
+         // else {
+         //    echo '<form action="/account/" method="post">
+         //          <button type="submit" class="btn btn-outline-primary fmrounded"><i class="fas fa-user-edit"></i> ' . $lang['edit-profile'] . ' <span class="caret"></span></button></form>
+         //          </form>';
+         //    echo '<form action="/account/logout/" method="post" class="pl-1">
+         //          <button type="submit" class="btn btn-primary fmrounded"><i class="fas fa-sign-out-alt"></i> ' . $lang['log-out'] . '<span class="caret"></span></button>
+         //          <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
+         //          </form>';
+         // }
          ?>
       </div>
    </div>
