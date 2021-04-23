@@ -227,16 +227,12 @@ $('#submitPictures').on("click", function(evt) {
                                     "</div>");
                         $('#submitPictures').prop('disabled', false)
                         $('#fmPicupload').prop('disabled', false)
-                    } else if (res == "SUCCESS"){
+                    } else {
                         setTimeout(() => {
                             $('#status-bar').html(" ");
                             $('#pills-modupload').hide("slow")
                             $('#pills-form').tab("show")
                         }, 1000);
-                    } else {
-                        alert("Something went wrong. If this message keeps occuring, please message our support team.")
-                        $('#submitPictures').prop('disabled', false)
-                        $('#fmPicupload').prop('disabled', false)
                     }
                     
                 }
