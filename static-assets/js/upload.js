@@ -165,7 +165,7 @@ $('#submitPictures').on("click", function(evt) {
                 stop = true;
             } else if(picExtensions.indexOf(file['name'].split(".")[file['name'].split(".").length - 1]) == -1) {
                 $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
-                                        "<strong>Error! </strong> One of your attached files has an unvalid file ending!</div>");
+                                        "<strong>Error! </strong> One of your attached files has an invalid file ending!</div>");
                 $('#submitPictures').prop('disabled', false)
                 $('#fmPicupload').prop('disabled', false)
                 stop = true;
