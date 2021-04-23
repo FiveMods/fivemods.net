@@ -43,6 +43,8 @@
                 }
             }
 
+            $total = 0;
+
             $main = $data[0]['status'];
             $updown = $data[1]['status'];
             $discord = $data[2]['status'];
@@ -52,6 +54,19 @@
             $cookies = $data[6]['status'];
             $location = $data[7]['status'];
             $payment = $data[8]['status'];
+
+            while ($i < 9) {
+                if ($data[$i]['status'] == 1) {
+                    $total++;
+                } elseif ($data[$i]['status'] == 2) {
+                    $total++;
+                } elseif ($data[$i]['status'] == 3) {
+                    $total++;
+                }
+                $i++;
+            }
+
+
 
             if ($main == 0 && $updown == 0 && $discord == 0 && $google == 0 && $github == 0 && $advertisement == 0 && $cookies == 0 && $location == 0 && $payment == 0) {
                 echo '<div class="card bg-success text text-white rounded mb-3">
@@ -83,7 +98,7 @@
                 </div>
             </div>
             </div>';
-            } elseif ($main == 3 || $updown == 3 || $discord == 3 || $google == 3 || $github == 3 || $advertisement == 3 || $cookies == 3 || $location == 3 || $payment == 3) {
+            } elseif ($total == 8) {
                 echo '<div class="card bg-danger text text-white rounded mb-3">
             <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                 <b>Major Outage</b>
@@ -93,7 +108,7 @@
                 </div>
             </div>
             </div>';
-            } elseif ($main == 2 || $updown == 2 || $discord == 2 || $google == 2 || $github == 2 || $advertisement == 2 || $cookies == 2 || $location == 2 || $payment == 2) {
+            } elseif ($total > 3) {
                 echo '<div class="card bg-primary text text-white rounded mb-3">
             <div class="card-body d-flex justify-content-between btnRefresh" style="font-size:19px;">
                 <b>Partial Outage</b>
@@ -103,7 +118,7 @@
                 </div>
             </div>
             </div>';
-            } elseif ($main == 1 || $updown == 1 || $discord == 1 || $google == 1 || $github == 1 || $advertisement == 1 || $cookies == 1 || $location == 1 || $payment == 1) {
+            } elseif ($total > 1) {
                 echo '<div class="card bg-warning text text-white rounded mb-3">
             <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                 <b>Degraded Performance</b>
