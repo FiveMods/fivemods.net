@@ -78,9 +78,9 @@
                      <li>
                         <a href="/user/"><?php echo $lang['all-user']; ?></a>
                      </li>
-                     <li>
+                     <!-- <li>
                         <a href="/affiliate/">Affiliate</a>
-                     </li>
+                     </li> -->
                      <li>
                         <a href="/partner-program/"><?php echo $lang['partner-program']; ?></a>
                      </li>
