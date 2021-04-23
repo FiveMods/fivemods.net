@@ -19,7 +19,7 @@ if ($_GET['id']) {
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
          $name = $row['m_name'];
-         $description = $row['m_description'];
+         $description = removeXss($row['m_description']);
          $img = $row['m_picture'];
          $tags = $row['m_tags'];
          $cat = $row['m_category'];
@@ -151,6 +151,13 @@ if ($_GET['id']) {
    } 
 } else {
    header('location: /');
+}
+
+function removeXss($string) {
+   $breakTags = array('&lt;br /&gt;', '&lt;br&gt;');
+   $stringhtml = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+   $stringMD = str_replace($breakTags, '<br>' ,$stringhtml);
+   return $stringMD;
 }
 
 
