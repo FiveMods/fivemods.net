@@ -114,7 +114,7 @@ $currentPage = $_GET['page'];
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://discord.com/invite/fivem">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-discord'] ?></h5> The official FiveM discord.
+                        <h5 class="mb-0">FiveM Discord</h5> The official FiveM discord.
                      </div>
                   </a>
                </div>
