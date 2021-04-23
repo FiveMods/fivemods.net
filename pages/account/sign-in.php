@@ -65,7 +65,7 @@ if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
                 <div class="card shadow1 rounded emp-login">
                     <article class="card-body">
                         <a href="/">
-                            <h4 class="card-title text-center mb-4 mt-1"> <img src="https://fivemods.net/static-assets/img/brand-down.png" height="50" alt=""> </h4>
+                            <h4 class="card-title text-center mb-4 mt-1"> <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" loading="lazy" height="50" alt="fivemods_brand_icon_watermark_primary"> </h4>
                         </a>
                         <div class="separator text-dark"> <?php echo $lang['log-in']; ?> </div>
                         <?php echo $_SESSION['logoutsuccess'];
@@ -98,7 +98,7 @@ if(isset($_COOKIE['f_val']) && isset($_COOKIE['f_key'])) {
                             </div>
                             <p class="text-center mt-4 text-muted">
                                 <small style="color:gray;">By creating an account, you accept our <a href="/privacy-policy/">Privacy Policy</a> & <a href="/terms-of-service/">Terms Of Use</a>.</small> <br>
-                                <small class="text-success text-center "><?php echo $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?> (<?php echo $city; ?>)</small>
+                                <small class="text-success text-center "><?php echo $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?></small>
                             </p>
                         </form>
                     </article>

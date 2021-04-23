@@ -7,9 +7,9 @@ Next supported version will be v0.x.x-rc.1
 
 | Version | Supported          |
 | ------- | ------------------ |
-| v0.x.x-rc.1   | :white_check_mark: |
-| v0.3.75-a.1   | :white_check_mark: | -> https://pre-live.fivemods.net
-| v0.7.46-a.1   | :white_check_mark: | -> https://pre-live.fivemods.net
+| v1.2.65-stable   | :white_check_mark: |
+| v0.3.75-a.1   | :white_check_mark: |
+| v0.7.46-a.1   | :white_check_mark: |
 | v0.3.32-a.1   | :white_check_mark: |
 | v0.2.13-a.1   | :x: |
 | v0.1.51-a.1   | :x: |

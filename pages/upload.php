@@ -1,380 +1,395 @@
-<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
-
-
-  <!-- Vertical Test -->
-  <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px"
-       data-ad-client="ca-pub-9727102575141971"
-       data-ad-slot="2716933531"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
-<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
-
-  <!-- Vertical Test -->
-  <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px"
-       data-ad-client="ca-pub-9727102575141971"
-       data-ad-slot="2716933531"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-</div>
 <?php
 session_start();
 include('./include/header-banner.php');
-
-
-if(!isset($_COOKIE['f_val']) || !isset($_COOKIE['f_key'])) {
-	header("location: /account/logout/");
-	exit();
-	die();
-}
-require_once('./config.php');
-
-   $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
-
-   $selVals = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
-   $selVals->execute(array($_SESSION['uuid']));
-   $vals = $selVals->fetch();
-if (isset($_POST['uploadMod'])) {
-
-   $path = '../storage-html/uploads';
-   $userid = $vals['id'];
-   $downloadWebsite = 'https://storage.fivemods.net/uploads';
-
-   $modid = randomChars(12);
-
-   $title = htmlspecialchars($_POST['title']);
-   $description = nl2br($_POST['description']);
-   $category = htmlspecialchars($_POST['category']);
-   $tags = htmlspecialchars($_POST['tags']);
-
-   if (empty(htmlspecialchars($_POST['requiredMod']))) {
-      $requiredMod = "0";
-   } else {
-      $requiredMod = htmlspecialchars($_POST['requiredMod']);
-   }
-
-   if (empty(htmlspecialchars($_POST['price']))) {
-      $price = NULL;
-   } else {
-      $price = htmlspecialchars($_POST['price']);
-   }
-
-   if (!is_dir($path . '/' . $userid)) mkdir($path . '/' . $userid);
-   if (!is_dir($path)) mkdir($path);
-
-   mkdir($path . '/' . $userid . '/' . $modid);
-   mkdir($path . '/' . $userid . '/' . $modid . '/img');
-
-   move_uploaded_file($_FILES["modupload"]["tmp_name"], $path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]));
-   rename($path . '/' . $userid . '/' . $modid . '/' . basename($_FILES["modupload"]["name"]), $path . '/' . $userid . '/' . $modid . '/' . preg_replace("/([#&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip'));
-   $download = $downloadWebsite . '/' . $userid . '/' . $modid . '/' . preg_replace("/([#&%§$]{1,})/", "_",str_replace(" ", "_", strtolower($title)) . '-' . $modid . '.zip');
-   $pictures = [];
-   foreach ($_FILES["picupload"]["error"] as $key => $error) {
-      if ($error == "UPLOAD_ERR_OK") {
-         move_uploaded_file($_FILES["picupload"]["tmp_name"][$key], $path . '/' . $userid . '/' . $modid . '/' . 'img/' . basename($_FILES["picupload"]["name"][$key]));
-         $fileEnding = substr($_FILES["picupload"]["name"][$key], -5);
-         $fileName = randomChars(20);
-         rename($path . '/' . $userid . '/' . $modid . '/' . 'img/' . basename($_FILES["picupload"]["name"][$key]), $path . '/' . $userid . '/' . $modid . '/' . 'img/' . $fileName . $fileEnding);
-         array_push($pictures, $downloadWebsite . '/' . $userid . '/' . $modid . '/' . 'img/' . $fileName . $fileEnding);
-      }
-   }
-   $pictures = implode(" ", $pictures);
-
-   if($vals['premium'] == 0) {
-      $approved = 1;
-      $approvedby = NULL;
-   } else {
-      $approved = 0;
-      $approvedby = "Automatically";
-   }
-
-
-
-
-   $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_price, m_approved, m_approvedby) VALUES (:uid, :title, :pictures, :category, :tags, :m_description, :requiredMod, :download, :price, :approved, :approvedby)");
-   $statement->execute(array('uid' => $userid, 'title' => $title, 'pictures' => $pictures, 'category' => $category, 'tags' => $tags, 'm_description' => $description, 'requiredMod' => $requiredMod, 'download' => $download, 'price' => $price, 'approved' => $approved, 'approvedby' => $approvedby));
-
-   $_SESSION['upload'] = 1;
-
-
-   if($vals['premium'] == 1) {
-
-      $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_picture = :pic");
-      $stmt->execute(array("name" => $title, "pic" => $pictures));
-      $statement = $stmt->fetch();
-
-      $ch = curl_init();
-      $token = $apiToken;
-      $modid = $statement['m_id'];
-
-      curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
-      curl_setopt($ch, CURLOPT_POST, 1);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, "action=newMod&token=$token&modid=$modid");
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $response = curl_exec($ch);
-      curl_close($ch);
-   }
-
-
-   header("Location: /helper/manage.php?upload=1");
-   exit();
-   die();
-}
-
-$pdo = null;
-function randomChars($length)
-{
-   $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-   return substr(str_shuffle($permitted_chars), 0, $length);
-} ?>
+?>
+<link rel="stylesheet" href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006288/BBBootstrap/choices.min.css?version=7.0.0">
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006273/BBBootstrap/choices.min.js?version=7.0.0"></script>
 <style>
-   .submitFinal {
-      padding-left: 10%;
-      padding-right: 10%;
-      display: block;
-      margin: auto;
-   }
+    .rounded-lg {
+        border-radius: 1rem;
+    }
 
-   .center {
-      text-align: center;
-   }
+    .custom-file-label.rounded-pill {
+        border-radius: 50rem;
+    }
 
-   .btn-upload {
-      margin-right: 5px;
-   }
+    .custom-file-label.rounded-pill::after {
+        border-radius: 0 50rem 50rem 0;
+    }
 
-   .final-upload p,
-   .final-upload li {
-      margin-left: 25%;
-   }
+    .file-upload input[type='file'] {
+        display: none;
+    }
+
+    .quote-imgs-thumbs--hidden {
+        display: none;
+    }
+
+    .img-preview-thumb {
+        background: #fff;
+        border: 1px solid #777;
+        border-radius: 0.25rem;
+        box-shadow: 0.125rem 0.125rem 0.0625rem rgba(0, 0, 0, 0.12);
+        margin: .5rem;
+        max-width: 140px;
+        max-height: 94px;
+        /* padding: 0.15rem; */
+    }
+
+    .choices__list--multiple .choices__item {
+        display: inline-block;
+        vertical-align: middle;
+        border-radius: 20px;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: 500;
+        margin-right: 3.75px;
+        margin-bottom: 3.75px;
+        background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
+        border: 1px solid #fff;
+        color: #fff;
+        word-break: break-all;
+    }
+
+    .choices[data-type*=select-multiple] .choices__button,
+    .choices[data-type*=text] .choices__button {
+        position: relative;
+        display: inline-block;
+        margin: 0 -4px 0 8px;
+        padding-left: 16px;
+        border-left: 1px solid #fff;
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSIjRkZGIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yLjU5Mi4wNDRsMTguMzY0IDE4LjM2NC0yLjU0OCAyLjU0OEwuMDQ0IDIuNTkyeiIvPjxwYXRoIGQ9Ik0wIDE4LjM2NEwxOC4zNjQgMGwyLjU0OCAyLjU0OEwyLjU0OCAyMC45MTJ6Ii8+PC9nPjwvc3ZnPg==);
+        background-size: 8px;
+        width: 8px;
+        line-height: 1;
+        opacity: .75;
+        border-radius: 0;
+    }
+
+    #check-short {
+        animation: checkshort 500ms linear backwards;
+    }
+
+    #check-long {
+        opacity: 0;
+        animation: checklong 571ms linear 500ms forwards;
+    }
+
+    #extra-box {
+        animation: extrabox 500ms linear forwards;
+    }
+
+    @keyframes checkshort {
+        0% {
+            clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+        }
+
+        100% {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+    }
+
+    @keyframes checklong {
+        0% {
+            opacity: 1;
+            clip-path: polygon(0 78%, 100% 78%, 100% 100%, 0 100%);
+        }
+
+        100% {
+            opacity: 1;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        }
+    }
+
+    @keyframes extrabox {
+        0% {
+            opacity: 0;
+        }
+
+        75% {
+            opacity: 0;
+        }
+
+        76% {
+            opacity: 1;
+            clip-path: polygon(0 0, 0 100%, 0 100%, 0 0);
+        }
+
+        100% {
+            clip-path: polygon(0 100%, 0 0, 100% 0, 100% 100%);
+        }
+    }
 </style>
+<div class="row">
+    <div class="container">
+        <div id="status-bar"></div>
+    </div>
+</div>
 <section class="pt-5 pb-5">
-   <div class="container">
-      <div class="card">
-         <div class="card-header">
-            <h3><?php echo $lang['upload-text1']; ?></h3>
-         </div>
 
-         <div class="card-body">
-            <form autocomplete="off" class="was-validated" method="post" action="/upload" enctype="multipart/form-data">
-               <div class="row d-flex justify-content-center">
-                  <div class="col-sm-12 col-12">
-                     <?php
-                     if (isset($_SESSION['upload'])) :
-                        unset($_SESSION['upload']);
-                     ?>
-                        <div class="alert alert-success alert-dismissible fade show center" role="alert">
-                           <strong>Success!</strong> You successfully uploaded a modification!
-                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                           </button>
-                        </div>
-                     <?php endif; ?>
-                     <div class="card-header pills-regular d-flex justify-content-center">
-                        <ul class="nav nav-pills card-header-pills" role="tablist">
-                           <li class="nav-item">
-                              <button class="btn btn-primary rounded btn-upload nav-link active show" id="card-pills-1" data-toggle="tab" href="#card-pill-1" role="tab" aria-controls="card-1" aria-selected="true">1</span>
-                           </li>
-                           <li class="nav-item">
-                              <button class="btn btn-primary rounded btn-upload nav-link" id="card-pills-2" data-toggle="tab" href="#card-pill-2" role="tab" aria-controls="card-2" aria-selected="false">2</span>
-                           </li>
-                           <li class="nav-item">
-                              <button class="btn btn-primary rounded btn-upload nav-link" id="card-pills-3" data-toggle="tab" href="#card-pill-3" role="tab" aria-controls="card-3" aria-selected="false">3</span>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="card-body">
-                        <div class="tab-content">
-                           <!-- Introduction -->
-                           <div class="tab-pane fade active show" id="card-pill-1" role="tabpanel" aria-labelledby="card-tab-1">
-                              <div class="form-group text-center">
-                                 <div class="alert alert-info" role="alert">
-                                    <h4 class="alert-heading"><?php echo $lang['welcome'] . ' ' . $vals['name']; ?>!</h4>
-                                    <p><?php echo $lang['upload-start-msg']; ?></p>
-                                    <hr>
-                                    <p class="mb-0"><?php echo $lang['app-time']; ?> </a>: <b>1-3 <?php echo $lang['days']; ?></b></p>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- End Introduction -->
-                           <div class="tab-pane fade" id="card-pill-2" role="tabpanel" aria-labelledby="card-tab-2">
-                              <!-- Header -->
-                              <h2 class="center"><?php echo $lang['upload-prod']; ?></h2><br>
-                              <div class="alert alert-warning text-center" role="alert">
-                                 <?php echo $lang['fill-fields']; ?> <span class="text text-danger">*</span>
-                              </div>
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-lg-5 mx-auto">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-modupload-tab" data-toggle="pill" href="#pills-modupload" role="tab" aria-controls="pills-modupload" aria-selected="false">Mod Upload</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-form-tab" data-toggle="pill" href="#pills-form" role="tab" aria-controls="pills-form" aria-selected="false">Form</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-done-tab" data-toggle="pill" href="#pills-done" role="tab" aria-controls="pills-done" aria-selected="false">Done</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
 
-                              <br>
-                              <!-- End Header -->
-                              <!-- Title -->
-                              <div>
-                                 <label for="tile">Title <span class="text text-danger">*</span></label>
-                                 <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" required>
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">The title has to be at least 10 and max. 75 characters long</div>
-                              </div>
-                              <br>
-                              <!-- Description -->
-                              <div>
-                                 <label for="description">Description <span class="text text-danger">*</span></label>
-                                 <textarea class="form-control" id="description" name="description" value="" rows="5" minlength="150" required></textarea>
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">The description has to be at least 150 characters long</div>
-                              </div>
-                              <br>
-                              <!-- Mod Upload -->
-                              <p>Upload your Mod here <span class="text text-danger">*</span></p>
-                              <div class="custom-file mb-3">
-                                 <input type="file" class="custom-file-input" name="modupload" id="modupload" accept=".zip, .7z, .rar, .tar, .tar.gz" required>
-                                 <label class="custom-file-label" for="modupload">Choose file...</label>
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to upload a .zip, .7z, .rar, .tar or .tar.gz file</div>
-                              </div>
-                              <output id="uploadOutput"></output>
-                              <br><br>
-                              <!-- Category -->
-                              <div>
-                                 <label for="category">Select a category <span class="text text-danger">*</span></label>
-                                 <select class="custom-select" id="category" name="category" onChange="CategoryFeedback(this)" required>
-                                    <option value="" disabled selected>Choose category...</option>
-                                    <option value="Scripts">Scripts</option>
-                                    <option value="Vehicles">Vehicles</option>
-                                    <option value="Weapons">Weapons</option>
-                                    <option value="Peds">Peds</option>
-                                    <option value="Maps">Maps</option>
-                                    <option value="Liveries">Liveries</option>
-                                    <option value="Misc">Misc</option>
-                                 </select>
-                                 <div id="categoryfeedback" class="invalid-feedback">You have to select a category</div>
-                              </div>
-                              <br>
-                              <!-- Tags -->
-                              <div>
-                                 <label for="tags">Set some tags <span class="text text-danger">*</span></label>
-                                 <input type="text" class="form-control" id="tags" name="tags" minlength="3" value="" required placeholder="You can add multiple tags, just seperate them with a comma.">
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to set at least one tag!</div>
-                              </div>
-                              <br>
-                              <!-- Picture Upload -->
-                              <p>Upload some pictures here <span class="text text-danger">*</span></p>
-                              <div class="custom-file mb-3">
-                                 <input type="file" class="custom-file-input" name="picupload[]" id="picupload" accept=".jpg, .png, .jpeg, .webp" multiple required>
-                                 <label class="custom-file-label" for="picupload">Choose file...</label>
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to upload at least one .jpg, .jpeg, .png or .webp image file (max. 10 pictures)</div>
-                              </div>
-                              <output id="pictureOutput"></output>
-                              <br><br>
-                              <!-- Required Mod -->
-                              <div>
-                                 <label for="requiredMod">Required Mod</label>
-                                 <input type="url" class="form-control" id="requiredMod" name="requiredMod" value="" placeholder="URL">
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to use an URL</div>
-                              </div>
-                              <br>
-                              <!-- Price suggestion -->
-                              <!--
-                              <div>
-                                 <label for="price">Price suggestion</label>
-                                 <input type="number" class="form-control" id="price" name="price" value="" placeholder="Use this if you want your mod to be sold on FiveMods. Payment Policy applies." max="5">
-                                 <div class="valid-feedback">Looks good!</div>
-                                 <div class="invalid-feedback">You have to use a number between 0 and 5</div>
-                              </div>
-                              -->
-                           </div>
-                           <div class="tab-pane fade" id="card-pill-3" role="tabpanel" aria-labelledby="card-tab-3">
-                              <!-- Header -->
-                              <h2 class="text-center"><?php echo $lang['nearly-done']; ?></h2><br>
-                              <div class="alert alert-warning final-upload" role="alert">
-                                 <p><?php echo $lang['upload-submit1']; ?> </p>
-                                 <div class="text-center">
-                                    <a href="/upload-policy/"><?php echo $lang['upload-policy']; ?></a>
-                                 </div>
-                                 <p>
-                                 <?php echo $lang['upload-submit2']; ?>
-                                 </p>
-                              </div>
-                              <br>
-                              <!-- End Header -->
-                              <div class="form-group d-flex justify-content-center">
-                                 <input name="uploadMod" value="1" hidden>
-                                 <button type="submit" class="btn btn-primary" style="margin-right: 5px;"><?php echo $lang['accept-and-upload']; ?> </button>
-                                 <button type="reset" class="btn btn-danger">Reset</button>
-                              </div>
-                           </div>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+            <section>
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="col-lg-5 mx-auto uploadDiv">
+                            <div class="progress mb-2 ml-1 mr-1 rounded">
+                                <div class="progress-bar pg-mods bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/upload.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+
+                                <h6 class="text-center mb-4 text-muted">
+                                    Upload your resource here
+                                </h6>
+
+                                <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                    <label for="fmUpload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for file ...
+                                        <input id="fmUpload" type="file" name="files[]" accept=".zip, .7z, .rar, .tar or .tar.gz" required>
+                                    </label>
+                                </div>
+                                <!-- End -->
+
+                                <div class="text-center mb-4 text-muted border p-2" id="uploadPreview">
+
+                                </div>
+                                <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
+                                    You have to upload a .zip, .7z, .rar, .tar or .tar.gz file.
+                                </h6>
+                                <button id="submitUpload" class="btn btn-success btn-block rounded">Save & Continue</button>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="tab-pane fade" id="pills-modupload" role="tabpanel" aria-labelledby="pills-modupload-tab">
+            <section>
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="col-lg-5 mx-auto">
+                            <div class="progress mb-2 ml-1 mr-1 rounded">
+                                <div class="progress-bar pg-pics bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+
+                            <div class="p-5 bg-white shadow rounded-lg"><img src="/static-assets/img/svg/upload/gallery.svg" loading="lazy" alt="FiveMods upload brand" width="100px" class="d-block mx-auto mb-4 rounded-pill">
+
+                                <h6 class="text-center mb-4 text-muted">
+                                    Upload your images here
+                                </h6>
+
+                                <div class="grid-x grid-padding-x">
+                                    <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
+                                        <p>
+                                        <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                            <label for="fmPicupload" class="file-upload btn btn-primary btn-block rounded-pill shadow"><i class="fa fa-upload mr-2"></i>Browse for images ...
+                                                <input class="show-for-sr" type="file" id="fmPicupload" name="fmPicupload[]" accept=".jpg, .png, .jpeg, .webp" multiple />
+                                            </label>
+                                        </div>
+                                        </p>
+                                    </div>
+                                </div>
+                                <h6 class="text-center mb-4 text-muted" style="font-size: 10px;">
+                                    You have to upload images in the format .png, .jpg, .jpeg or .webp. Max. 10 images
+                                </h6>
+                                <button id="submitPictures" class="btn btn-success btn-block rounded">Save & Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="pt-3 pb-3">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="card-deck quote-imgs-thumbs quote-imgs-thumbs--hidden p-3 bg-white shadow rounded-lg" id="img_preview" aria-live="polite">
+                            <div class="card-img-top shadow"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="tab-pane fade" id="pills-form" role="tabpanel" aria-labelledby="pills-form-tab">
+            <section>
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="col-lg-10 mx-auto">
+
+                            <div class="p-5 bg-white shadow rounded-lg">
+
+                                <form action="upload_file.php" id="form-upload" class="was-validated" method="post" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="title">Title <span class="text text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="title" name="title" minlength="10" maxlength="75" value="" placeholder="Enter your mod title.." required>
+                                        <small id="title" class="form-text text-muted">The title has to be at least 10 and max. 75 characters long.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="description">Description <span class="text text-danger">*</span></label>
+                                        <textarea class="form-control" id="description" name="description" value="" placeholder="Enter an exciting description.." rows="5" minlength="150" required></textarea>
+                                        <small id="title" class="form-text text-muted">The description has to be at least 150 characters long.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Select a category <span class="text text-danger">*</span></label>
+                                        <select class="form-control custom-select" id="category" name="category" required>
+                                            <option value="" disabled selected>Choose category..</option>
+                                            <option value="Scripts">Scripts</option>
+                                            <option value="Vehicles">Vehicles</option>
+                                            <option value="Weapons">Weapons</option>
+                                            <option value="Peds">Peds</option>
+                                            <option value="Maps">Maps</option>
+                                            <option value="Liveries">Liveries</option>
+                                            <option value="Misc">Misc</option>
+                                        </select>
+                                        <small id="title" class="form-text text-muted">You have to select a category.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Set some tags <span class="text text-danger">*</span></label>
+                                        <select id="choices-multiple-remove-button" placeholder="Select up to 20 tags" multiple>
+                                            <?php
+                                            require_once('config.php');
+                                            $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+                                            $selVals = $pdo->prepare("SELECT * FROM tags");
+                                            $selVals->execute();
+                                            $vals = $selVals->fetchAll();
+
+                                            foreach ($vals as $value) {
+                                                echo '<option value="' . $value['tag'] . '">' . $value['tag'] . '</option>';
+                                            }
+                                            
+
+                                            ?>
+                                        </select>
+                                        <small id="title" class="form-text text-muted">You have to set at least one tag.</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title">Required resource</label>
+                                        <input type="text" class="form-control" id="required" name="required" minlength="10" maxlength="75" value="" placeholder="Enter an additional URL..">
+                                        <small id="title" class="form-text text-muted">Not required</small>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button id="submitBtn" class="btn btn-primary" style="padding:10px 20px 10px;border-radius:7px;font-size: 16px;">Upload <i class="fas fa-upload pl-1"></i></button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="pt-3 pb-3">
+                <div class="container">
+                    <div class="row row-grid">
+                        <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="tab-pane fade" id="pills-done" role="tabpanel" aria-labelledby="pills-done-tab">
+            <section>
+                <div class="container p-5">
+                    <div class="row">
+                        <div class="col-lg-5 mx-auto">
+
+                            <div class="p-5 bg-white shadow rounded-lg">
+                                <svg width="100" viewBox="0 0 4353 4732" fill="none" xmlns="http://www.w3.org/2000/svg" loading="lazy" alt="FiveMods upload brand" class="d-block mx-auto mb-4 rounded-pill">
+                                    <g id="check file">
+                                        <g id="file">
+                                            <path id="Vector" d="M377.516 16.6526C236.713 59.5057 112.234 165.618 38.7719 304.381C2.04063 371.721 0 463.55 0 2365.41C0 4267.27 2.04063 4359.1 38.7719 4426.44C91.8281 4526.43 189.778 4626.42 285.688 4677.44C365.272 4722.33 385.678 4722.33 1442.72 4728.46C2501.81 4734.58 2520.17 4732.54 2560.98 4691.72C2612 4640.71 2614.04 4581.53 2560.98 4528.47C2522.21 4489.7 2493.64 4487.66 1485.58 4487.66C487.709 4487.66 446.897 4485.62 381.597 4446.85C344.866 4424.4 297.931 4377.47 275.484 4340.74C234.672 4275.44 234.672 4232.58 234.672 2365.41C234.672 498.24 234.672 455.387 275.484 390.087C297.931 353.356 344.866 306.421 381.597 283.974C446.897 245.203 487.709 243.162 1522.31 243.162H2597.72L2605.88 461.509C2614.04 702.303 2638.53 771.684 2752.8 892.081C2877.28 1026.76 2946.66 1047.17 3279.28 1055.33C3560.89 1063.49 3579.26 1061.45 3620.07 1020.64C3646.6 994.112 3662.92 951.259 3662.92 910.447C3662.92 802.293 3603.74 590.068 3546.61 481.915C3475.18 353.356 3307.85 186.024 3179.29 114.603C2971.15 2.36823 2924.22 -1.71302 1622.3 0.327607C965.216 0.327607 406.084 8.49011 377.516 16.6526ZM3003.8 304.381C3126.24 359.478 3285.41 514.565 3346.63 637.003C3430.29 806.375 3426.21 814.537 3230.31 814.537C2942.58 814.537 2846.67 718.628 2846.67 430.899C2846.67 239.081 2852.79 234.999 3003.8 304.381Z" fill="url(#paint0_linear)" />
+                                            <path id="Vector_2" d="M3458.86 1426.74C3420.09 1465.51 3418.05 1494.08 3418.05 2038.93C3418.05 2583.77 3420.09 2612.34 3458.86 2651.11C3481.31 2673.56 3518.04 2691.93 3540.48 2691.93C3562.93 2691.93 3599.66 2673.56 3622.11 2651.11C3660.88 2612.34 3662.92 2583.77 3662.92 2038.93C3662.92 1494.08 3660.88 1465.51 3622.11 1426.74C3599.66 1404.29 3562.93 1385.93 3540.48 1385.93C3518.04 1385.93 3481.31 1404.29 3458.86 1426.74Z" fill="url(#paint1_linear)" />
+                                        </g>
+                                        <g id="Green Checkmark">
+                                            <circle id="circle" cx="3541.86" cy="3919.93" r="810.5" fill="url(#paint2_linear)" />
+                                            <g id="Checkmarks">
+                                                <rect id="extra-box" x="3454" y="4166.82" width="113.472" height="113.472" transform="rotate(45 3454 4166.82)" fill="white" />
+                                                <rect id="check-short" x="3007" y="4040.74" width="226.939" height="518.717" rx="113.469" transform="rotate(-45 3007 4040.74)" fill="white" />
+                                                <rect id="check-long" x="3901.05" y="3559.31" width="226.939" height="972.594" rx="113.469" transform="rotate(45 3901.05 3559.31)" fill="white" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                    <defs>
+                                        <linearGradient id="paint0_linear" x1="1831.46" y1="4731.04" x2="1831.46" y2="-0.000976562" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#E94057" />
+                                            <stop offset="1" stop-color="#F27121" />
+                                        </linearGradient>
+                                        <linearGradient id="paint1_linear" x1="3540.48" y1="2691.93" x2="3540.48" y2="1385.93" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#E94057" />
+                                            <stop offset="1" stop-color="#F27121" />
+                                        </linearGradient>
+                                        <linearGradient id="paint2_linear" x1="3541.86" y1="3109.43" x2="3541.86" y2="4730.43" gradientUnits="userSpaceOnUse">
+                                            <stop stop-color="#57C84D" />
+                                            <stop offset="1" stop-color="#2EB62C" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <h6 class="text-center mb-4 pt-4 text-muted">
+                                    <!-- vlt randomizer mit kleinen sprüchen rein machen idk wäre nice ig -->
+                                    You uploaded your mod. <br> We will review and hopefully approve it in the next few days.
+                                </h6>
+
+                                <div class="grid-x grid-padding-x">
+                                    <div class="small-10 small-offset-1 medium-8 medium-offset-2 cell">
+                                        <p>
+                                        </p>
+                                        <!--<div class="quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>-->
+                                    </div>
+                                </div>
+                                <h6 class="text-center mb-4 pt-3 text-muted" style="font-size: 10px;">
+                                    With uploading an resource you agree to our <a href="/upload-policy/">Upload policy</a>.
+                                    Failures can result in withdrawal of monitarization, a removal of the specific mod or your account.
+                                </h6>
+                                <div class="d-flex justify-content-center">
+                                    <a href="/" class="text-center text-muted" style="font-size: 10px;">
+                                        <u>Go back to FiveMods.net</u>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="pt-3 pb-3">
+                <div class="container">
+                    <div class="row row-grid">
+                        <div class="col-xs-6 col-md-3 my-1 quote-imgs-thumbs quote-imgs-thumbs--hidden" id="img_preview" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
 </section>
 <script>
-   window.addEventListener("load", function(event) {
-      console.log("Site loaded!");
-   });
+    $(document).ready(function() {
 
-   function picchange(evt) {
-
-      var files = evt.target.files;
-
-      var fragments = [];
-
-      for (var i = 0, f; f = files[i]; i++) {
-         fragments.push('<li><strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
-                        f.size, ' bytes</li>');
-      }
-   document.getElementById('pictureOutput').innerHTML = '<ul>' + fragments.join('') + '</ul>';
-   }
-
-   function uploadChange(evt) {
-
-      var files = evt.target.files;
-
-      var fragments = [];
-
-      for (var i = 0, f; f = files[i]; i++) {
-         fragments.push('-> <strong>', f.name, '</strong> (', f.type || 'n/a', ') - ',
-            (f.size / 1000000).toString().slice(0, 4) , ' MB');
-      }
-   document.getElementById('uploadOutput').innerHTML = fragments.join('');
-   }
-
-   document.addEventListener("DOMContentLoaded", function() {
-      document.getElementById('picupload').addEventListener('change', picchange, false);
-      document.getElementById('modupload').addEventListener('change', uploadChange, false);
-   });
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount: 20,
+            searchResultLimit: 100,
+            renderChoiceLimit: 100
+        });
 
 
-   function CategoryFeedback(item) {
-      document.getElementById('categoryfeedback').className = "valid-feedback";
-      document.getElementById('categoryfeedback').innerHTML = "Looks good!";
-   };
-
-    var modupload = document.getElementById('modupload');
-    modupload.onchange = function() {
-        if (!modupload.files[0].name.endsWith(".zip") && !modupload.files[0].name.endsWith(".7z") && !modupload.files[0].name.endsWith(".rar") && !modupload.files[0].name.endsWith(".tar") && !modupload.files[0].name.endsWith(".tar.gz")) {
-            modupload.value = '';
-        }
-    };
-    var picupload = document.getElementById('picupload');
-    picupload.onchange = function() {
-        if (picupload.files.length <= 10) {
-            for (let v = 0; v < picupload.files.length; v++) {
-            if (!picupload.files[v].name.endsWith(".png") && !picupload.files[v].name.endsWith(".jpg") && !picupload.files[v].name.endsWith(".jpeg") && !picupload.files[v].name.endsWith(".webp")) {
-                picupload.value = '';
-                break;
-            }
-         }
-      } else {
-         picupload.value = '';
-      }
-   };
+    });
 </script>
+
+<script src="https://fivemods.net/static-assets/js/upload.js"></script>

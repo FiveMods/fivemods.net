@@ -1,10 +1,18 @@
 <?php
 session_start();
+<<<<<<< HEAD
 $modPathTemp = "../localstorage/upload/mods/";
 $picPathTemp = "../localstorage/upload/pictures/";
 
 $path = "../localstorage/upload/";
 $url = "https://storage.fivemods.net/upload/mods/";
+=======
+$modPathTemp = "/var/www/fivemods/storage-html/uploads/mods/";
+$picPathTemp = "/var/www/fivemods/storage-html/uploads/pics/";
+
+$path = "/var/www/fivemods/storage-html/uploads/";
+$url = "https://storage.fivemods.net/uploads/";
+>>>>>>> dd7407d9abcdf2ab06e9d28b3f7e59995f27d647
 
 require_once('../config.php');
 if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
@@ -64,8 +72,34 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
     $selVals->execute(array($_SESSION['uuid']));
     $vals = $selVals->fetch();
 
+<<<<<<< HEAD
     $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+=======
+    if($vals['premium'] == 0) {
+        $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+    } else if($vals['premium'] == 1) {
+        $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_approvedby, m_approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, \"Automatically\", 0)");
+        $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+
+        $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_picture = :pic");
+        $stmt->execute(array("name" => $title, "pic" => $pictures));
+        $statement = $stmt->fetch();
+
+        $ch = curl_init();
+        $token = $apiToken;
+        $modid = $statement['m_id'];
+
+        curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "action=newMod&token=$token&modid=$modid");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+    }
+>>>>>>> dd7407d9abcdf2ab06e9d28b3f7e59995f27d647
 
     print_r("SUCCESS");
 }

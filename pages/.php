@@ -227,7 +227,7 @@ if (isset($_SESSION['downloadMod'])) {
                     <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
                             <a href="/product/<?php echo $article['m_id']; ?>/">
-                                <img class="card-img-top img-fluid cover rounded" async=on src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
+                                <img class="card-img-top img-fluid cover rounded" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/<?php echo explode(" ", $article['m_picture'])[0]; ?>" alt="<?php echo $article['m_name']; ?>-IMAGE">
 
                             </a>
                             <div class="card-body">

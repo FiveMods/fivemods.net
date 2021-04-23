@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
              <div class="card bg-transparent text-light text-center border-0">
                 <div class="card-body pt-1 pb-1">
                    <p class="lead pb-0 mb-0">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> | Your mod got approved by <a href="/user/' . $m_approvedby . '/" class="text-white">' . $m_approvedby . '</a>.
+                   <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> | Your mod has been approved by <a href="/user/' . $m_approvedby . '/" class="text-white">' . $m_approvedby . '</a>.
                    </p>
                 </div>
              </div>
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
              <div class="card bg-transparent text-light text-center border-0">
                 <div class="card-body pt-1 pb-1">
                    <p class="lead pb-0 mb-0">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> | Your mod got denied. Reason: ' . $m_denyreason . '.
+                   <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> | Your mod has been denied. Reason: ' . $m_denyreason . '.
                    </p>
                    <small>You may adjust your modification to fit our <a href="/upload-policy/" class="text text-white">Upload Policies</a>.</small>
                 </div>

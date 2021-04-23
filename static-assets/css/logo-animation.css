@@ -1,0 +1,38 @@
+#fivemods {
+    overflow: hidden;
+}
+
+#five {
+    animation: five-intro 1.5s ease .5s backwards;
+}
+
+#mods {
+    animation: mods-intro 1.5s ease .5s backwards;
+}
+
+
+@keyframes mods-intro {
+    0% {
+        transform: translateX(-110px);
+        clip-path: polygon(70% 0%, 70% 100%, 100% 100%, 100% 0%);
+    }
+
+    60% {
+        clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+    }
+
+    100% {
+        transform: translateX(0);
+        clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+    }
+}
+
+@keyframes five-intro {
+    0% {
+        transform: translateX(90px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

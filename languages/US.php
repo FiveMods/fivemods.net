@@ -66,7 +66,7 @@
         "partner-condition3" => "Downloads in Total",
         "search-results" => "Search results for ",
         "search-result" => "Search result for ",
-        "search" => "Seach",
+        "search" => "Search",
         "searchbar" => "Search FiveMods..",
         "to-profile" => "Go to profile",
         "upload-text1" => "Upload a mod on FiveMods",

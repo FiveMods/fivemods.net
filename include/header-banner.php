@@ -10,16 +10,23 @@ if($headerVals->rowCount() > 0) {
 } else {
    $banner = $css_banner;
 }
+
+if (empty($_SESSION['uuid'])) {
+   $h = "7";
+} else {
+   $h = "12";
+}
+
 ?>
 
 <style>
 .fill {
-    min-height: 17vh;
+    height: <?php echo $h; ?>vh;
     transform: scale(1,1);
     overflow: hidden;
     background-size: cover;
     background-position: center;
-    background-image: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/<?php echo $banner; ?>');
+    background-image: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
 }
 </style>
 <section class="pt-5 pb-5 mt-0 align-items-center d-flex bg-light blinker fill">

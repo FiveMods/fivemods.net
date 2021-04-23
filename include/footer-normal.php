@@ -4,14 +4,14 @@
          <div class="container">
             <div class="row">
                <div class="col-xs-6 col-sm-3">
-                  <a href="#">
-                     <img src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/brand-side.png" height="40px" alt="">
+                  <a href="/">
+                     <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" loading="lazy" alt="fivemods_brand_text_primary_white_280x100_footer_normal" width="112px" height="40px">
                   </a>
                   <hr style="background-color:#605f62;margin-right:25%;margin-top:10%;">
                   <address class="color-light-20 mt-4">
                      <a href="mailto://contact@fivemods.net" style="color:lightgray;">contact@fivemods.net</a>
                   </address>
-                  <small style="color:#605f62;">live production <a href="/ref?rdc=https://github.com/FiveMods/fivemods.net/releases/tag/v1.1.05-a.1">v1.1.0.5-a.1</a></small>
+                  <small style="color:#605f62;">live production <a href="/ref?rdc=https://github.com/FiveMods/fivemods.net/releases/tag/v1.2.65-stable">v1.2.65-stable</a></small>
                </div>
                <div class="col-xs-6 col-sm-3">
                   <h4 class="my-2"><?php echo $lang['about-us']; ?></h4>
@@ -86,6 +86,9 @@
                      </li>
                      <li>
                         <a href="/famous-creator/"><?php echo $lang['famous-creator']; ?></a>
+                     </li>
+                     <li>
+                        <a href="/language/"><?php echo $lang['language']; ?></a>
                      </li>
                   </ul>
                </div>
