@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '5f819c19100da905c4bb9164b1b0e93ba74bff16',
+    'reference' => '25dde33180164720d050dfe8bc089a43e179e878',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => '5f819c19100da905c4bb9164b1b0e93ba74bff16',
+      'reference' => '25dde33180164720d050dfe8bc089a43e179e878',
+    ),
+    'erusev/parsedown' => 
+    array (
+      'pretty_version' => '1.7.4',
+      'version' => '1.7.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cb17b6477dfff935958ba01325f2e8a2bfa6dab3',
     ),
     'guzzlehttp/guzzle' => 
     array (

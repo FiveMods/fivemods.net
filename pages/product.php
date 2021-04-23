@@ -3,6 +3,9 @@ session_start();
 include('./include/header-banner.php');
 require_once('./config.php');
 
+require_once './vendor/erusev/parsedown/Parsedown.php';
+
+$Parsedown = new Parsedown();
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
@@ -19,7 +22,7 @@ if ($_GET['id']) {
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
          $name = $row['m_name'];
-         $description = removeXss($row['m_description']);
+         $description = $Parsedown->text(removeXss($row['m_description']));
          $img = $row['m_picture'];
          $tags = $row['m_tags'];
          $cat = $row['m_category'];
@@ -46,54 +49,7 @@ if ($_GET['id']) {
             }
             $number = round($number / count($rateArray));
          }
-
-         // Header
-         $description = preg_replace('/#####\s(.+)/', "<h6>$1</h6>", $description);
-         $description = preg_replace('/####\s(.+)/', "<h5>$1</h5>", $description);
-         $description = preg_replace('/###\s(.+)/', "<h4>$1</h4>", $description);
-         $description = preg_replace('/##\s(.+)/', "<h3>$1</h3>", $description);
-         $description = preg_replace('/#\s(.+)/', "<h2>$1</h2>", $description);
-
-         // Bold
-         $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
-         $description = preg_replace('/\[b\](.+)\[\/b\]/', "<b>$1</b>", $description);
-
-         // Italic
-         $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
-         $description = preg_replace('/\[i\](.+)\[\/i\]/', "<i>$1</i>", $description);
-
-         // Underline
-         $description = preg_replace('/\_\_(.+)\_\_/', "<u>$1</u>", $description);
-         $description = preg_replace('/\[u\](.+)\[\/u\]/', "<u>$1</u>", $description);
-
-         // Crossed out
-         $description = preg_replace('/\[s\](.+)\[\/s\]/', "<s>$1</s>", $description);
-
-         // Code
-         $description = preg_replace('/(\`\`\`)([^\`]+)(\`\`\`)/s', "<code style=\"max-width: 100%;\">$2<br /></code>", $description);
-
-         // Links
-         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/', "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>", $description);
          
-         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(jpe?g|bmp|png))/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
-            $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif))/', "<img src=\"$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$1\" loading=lazy style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$2\" loading=lazy style=\"max-width: 100%;\">", $description);
-
-         $description = preg_replace('/\[url\](.+)\[\/url\]/', "<a href=\"/ref?rdc=$1\">$1</a>", $description);
-         $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
-         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9]+\.[^\s|\)|\<]{2,})/', "<a href=\"/ref?rdc=$2$3\">$2$3</a>", $description);
-         
-         // Mentions
-         $description = preg_replace('/@([A-Za-z0-9-_]+[^\s|\W]{1,})/', "<a href=\"/user/$1\">@$1</a>$2", $description);
-         
-         // Smileys
-         $description = preg_replace('/\:\)|\=\)|\:slight_smile\:/', "🙂", $description);
-         $description = preg_replace('/\:rolleyes\:/', "🙄", $description);
-         $description = preg_replace('/\:cool\:/', "😎", $description);
-         $description = preg_replace('/\:lol\:|\:joy\:/', "😂", $description);
-
-         $description = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $description);
 
       }
    } else {
