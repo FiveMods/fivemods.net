@@ -23,11 +23,20 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 
       if(strlen($_POST['username']) >= 3 && strlen($_POST['username']) <= 35) {
         if(!preg_match('/\W/', $_POST['username'])) {
+          
+          $name = $pdo->prepare("SELECT * FROM user WHERE name = ?");
+          $name->execute(array($_POST['username']));
+          if($name->rowCount() > 0) {
+            print_r("ERR_ALREADY_EXISTING");
+            exit();
+            die();
+          } else {
+            $stmt = $pdo->prepare("UPDATE user SET name = ? WHERE uuid = ?");
+            $stmt->execute(array($_POST['username'], $_SESSION['uuid']));
+  
+            print_r("SUCCESS");
+          }
 
-          $stmt = $pdo->prepare("UPDATE user SET name = ? WHERE uuid = ?");
-          $stmt->execute(array($_POST['username'], $_SESSION['uuid']));
-
-          print_r("SUCCESS");
         } else {
           print_r("ERR_REGEX");
           exit();
