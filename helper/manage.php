@@ -161,8 +161,7 @@ function downloadMod($pdo, $pdoPayment)
     {
         $fetch = $getDownloads->fetchAll();
         foreach ($fetch as $modA) {
-            if(strtotime($modA['created_at']) > (60 * 5)) {
-                $_SESSION['lastDownload'] = $mod;
+            if(strtotime($modA['created_at']) > (60 * 5) && $_SESSION['lastDownload'] == $mod) {
                 $_SESSION['downloadMod'] = $mod;
                 switch ($_GET['o']) {
                     case 'product':
