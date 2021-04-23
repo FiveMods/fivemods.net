@@ -154,8 +154,9 @@ if ($_GET['id']) {
 }
 
 function removeXss($string) {
+   $breakTags = array('&lt;br /&gt;', '&lt;br&gt;');
    $stringhtml = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-   $stringMD = str_replace('&lt;br /&gt;', '<br>' ,$stringhtml);
+   $stringMD = str_replace($breakTags, '<br>' ,$stringhtml);
    return $stringMD;
 }
 
