@@ -106,7 +106,7 @@ if ($_SESSION['dc_access_token']) {
 
       $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
       $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
-      $insertUser->execute(array('provider' => "Discord", 'id' => $uid, 'uuid' => $v5uuid, 'username' => $_SESSION['user_username'], 'email' => $email, 'country' => $user->locale));
+      $insertUser->execute(array('provider' => "Discord", 'id' => $uid, 'uuid' => $v5uuid, 'username' => $user->username, 'email' => $email, 'country' => $user->locale));
 
       //
       // Login Code
@@ -119,6 +119,8 @@ if ($_SESSION['dc_access_token']) {
 
       $sessionInsert = $pdo->prepare("INSERT INTO sessions (uuid, newid) VALUES (?, ?)");
       $sessionInsert->execute(array($v5uuid, $sessionKey));
+
+      $_SESSION['username'] = $user->username;
 
     	header("Location: /pages/account/helper/account.check.php");
 

@@ -15,12 +15,8 @@ $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
 $selToken->execute(array($_COOKIE['f_key']));
 $fetch = $selToken->fetch();
 
-$selectUsername = $pdo->prepare("SELECT * FROM user WHERE uuid = ?");
-$selectUsername->execute(array($fetch['uuid']));
-
-$selFetch = $selectUsername->fetch();
-$username = str_replace(" ", "_", $selFetch['name']);
-
+$username = str_replace(" ", "_", $_SESSION['username']);
+echo $_SESSION['username'];
 $nameCheck = $pdo->prepare("SELECT * FROM user WHERE name = ?");
 $nameCheck->execute(array($username));
 
@@ -28,7 +24,7 @@ if($nameCheck->rowCount() > 1) {
     $username = $username . "_". randomChars(6);
 }
 
-if(strlen($_POST['username']) >= 3 && strlen($_POST['username'] <= 50) && !preg_match('/\W/', $_POST['username'])) {
+if(strlen($username) >= 3 && strlen($username) <= 50 && !preg_match('/\W/', $username)) {
     echo "valid";
 } else {
     $username = "User_". randomChars(6);
@@ -38,6 +34,7 @@ if(strlen($_POST['username']) >= 3 && strlen($_POST['username'] <= 50) && !preg_
 $insert = $pdo->prepare("UPDATE user SET name = :name WHERE uuid = :uuid");
 $insert->execute(array("name" => $username, "uuid" => $fetch['uuid']));
 
+unset($_SESSION['username']);
 $pdo = null;
 
 header("Location: /account/");
