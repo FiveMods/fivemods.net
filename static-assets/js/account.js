@@ -45,6 +45,10 @@ $('#newUsername').on("click", function() {
                         errtext = "Your are not logged in";
                         window.location.replace("https://fivemods.net/logout?url=invalid");
                         break;
+                    case "ERR_ALREADY_EXISTING":
+                        err = 1;
+                        errtext = "This username is already taken"
+                        break;
                     default:
                         err = 1
                         errText = "Unknown error"
