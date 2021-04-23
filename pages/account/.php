@@ -178,7 +178,7 @@ h6.mb-0.key:hover {
 						<form action="/pages/account/helper/profile.edit.php" method="post">
 							<div class="form-group">
 								<label for="email">Email <a href="#info" class="text text-danger">*</a> </label>
-								<input type="text" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $vals['email']; ?>" required>
+								<input type="email" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $vals['email']; ?>" required>
 								<small id="emailHelp" class="form-text text-muted"><?php echo $lang['email-desc']; ?></small>
 							</div>
 							<div class="form-group">
@@ -188,7 +188,7 @@ h6.mb-0.key:hover {
 							</div>
 							<div class="form-group">
 								<label for="url">Website</label>
-								<input type="url" class="form-control" name="website" id="noSpace" maxlength="64" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" name="website" placeholder="Enter your website address" value="<?php echo $vals['website']; ?>">
+								<input type="url" class="form-control" name="website" id="noSpace" maxlength="64" name="website" placeholder="Enter your website address" value="<?php echo $vals['website']; ?>">
 							</div>
 							<div class="form-group">
 								<label for="location"><?php echo $lang['location']; ?></label>

@@ -149,6 +149,9 @@ if($_SESSION['access_token']) {
         $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
         $insertUser->execute(array('provider' => "GitHub", 'id' => $user->id, 'uuid' => $v5uuid, 'username' => $user->login, 'email' => $email, 'country' => $location));
 
+        
+        $_SESSION['username'] = $user->login;
+
         header("Location: /pages/account/helper/account.check.php");
     }
 }
