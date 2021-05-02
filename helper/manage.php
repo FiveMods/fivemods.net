@@ -163,7 +163,8 @@ function downloadMod($pdo, $pdoPayment)
         foreach ($fetch as $modA) {
             if(strtotime($modA['created_at']) > (60 * 1)) {
                 $_SESSION['downloadMod'] = $mod;
-                switch ($_GET['o']) {
+                $_SESSION['lastDownload'] = $mod;
+                switch ($_GET['o']) { 
                     case 'product':
                         header("Location: /product/$mod");
                         break;
