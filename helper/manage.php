@@ -162,24 +162,26 @@ function downloadMod($pdo, $pdoPayment)
         $fetch = $getDownloads->fetchAll();
         foreach ($fetch as $modA) {
             if(strtotime($modA['created_at']) > (60 * 1)) {
-                $_SESSION['downloadMod'] = $mod;
-                $_SESSION['lastDownload'] = $mod;
-                switch ($_GET['o']) { 
-                    case 'product':
-                        header("Location: /product/$mod");
-                        break;
-                    case 'index':
-                        header("Location: /");
-                        break;
-                    case 'user':
-                        $user = $_GET['username'];
-                        header("Location: /user/$user");
-                    default:
-                        header("Location: /");
-                        break;
+                if($modA['download_id'] == $mod) {
+                    $_SESSION['downloadMod'] = $mod;
+                    $_SESSION['lastDownload'] = $mod;
+                    switch ($_GET['o']) { 
+                        case 'product':
+                            header("Location: /product/$mod");
+                            break;
+                        case 'index':
+                            header("Location: /");
+                            break;
+                        case 'user':
+                            $user = $_GET['username'];
+                            header("Location: /user/$user");
+                        default:
+                            header("Location: /");
+                            break;
+                    }
+                    exit();
+                    die();
                 }
-                exit();
-                die();
             }
         }
     }
