@@ -3,9 +3,9 @@ session_start();
 include('./include/header-banner.php');
 require_once('./config.php');
 
-require_once './vendor/erusev/parsedown/Parsedown.php';
+require 'helper/markdown.php';
 
-$Parsedown = new Parsedown();
+$parser = new Slimdown;
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
@@ -22,7 +22,7 @@ if ($_GET['id']) {
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
          $name = $row['m_name'];
-         $description = $Parsedown->text(removeXss($row['m_description']));
+         $description = $parser->render(removeXss($row['m_description']));
          $img = $row['m_picture'];
          $tags = $row['m_tags'];
          $cat = $row['m_category'];
@@ -111,9 +111,10 @@ if ($_GET['id']) {
 
 function removeXss($string) {
    $breakTags = array('&lt;br /&gt;', '&lt;br&gt;');
-   $stringhtml = htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
-   $stringMD = str_replace($breakTags, '<br>' ,$stringhtml);
-   return $stringMD;
+   $stringhtml = htmlspecialchars($string);
+   $stringEnd = str_replace($breakTags, '', $stringhtml);
+
+   return $stringEnd;
 }
 
 
