@@ -224,34 +224,7 @@ function removeXss($string) {
 </style>
 
 <section class="pt-5 pb-5">
-   <div class="container">
-      <?php
-         if(isset($_SESSION['rated'])) {
-      ?>
-      <div class="alert alert-success alert-dismissible fade show center" role="alert">
-         <strong>Success!</strong> You've successfully rated this mod with <?php echo $_SESSION['rated'];?> stars!
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      <?php
-         unset($_SESSION['rated']);
-         }
-      ?>
-      <?php 
-   
-         if ($_SESSION['successpurchased'] == TRUE) {
-            echo '<div class="alert alert-success alert-dismissible fade show center" role="alert">
-            <strong>Success!</strong> You\'ve successfully purchased this mod!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-            </button>
-         </div>';
-         $_SESSION['successpurchased'] == FALSE;
-         unset($_SESSION['successpurchased']);
-         }
-
-      ?>
+   <div class="container" id="fm-container">
       <div class="row">
          <div class="col-md-6 text-center">
             <div id="imgCarousel" class="carousel slide" data-ride="carousel">
@@ -313,7 +286,7 @@ function removeXss($string) {
                      <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars">2 stars</label>
                      <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">1 star</label>
                      <br>
-                     <button onclick="getRating()" class="btn btn-block btn-sm btn-primary"><?php echo $lang['submit']; ?></button>
+                     <button id="submitRate" class="btn btn-block btn-sm btn-primary"><?php echo $lang['submit']; ?></button>
                   </div>
                </div>
             </div>
@@ -408,29 +381,6 @@ function removeXss($string) {
    </div>
 </section>
 
-<script>
-   function getRating() {
-      var star1 = document.getElementById("star1").checked;
-      var star2 = document.getElementById("star2").checked;
-      var star3 = document.getElementById("star3").checked;
-      var star4 = document.getElementById("star4").checked;
-      var star5 = document.getElementById("star5").checked;
-
-      if (star1 === true) {
-         var rating = 1
-      } else if (star2 === true) {
-         var rating = 2
-      } else if (star3 === true) {
-         var rating = 3
-      } else if (star4 === true) {
-         var rating = 4
-      } else if (star5 === true) {
-         var rating = 5
-      }
-
-      window.location.href = "/helper/manage.php?rate=1&id=<?php echo $nameID; ?>_" + rating + "&userid=<?php echo $vals['id'];?>";
-   }
-</script>
 
 <section class="mt-3 pb-1 bg-dark">
    <div class="container-fluid">
@@ -794,6 +744,10 @@ span.onclick = function() {
 baguetteBox.run('.gallary');
 
 </script>
+<script>
+   var nameID = <?php echo $nameID; ?>
+</script>
+<script src="/static-assets/js/product.js">
 
 <?php
    $pdo = null;
