@@ -27,8 +27,6 @@ if (htmlspecialchars($_POST['contact'])) {
     partner($pdo, $uid);
 } elseif (htmlspecialchars($_POST['reportmod'])) {
     reportmod($pdo, $uid);
-} elseif (htmlspecialchars($_GET['rate'])) {
-    rate($pdo, $uid);
 } elseif (htmlspecialchars($_GET['upload'])) {
     uploadMod();
 } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
@@ -110,37 +108,6 @@ function reportmod($pdo, $uid)
     die();
 }
 
-function rate($pdo, $uid) {
-    session_start();
-
-    $cookieArray = explode("_", $_GET['id']);
-
-    $nameID = $cookieArray[0];
-    $rating = $cookieArray[1];
-    if($_SESSION['lastRated'] != $nameID) {
-      $changeRating = $pdo->prepare("SELECT m_rating FROM mods WHERE m_id = :id");
-      $changeRating->execute(array('id' => $nameID));
-
-      while ($row = $changeRating->fetch()) {
-          $m_rating = $row['m_rating'];
-          if (!empty($m_rating)) {
-              $newRating = $m_rating . " " . $rating;
-          } else {
-              $newRating = $rating;
-          }
-          $change = $pdo->prepare("UPDATE mods SET m_rating = :rating WHERE m_id = :id");
-          $change->execute(array('rating' => $newRating, 'id' => $nameID));
-
-          $log = $pdo->prepare("INSERT INTO rate (mod_id, user_id) VALUES (:mod, :id)");
-          $log->execute(array('mod' => $nameID, 'id' => $uid));
-          header("Location: /product/$nameID");
-          $_SESSION['rated'] = $rating;
-          $_SESSION['lastRated'] = $nameID;
-          exit();
-          die();
-      }
-    }
-}
 function randomChars($length)
 {
     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
