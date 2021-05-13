@@ -113,6 +113,23 @@ function reportmod($pdo, $uid)
 function rate($pdo, $uid) {
     session_start();
 
+    if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
+    
+        $selToken = $pdo->prepare("SELECT * FROM sessions WHERE newid = ?");
+        $selToken->execute(array($_COOKIE['f_key']));
+        if ($selToken->rowCount() == 0) {
+            print_r("NOT_LOGGED_IN");
+            header("Location: /account/logout?url=invalid");
+            exit();
+            die();
+        }
+    } else {
+        print_r("NOT_LOGGED_IN");
+        header("Location: /account/logout?url=invalid");
+        exit();
+        die();
+    }
+
     $cookieArray = explode("_", $_GET['id']);
 
     $nameID = $cookieArray[0];
