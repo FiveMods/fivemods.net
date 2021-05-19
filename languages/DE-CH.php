@@ -191,6 +191,8 @@
         "america" => "Amerika", //America
         "en-us" => "Englisch - U.S.A", //English - U.S.A
         "mx-mx" => "Spanisch - Mexico", //Mexican - Mexico
+        "middle-east" => "Mittlerer Osten",
+        "hb-il" => "Hebräisch - Israel",
         "asia" => "Asien", //Asia
         "jp-jp" => "Japanisch - Japan", //Japanese - Japan
         "cn-cn" => "Chinesisch (Eifach) - China", //Chinese (Simplified) - China

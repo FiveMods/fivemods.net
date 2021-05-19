@@ -83,7 +83,15 @@ if (isset($_GET['is'])) {
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
       </div>';
-    } 
+    }  elseif ($_GET['is'] == "IL") {
+        $_SESSION['selfselect'] = "1";
+        $_SESSION['selfselectlang'] = "IL";
+        header('location: ./');
+        $_SESSION['langupdate'] = '<div class="alert alert-success mb-5" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
+      </div>';
+    }
 }
 
 if (!empty($_GET['callbackURI'])) {
@@ -144,6 +152,17 @@ if ($_SESSION['selfselect'] == '1') {
                 <ul class="list-unstyled  ">
                     <li>
                         <a style="color:black;" href="?is=US"><span class="flag-icon flag-icon-us"></span> <?php echo $lang['en-us']; ?></a>
+                    </li>
+                    <li>
+                        <!-- <s style="color:black;" href="?is=ES"><span class="flag-icon flag-icon-mx"></span> <?php echo $lang['mx-mx']; ?></s> -->
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md" style="text-align: left;">
+                <h5>Middle east</h5>
+                <ul class="list-unstyled  ">
+                    <li>
+                        <a style="color:black;" href="?is=IL"><span class="flag-icon flag-icon-il"></span> <?php echo $lang['hb-il']; ?></a>
                     </li>
                     <li>
                         <!-- <s style="color:black;" href="?is=ES"><span class="flag-icon flag-icon-mx"></span> <?php echo $lang['mx-mx']; ?></s> -->

@@ -170,6 +170,8 @@
         "america" => "Amerikaans", //America
         "en-us" => "Engels - Amerika", //English - U.S.A
         "mx-mx" => "Mexicaans - Mexico", //Mexican - Mexico
+        "middle-east" => "Midden-Oosten",
+        "hb-il" => "Hebreeuws - Israël",
         "asia" => "Azië", //Asia
         "jp-jp" => "Japans - Japan", //Japanese - Japan
         "cn-cn" => "Chinees (Simpel) - China", //Chinese (Simplified) - China

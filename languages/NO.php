@@ -166,6 +166,8 @@
         "america" => "Amerika", //America
         "en-us" => "Engelsk - USA", //English - U.S.A
         "mx-mx" => "Meksikansk - Mexico", //Mexican - Mexico
+        "middle-east" => "Midtøsten",
+        "hb-il" => "Hebraisk - Israel",
         "asia" => "Asia", //Asia
         "jp-jp" => "Japansk - Japan", //Japanese - Japan
         "cn-cn" => "Kinesisk (Forenklet) - Kina", //Chinese (Simplified) - China
