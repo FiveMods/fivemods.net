@@ -114,7 +114,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="<?php if ($_COOKIE['language_preference'] == "IL") { echo "rtl";} else { echo "ltr"; } ?>">
 
 <head>
 

@@ -191,7 +191,7 @@ if ($_SESSION['selfselect'] == '1') {
             </div>
         </div>
         <hr>
-        <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/Huskyy/">Huskyy</a> for translating the polish version, <a href="/user/Fredney/">Fredney</a> for translating the norwegian version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
+        <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/Tamir112/">Tamir112</a> for translating the hebrew version, <a href="/user/Huskyy/">Huskyy</a> for translating the polish version, <a href="/user/Fredney/">Fredney</a> for translating the norwegian version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
         <small>We are happy about any help with our translations - via <a href="/ref?rdc=https://github.com/FiveMods">GitHub</a>.</small>
     </section>
 </section>
