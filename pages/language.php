@@ -83,7 +83,15 @@ if (isset($_GET['is'])) {
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
       </div>';
-    } 
+    }  elseif ($_GET['is'] == "IL") {
+        $_SESSION['selfselect'] = "1";
+        $_SESSION['selfselectlang'] = "IL";
+        header('location: ./');
+        $_SESSION['langupdate'] = '<div class="alert alert-success mb-5" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Successfully updated! </strong> Your language got successfully changed to ' . $_SESSION['selfselectlang'] . '.
+      </div>';
+    }
 }
 
 if (!empty($_GET['callbackURI'])) {
@@ -151,6 +159,17 @@ if ($_SESSION['selfselect'] == '1') {
                 </ul>
             </div>
             <div class="col-6 col-md" style="text-align: left;">
+                <h5>Middle east</h5>
+                <ul class="list-unstyled  ">
+                    <li>
+                        <a style="color:black;" href="?is=IL"><span class="flag-icon flag-icon-il"></span> <?php echo $lang['hb-il']; ?></a>
+                    </li>
+                    <li>
+                        <!-- <s style="color:black;" href="?is=ES"><span class="flag-icon flag-icon-mx"></span> <?php echo $lang['mx-mx']; ?></s> -->
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6 col-md" style="text-align: left;">
                 <h5><?php echo $lang['asia']; ?></h5>
                 <ul class="list-unstyled  ">
                     <li>
@@ -172,7 +191,7 @@ if ($_SESSION['selfselect'] == '1') {
             </div>
         </div>
         <hr>
-        <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/Huskyy/">Huskyy</a> for translating the polish version, <a href="/user/Fredney/">Fredney</a> for translating the norwegian version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
+        <p>Huge probs and a big shout-out to: <a href="/user/meko/">meko</a> for translating our asia area, <a href="/user/Tamir112/">Tamir112</a> for translating the hebrew version, <a href="/user/Huskyy/">Huskyy</a> for translating the polish version, <a href="/user/Fredney/">Fredney</a> for translating the norwegian version and to <a href="/user/awesomecore1">Awesome_core1</a> for translating the dutch version. </p>
         <small>We are happy about any help with our translations - via <a href="/ref?rdc=https://github.com/FiveMods">GitHub</a>.</small>
     </section>
 </section>

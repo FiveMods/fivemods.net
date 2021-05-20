@@ -1,0 +1,45 @@
+{
+    "index": {
+      "description": "Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server.",
+      "keywords": "fivemods, fivem scripts, fivem mods, fivem, fivem scripts free, fivem ready, fivem ready scripts, five ready mods",
+      "page-topic": "FiveM ready scripts, vehicles, mods, maps, peds and more.",
+      "page-type": "Website, Landingpage, Homepage, Platform, Community"
+    },
+    "language": {
+      "description": "Adjust and easily change your language settings.",
+      "keywords": "language, preference, settings",
+      "page-topic": "FiveMods language preference",
+      "page-type": "Website, Preference, Settings"
+    },
+    "help-center": {
+      "description": "You have questions about FiveM or FiveMods? Here you can ask them and see answers to important FiveM topics.",
+      "keywords": "help, help-center, fivem, codewalker, vmenu, boost fivem server, txadmin, create server",
+      "page-topic": "FiveMods help center",
+      "page-type": "Website, Help, FAQ"
+    },
+    "user": {
+      "description": "Here are all our users listed. Maybe you see yourself here.",
+      "keywords": "user, userlist, profile, account",
+      "page-topic": "FiveMods users",
+      "page-type": "Website, User, Account, Profile"
+    },
+    "about-us": {
+      "description": "Who we are? Find out. Additionally our design rules, logos and more.",
+      "keywords": "about, about us, corporate",
+      "page-topic": "FiveMods about us, corporate",
+      "page-type": "Website, About, Corporate"
+    },
+    "account/sign-in": {
+      "description": "Log in to edit your profile and upload mods. No account yet? No problem, sign up via Discord, Google or GitHub within 20 seconds.",
+      "keywords": "user, account, profile, settings, preference, google login, github login, discord login, login",
+      "page-topic": "FiveMods account and profile",
+      "page-type": "Website, Account, Profile, Settings"
+    },
+    "legal": {
+      "description": "Our legal center, here you can find our privacy policy, terms of use, cookie settings and much more. Questions or complaints? Write us an email.",
+      "keywords": "legal, legal center, privacy, policy, terms of service, cookie policy, account policy, payment agreement",
+      "page-topic": "FiveMods legal center",
+      "page-type": "Website, Legal"
+    }
+  }
+  

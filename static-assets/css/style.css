@@ -2644,8 +2644,8 @@ fieldset:disabled a.btn {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #482879;
-    border-color: #422470
+    background-color: #ff7921;
+    border-color: #ed6f1c
 }
 
 .btn-primary.focus,
@@ -2665,7 +2665,7 @@ fieldset:disabled a.btn {
 .btn-primary:not(:disabled):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
     color: #fff;
-    background-color: #422470;
+    background-color: #ed6f1c;
     border-color: #3c2166
 }
 
@@ -5135,7 +5135,7 @@ input[type=submit].btn-block {
 .badge-primary[href]:hover {
     color: #fff;
     text-decoration: none;
-    background-color: #422470
+    background-color: #ed6f1c
 }
 
 .badge-secondary {
@@ -6483,7 +6483,7 @@ a.bg-primary:focus,
 a.bg-primary:hover,
 button.bg-primary:focus,
 button.bg-primary:hover {
-    background-color: #422470!important
+    background-color: #ed6f1c!important
 }
 
 .bg-secondary {
@@ -9387,7 +9387,7 @@ button.bg-dark:hover {
 
 a.text-primary:focus,
 a.text-primary:hover {
-    color: #422470!important
+    color: #ed6f1c!important
 }
 
 .text-secondary {

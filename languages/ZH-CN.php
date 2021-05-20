@@ -168,6 +168,8 @@
         "america" => "美洲", //America
         "en-us" => "英语 - 美国", //English - U.S.A
         "mx-mx" => "墨西哥语 - 墨西哥", //Mexican - Mexico
+        "middle-east" => "中东",
+        "hb-il" => "希伯来语-以色列",
         "asia" => "亚洲", //Asia
         "jp-jp" => "日文 - 日本", //Japanese - Japan
         "cn-cn" => "中文(简体) - 中国", //Chinese (Simplified) - China

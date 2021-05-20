@@ -114,7 +114,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="<?php if ($_COOKIE['language_preference'] == "IL") { echo "rtl";} else { echo "ltr"; } ?>">
 
 <head>
 
@@ -258,9 +258,10 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '<title>' . $lang['title'] . '</title>';
    }
 
-   ?>
+   require_once('./lib/spec_meta.php');
 
-   <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
+   ?>  
+
    <meta name="robots" content="index, follow" />
    <meta name="department" content="legal" />
    <meta name="audience" content="all" />
@@ -269,9 +270,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="organisation" content="FiveMods" />
    <meta name="copyright" content="Copyright (c) 2020-2021 FiveMods" />
    <meta name="generator" content="Atom, Visual Studio Code" />
-   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free" />
-   <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
-   <meta name="page-type" content="Website, Landingpage, Homepage, Platform, Community" />
    <meta name="coverage" content="Worldwide">
 
    <meta name="reply-to" content="contact@fivemods.net">
@@ -289,7 +287,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="DC.Creator" content="FiveMods" />
    <meta name="DC.Publisher" content="FiveMods" />
    <meta name="DC.Rights" content="FiveMods" />
-   <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
    <?php
    if (!empty($_COOKIE['fm_design'])) {
