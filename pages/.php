@@ -1,23 +1,5 @@
-<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
-
-
-    <!-- Vertical Test -->
-    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
-
-    <!-- Vertical Test -->
-    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</div>
-
-<?php
-
+<?php 
+include('./vertical-ads.html');
 require_once('./config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
@@ -183,19 +165,6 @@ if (isset($_SESSION['downloadMod'])) {
     </section>
     <section class="pt-5 pb-5">
         <div class="container">
-            <div class="d-flex justify-content-end">
-                <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm mb-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-sort-numeric-down"></i>
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="?max=12">12</a>
-                        <a class="dropdown-item" href="?max=24">24</a>
-                        <a class="dropdown-item" href="?max=48">48</a>
-                        <a class="dropdown-item" href="?max=96">96</a>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <?php foreach ($articles as $article) : ?>
                     <?php

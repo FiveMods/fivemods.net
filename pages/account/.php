@@ -1,3 +1,4 @@
+<?php include('./vertical-ads.html'); ?>
 <?php
 
 require_once "./config.php";
