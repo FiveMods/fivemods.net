@@ -1,3 +1,20 @@
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins> <!-- data-ad-format="auto" data-full-width-responsive="true" -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
 <?php include('./vertical-ads.html'); ?>
 <?php
 session_start();
@@ -18,7 +35,7 @@ if(!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key'])) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0"); 
+   $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0");
    $result->execute(array($nameID));
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
@@ -50,7 +67,7 @@ if ($_GET['id']) {
             }
             $number = round($number / count($rateArray));
          }
-         
+
 
       }
    } else {
@@ -84,7 +101,7 @@ if ($_GET['id']) {
    $parts = explode('/', $url);
    $urlNumber = $parts[count($parts) - 2];
 
-   
+
    if (strpos($url, 'download') != FALSE) {
       header('location: '.$download);
    }
@@ -105,7 +122,7 @@ if ($_GET['id']) {
          header("Location: $downloadLink");
       }
       unset($_SESSION['downloadMod']);
-   } 
+   }
 } else {
    header('location: /');
 }
@@ -152,7 +169,7 @@ function removeXss($string) {
 
    }
 
-   /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
       follow these rules. Every browser that supports :checked also supports :not(), so
       it doesn’t make the test unnecessarily selective */
    .rating:not(:checked)>input {
@@ -207,7 +224,7 @@ function removeXss($string) {
    .center {
       text-align: center;
    }
-   
+
     #expandImg {
     border-radius: 5px;
     cursor: pointer;
@@ -329,8 +346,8 @@ function removeXss($string) {
                   <b class="text text-dark">(<?php echo count($rateArray); ?>)</b>
                </div>
 
-               <?php 
-               
+               <?php
+
                if (empty($m_price)) {
                   echo '<b class="badge badge-success">'.$lang['free-download'].'</b>';
                } else {
@@ -338,7 +355,7 @@ function removeXss($string) {
                }
 
                ?>
-               
+
                <?php
                echo '<a href="/search/?query=' . $cat . '&cat=1&submit-search=" class="badge badge-primary tag">' . $cat . '</a>';
                for ($i = 0; $i < count($tagArray); $i++) {
@@ -349,7 +366,7 @@ function removeXss($string) {
             </p>
 
             <?php
-            
+
             if (empty($m_price)) {
                echo '<form action="/helper/manage.php?o=product&download='.$nameID.'" method="post">
                <button type="submit" class="btn btn-block btn-lg btn-success">'.$lang['download-now'].'</button>
@@ -438,7 +455,7 @@ function removeXss($string) {
 
                if (!empty($m_price)) {
                   $do = 'border border-info';
-               } 
+               }
 
                if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                   $mods++;
