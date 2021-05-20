@@ -183,6 +183,19 @@ if (isset($_SESSION['downloadMod'])) {
     </section>
     <section class="pt-5 pb-5">
         <div class="container">
+            <div class="d-flex justify-content-end">
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm mb-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-sort-numeric-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="?max=12">12</a>
+                        <a class="dropdown-item" href="?max=24">24</a>
+                        <a class="dropdown-item" href="?max=48">48</a>
+                        <a class="dropdown-item" href="?max=96">96</a>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <?php foreach ($articles as $article) : ?>
                     <?php
