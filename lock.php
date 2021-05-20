@@ -56,7 +56,7 @@ function minifier($code)
     <meta name="DC.Rights" content="FiveMods" />
     <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
     <script src="/cdn-cgi/apps/head/ictDLxICQsFVMPS59T0akYEa1qs.js"></script>
-    <link rel="icon" href="https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg">
+    <link rel="icon" href="https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg">
 
     <meta http-equiv="refresh" content="5">
 
@@ -103,7 +103,7 @@ function minifier($code)
 
 <body>
     <div class="flex-center position-ref full-height">
-        <div class="center"><img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" load="lazy" alt="Brand Logo" style="height: 75px;"></div>
+        <div class="center"><img src="https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" load="lazy" alt="Brand Logo" style="height: 75px;"></div>
     </div>
 
     
