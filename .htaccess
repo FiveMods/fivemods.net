@@ -43,6 +43,10 @@ RewriteRule ^(account*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/edit*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/edit*)$ ./index.php?page=$1 [L,QSA]
 
+# Publish 
+RewriteRule ^(publish/([a-zA-Z0-9-/]+)/)$ ./publish.php?case=$1 [L,QSA]
+RewriteRule ^(publish/([a-zA-Z0-9-/]+))$ ./publish.php?case=$1 [L,QSA]
+
 # Account Product Delete rdc.
 RewriteRule ^(account/delete/([a-zA-Z0-9-/]+)/)$ ./account/?delete=$2 [L,QSA]
 RewriteRule ^(account/delete/([a-zA-Z0-9-/]+))$ ./account/?delete=$2 [L,QSA]

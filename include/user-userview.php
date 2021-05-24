@@ -327,6 +327,10 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
          } elseif ($blocked == 1) {
             echo '<small><p class="text text-danger">' . $lang['you-are-banned'] . ' <a href="#" class="text text-danger"><u>' . $lang['whybanned'] . '</u></a></p></small>';
          }
+
+         if ($username == "LondonStudios") {
+            echo ' - <small><a href="/publish/'.$username.'" style="color: #444;" title="View publishing permission">View PA</a></small>';
+         }
          
          if (!$blocked == 1) {
             echo '
