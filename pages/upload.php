@@ -15,7 +15,6 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </div>
-<?php include('./vertical-ads.html'); ?>
 <?php
 session_start();
 include('./include/header-banner.php');
