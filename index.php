@@ -117,7 +117,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <html lang="en" dir="<?php if ($_COOKIE['language_preference'] == "IL") { echo "rtl";} else { echo "ltr"; } ?>">
 
 <head>
-
+   <script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>
    <?php
 
    if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
@@ -330,6 +330,13 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
+   <script type="text/javascript">
+      window._mNHandle = window._mNHandle || {};
+      window._mNHandle.queue = window._mNHandle.queue || [];
+      medianet_versionId = "3121199";
+   </script>
+   <script src="https://contextual.media.net/dmedianet.js?cid=8CUTWJ28J" async="async"></script>
+
    <script>
       function swapStyleSheet(sheet) {
          document.getElementById('pagestyle').setAttribute('href', sheet);
@@ -346,6 +353,16 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 </head>
 
 <body class="bg">
+<div id="684841532">
+        <script type="text/javascript">
+            try {
+                window._mNHandle.queue.push(function (){
+                    window._mNDetails.loadTag("684841532", "160x600", "684841532");
+                });
+            }
+            catch (error) {}
+        </script>
+    </div>
    <?php
 
    if ($_GET['prel'] == 0) {
