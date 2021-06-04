@@ -1,4 +1,5 @@
 Header set X-FRAME-OPTIONS: SAMEORIGIN
+Header always append Content-Security-Policy "frame-ancestors https://p.voyal.xyz/ https://api.fivemods.net https://assets.fivemods.net https://tracking.fivemods.net https://acp.oetkher.de"
 
 # Force backslash policy
 #RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
