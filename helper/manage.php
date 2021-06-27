@@ -158,6 +158,25 @@ function downloadMod($pdo, $pdoPayment)
     while ($row = $download->fetch()) {
         $downloads = $row['m_downloads'];
 
+        if($row['m_blocked'] == 1) {
+            switch ($_GET['o']) { 
+                case 'product':
+                    header("Location: /product/$mod");
+                    break;
+                case 'index':
+                    header("Location: /");
+                    break;
+                case 'user':
+                    $user = $_GET['username'];
+                    header("Location: /user/$user");
+                default:
+                    header("Location: /");
+                    break;
+            }
+            exit();
+            die();
+        }
+
         if ($_SESSION['lastDownload'] != $mod) {
             $newDownloads = $downloads + 1;
             $newDownloadSet = $pdo->prepare("UPDATE mods SET m_downloads = :downloads WHERE m_id = :id");
