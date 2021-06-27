@@ -158,7 +158,7 @@ function downloadMod($pdo, $pdoPayment)
     while ($row = $download->fetch()) {
         $downloads = $row['m_downloads'];
 
-        if($row['m_blocked'] == 1) {
+        if($row['m_blocked'] == 1 || $row['m_approved'] == -1) {
             switch ($_GET['o']) { 
                 case 'product':
                     header("Location: /product/$mod");
