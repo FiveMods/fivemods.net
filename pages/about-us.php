@@ -92,134 +92,35 @@ $pdo = null;
       </div>
    </div>
 </section>
-<section class="pt-5 pb-5">
-   <div class="container">
-      <div class="row">
-      <div class="col-12">
-         <h2 class="mb-2 text-center">What people say about FiveMods</h2>
-         <p class="mb-5 text-center">Feedback is the way to improve. Help us to improve.</p>
-      </div>
-      <div class="col-12">
-         <div class="card-columns">
-            <div class="card mb-4">
-            <div class="card-body">
-               <blockquote class=" ">
-                  <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3 mb-3" aria-hidden="true"></i>
-                  <p class=" m-0 text-muted ">
-                  Feedback is the best way to show us what you like and what you want to get changed. Quote FiveMods.net and let others know what you think.
-                  </p>
-                  <footer class="blockquote-footer small p-1">
-                  <span class="small">Your Name
-                     <cite class="font-weight-bold">YOUR COMPANY</cite>
-                  </span>
-                  </footer>
-               </blockquote>
-            </div>
-            </div>
-            <div class="card mb-4">
-            <div class="card-body">
-               <blockquote class=" ">
-                  <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3 mb-3" aria-hidden="true"></i>
-                  <p class=" m-0 text-muted ">
-                  Feedback is the best way to show us what you like and what you want to get changed. Quote FiveMods.net and let others know what you think.</p>
-                  <footer class="blockquote-footer small p-1">
-                  <span class="small">Your Name
-                     <cite class="font-weight-bold">YOUR COMPANY</cite>
-                  </span>
-                  </footer>
-               </blockquote>
-            </div>
-            </div>
-            <div class="card mb-4">
-            <div class="card-body">
-               <blockquote class=" ">
-                  <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3 mb-3" aria-hidden="true"></i>
-                  <p class=" m-0 text-muted ">
-                  Feedback is the best way to show us what you like and what you want to get changed. Quote FiveMods.net and let others know what you think.</p>
-                  <footer class="blockquote-footer small p-1">
-                  <span class="small">Your Name
-                     <cite class="font-weight-bold">YOUR COMPANY</cite>
-                  </span>
-                  </footer>
-               </blockquote>
-            </div>
-            </div>
-            <div class="card mb-4">
-            <div class="card-body">
-               <blockquote class=" ">
-                  <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3 mb-3" aria-hidden="true"></i>
-                  <p class=" m-0 text-muted ">
-                  Feedback is the best way to show us what you like and what you want to get changed. Quote FiveMods.net and let others know what you think.</p>
-                  <footer class="blockquote-footer small p-1">
-                  <span class="small">Your Name
-                     <cite class="font-weight-bold">YOUR COMPANY</cite>
-                  </span>
-                  </footer>
-               </blockquote>
-            </div>
-            </div>
-            <div class="card mb-4">
-            <div class="card-body">
-               <blockquote class=" ">
-                  <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3 mb-3" aria-hidden="true"></i>
-                  <p class=" m-0 text-muted ">
-                  Feedback is the best way to show us what you like and what you want to get changed. Quote FiveMods.net and let others know what you think.</p>
-                  <footer class="blockquote-footer small p-1">
-                  <span class="small">Your Name
-                     <cite class="font-weight-bold">YOUR COMPANY</cite>
-                  </span>
-                  </footer>
-               </blockquote>
-            </div>
-            </div>
-            <div class="card mb-4">
-            <div class="card-body">
-               <blockquote class=" ">
-                  <i class="fa fa-quote-right fa-2x text-muted pull-right mt-3 mb-3" aria-hidden="true"></i>
-                  <p class=" m-0 text-muted ">
-                  Feedback is the best way to show us what you like and what you want to get changed. Quote FiveMods.net and let others know what you think.</p>
-                  <footer class="blockquote-footer small p-1">
-                  <span class="small">Your Name
-                     <cite class="font-weight-bold">YOUR COMPANY</cite>
-                  </span>
-                  </footer>
-               </blockquote>
-            </div>
-            </div>
-         </div>
-      </div>
-      </div>
-   </div>
-</section>
 <section class="pt-5 pb-5 bg-dark mb-5">
    <div class="container">
       <div class="row text-center">
       <div class="col-md-3 col-6">
          <div class="counter card card-body bg-light rounded">
             <i class="fa fa-code fa-2x text-primary mb-3"></i>
-            <h2 class="timer count-title count-number" data-to="15,000" data-speed="1500">15,000+</h2>
-            <p class="count-text ">Lines of code</p>
+            <h2 class="timer count-title count-number" data-to="7,000" data-speed="7000">7,000+</h2>
+            <p class="count-text ">Lines of backend</p>
          </div>
       </div>
       <div class="col-md-3 col-6">
          <div class="counter card card-body bg-light rounded">
             <i class="fa fa-users fa-2x text-primary mb-3"></i>
             <h2 class="timer count-title count-number" data-to="<?php echo $amount; ?>" data-speed="1500"><?php echo $amount; ?></h2>
-            <p class="count-text ">Total Users</p>
+            <p class="count-text ">Total users</p>
          </div>
       </div>
       <div class="col-md-3 col-6">
          <div class="counter card card-body bg-light rounded">
             <i class="fas fa-upload fa-2x text-primary mb-3"></i>
             <h2 class="timer count-title count-number" data-to="<?php echo $amount2; ?>" data-speed="1500"><?php echo $amount2; ?></h2>
-            <p class="count-text">Total Projects</p>
+            <p class="count-text">Total projects</p>
          </div>
       </div>
       <div class="col-md-3 col-6">
          <div class="counter card card-body bg-light rounded">
             <i class="fas fa-download fa-2x text-primary mb-3"></i>
             <h2 class="timer count-title count-number" data-to="<?php echo $totalDownloads; ?>" data-speed="1500"><?php echo $totalDownloads; ?></h2>
-            <p class="count-text ">Total Mod Downloads</p>
+            <p class="count-text ">Total mod downloads</p>
          </div>
       </div>
       </div>
@@ -230,7 +131,7 @@ $pdo = null;
       <div class="  text-center pb-0">
       <div class="row justify-content-center d-flex">
          <div class="col-12 col-md-12 align-self-center">
-            <img src="../static-assets/img/about-us/website.png" alt="" class="img-fluid shadow-lg rounded mt-2 mb-2" style="margin:auto">
+            <img src="https://ext-cdn.fivemods.net/img/a9657876dc17bff0838ecb47ba0419af.png" alt="" class="img-fluid shadow-lg rounded mt-2 mb-2" style="margin:auto">
             <div class="row mt-5  justify-content-around d-flex">
             <div class="col-md-3">
                <div class="featured-list-icon mt-1 mr-md-2 mb-4">
@@ -376,7 +277,7 @@ $pdo = null;
                <p class="lead">No extra account needed. Easy login with Google or Discord.</p>
             </div>
             <div class="bg-light shadow mx-auto overflow-hidden" style="width: 80%; max-height: 300px; border-radius: 21px 21px 0 0;">
-               <img alt="image" class="img-fluid rounded m-0" src="../static-assets/img/about-us/login.png">
+               <img alt="image" class="img-fluid rounded m-0" src="https://ext-cdn.fivemods.net/img/05382683f0ab9de0828fbd751c27dd7b.png">
             </div>
             </div>
          </div>
@@ -403,7 +304,7 @@ $pdo = null;
                <p class="lead">Easy to check if FiveM or FiveMods is having issues.</p>
             </div>
             <div class="bg-light shadow mx-auto overflow-hidden" style="width: 80%; max-height: 300px; border-radius: 21px 21px 0 0;">
-               <img alt="image" class="img-fluid rounded m-0" src="../static-assets/img/about-us/status.png">
+               <img alt="image" class="img-fluid rounded m-0" src="https://ext-cdn.fivemods.net/img/e7fce6a4cf0b5a82257047964c2a5879.png">
             </div>
             </div>
          </div>

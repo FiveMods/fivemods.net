@@ -27,8 +27,6 @@ if (htmlspecialchars($_POST['contact'])) {
     partner($pdo, $uid);
 } elseif (htmlspecialchars($_POST['reportmod'])) {
     reportmod($pdo, $uid);
-} elseif (htmlspecialchars($_GET['rate'])) {
-    rate($pdo, $uid);
 } elseif (htmlspecialchars($_GET['upload'])) {
     uploadMod();
 } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
@@ -110,37 +108,6 @@ function reportmod($pdo, $uid)
     die();
 }
 
-function rate($pdo, $uid) {
-    session_start();
-
-    $cookieArray = explode("_", $_GET['id']);
-
-    $nameID = $cookieArray[0];
-    $rating = $cookieArray[1];
-    if($_SESSION['lastRated'] != $nameID) {
-      $changeRating = $pdo->prepare("SELECT m_rating FROM mods WHERE m_id = :id");
-      $changeRating->execute(array('id' => $nameID));
-
-      while ($row = $changeRating->fetch()) {
-          $m_rating = $row['m_rating'];
-          if (!empty($m_rating)) {
-              $newRating = $m_rating . " " . $rating;
-          } else {
-              $newRating = $rating;
-          }
-          $change = $pdo->prepare("UPDATE mods SET m_rating = :rating WHERE m_id = :id");
-          $change->execute(array('rating' => $newRating, 'id' => $nameID));
-
-          $log = $pdo->prepare("INSERT INTO rate (mod_id, user_id) VALUES (:mod, :id)");
-          $log->execute(array('mod' => $nameID, 'id' => $uid));
-          header("Location: /product/$nameID");
-          $_SESSION['rated'] = $rating;
-          $_SESSION['lastRated'] = $nameID;
-          exit();
-          die();
-      }
-    }
-}
 function randomChars($length)
 {
     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -161,25 +128,27 @@ function downloadMod($pdo, $pdoPayment)
     {
         $fetch = $getDownloads->fetchAll();
         foreach ($fetch as $modA) {
-            if(strtotime($modA['created_at']) > (60 * 5)) {
-                $_SESSION['lastDownload'] = $mod;
-                $_SESSION['downloadMod'] = $mod;
-                switch ($_GET['o']) {
-                    case 'product':
-                        header("Location: /product/$mod");
-                        break;
-                    case 'index':
-                        header("Location: /");
-                        break;
-                    case 'user':
-                        $user = $_GET['username'];
-                        header("Location: /user/$user");
-                    default:
-                        header("Location: /");
-                        break;
+            if(strtotime($modA['created_at']) > (60 * 1)) {
+                if($modA['download_id'] == $mod) {
+                    $_SESSION['downloadMod'] = $mod;
+                    $_SESSION['lastDownload'] = $mod;
+                    switch ($_GET['o']) { 
+                        case 'product':
+                            header("Location: /product/$mod");
+                            break;
+                        case 'index':
+                            header("Location: /");
+                            break;
+                        case 'user':
+                            $user = $_GET['username'];
+                            header("Location: /user/$user");
+                        default:
+                            header("Location: /");
+                            break;
+                    }
+                    exit();
+                    die();
                 }
-                exit();
-                die();
             }
         }
     }
@@ -188,6 +157,25 @@ function downloadMod($pdo, $pdoPayment)
     $download->execute(array('id' => $mod));
     while ($row = $download->fetch()) {
         $downloads = $row['m_downloads'];
+
+        if($row['m_blocked'] == 1) {
+            switch ($_GET['o']) { 
+                case 'product':
+                    header("Location: /product/$mod");
+                    break;
+                case 'index':
+                    header("Location: /");
+                    break;
+                case 'user':
+                    $user = $_GET['username'];
+                    header("Location: /user/$user");
+                default:
+                    header("Location: /");
+                    break;
+            }
+            exit();
+            die();
+        }
 
         if ($_SESSION['lastDownload'] != $mod) {
             $newDownloads = $downloads + 1;

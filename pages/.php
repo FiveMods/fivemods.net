@@ -2,7 +2,7 @@
 
 
     <!-- Vertical Test -->
-    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531"></ins>
+    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins> <!-- data-ad-format="auto" data-full-width-responsive="true" -->
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -10,14 +10,13 @@
 <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
 
     <!-- Vertical Test -->
-    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531"></ins>
+    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </div>
-
 <?php
-
+include('./vertical-ads.html');
 require_once('./config.php');
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
@@ -30,29 +29,10 @@ $perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] :
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
 
 // Query
-$articles = $pdo->prepare("
- SELECT SQL_CALC_FOUND_ROWS *
- FROM mods
- LEFT JOIN user ON mods.m_authorid = user.id
- ORDER BY m_id DESC
- LIMIT {$start}, {$perPage};
-");
+$articles = $pdo->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM mods LEFT JOIN user ON mods.m_authorid = user.id WHERE m_approved = 0 AND m_blocked = 0 ORDER BY m_id DESC LIMIT {$start}, {$perPage};");
 
 $articles->execute();
 $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
-
-// Query 2
-$most = $pdo->prepare("
- SELECT SQL_CALC_FOUND_ROWS *
- FROM mods
- LEFT JOIN user ON mods.m_authorid = user.id
- WHERE m_approved = 0 AND m_blocked = 0
- ORDER BY m_downloads DESC
- LIMIT 0, 4;
-");
-
-$most->execute();
-$most = $most->fetchAll(PDO::FETCH_ASSOC);
 
 // Pages
 $total = $pdo->query("SELECT FOUND_ROWS() as total")->fetch()['total'];
@@ -202,6 +182,19 @@ if (isset($_SESSION['downloadMod'])) {
     </section>
     <section class="pt-5 pb-5">
         <div class="container">
+            <div class="d-flex justify-content-end">
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-sm mb-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-sort-numeric-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="?max=12">12</a>
+                        <a class="dropdown-item" href="?max=24">24</a>
+                        <a class="dropdown-item" href="?max=48">48</a>
+                        <a class="dropdown-item" href="?max=96">96</a>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <?php foreach ($articles as $article) : ?>
                     <?php
@@ -236,29 +229,13 @@ if (isset($_SESSION['downloadMod'])) {
                                 </a>
                                 <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <?php
-
-                                    if (empty($article['m_price'])) {
-                                        echo '<div class="btn-group">
-                            <form action="/helper/manage.php?o=index&download=' . $article['m_id'] . '" method="post">
-                               <button type="submit" class="btn btn-sm btn-outline-success">' . $lang['download'] . '</button>
-                            </form>
-                            <button type="button" class="btn btn-sm btn-success" title="' . number_format($article['m_downloads']) . ' downloads">' . $donwloads . $suffix . ' <i class="fas fa-download"></i></button>
-                         </div>';
-                                    } else {
-                                        echo '<div class="btn-group">
-
-                            <form action="/product/' . $article['m_id'] . '/" method="post">
-                               <button type="submit" class="btn btn-sm btn-outline-info">Purchase</button>
-                            </form>
-                            <button type="button" class="btn btn-sm btn-info" title="' . $article['m_price'] . '€">' . $article['m_price'] . '€</button>
-                         </div>';
-                                    }
-
-                                    ?>
-                                    <small class="text-muted"><?php echo $lang['by']; ?> <a href="/user/<?php echo $article['name']; ?>"><b><?php echo $article['name']; ?></b></a> <?php if ($article['premium'] == 1) {
-                                                                                                                                                                                        echo '<a href="/partner-program/" class="fas fa-crown text text-muted" title="Premium content creator"></a>';
-                                                                                                                                                                                    } ?></small>
+                                    <div class="btn-group">
+                                        <form action="/helper/manage.php?o=index&download=<?php echo $article['m_id']; ?>" method="post">
+                                            <button type="submit" class="btn btn-sm btn-outline-success"><?php echo $lang['download']; ?></button>
+                                        </form>
+                                        <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button>
+                                    </div>
+                                    <small class="text-muted"><?php echo $lang['by']; ?> <a href="/user/<?php echo $article['name']; ?>"><b><?php echo $article['name']; ?></b></a> <?php if ($article['premium'] == 1) echo '<a href="/partner-program/" class="fas fa-crown text text-muted" title="Premium content creator"></a>'; ?></small>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +246,7 @@ if (isset($_SESSION['downloadMod'])) {
     </section>
     <div class="centerBasedFooterAd" style="text-align: center; bottom: 35%;">
         <!-- Footer-Block-Ads -->
-        <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
+        <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594" data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>

@@ -1,18 +1,35 @@
-<?php
+<?php 
+
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
+else ob_start();
 
 ob_start("minifier");
 function minifier($code)
 {
-    $search = array(
-        '/\>[^\S ]+/s',
-        '/[^\S ]+\</s',
-        '/(\s)+/s',
-        '/<!--(.|\s)*?-->/'
-    );
-    $replace = array('>', '<', '\\1');
-    $code = preg_replace($search, $replace, $code);
-    return $code;
+   $search = array(
+      '/\>[^\S ]+/s',
+      '/[^\S ]+\</s',
+      '/(\s)+/s',
+      '/<!--(.|\s)*?-->/'
+   );
+   $replace = array('>', '<', '\\1');
+   $code = preg_replace($search, $replace, $code);
+   return $code;
 }
+
+if (strpos($_GET['case'], "LondonStudios") !== false) {
+    $case = "LondonStudios";
+    if ($case == "LondonStudios") {
+        $pTime = "-";
+        $pDate = "03/31/2021";
+        $pCase = "FiveMods.net reached out to the FiveM content creator Marcus, known as LondonStudios. We have contacted him to upload his free mods to FiveMods.net on request. With the requirement that the website is free and the mods are not sold, he gave us his consent, see attachment / proof.";
+        $pProof = "https://cdn.discordapp.com/attachments/662762008504041522/845266910518050856/marcusproof.png";
+        $pAcc = "FiveMods Management";
+    }
+} else {
+    header('location: /');
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -41,15 +58,15 @@ function minifier($code)
     <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
-    <title>We will be right back - FiveMods.net</title>
+    <title>Publishing permission <?php echo $case; ?> - FiveMods.net</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="We'll be right back - FiveMods.net">
+    <meta name="description" content="Publishing permission <?php echo $case; ?> - FiveMods.net">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://assets.fivemods.net/">
-    <meta property="og:title" content="We'll be right back - FiveMods.net">
-    <meta property="og:description" content="We'll be right back - FiveMods.net">
-    <meta property="og:site_name" content="We'll be right back - FiveMods.net">
+    <meta property="og:url" content="https://fivemods.net/publish/londonstudios">
+    <meta property="og:title" content="Publishing permission <?php echo $case; ?> - FiveMods.net">
+    <meta property="og:description" content="Publishing permission <?php echo $case; ?> - FiveMods.net">
+    <meta property="og:site_name" content="4Publishing permission <?php echo $case; ?> - FiveMods.net">
     <meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_401.svg">
     <meta name="theme-color" content="#ff8637">
     <meta name="msapplication-navbutton-color" content="#ff8637">
@@ -280,16 +297,63 @@ function minifier($code)
             <div class="col-md-3"> </div>
             <div class="col-md-6 mt-2 mb-2 p-4">
                 <div>
-                    <div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_gradient_281x100.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
-                    <h3 class="fmAdH3 mt-5 pt-4">We will be right back</h3>
-                    <p class="fmAdjP">The page or resource you are trying to access is currently experiencing a disruption or attack. Please refer to our system administrator if you think this is an error. Reach out via <a href="mailto:contact@fivemods.net">contact@fivemods.net</span></a>. This page will refresh every 5 seconds. <br><br> If you wish to check the current status, please click <a href="https://status.fivemods.net" rel="noreferrer noopener">here</a>. 
+                    <div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_gradient_281x100.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
+                    <h3 class="fmAdH3 mt-5 pt-4">Publishing permission <span style="font-weight: 400;"><?php echo $case; ?></span> </h3>
+                    <p class="fmAdjP"><u>Definition:</u> <br> A publishing permission is a permission between a publisher and a writer or author, to publish original content by the writer or author. This may involve a single written work, or a series of works. In the case of music publishing, the emphasis is not on printed or recorded works.</p>
+                    <hr>
+                    <p class="fmAdjP"><u>Additional information:</u><br>
+                    Date: <?php echo $pDate; ?>
+                    <br>
+                    Creator: <a href="/user/<?php echo $case; ?>"><?php echo $case; ?></a>
+                    <br>
+                    Account: <?php echo $pAcc; ?>
                     </p>
-
+                    <p class="fmAdjP"><u>Case:</u> <br><?php echo $pCase; ?></p>
+                    <p class="fmAdjP"><u>Proof:</u> <br> <a href="<?php echo $pProof; ?>"><img src="<?php echo $pProof; ?>" class="img-fluid" width="700px" alt="<?php echo $pProof; ?>"></a> </p>
+                    <p class="fmAdjP"><u>Inquiry:</u> <br> Want to revoke your consent or have concerns? Write us an email to <a href="mailto:contact@fivemods.net">contact@fivemods.net</a> or create a ticket in our <a hreF="/discord">Discord</a>.</p>
                 </div>
             </div>
             <div class="col-md-3"> </div>
         </section>
     </main>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        function mehr1() {
+            var dots = document.getElementById("dots");
+            var moreText = document.getElementById("more");
+            var btnText = document.getElementById("myBtn");
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                btnText.innerHTML = "Mehr";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                btnText.innerHTML = "Weniger";
+                moreText.style.display = "inline";
+            }
+        }
+
+        function mehr2() {
+            var dots2 = document.getElementById("dots2");
+            var moreText2 = document.getElementById("more2");
+            var btnText2 = document.getElementById("myBtn2");
+            if (dots2.style.display === "none") {
+                dots2.style.display = "inline";
+                btnText2.innerHTML = "Mehr";
+                moreText2.style.display = "none";
+            } else {
+                dots2.style.display = "none";
+                btnText2.innerHTML = "Weniger";
+                moreText2.style.display = "inline";
+            }
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>

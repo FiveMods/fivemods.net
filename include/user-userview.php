@@ -62,17 +62,17 @@ while ($row = $statement->fetch()) {
    }
 
    if ($perms == "-1") {
-      $rank = ' <small class="profile-badge badge-owner"">Owner</small>';
+      $rank = ' <small class="profile-badge badge-owner">Owner</small>';
    } elseif ($perms == "1024") {
-      $rank = ' <small class="profile-badge badge-helper"">Helper</small>';
+      $rank = ' <small class="profile-badge badge-helper">Helper</small>';
    } elseif ($perms == "2048") {
-      $rank = ' <small class="profile-badge badge-dev"">Developer</small>';
+      $rank = ' <small class="profile-badge badge-dev">Developer</small>';
    } elseif ($perms == "4096") {
-      $rank = ' <small class="profile-badge badge-staff"">Staff Member</small>';
+      $rank = ' <small class="profile-badge badge-staff">Staff Member</small>';
    } elseif ($perms == "8192") {
-      $rank = ' <small class="profile-badge badge-cm"">Community Manager</small>';
+      $rank = ' <small class="profile-badge badge-cm">Community Manager</small>';
    } elseif ($perms == "16384") {
-      $rank = ' <small class="profile-badge badge-mgmt"">Management</small>';
+      $rank = ' <small class="profile-badge badge-mgmt">Management</small>';
    }
 }
 
@@ -326,6 +326,10 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
             echo '<small><i class="fas fa-crown" title="Premium content creator"></i> Premium Content Creator</small>';
          } elseif ($blocked == 1) {
             echo '<small><p class="text text-danger">' . $lang['you-are-banned'] . ' <a href="#" class="text text-danger"><u>' . $lang['whybanned'] . '</u></a></p></small>';
+         }
+
+         if ($username == "LondonStudios") {
+            echo ' - <small><a href="/publish/'.$username.'" style="color: #444;" title="View publishing permission">View PA</a></small>';
          }
          
          if (!$blocked == 1) {

@@ -25,7 +25,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
         print_r("NOT_LOGGED_IN");
 		exit();
 		die();
-    } 
+    }
 } else {
     print_r("NOT_LOGGED_IN");
 	exit();
@@ -46,7 +46,7 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
         exit();
         die();
     }
-    
+
     foreach (scandir($modPathTemp) as $dir) {
         if(startsWith($dir, $id)) {
             $filePath = $path . $id . "/" . preg_replace("/([\/#&%§$.,]{1,})/", "_",str_replace(" ", "_", strtolower($title))) . "." . strtolower(end(explode('.', $dir)));
@@ -55,7 +55,7 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 
             $downloadLink = $url . $id . "/" . preg_replace("/([\/#&%§$.,]{1,})/", "_",str_replace(" ", "_", strtolower($title))) . "." . strtolower(end(explode('.', $dir)));
         }
-        
+
     }
 
     $pics = [];
@@ -83,8 +83,8 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
         $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_approvedby, m_approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, \"Automatically\", 0)");
         $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
 
-        $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_picture = :pic");
-        $stmt->execute(array("name" => $title, "pic" => $pictures));
+        $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_description = :desc");
+        $stmt->execute(array("name" => $title, "desc" => $description));
         $statement = $stmt->fetch();
 
         $ch = curl_init();
@@ -102,6 +102,8 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 >>>>>>> dd7407d9abcdf2ab06e9d28b3f7e59995f27d647
 
     print_r("SUCCESS");
+    exit();
+    die();
 }
 
 function randomChars($length = 6)

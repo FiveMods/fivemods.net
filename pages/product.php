@@ -1,8 +1,29 @@
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins> <!-- data-ad-format="auto" data-full-width-responsive="true" -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<?php include('./vertical-ads.html'); ?>
 <?php
 session_start();
 include('./include/header-banner.php');
 require_once('./config.php');
 
+require 'helper/markdown.php';
+
+$parser = new Slimdown;
 
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
 
@@ -14,12 +35,12 @@ if(!empty($_COOKIE['f_val']) and !empty($_COOKIE['f_key'])) {
 
 if ($_GET['id']) {
    $nameID = $_GET['id'];
-   $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0"); 
+   $result = $pdo->prepare("SELECT * FROM mods WHERE m_id = ? AND m_approved=0 AND m_blocked=0");
    $result->execute(array($nameID));
    if ($result->rowCount() > 0) {
       while ($row = $result->fetch()) {
          $name = $row['m_name'];
-         $description = $row['m_description'];
+         $description = $parser->render(removeXss($row['m_description']));
          $img = $row['m_picture'];
          $tags = $row['m_tags'];
          $cat = $row['m_category'];
@@ -47,53 +68,6 @@ if ($_GET['id']) {
             $number = round($number / count($rateArray));
          }
 
-         // Header
-         $description = preg_replace('/#####\s(.+)/', "<h6>$1</h6>", $description);
-         $description = preg_replace('/####\s(.+)/', "<h5>$1</h5>", $description);
-         $description = preg_replace('/###\s(.+)/', "<h4>$1</h4>", $description);
-         $description = preg_replace('/##\s(.+)/', "<h3>$1</h3>", $description);
-         $description = preg_replace('/#\s(.+)/', "<h2>$1</h2>", $description);
-
-         // Bold
-         $description = preg_replace('/\*\*(.+)\*\*/', "<b>$1</b>", $description);
-         $description = preg_replace('/\[b\](.+)\[\/b\]/', "<b>$1</b>", $description);
-
-         // Italic
-         $description = preg_replace('/\*(.+)\*/', "<i>$1</i>", $description);
-         $description = preg_replace('/\[i\](.+)\[\/i\]/', "<i>$1</i>", $description);
-
-         // Underline
-         $description = preg_replace('/\_\_(.+)\_\_/', "<u>$1</u>", $description);
-         $description = preg_replace('/\[u\](.+)\[\/u\]/', "<u>$1</u>", $description);
-
-         // Crossed out
-         $description = preg_replace('/\[s\](.+)\[\/s\]/', "<s>$1</s>", $description);
-
-         // Code
-         $description = preg_replace('/(\`\`\`)([^\`]+)(\`\`\`)/s', "<code style=\"max-width: 100%;\">$2<br /></code>", $description);
-
-         // Links
-         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/', "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>", $description);
-         
-         $description = preg_replace('/(^(?!\()|\s)((https?).*\.(jpe?g|bmp|png))/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
-            $description = preg_replace('/(^(?!\()|\s)((https?).*\.(gif))/', "<img src=\"$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/\[img\](.+)\[\/img\]/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$1\" loading=lazy style=\"max-width: 100%;\">", $description);
-         $description = preg_replace('/(\!\[\])\((.+)\)/', "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$2\" loading=lazy style=\"max-width: 100%;\">", $description);
-
-         $description = preg_replace('/\[url\](.+)\[\/url\]/', "<a href=\"/ref?rdc=$1\">$1</a>", $description);
-         $description = preg_replace('/\[(.+)\]\((.+)\)/', "<a href=\"/ref?rdc=$2\">$1</a>", $description);
-         $description = preg_replace('/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s|\)|\<]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s|\)|\<]{2,}|www\.[a-zA-Z0-9]+\.[^\s|\)|\<]{2,})/', "<a href=\"/ref?rdc=$2$3\">$2$3</a>", $description);
-         
-         // Mentions
-         $description = preg_replace('/@([A-Za-z0-9-_]+[^\s|\W]{1,})/', "<a href=\"/user/$1\">@$1</a>$2", $description);
-         
-         // Smileys
-         $description = preg_replace('/\:\)|\=\)|\:slight_smile\:/', "🙂", $description);
-         $description = preg_replace('/\:rolleyes\:/', "🙄", $description);
-         $description = preg_replace('/\:cool\:/', "😎", $description);
-         $description = preg_replace('/\:lol\:|\:joy\:/', "😂", $description);
-
-         $description = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $description);
 
       }
    } else {
@@ -127,7 +101,7 @@ if ($_GET['id']) {
    $parts = explode('/', $url);
    $urlNumber = $parts[count($parts) - 2];
 
-   
+
    if (strpos($url, 'download') != FALSE) {
       header('location: '.$download);
    }
@@ -148,9 +122,17 @@ if ($_GET['id']) {
          header("Location: $downloadLink");
       }
       unset($_SESSION['downloadMod']);
-   } 
+   }
 } else {
    header('location: /');
+}
+
+function removeXss($string) {
+   $breakTags = array('&lt;br /&gt;', '&lt;br&gt;');
+   $stringhtml = htmlspecialchars($string);
+   $stringEnd = str_replace($breakTags, '', $stringhtml);
+
+   return $stringEnd;
 }
 
 
@@ -187,7 +169,7 @@ if ($_GET['id']) {
 
    }
 
-   /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t 
+   /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
       follow these rules. Every browser that supports :checked also supports :not(), so
       it doesn’t make the test unnecessarily selective */
    .rating:not(:checked)>input {
@@ -242,7 +224,7 @@ if ($_GET['id']) {
    .center {
       text-align: center;
    }
-   
+
     #expandImg {
     border-radius: 5px;
     cursor: pointer;
@@ -260,34 +242,7 @@ if ($_GET['id']) {
 </style>
 
 <section class="pt-5 pb-5">
-   <div class="container">
-      <?php
-         if(isset($_SESSION['rated'])) {
-      ?>
-      <div class="alert alert-success alert-dismissible fade show center" role="alert">
-         <strong>Success!</strong> You've successfully rated this mod with <?php echo $_SESSION['rated'];?> stars!
-         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-         </button>
-      </div>
-      <?php
-         unset($_SESSION['rated']);
-         }
-      ?>
-      <?php 
-   
-         if ($_SESSION['successpurchased'] == TRUE) {
-            echo '<div class="alert alert-success alert-dismissible fade show center" role="alert">
-            <strong>Success!</strong> You\'ve successfully purchased this mod!
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-            </button>
-         </div>';
-         $_SESSION['successpurchased'] == FALSE;
-         unset($_SESSION['successpurchased']);
-         }
-
-      ?>
+   <div class="container" id="fm-container">
       <div class="row">
          <div class="col-md-6 text-center">
             <div id="imgCarousel" class="carousel slide" data-ride="carousel">
@@ -349,7 +304,7 @@ if ($_GET['id']) {
                      <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 stars">2 stars</label>
                      <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star">1 star</label>
                      <br>
-                     <button onclick="getRating()" class="btn btn-block btn-sm btn-primary"><?php echo $lang['submit']; ?></button>
+                     <button id="submitRate" class="btn btn-block btn-sm btn-primary"><?php echo $lang['submit']; ?></button>
                   </div>
                </div>
             </div>
@@ -391,8 +346,8 @@ if ($_GET['id']) {
                   <b class="text text-dark">(<?php echo count($rateArray); ?>)</b>
                </div>
 
-               <?php 
-               
+               <?php
+
                if (empty($m_price)) {
                   echo '<b class="badge badge-success">'.$lang['free-download'].'</b>';
                } else {
@@ -400,7 +355,7 @@ if ($_GET['id']) {
                }
 
                ?>
-               
+
                <?php
                echo '<a href="/search/?query=' . $cat . '&cat=1&submit-search=" class="badge badge-primary tag">' . $cat . '</a>';
                for ($i = 0; $i < count($tagArray); $i++) {
@@ -411,7 +366,7 @@ if ($_GET['id']) {
             </p>
 
             <?php
-            
+
             if (empty($m_price)) {
                echo '<form action="/helper/manage.php?o=product&download='.$nameID.'" method="post">
                <button type="submit" class="btn btn-block btn-lg btn-success">'.$lang['download-now'].'</button>
@@ -444,29 +399,6 @@ if ($_GET['id']) {
    </div>
 </section>
 
-<script>
-   function getRating() {
-      var star1 = document.getElementById("star1").checked;
-      var star2 = document.getElementById("star2").checked;
-      var star3 = document.getElementById("star3").checked;
-      var star4 = document.getElementById("star4").checked;
-      var star5 = document.getElementById("star5").checked;
-
-      if (star1 === true) {
-         var rating = 1
-      } else if (star2 === true) {
-         var rating = 2
-      } else if (star3 === true) {
-         var rating = 3
-      } else if (star4 === true) {
-         var rating = 4
-      } else if (star5 === true) {
-         var rating = 5
-      }
-
-      window.location.href = "/helper/manage.php?rate=1&id=<?php echo $nameID; ?>_" + rating + "&userid=<?php echo $vals['id'];?>";
-   }
-</script>
 
 <section class="mt-3 pb-1 bg-dark">
    <div class="container-fluid">
@@ -523,7 +455,7 @@ if ($_GET['id']) {
 
                if (!empty($m_price)) {
                   $do = 'border border-info';
-               } 
+               }
 
                if ($id != $_GET['id'] && $mods < 9 && empty($m_price)) {
                   $mods++;
@@ -830,6 +762,10 @@ span.onclick = function() {
 baguetteBox.run('.gallary');
 
 </script>
+<script>
+   var nameID = <?php echo $nameID; ?>
+</script>
+<script src="/static-assets/js/product.js">
 
 <?php
    $pdo = null;

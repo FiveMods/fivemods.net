@@ -1,4 +1,5 @@
 Header set X-FRAME-OPTIONS: SAMEORIGIN
+Header always append Content-Security-Policy "frame-ancestors https://p.voyal.xyz/ https://api.fivemods.net https://assets.fivemods.net https://tracking.fivemods.net https://acp.oetkher.de"
 
 # Force backslash policy
 #RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
@@ -42,6 +43,10 @@ RewriteRule ^(account*/)$ ./index.php?page=$1 [L,QSA]
 # Account - Edit rdc. 
 RewriteRule ^(account/edit*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/edit*)$ ./index.php?page=$1 [L,QSA]
+
+# Publish 
+RewriteRule ^(publish/([a-zA-Z0-9-/]+)/)$ ./publish.php?case=$1 [L,QSA]
+RewriteRule ^(publish/([a-zA-Z0-9-/]+))$ ./publish.php?case=$1 [L,QSA]
 
 # Account Product Delete rdc.
 RewriteRule ^(account/delete/([a-zA-Z0-9-/]+)/)$ ./account/?delete=$2 [L,QSA]
