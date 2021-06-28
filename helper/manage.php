@@ -118,7 +118,7 @@ function downloadMod($pdo, $pdoPayment)
 {
     session_start();
 
-    $ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : $_SERVER['HTTP_X_FORWARDED_FOR']);;
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ? $_SERVER['HTTP_CF_CONNECTING_IP'] : ($_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : $_SERVER['HTTP_X_FORWARDED_FOR']);
     $mod = $_GET['download'];
 
     $getDownloads = $pdo->prepare("SELECT * FROM downloads WHERE ip = ?");
