@@ -9,20 +9,35 @@ if ($conn->connect_error) {
 
 require_once './errors.php';
 
-$input = file_get_contents('php://input');
+$key = getBearerToken();
 
-$decinput = json_decode($input, TRUE, 512, JSON_BIGINT_AS_STRING);
+$status_array =
+      array (
+        'fivemods' => 
+        array (
+          0 => 'main',
+          1 => 'updown',
+          2 => 'discord',
+          3 => 'google',
+          4 => 'github',
+          5 => 'advertisement',
+          6 => 'cookies',
+          7 => 'location',
+          8 => 'payment',
+        ),
+        'fivem' => 
+        array (
+          0 => 'serverlist',
+          1 => 'auth',
+          2 => 'ingame',
+          3 => 'website',
+          4 => 'artifacts',
+          5 => 'keymaster',
+        ),
+    );
 
-$key = $decinput['info']['0']['key'];
-
-if (empty($key)) {
-    http_response_code(400);
-    echo $invalidkey;
-    die();
-}
-
-$fivemods = $decinput['status']['0']['fivemods']['0'];
-$fivem = $decinput['status']['0']['fivem']['0'];
+$fivemods = $_GET['fivemods'];
+$fivem = $_GET['fivem'];
 $date = date("U");
 $array = array();
 
@@ -47,13 +62,13 @@ if ($result->num_rows > 0) {
             echo $nostatus;
         }
 
-        if (!empty($fivemods)) {
-            foreach ($decinput['status']['0']['fivemods'] as $key => $status) {
+        if ($fivemods == true) {
+            foreach ($status_array['fivemods'] as $key => $status) {
                 fivemodsstatus($status);
             }
         }
-        if (!empty($fivem)) {
-            foreach ($decinput['status']['0']['fivem'] as $key => $status) {
+        if ($fivem == true) {
+            foreach ($status_array['fivem'] as $key => $status) {
                 fivemstatus($status);
             }
         }
@@ -246,4 +261,35 @@ function fivemstatus($fcheck) {
         $array['keymaster'] = $keymaster;
     }
     
+}
+
+
+function getAuthorizationHeader(){
+    $headers = null;
+    if (isset($_SERVER['Authorization'])) {
+        $headers = trim($_SERVER["Authorization"]);
+    }
+    else if (isset($_SERVER['HTTP_AUTHORIZATION'])) { //Nginx or fast CGI
+        $headers = trim($_SERVER["HTTP_AUTHORIZATION"]);
+    } elseif (function_exists('apache_request_headers')) {
+        $requestHeaders = apache_request_headers();
+        // Server-side fix for bug in old Android versions (a nice side-effect of this fix means we don't care about capitalization for Authorization)
+        $requestHeaders = array_combine(array_map('ucwords', array_keys($requestHeaders)), array_values($requestHeaders));
+        //print_r($requestHeaders);
+        if (isset($requestHeaders['Authorization'])) {
+            $headers = trim($requestHeaders['Authorization']);
+        }
+    }
+    return $headers;
+}
+
+function getBearerToken() {
+$headers = getAuthorizationHeader();
+// HEADER: Get the access token from the header
+if (!empty($headers)) {
+    if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+        return $matches[1];
+    }
+}
+return null;
 }
