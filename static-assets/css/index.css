@@ -209,6 +209,10 @@ html {
     z-index: 99;
  }
 
+   .leftBasedAds, .rightBasedAds {
+      z-index: 0;
+   }
+
  .fst {
     font-size: 8px;
     color: gray;

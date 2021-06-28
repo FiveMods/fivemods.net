@@ -118,7 +118,7 @@ function downloadMod($pdo, $pdoPayment)
 {
     session_start();
 
-    $ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ? $_SERVER['HTTP_CF_CONNECTING_IP'] : ($_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : $_SERVER['HTTP_X_FORWARDED_FOR']);
     $mod = $_GET['download'];
 
     $getDownloads = $pdo->prepare("SELECT * FROM downloads WHERE ip = ?");
@@ -158,7 +158,7 @@ function downloadMod($pdo, $pdoPayment)
     while ($row = $download->fetch()) {
         $downloads = $row['m_downloads'];
 
-        if($row['m_blocked'] == 1) {
+        if($row['m_blocked'] == 1 || $row['m_approved'] == -1) {
             switch ($_GET['o']) { 
                 case 'product':
                     header("Location: /product/$mod");
