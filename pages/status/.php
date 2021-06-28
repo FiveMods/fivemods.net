@@ -118,7 +118,7 @@
                 </div>
             </div>
             </div>';
-            } elseif ($total > 1) {
+            } elseif ($total > 0) {
                 echo '<div class="card bg-warning text text-white rounded mb-3">
             <div class="card-body d-flex justify-content-between" style="font-size:19px;">
                 <b>Degraded Performance</b>
