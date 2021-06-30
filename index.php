@@ -127,6 +127,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       include('./include/gStatics.html'); 
       echo '<script>console.log("Pri: all");</script>';
       echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
+      echo '<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>';
    }
 
    ?>
@@ -334,7 +335,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       var infolinks_pid = 3332544;
       var infolinks_wsid = 0;
    </script>
-   <script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
+   
 
    <script type="text/javascript">
       window._mNHandle = window._mNHandle || {};
