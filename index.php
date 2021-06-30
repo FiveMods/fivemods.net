@@ -117,7 +117,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <html lang="en" dir="<?php if ($_COOKIE['language_preference'] == "IL") { echo "rtl";} else { echo "ltr"; } ?>">
 
 <head>
-   <script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>
    <?php
 
    if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
@@ -127,6 +126,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    if ($_GET['pri'] == "all") {
       include('./include/gStatics.html'); 
       echo '<script>console.log("Pri: all");</script>';
+      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
    }
 
    ?>
