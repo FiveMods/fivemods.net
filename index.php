@@ -331,6 +331,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
    <script type="text/javascript">
+      var infolinks_pid = 3332544;
+      var infolinks_wsid = 0;
+   </script>
+   <script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>
+
+   <script type="text/javascript">
       window._mNHandle = window._mNHandle || {};
       window._mNHandle.queue = window._mNHandle.queue || [];
       medianet_versionId = "3121199";
