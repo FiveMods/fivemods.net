@@ -394,7 +394,7 @@ h6.mb-0.key:hover {
 						$ch = curl_init();
 
                   		$token = $apiToken;
-						$userid = $vals['id'];
+						$userid = $vals['oauth_uid'];
 
 						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
 						curl_setopt($ch, CURLOPT_POST, 1);
