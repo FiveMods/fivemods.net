@@ -7,6 +7,10 @@ function proxy_detect($null)
                $sockport = true;
           }
      }
+
+     global $ip;
+     $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ? $_SERVER['HTTP_CF_CONNECTING_IP'] : ($_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : $_SERVER['HTTP_X_FORWARDED_FOR']);
+
      if (
           $_SERVER['HTTP_FORWARDED']
           || $_SERVER['HTTP_X_FORWARDED_FOR']
@@ -27,4 +31,5 @@ if (proxy_detect($null) == false) {
 } else {
      echo '<script>console.log("Proxy: detected ('.$ip.')");</script>';
 }
+
 ?>

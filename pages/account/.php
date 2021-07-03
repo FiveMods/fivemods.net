@@ -1,3 +1,21 @@
+<div class="leftBasedAds" style="left: 0px; position: fixed; text-align: center; top: 20%;margin-left:3%;">
+
+
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle leftBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins> <!-- data-ad-format="auto" data-full-width-responsive="true" -->
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
+
+    <!-- Vertical Test -->
+    <ins class="adsbygoogle rightBasedAds" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="2716933531" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+<?php include('./vertical-ads.html'); ?>
 <?php
 
 require_once "./config.php";
@@ -78,8 +96,10 @@ h6.mb-0.key:hover {
 }
 </style>
 <div class="container mt-5 mb-5">
+	<div id="alert-box">
 	<?php echo $_SESSION['success'];
-	//unset($_SESSION['success']); ?>
+	unset($_SESSION['success']); ?>
+	</div>
 	<div class="row gutters-sm">
 		<div class="col-md-4 d-none d-md-block">
 			<div class="card fmround">
@@ -176,7 +196,7 @@ h6.mb-0.key:hover {
 						<form action="/pages/account/helper/profile.edit.php" method="post">
 							<div class="form-group">
 								<label for="email">Email <a href="#info" class="text text-danger">*</a> </label>
-								<input type="text" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $vals['email']; ?>" required>
+								<input type="email" class="form-control" name="email" id="email" maxlength="32" aria-describedby="emailHelp" placeholder="Enter your email" value="<?php echo $vals['email']; ?>" required>
 								<small id="emailHelp" class="form-text text-muted"><?php echo $lang['email-desc']; ?></small>
 							</div>
 							<div class="form-group">
@@ -186,7 +206,7 @@ h6.mb-0.key:hover {
 							</div>
 							<div class="form-group">
 								<label for="url">Website</label>
-								<input type="text" class="form-control" name="website" id="noSpace" maxlength="64" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" name="website" placeholder="Enter your website address" value="<?php echo $vals['website']; ?>">
+								<input type="url" class="form-control" name="website" id="noSpace" maxlength="64" name="website" placeholder="Enter your website address" value="<?php echo $vals['website']; ?>">
 							</div>
 							<div class="form-group">
 								<label for="location"><?php echo $lang['location']; ?></label>
@@ -204,14 +224,12 @@ h6.mb-0.key:hover {
 					<div class="tab-pane fade" id="account">
 						<h6><?php echo strtoupper($lang['acc-settings']); ?></h6>
 						<hr>
-						<form action="/pages/account/helper/account.edit.php" method="post">
 							<div class="form-group">
 								<label for="username">Username <a href="#info" class="text text-danger">*</a></label>
-								<input type="text" class="form-control" id="username" pattern="[a-zA-Z0-9]+(?:[_-]?[a-zA-Z0-9])" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
+								<input type="text" class="form-control" id="username" name="username" aria-describedby="usernameHelp" value="<?php echo $vals['name']; ?>" placeholder="Enter your username" required>
 								<small id="usernameHelp" class="form-text text-muted"><?php echo $lang['username-desc']; ?></small>
-								<button type="submit" class="btn btn-primary mt-2 fmround">Change username</button>
+								<button type="submit" id="newUsername" class="btn btn-primary mt-2 fmround">Change username</button>
 							</div>
-						</form>
 						<?php
 
 						if ($vals['premium'] == "1") {
@@ -376,7 +394,7 @@ h6.mb-0.key:hover {
 						$ch = curl_init();
 
                   		$token = $apiToken;
-						$userid = $vals['id'];
+						$userid = $vals['oauth_uid'];
 
 						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
 						curl_setopt($ch, CURLOPT_POST, 1);
@@ -585,50 +603,16 @@ h6.mb-0.key:hover {
 	</div>
 
 </div>
-<script>
-	var input = document.getElementById("noSpace");
 
-	input.oninput = function(e) {
-		e.target.value = e.target.value.replace(' ', '_');
-		e.target.value = e.target.value.replace('™', 'TM');
-		e.target.value = e.target.value.replace('®', 'R');
-	}
-</script>
-<script>
-	var input = document.getElementById("noSpace2");
-
-	input.oninput = function(e) {
-		e.target.value = e.target.value.replace(' ', '_');
-		e.target.value = e.target.value.replace('™', 'TM');
-		e.target.value = e.target.value.replace('®', 'R');
-	}
-</script>
-<script>
-	var input = document.getElementById("noSpace3");
-
-	input.oninput = function(e) {
-		e.target.value = e.target.value.replace(' ', '_');
-		e.target.value = e.target.value.replace('™', 'TM');
-		e.target.value = e.target.value.replace('®', 'R');
-	}
-</script>
-<script>
-	$(document).ready(function() {
-		$("#success-alert").hide();
-		$("#myWish").click(function showAlert() {
-			$("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
-				$("#success-alert").slideUp(500);
-			});
-		});
-	});
-</script>
 <div class="centerBasedFooterAd" style="text-align: center; bottom: 35%;">
     <!-- Footer-Block-Ads -->
-    <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594"></ins>
+    <ins class="adsbygoogle" style="display:inline-block;width:820px;height:200px" data-ad-client="ca-pub-9727102575141971" data-ad-slot="1867802594" data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 </div>
+
+<script src="https://fivemods.net/static-assets/js/account.js"></script>
 <?php
 	$pdo = null;
 ?>

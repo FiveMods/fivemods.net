@@ -118,6 +118,9 @@ if($userDB->rowCount() > 0) {
   $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
   $insertUser->execute(array('provider' => "Google", 'id' => $uid, 'uuid' => $v5uuid, 'username' => $uname, 'email' => $email, 'country' => $userData['locale']));
 
+  
+  $_SESSION['username'] = $uname;
+
 	header("Location: /pages/account/helper/account.check.php");
 }
 function randomChars($length = 25)

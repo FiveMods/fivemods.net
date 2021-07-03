@@ -27,8 +27,6 @@ if (htmlspecialchars($_POST['contact'])) {
     partner($pdo, $uid);
 } elseif (htmlspecialchars($_POST['reportmod'])) {
     reportmod($pdo, $uid);
-} elseif (htmlspecialchars($_GET['rate'])) {
-    rate($pdo, $uid);
 } elseif (htmlspecialchars($_GET['upload'])) {
     uploadMod();
 } elseif (htmlspecialchars($_GET['download']) and htmlspecialchars($_GET['o'])) {
@@ -110,41 +108,6 @@ function reportmod($pdo, $uid)
     die();
 }
 
-function rate($pdo, $uid) {
-    session_start();
-
-    $cookieArray = explode("_", $_GET['id']);
-
-    $nameID = $cookieArray[0];
-    $rating = $cookieArray[1];
-    if($_SESSION['lastRated'] != $nameID) {
-      $changeRating = $pdo->prepare("SELECT m_rating FROM mods WHERE m_id = :id");
-      $changeRating->execute(array('id' => $nameID));
-
-      while ($row = $changeRating->fetch()) {
-          $m_rating = $row['m_rating'];
-          if (!empty($m_rating)) {
-              $newRating = $m_rating . " " . $rating;
-          } else {
-              $newRating = $rating;
-          }
-          $change = $pdo->prepare("UPDATE mods SET m_rating = :rating WHERE m_id = :id");
-          $change->execute(array('rating' => $newRating, 'id' => $nameID));
-
-          $log = $pdo->prepare("INSERT INTO rate (mod_id, user_id) VALUES (:mod, :id)");
-          $log->execute(array('mod' => $nameID, 'id' => $uid));
-          header("Location: /product/$nameID");
-          $_SESSION['rated'] = $rating;
-          $_SESSION['lastRated'] = $nameID;
-          exit();
-          die();
-      }
-    }
-}
-function uploadMod()
-{
-    header("location: /upload/");
-}
 function randomChars($length)
 {
     $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -155,16 +118,63 @@ function downloadMod($pdo, $pdoPayment)
 {
     session_start();
 
-
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ? $_SERVER['HTTP_CF_CONNECTING_IP'] : ($_SERVER['REMOTE_ADDR'] ? $_SERVER['REMOTE_ADDR'] : $_SERVER['HTTP_X_FORWARDED_FOR']);
     $mod = $_GET['download'];
+
+    $getDownloads = $pdo->prepare("SELECT * FROM downloads WHERE ip = ?");
+    $getDownloads->execute(array($ip));
+
+    if($getDownloads->rowCount() > 0) 
+    {
+        $fetch = $getDownloads->fetchAll();
+        foreach ($fetch as $modA) {
+            if(strtotime($modA['created_at']) > (60 * 1)) {
+                if($modA['download_id'] == $mod) {
+                    $_SESSION['downloadMod'] = $mod;
+                    $_SESSION['lastDownload'] = $mod;
+                    switch ($_GET['o']) { 
+                        case 'product':
+                            header("Location: /product/$mod");
+                            break;
+                        case 'index':
+                            header("Location: /");
+                            break;
+                        case 'user':
+                            $user = $_GET['username'];
+                            header("Location: /user/$user");
+                        default:
+                            header("Location: /");
+                            break;
+                    }
+                    exit();
+                    die();
+                }
+            }
+        }
+    }
+
     $download = $pdo->prepare("SELECT SQL_CALC_FOUND_ROWS * FROM mods LEFT JOIN user ON mods.m_authorid = user.id WHERE m_id = :id");
     $download->execute(array('id' => $mod));
     while ($row = $download->fetch()) {
         $downloads = $row['m_downloads'];
-        $price = $row['m_price'];
 
-        if (!empty($price)) {
-            header('location: /account/logout/?url=error');
+        if($row['m_blocked'] == 1 || $row['m_approved'] == -1) {
+            switch ($_GET['o']) { 
+                case 'product':
+                    header("Location: /product/$mod");
+                    break;
+                case 'index':
+                    header("Location: /");
+                    break;
+                case 'user':
+                    $user = $_GET['username'];
+                    header("Location: /user/$user");
+                default:
+                    header("Location: /");
+                    break;
+            }
+            exit();
+            die();
         }
 
         if ($_SESSION['lastDownload'] != $mod) {
@@ -190,6 +200,9 @@ function downloadMod($pdo, $pdoPayment)
 
             $update = $pdo->prepare("UPDATE user SET totaldownloads = $totalDownloads WHERE uuid = :uuid");
             $update->execute(array('uuid' => $row['uuid']));
+
+            $downloadLog = $pdo->prepare("INSERT INTO downloads (`user_uuid`, `download_id`, `ip`) VALUES (?, ?, ?)");
+            $downloadLog->execute(array($_SESSION['uuid'], $mod, $ip));
 
             $_SESSION['downloadMod'] = $newDownloads;
         } else {
@@ -218,11 +231,11 @@ function downloadMod($pdo, $pdoPayment)
     die();
 }
 
-
+/*
 function purchaseMod($pdo, $pdoPayment, $uid)
 {
     echo "<h1>CURRENTLY DISABLED</h1>";
-    /*
+    
     session_start();
 
     $fivemodsuuid = "5b3107fd-3dfe-43ae-b8f6-028560184861";
@@ -379,5 +392,6 @@ function purchaseMod($pdo, $pdoPayment, $uid)
         exit();
         die();
     }
-    */
+    
 }
+*/

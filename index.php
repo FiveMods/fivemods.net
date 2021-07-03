@@ -63,7 +63,7 @@ include('./helper/lang-confg.php');
 
 // include('./helper/geo-vpn.sub.php');
 
-$favicon = 'https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
+$favicon = 'https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
 $css_text = 'text text-gray';
 
 require_once('./config.php');
@@ -114,10 +114,9 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="<?php if ($_COOKIE['language_preference'] == "IL") { echo "rtl";} else { echo "ltr"; } ?>">
 
 <head>
-
    <?php
 
    if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
@@ -127,6 +126,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    if ($_GET['pri'] == "all") {
       include('./include/gStatics.html'); 
       echo '<script>console.log("Pri: all");</script>';
+      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
+      echo '<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>';
    }
 
    ?>
@@ -254,13 +255,14 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta name="twitter:image" content="' . $user_picture . '">';
       }
    } else {
-      echo '<meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png">';
+      echo '<meta property="og:image" content="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png">';
       echo '<title>' . $lang['title'] . '</title>';
    }
 
-   ?>
+   require_once('./lib/spec_meta.php');
 
-   <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the place to get the best resources for your FiveM server." />
+   ?>  
+
    <meta name="robots" content="index, follow" />
    <meta name="department" content="legal" />
    <meta name="audience" content="all" />
@@ -269,9 +271,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="organisation" content="FiveMods" />
    <meta name="copyright" content="Copyright (c) 2020-2021 FiveMods" />
    <meta name="generator" content="Atom, Visual Studio Code" />
-   <meta name="keywords" content="fivem scripts, fivem mods, fivem, fivem scripts free" />
-   <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
-   <meta name="page-type" content="Website, Landingpage, Homepage, Platform, Community" />
    <meta name="coverage" content="Worldwide">
 
    <meta name="reply-to" content="contact@fivemods.net">
@@ -289,42 +288,41 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <meta name="DC.Creator" content="FiveMods" />
    <meta name="DC.Publisher" content="FiveMods" />
    <meta name="DC.Rights" content="FiveMods" />
-   <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
 
    <?php
    if (!empty($_COOKIE['fm_design'])) {
       if ($_COOKIE['fm_design'] == "dark") {
-         echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css-dark/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css-dark/style.css">';
          $css_text = 'text text-muted';
          $darkmode = 'bg-dark';
       } elseif ($_COOKIE['fm_design'] == "normal") {
-         echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">';
          $css_text = 'text text-muted';
       } elseif (empty($_COOKIE['fm_design'])) {
-         echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">';
          $css_text = 'text text-muted';
       }
    } else {
-      echo '<link rel="stylesheet" id="pagestyle" href="https://www.fivemods.net/static-assets/css/style.css">';
+      echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">';
       $css_text = 'text text-muted';
    }
    ?>
 
    <link rel="icon" href="<?php echo $favicon; ?>">
 
-   <link rel="apple-touch-icon" href="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="57x57" href="https://img-cdn.fivemods.net/unsafe/57x57/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="72x72" href="https://img-cdn.fivemods.net/unsafe/72x72/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="76x76" href="https://img-cdn.fivemods.net/unsafe/76x76/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="114x114" href="https://img-cdn.fivemods.net/unsafe/114x114/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="120x120" href="https://img-cdn.fivemods.net/unsafe/120x120/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
-   <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" href="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="57x57" href="https://img-cdn.fivemods.net/unsafe/57x57/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="72x72" href="https://img-cdn.fivemods.net/unsafe/72x72/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="76x76" href="https://img-cdn.fivemods.net/unsafe/76x76/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="114x114" href="https://img-cdn.fivemods.net/unsafe/114x114/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="120x120" href="https://img-cdn.fivemods.net/unsafe/120x120/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
+   <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
 
-   <link rel="stylesheet" href="https://www.fivemods.net/static-assets/css/style-adj.css">
-   <link rel="stylesheet" href="/static-assets/css/logo-animation.css">
-   <link rel="stylesheet" href="/static-assets/css/index.css">
+   <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/style-adj.css">
+   <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/logo-animation.css">
+   <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/index.css">
 
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -332,6 +330,19 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+   <script type="text/javascript">
+      var infolinks_pid = 3332544;
+      var infolinks_wsid = 0;
+   </script>
+   
+
+   <script type="text/javascript">
+      window._mNHandle = window._mNHandle || {};
+      window._mNHandle.queue = window._mNHandle.queue || [];
+      medianet_versionId = "3121199";
+   </script>
+   <script src="https://contextual.media.net/dmedianet.js?cid=8CUTWJ28J" async="async"></script>
 
    <script>
       function swapStyleSheet(sheet) {
@@ -349,6 +360,16 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 </head>
 
 <body class="bg">
+<div id="684841532">
+        <script type="text/javascript">
+            try {
+                window._mNHandle.queue.push(function (){
+                    window._mNDetails.loadTag("684841532", "160x600", "684841532");
+                });
+            }
+            catch (error) {}
+        </script>
+    </div>
    <?php
 
    if ($_GET['prel'] == 0) {

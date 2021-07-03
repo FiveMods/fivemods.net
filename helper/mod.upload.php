@@ -17,7 +17,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
         print_r("NOT_LOGGED_IN");
 		exit();
 		die();
-    } 
+    }
 } else {
     print_r("NOT_LOGGED_IN");
 	exit();
@@ -38,7 +38,7 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
         exit();
         die();
     }
-    
+
     foreach (scandir($modPathTemp) as $dir) {
         if(startsWith($dir, $id)) {
             $filePath = $path . $id . "/" . preg_replace("/([\/#&%§$.,]{1,})/", "_",str_replace(" ", "_", strtolower($title))) . "." . strtolower(end(explode('.', $dir)));
@@ -47,7 +47,7 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
 
             $downloadLink = $url . $id . "/" . preg_replace("/([\/#&%§$.,]{1,})/", "_",str_replace(" ", "_", strtolower($title))) . "." . strtolower(end(explode('.', $dir)));
         }
-        
+
     }
 
     $pics = [];
@@ -64,10 +64,33 @@ if ($_SERVER ["REQUEST_METHOD"] === "POST") {
     $selVals->execute(array($_SESSION['uuid']));
     $vals = $selVals->fetch();
 
-    $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+    if($vals['premium'] == 0) {
+        $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+    } else if($vals['premium'] == 1) {
+        $statement = $pdo->prepare("INSERT INTO mods (m_authorid, m_name, m_picture, m_category, m_tags, m_description, m_requiredmod, m_downloadlink, m_approvedby, m_approved) VALUES (?, ?, ?, ?, ?, ?, ?, ?, \"Automatically\", 0)");
+        $statement->execute(array($vals['id'], $title, implode(" ", $pics), $category, $tags, $description, $required, $downloadLink));
+
+        $stmt = $pdo->prepare("SELECT m_id FROM mods WHERE m_name = :name AND m_description = :desc");
+        $stmt->execute(array("name" => $title, "desc" => $description));
+        $statement = $stmt->fetch();
+
+        $ch = curl_init();
+        $token = $apiToken;
+        $modid = $statement['m_id'];
+
+        curl_setopt($ch, CURLOPT_URL,"http://85.214.166.192:8081");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "action=newMod&token=$token&modid=$modid");
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($ch);
+        curl_close($ch);
+    }
 
     print_r("SUCCESS");
+    exit();
+    die();
 }
 
 function randomChars($length = 6)

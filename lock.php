@@ -1,113 +1,295 @@
-<?php 
-
-require_once('./config.php');
-
-$conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password']);
-
-if (!$conn->connect_error) {
-   header('location: /');
-}
-
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start('ob_gzhandler');
-else ob_start();
-
-session_start();
+<?php
 
 ob_start("minifier");
 function minifier($code)
 {
-   $search = array(
-      '/\>[^\S ]+/s',
-      '/[^\S ]+\</s',
-      '/(\s)+/s',
-      '/<!--(.|\s)*?-->/'
-   );
-   $replace = array('>', '<', '\\1');
-   $code = preg_replace($search, $replace, $code);
-   return $code;
+    $search = array(
+        '/\>[^\S ]+/s',
+        '/[^\S ]+\</s',
+        '/(\s)+/s',
+        '/<!--(.|\s)*?-->/'
+    );
+    $replace = array('>', '<', '\\1');
+    $code = preg_replace($search, $replace, $code);
+    return $code;
 }
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
+    <script src="/cdn-cgi/apps/head/wHhLuPTmd1Xk-g7DC7gCWvIJ040.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg">
+    <link rel="apple-touch-icon" href="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="https://img-cdn.fivemods.net/unsafe/57x57/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="https://img-cdn.fivemods.net/unsafe/72x72/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="https://img-cdn.fivemods.net/unsafe/76x76/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="https://img-cdn.fivemods.net/unsafe/114x114/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="https://img-cdn.fivemods.net/unsafe/120x120/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
+    <title>We will be right back - FiveMods.net</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>We'll be right back - FiveMods.net</title>
-    <meta http-equiv="content-language" content="en" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
-    <meta name="description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place. FiveMods.net the palce to get the best resources for your FiveM server." />
-    <meta name="robots" content="index, follow" />
-    <meta name="department" content="legal" />
-    <meta name="audience" content="all" />
-    <meta name="author" content="FiveMods" />
-    <meta name="publisher" content="FiveMods" />
-    <meta name="organisation" content="FiveMods" />
-    <meta name="copyright" content="FiveMods" />
-    <meta name="generator" content="Atom, Visual Studio Code, PhpStorm, Eclipse (WTP)" />
-    <meta name="keywords" content="FiveM, fivem, fivemods, FiveMods, GTA5, GTAV, gta5, gtav, gta, scripts, script, Scripts, Script, Development, Dev, dev, development, offical, usa, america" />
-    <meta name="page-topic" content="FiveM ready scripts, vehicles, mods, maps, peds and more." />
-    <meta name="page-type" content="Website, Landingpage, Homepage" />
-    <meta name="copyrighted-site-verification" content="f9fa2783d3d1da95" />
-    <meta name="DC.Language" content="en" />
-    <meta name="DC.Creator" content="FiveMods" />
-    <meta name="DC.Publisher" content="FiveMods" />
-    <meta name="DC.Rights" content="FiveMods" />
-    <meta name="DC.Description" content="Searching for FiveM ready scripts, vehicles, mods, maps, peds and more? You've come to the right place." />
-    <script src="/cdn-cgi/apps/head/ictDLxICQsFVMPS59T0akYEa1qs.js"></script>
-    <link rel="icon" href="https://www.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg">
-
-    <meta http-equiv="refresh" content="5">
-
+    <meta name="description" content="We'll be right back - FiveMods.net">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://assets.fivemods.net/">
+    <meta property="og:title" content="We'll be right back - FiveMods.net">
+    <meta property="og:description" content="We'll be right back - FiveMods.net">
+    <meta property="og:site_name" content="We'll be right back - FiveMods.net">
+    <meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_401.svg">
+    <meta name="theme-color" content="#ff8637">
+    <meta name="msapplication-navbutton-color" content="#ff8637">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ff8637">
     <style>
-        html,
-        body {
-            background: url('/static-assets/img/background/icon_bg_dark.png');
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body::-webkit-scrollbar {
+            width: .5rem;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #17141f;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
+        }
+
+        :root {
+            --v-fivemods-brand-color: #ff8637;
+            --v-global-light-bg-color: #f9f9f9;
+        }
+
+        .f-bg-dark {
+            background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://assets.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png');
             background-repeat: repeat;
             background-size: 75%;
-            color: #ff8637;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: 100;
-            height: 100vh;
+        }
+
+        .bg {
+            background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://assets.fivemods.net/static-assets/img/background/icon_bg_multi_lighter.png');
+            background-repeat: repeat;
+            background-size: 75%;
+        }
+
+        .sign-in-bg {
+            background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://assets.fivemods.net/static-assets/img/bg-4.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .emp-login {
+            padding: 3%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            /* opacity: 0.6; */
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid gray;
+        }
+
+        .separator:not(:empty)::before {
+            margin-right: .25em;
+        }
+
+        .separator:not(:empty)::after {
+            margin-left: .25em;
+        }
+
+        .btn-discord {
+            background-color: #2f3136;
+            color: white;
+        }
+
+        .btn-discord:hover {
+            background-color: #26272b;
+            color: white;
+        }
+
+        .invalid-feedback.feedback-icon {
+            position: absolute;
+            width: auto;
+            bottom: 30px;
+            right: 10px;
+            margin-top: 0;
+        }
+
+        .valid-feedback.feedback-icon {
+            position: absolute;
+            width: auto;
+            bottom: 10px;
+            right: 10px;
+            margin-top: 0;
+        }
+
+        .fmAdH3 {
+            font-size: 1.5em;
+            margin: .8em 0 .3em;
+            font-weight: bold;
+            display: block;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+        }
+
+        .fmAdjP {
+            font-size: 14px;
+            color: #1d222b;
+        }
+
+        .fmAdjCH {
+            background-color: var(--v-global-light-bg-color);
+            padding: 16px 18px;
+        }
+
+        .fmAdjCTBrand {
+            color: var(--v-fivemods-brand-color);
+            font-size: .875em;
+            text-transform: uppercase;
+            font-weight: 600;
             margin: 0;
         }
-        
-        .full-height {
-            height: 100vh;
+
+        .fmAdjCT {
+            color: black;
+            font-size: .875em;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin: 0;
         }
-        
-        .flex-center {
-            align-items: center;
+
+        .fmAdjCD {
+            border-left: 2px solid var(--v-fivemods-brand-color);
+            padding-left: 13px;
+            margin-bottom: 1.4em;
+        }
+
+        .fmAdjH3 {
+            display: inline;
+            font-size: inherit;
+            margin: .8em 0 .3em;
+            font-weight: bold;
+        }
+
+        .em0_8 {
+            margin-left: 0.8em;
+        }
+
+        .em2_5 {
+            margin-left: 2.5em;
+        }
+
+        .fmAdjHSP {
+            overflow: hidden;
+            background-color: #fff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .fmAdjAB {
+            color: #188fff;
+        }
+
+        #more1 {
+            display: none;
+        }
+
+        #more2 {
+            display: none;
+        }
+
+        .fmAdjBt {
+            max-width: 95%;
+            width: 135px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            background: #FFFFFF;
+            -webkit-box-shadow: 0 2px 15px 0 rgb(172 172 172 / 50%);
+            box-shadow: 0 2px 15px 0 rgb(172 172 172 / 50%);
+            margin: 0 auto;
+            border: 1px solid #188fff;
+            font-size: 14px;
+            border-radius: 1.5em;
+            font-weight: 400;
+            color: #188fff;
         }
-        
-        .position-ref {
-            position: relative;
+
+        .fmAdjMBtn {
+            border: none;
+            color: #188fff;
+            background-color: white;
         }
-        
-        .code {
-            border-right: 2px solid;
-            font-size: 26px;
-            padding: 0 15px 0 15px;
-            text-align: center;
+
+        .fmAdjMBtn:hover {
+            text-decoration: underline;
         }
-        
-        .message {
-            font-size: 18px;
-            text-align: center;
+
+        a {
+            color: #188fff;
+        }
+
+        a:hover {
+            color: #188fff;
         }
     </style>
 </head>
 
 <body>
-    <div class="flex-center position-ref full-height">
-        <div class="center"><img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" load="lazy" alt="Brand Logo" style="height: 75px;"></div>
-    </div>
+    <main>
+        <section class="align-items-bottom d-flex" style="min-height: 100vh; background-size: cover;">
+            <div class="col-md-3"> </div>
+            <div class="col-md-6 mt-2 mb-2 p-4">
+                <div>
+                    <div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_gradient_281x100.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
+                    <h3 class="fmAdH3 mt-5 pt-4">We will be right back</h3>
+                    <p class="fmAdjP">The page or resource you are trying to access is currently experiencing a disruption or attack. Please refer to our system administrator if you think this is an error. Reach out via <a href="mailto:contact@fivemods.net">contact@fivemods.net</span></a>. This page will refresh every 5 seconds. <br><br> If you wish to check the current status, please click <a href="https://status.fivemods.net" rel="noreferrer noopener">here</a>. 
+                    </p>
 
-    
-
+                </div>
+            </div>
+            <div class="col-md-3"> </div>
+        </section>
+    </main>
 </body>
 
 </html>

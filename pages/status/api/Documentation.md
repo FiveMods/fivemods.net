@@ -14,45 +14,20 @@ Once you have your API token you can request the status by following these steps
 
 1. Make your request
 
-   To make your request you need to use the following json format:
-   ```json
-    {
-    "info": [
-        {
-        "key": "Your API Key here"
-        }
-    ],
-    "status": [
-        {
-        "fivemods": [
-            "main",
-            "updown",
-            "discord",
-            "google",
-            "github",
-            "advertisement",
-            "cookies",
-            "location",
-            "payment"
-        ],
-        "fivem": [
-            "serverlist",
-            "auth",
-            "ingame",
-            "website",
-            "artifacts",
-            "keymaster"
-        ]
-        }
-    ]
-    }
-   ```
+    For your request you need to set the Authorization header to `Bearer [API-TOKEN]`
 
-   You can remove any status you don't want from the list
+    You also need to set the following get request options:
+    ```
+    if you want the fivemods status:
+    fivemods=true
+
+    if you want the fivem status:
+    fivem=true
+    ```
 
 2. Send your request
 
-    Send the json to <https://fivemods.net/pages/status/api/callback.php>.
+    Send the request to <https://fivemods.net/pages/status/api/callback.php>.
 
 3. Recieve the output
 
