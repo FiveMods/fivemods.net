@@ -1,8 +1,6 @@
 html {
-    scroll-behavior: smooth;
- }
-
-/* secret */
+   scroll-behavior: smooth;
+}
 
  @media all and (min-width: 992px) {
     .navbar .has-megamenu {
@@ -200,7 +198,6 @@ html {
     position: fixed;
     text-align: center;
     top: 0px;
-    z-index: 99;
  }
 
  #leftBasedAds {
@@ -208,12 +205,11 @@ html {
     position: fixed;
     text-align: center;
     top: 0px;
-    z-index: 99;
  }
 
-   .leftBasedAds, .rightBasedAds {
-      z-index: 0;
-   }
+.leftBasedAds, .rightBasedAds {
+   z-index: -1;
+}
 
  .fst {
     font-size: 8px;
