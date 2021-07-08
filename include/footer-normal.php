@@ -63,25 +63,25 @@
                   <h4 class="my-2"><?php echo $lang['categories']; ?></h4>
                   <ul class="list-unstyled list-light">
                      <li>
-                        <a href="#"><?php echo $lang['scripts']; ?></a>
+                        <a href="/search/?query=Scripts&cat=1&submit-search="><?php echo $lang['scripts']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['vehicles']; ?></a>
+                        <a href="/search/?query=Vehicles&cat=1&submit-search="><?php echo $lang['vehicles']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['weapons']; ?></a>
+                        <a href="/search/?query=Weapons&cat=1&submit-search="><?php echo $lang['weapons']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['peds']; ?></a>
+                        <a href="/search/?query=Peds&cat=1&submit-search="><?php echo $lang['peds']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['maps']; ?></a>
+                        <a href="/search/?query=Maps&cat=1&submit-search="><?php echo $lang['maps']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['liveries']; ?></a>
+                        <a href="/search/?query=Liveries&cat=1&submit-search="><?php echo $lang['liveries']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['misc']; ?></a>
+                        <a href="/search/?query=Misc&cat=1&submit-search="><?php echo $lang['misc']; ?></a>
                      </li>
                   </ul>
                </div>
