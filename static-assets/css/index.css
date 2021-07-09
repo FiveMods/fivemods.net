@@ -2,8 +2,6 @@ html {
     scroll-behavior: smooth;
  }
 
-/* secret */
-
  @media all and (min-width: 992px) {
     .navbar .has-megamenu {
        position: static !important;

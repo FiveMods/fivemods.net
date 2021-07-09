@@ -63,25 +63,25 @@
                   <h4 class="my-2"><?php echo $lang['categories']; ?></h4>
                   <ul class="list-unstyled list-light">
                      <li>
-                        <a href="#"><?php echo $lang['scripts']; ?></a>
+                        <a href="/search/?query=Scripts&cat=1&submit-search="><?php echo $lang['scripts']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['vehicles']; ?></a>
+                        <a href="/search/?query=Vehicles&cat=1&submit-search="><?php echo $lang['vehicles']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['weapons']; ?></a>
+                        <a href="/search/?query=Weapons&cat=1&submit-search="><?php echo $lang['weapons']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['peds']; ?></a>
+                        <a href="/search/?query=Peds&cat=1&submit-search="><?php echo $lang['peds']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['maps']; ?></a>
+                        <a href="/search/?query=Maps&cat=1&submit-search="><?php echo $lang['maps']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['liveries']; ?></a>
+                        <a href="/search/?query=Liveries&cat=1&submit-search="><?php echo $lang['liveries']; ?></a>
                      </li>
                      <li>
-                        <a href="#"><?php echo $lang['misc']; ?></a>
+                        <a href="/search/?query=Misc&cat=1&submit-search="><?php echo $lang['misc']; ?></a>
                      </li>
                   </ul>
                </div>
@@ -118,10 +118,10 @@
                <div class="col-md-4 text-xs-center text-lg-right text-secondary my-1">
                   <div class="btn-container  mt-1 text-md-right text-sm-center">
                      <div class="mb-1 mr-3 align-self-right pt-0 d-inline-block">
-                        <a href="/discord/" role="button" title="Discord" class="text-white rounded m-2" style="text-decoration: none;">
+                        <a href="/discord/" role="button" title="Discord" target="_blank" class="text-white rounded m-2" style="text-decoration: none;">
                            <i class="fab fa-discord fa-lg color-light" aria-hidden="true"></i>
                         </a>
-                        <a href="/ref?rdc=https://twitter.com/FiveModsNET" title="Twitter" role="button" class="text-white rounded m-2" style="text-decoration: none;">
+                        <a href="https://twitter.com/FiveModsNET" title="Twitter" target="_blank" role="button" class="text-white rounded m-2" style="text-decoration: none;">
                            <i class="fab fa-twitter fa-lg color-light" aria-hidden="true"></i>
                         </a>
 
