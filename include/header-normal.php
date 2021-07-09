@@ -38,7 +38,7 @@ $currentPage = $_GET['page'];
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
          <span class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownLbl" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $lang['community'];?> </a>
+               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownLbl" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Community </a>
                <div class="dropdown-menu dropdown-menu-right w-auto shadow p-0" id="navbarDropdown" aria-labelledby="navbarDropdownLbl">
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/partner-program/">
                      <div class="flex-shrink-1 text-center px-2"></div>
