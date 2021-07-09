@@ -46,7 +46,7 @@
  <div>
 <div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_404.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
 <h3 class="fmAdH3 mt-5 pt-4">Proxy or VPN service detected</h3>
-<p class="fmAdjP">You are not allowed to enter the FiveMods.net via a VPN or proxy.</p>
+<p class="fmAdjP">You are not allowed to enter FiveMods.net via a VPN or proxy.</p>
 </div>
 </div>
 <div class="col-md-3"> </div>
