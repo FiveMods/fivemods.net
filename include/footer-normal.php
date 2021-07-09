@@ -118,10 +118,10 @@
                <div class="col-md-4 text-xs-center text-lg-right text-secondary my-1">
                   <div class="btn-container  mt-1 text-md-right text-sm-center">
                      <div class="mb-1 mr-3 align-self-right pt-0 d-inline-block">
-                        <a href="/discord/" role="button" title="Discord" class="text-white rounded m-2" style="text-decoration: none;">
+                        <a href="/discord/" role="button" title="Discord" target="_blank" class="text-white rounded m-2" style="text-decoration: none;">
                            <i class="fab fa-discord fa-lg color-light" aria-hidden="true"></i>
                         </a>
-                        <a href="/ref?rdc=https://twitter.com/FiveModsNET" title="Twitter" role="button" class="text-white rounded m-2" style="text-decoration: none;">
+                        <a href="https://twitter.com/FiveModsNET" title="Twitter" target="_blank" role="button" class="text-white rounded m-2" style="text-decoration: none;">
                            <i class="fab fa-twitter fa-lg color-light" aria-hidden="true"></i>
                         </a>
 
