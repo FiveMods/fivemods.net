@@ -86,7 +86,7 @@
         "did-you-mean" => "Mente du:", //Mente du:
         "you-searched" => "Du søkte for:", //Du søkte for:
         "fivem-support-yes" => "Spørsmål? Spør!", //Spørsmål? Spør!
-        "fivem-support-subline" => "Søk etter spørsmålet ditt og vi vil se om vi kan finne et svar.", //Søk etter spørsmålet ditt og vi vill se om vi kan findet et svar.
+        "fivem-support-subline" => "Søk etter spørsmålet ditt og vi vil se om vi kan finde et svar.", //Søk etter spørsmålet ditt og vi vill se om vi kan findet et svar.
         "go" => "Gå", //Gå
         "faq" => "FAQ", //Ofte Stilte Spørsmål (FAQ)
         "upgrade-acc" => "Oppgrader kontoen med partner programmet.", //Oppgrader kontoen med partner programmet.
