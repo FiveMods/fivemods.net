@@ -31,7 +31,7 @@
 <meta property="og:title" content="Proxy or VPN service detected - FiveMods.net">
 <meta property="og:description" content="Proxy or VPN service detected - FiveMods.net">
 <meta property="og:site_name" content="Proxy or VPN service detected - FiveMods.net">
-<meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_401.svg">
+<meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_proxy.svg">
 <meta name="theme-color" content="#ff8637">
 <meta name="msapplication-navbutton-color" content="#ff8637">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,7 +44,7 @@
 <div class="col-md-3"> </div>
 <div class="col-md-6 mt-2 mb-2 p-4">
  <div>
-<div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_404.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
+<div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_proxy.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
 <h3 class="fmAdH3 mt-5 pt-4">Proxy or VPN service detected</h3>
 <p class="fmAdjP">You are not allowed to enter FiveMods.net via a VPN or proxy.</p>
 </div>
