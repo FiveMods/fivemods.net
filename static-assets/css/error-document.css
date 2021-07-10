@@ -1,0 +1,59 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body::-webkit-scrollbar {
+	width: .5rem;
+}
+
+body::-webkit-scrollbar-track {
+	background: #17141f;
+}
+
+body::-webkit-scrollbar-thumb {
+	background: linear-gradient(-20deg, #fc6076 0%, #ff9a44 100%);
+}
+
+:root {
+	--v-fivemods-brand-color: #ff8637;
+	--v-global-light-bg-color: #f9f9f9;
+}
+
+a {
+	color: #188fff;
+}
+
+a:hover {
+	color: #188fff;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.error-container {
+    margin: .5rem 27.5vw;
+}
+
+.error-fm-logo {
+    margin: 1.25rem 0 2rem 0;
+}
+
+.error-container img {
+    height: 40px;
+}
+
+.error-container h3 {
+    font-weight: bold;
+    font-size: 1.35rem;
+    margin: 1rem 0;
+}
+
+@media screen and (max-width: 700px) {
+    .error-container {
+        margin: .5rem 5vw;
+    }
+}
