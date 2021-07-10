@@ -1,12 +1,12 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Master CI/CD Service
+name: Dev CI/CD Service [LIVE]
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
   push: 
-    branches: [ master ]
+    branches: [ dev-live ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -42,7 +42,7 @@ jobs:
       - name: SSH connect
         uses: garygrossgarten/github-action-ssh@v0.5.0
         with:
-          command: cat premotd.txt && echo "Starttime:" && date +"%T" && cd /var/www/fivemods/html/ && pwd && git stash && git pull origin master && echo "✅ Update done" && chmod 755 * -R && echo "Done, moved to live checkout on https://www.fivemods.net/." && echo "Stoptime:" && date +"%T" && exit
+          command: echo "Starttime:" && date +"%T" && cd /var/www/fivemods/dev-html/ && pwd && git stash && git pull origin dev-live && echo "✅ Update done" && chmod 755 * -R && echo "Done, moved to live checkout on https://have-fun-on.fivemods.net/." && echo "Stoptime:" && date +"%T" && exit
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
@@ -60,7 +60,7 @@ jobs:
       - name: Apache restart and apache run control
         uses: garygrossgarten/github-action-ssh@v0.5.0
         with:
-          command: systemctl status apache2 && systemctl restart apache2 && systemctl status apache2 && cd /var/www/fivemods/pre-live-html && cat CHECK.md && exit
+          command: systemctl status apache2 && systemctl restart apache2 && systemctl status apache2 && exit
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}

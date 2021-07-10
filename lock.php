@@ -41,15 +41,15 @@ function minifier($code)
     <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
-    <title>We will be right back - FiveMods.net</title>
+    <title>We will be right back - FiveMods</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="We'll be right back - FiveMods.net">
+    <meta name="description" content="We'll be right back - FiveMods">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://assets.fivemods.net/">
-    <meta property="og:title" content="We'll be right back - FiveMods.net">
-    <meta property="og:description" content="We'll be right back - FiveMods.net">
-    <meta property="og:site_name" content="We'll be right back - FiveMods.net">
+    <meta property="og:title" content="We'll be right back - FiveMods">
+    <meta property="og:description" content="We'll be right back - FiveMods">
+    <meta property="og:site_name" content="We'll be right back - FiveMods">
     <meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_401.svg">
     <meta name="theme-color" content="#ff8637">
     <meta name="msapplication-navbutton-color" content="#ff8637">
