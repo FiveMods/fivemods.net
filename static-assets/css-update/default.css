@@ -1,0 +1,100 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --color-fm-orange-dark: #E57C0B;
+    --color-fm-orange-light: #FF9A44;
+    --color-fm-pink-dark: #E94057;
+    --color-fm-pink-light: #FC6076;
+    --color-fm-dark: #17141F;
+    --color-fm-blue: #3C344F;
+    --color-white: #FFFFFF;
+    --color-grey-dark: #444444;
+}
+
+body::-webkit-scrollbar {
+	width: .5rem;
+	height: .5rem;
+}
+
+body::-webkit-scrollbar-track {
+	background: var(--color-fm-dark);
+}
+
+body::-webkit-scrollbar-thumb {
+	background: linear-gradient(-20deg, var(--color-fm-pink-light) 0%, var(--color-fm-orange-light) 100%);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-grey-dark);
+    text-align: left;
+    background-color: var(--color-white);
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.bg {
+    background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_multi_lighter.png');
+    background-repeat: repeat;
+    background-size: 75%;
+}
+
+.bg-dark {
+    background: url('/static-assets/img/background/icon_bg_dark_darkest.png');
+    /* background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png'); */
+    background-repeat: repeat;
+    background-size: 75%;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    padding: 0 1rem;
+    height: 90px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand div{
+    margin: .336rem 0;
+}
+
+.header-brand img {
+    height: 40px;
+}

@@ -14,6 +14,19 @@ $rdc = $CurPageURL;
 $currentPage = $_GET['page'];
 
 ?>
+
+<header class="bg-dark">
+   <div class="header-left">
+      <a class="header-brand" href="/">
+         <div>
+            <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" loading="lazy" alt="FiveMods Logo">
+         </div>
+      </a>
+   </div>
+   <div class="header-right"></div>
+</header>
+
+<!--
 <style>
 
 .fmrounded {
@@ -43,31 +56,31 @@ $currentPage = $_GET['page'];
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/partner-program/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['partner-program']; ?></h5> Join our partner program to benefit.
+                        <h5 class="mb-0"><?php // echo $lang['partner-program']; ?></h5> Join our partner program to benefit.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/famous-creator/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['famous-creator']; ?></h5> Check the popularist users and mods.
+                        <h5 class="mb-0"><?php // echo $lang['famous-creator']; ?></h5> Check the popularist users and mods.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/help-center/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['help-center']; ?></h5> Any questions, visit the help center.
+                        <h5 class="mb-0"><?php // echo $lang['help-center']; ?></h5> Any questions, visit the help center.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/user/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['all-user']; ?></h5> Interested in our community? Visit our users.
+                        <h5 class="mb-0"><?php // echo $lang['all-user']; ?></h5> Interested in our community? Visit our users.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/status/">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['status']; ?></h5> Check the FiveM and FiveMods status.
+                        <h5 class="mb-0"><?php // echo $lang['status']; ?></h5> Check the FiveM and FiveMods status.
                      </div>
                   </a>
                </div>
@@ -78,37 +91,37 @@ $currentPage = $_GET['page'];
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://fivem.net?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-download'] ?></h5> Download FiveM from the official website.
+                        <h5 class="mb-0"><?php // echo $lang['fivem-download'] ?></h5> Download FiveM from the official website.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://github.com/tabarra/txAdmin">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-txadmin'] ?></h5> The official txAdmin GitHub repositories.
+                        <h5 class="mb-0"><?php // echo $lang['fivem-txadmin'] ?></h5> The official txAdmin GitHub repositories.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-art-lin'] ?></h5> Download the official FiveM linux artifacts.
+                        <h5 class="mb-0"><?php // echo $lang['fivem-art-lin'] ?></h5> Download the official FiveM linux artifacts.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-art-win'] ?></h5> Download the official FiveM windows artifacts.
+                        <h5 class="mb-0"><?php // echo $lang['fivem-art-win'] ?></h5> Download the official FiveM windows artifacts.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://keymaster.fivem.net/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-keymaster'] ?></h5> Register an official FiveM keymaster.
+                        <h5 class="mb-0"><?php // echo $lang['fivem-keymaster'] ?></h5> Register an official FiveM keymaster.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://www.fivem.net/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
-                        <h5 class="mb-0"><?php echo $lang['fivem-website'] ?></h5> The official FiveM website.
+                        <h5 class="mb-0"><?php // echo $lang['fivem-website'] ?></h5> The official FiveM website.
                      </div>
                   </a>
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://discord.com/invite/fivem">
@@ -121,13 +134,13 @@ $currentPage = $_GET['page'];
             </li>
          </span>
          <?php
-
+         /*
          if (!empty($_COOKIE['f_val']) && !empty($_COOKIE['f_key'])) {
             echo '<form action="/upload/" method="post"><button type="submit" class="btn btn-outline-primary fmrounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          } else {
             echo '<form action="/account/sign-in/" method="post"><button type="submit" class="btn btn-outline-primary fmrounded mr-3"><i class="fas fa-cloud-upload-alt mr-1"></i>' . $lang['upload'] . '</button></form>';
          }
-
+         */
          ?>
          <form id="demo-2" action="/search/" method="GET">
             <div class="ui-widget">
@@ -137,6 +150,7 @@ $currentPage = $_GET['page'];
             </div>
          </form>
          <?php
+         /*
 
          require_once('./config.php');
 
@@ -187,8 +201,11 @@ $currentPage = $_GET['page'];
          //          <input type="text" name="currentPage" value="' . $currentPage . '" hidden>
          //          </form>';
          // }
+         */
          ?>
       </div>
    </div>
    </div>
 </nav>
+
+ -->
