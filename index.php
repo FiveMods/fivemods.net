@@ -320,9 +320,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
    <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
 
-   <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/style-adj.css">
    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/logo-animation.css">
-   <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/index.css">
+   <link rel="stylesheet" href="/static-assets/css-update/default.css?v=<?php echo time(); ?>">
 
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -491,15 +490,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
    <!-- jQuery is required -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous"></script>
 
    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
    <script type="text/javascript">
       $(document).ready(function() {

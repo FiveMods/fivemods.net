@@ -63,3 +63,38 @@ button, input[type="submit"], input[type="reset"] {
 	cursor: pointer;
 	outline: inherit;
 }
+
+.bg {
+    background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_multi_lighter.png');
+    background-repeat: repeat;
+    background-size: 75%;
+}
+
+.bg-dark {
+    background: url('/static-assets/img/background/icon_bg_dark_darkest.png');
+    /* background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_dark_darkest.png'); */
+    background-repeat: repeat;
+    background-size: 75%;
+}
+
+/* Header */
+
+header {
+    width: 100%;
+    padding: 0 1rem;
+    height: 90px;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-brand div{
+    margin: .336rem 0;
+}
+
+.header-brand img {
+    height: 40px;
+}
