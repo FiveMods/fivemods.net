@@ -1,6 +1,6 @@
 <?php
     $lang = array(
-	"title" => "FiveMods.net - FiveM ready voertuigen, mods, scripts, mappen en meer", // FiveMods.net - FiveM ready vehicles, mods, scripts, maps and more.
+	"title" => "FiveMods - FiveM ready voertuigen, mods, scripts, mappen en meer", // FiveMods - FiveM ready vehicles, mods, scripts, maps and more.
 	"categories" => "Categorieën",
         "partner-program" => "Partner Programma",
         "home" => "Home",
@@ -40,7 +40,7 @@
         "legal-notice" => "Juridische Kennisgeving",
         "cookie-consent" => "Cookie Toestemming",
         "status" => "Status",
-        "footer-subtext" => "FiveMods.net is niet aangesloten bij Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM of het CitizenFX Collective. Juridische informatie staat vermeld in de Servicevoorwaarden en Juridische Kennisgeving. <br> Alle spelinhoud en handelsmerken zijn eigendom van hun respectievelijke eigenaren - alle rechten voorbehouden", //FiveMods.net is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved
+        "footer-subtext" => "FiveMods is niet aangesloten bij Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM of het CitizenFX Collective. Juridische informatie staat vermeld in de Servicevoorwaarden en Juridische Kennisgeving. <br> Alle spelinhoud en handelsmerken zijn eigendom van hun respectievelijke eigenaren - alle rechten voorbehouden", //FiveMods is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved
         "download" => "Download",
         "download-now" => "Download nu",
         "submit" => "Verzend",
@@ -54,7 +54,7 @@
         "partner-text1" => "Makkelijke Aanmelding om partner toegang the krijgen", //Easy application to get the partner access.
         "partner-text2" => "Bekijk onze makkelijke aanmelding en word geverifieerd in ons partner programma, vergeet de voorwaarden niet te lezen", //Check out our easy application and get verified to the partner program, make sure to read the conditions.
         "partner-text3" => "Doe het zoals zij het deden - Doe nu mee", //Do it like they did - Join Now
-        "partner-text4" => "Om mee te doen aan het partner programma moet je het volgende halen:", //To get part of the partner program you have to achieve the following condidtions on FiveMods.net:
+        "partner-text4" => "Om mee te doen aan het partner programma moet je het volgende halen:", //To get part of the partner program you have to achieve the following condidtions on FiveMods:
         "partner-button" => "Word een Partner", //Join Partnering
         "partner-question1" => "Volledige Naam", //Full Name
         "partner-question2" => "Leeftijd", //Age
@@ -122,9 +122,9 @@
         "fivem-stuff" => "FiveM", //FiveM
         "corp-ident" => "Zakelijke Identiteit", //Corporate Identity
         "about-text1" => "Welkom bij FiveMods, jouw website voor de nieuwste mods, scripts, personages, voertuigen en meer.", //Welcome to FiveMods, your website for the brand newest mods, scripts, peds, vehicles and more.
-        "about-text2" => "FiveMods.net is <b> niet </b> aangesloten bij Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM of het CitizenFX Collective.", //FiveMods.net is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
-        "about-text3" => 'FiveMods.net is <b> niet </b> aangesloten bij <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/"> zap-hosting </a> of <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/"> tebex.io </a>.', //FiveMods.net is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
-        "about-corp" => "Onze Bedrijfsidentiteit is een belangrijk onderdeel van FiveMods.net", //Our Corporate Identity is an important part of FiveMods.net.
+        "about-text2" => "FiveMods is <b> niet </b> aangesloten bij Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM of het CitizenFX Collective.", //FiveMods is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
+        "about-text3" => 'FiveMods is <b> niet </b> aangesloten bij <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/"> zap-hosting </a> of <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/"> tebex.io </a>.', //FiveMods is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
+        "about-corp" => "Onze Bedrijfsidentiteit is een belangrijk onderdeel van FiveMods", //Our Corporate Identity is an important part of FiveMods.
         "about-legal" => "Alle juridische en belangrijke informatie vindt u in de onderstaande links.", //All legal and important information are found in the links below.
         "fivem-download" => "Download FiveM", //Download FiveM
         "fivem-txadmin" => "txAdmin", //txAdmin

@@ -168,12 +168,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 
       echo '
-         <title>' . $m_name . ' - FiveMods.net</title>
+         <title>' . $m_name . ' - FiveMods</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber1 . '">
          <meta property="og:title" content="' . $m_name . '">
          <meta property="og:description" content="' . $m_desc . '">
-         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:site_name" content="FiveMods">
          <meta property="og:image" content="' . $imgArray[0] . '">
       
          <meta name="twitter:card" content="summary_large_image">
@@ -187,7 +187,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    } elseif (strpos($actual_link, 'status') != FALSE) {
 
       echo '
-         <title>Statuspage - FiveMods.net</title>
+         <title>Statuspage - FiveMods</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -198,7 +198,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:url" content="https://fivemods.net/status/">
          <meta property="og:title" content="FiveM & FiveMods Service Status">
          <meta property="og:description" content="Your page for the current FiveM & FiveMods outages">
-         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:site_name" content="FiveMods">
 
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@FiveModsNET">
@@ -230,11 +230,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
       if (empty($user_username)) {
-         echo '<title>User - FiveMods.net</title>';
+         echo '<title>User - FiveMods</title>';
       } else {
 
          echo '
-         <title>' . $user_username . ' - FiveMods.net</title>
+         <title>' . $user_username . ' - FiveMods</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -245,7 +245,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:url" content="https://fivemods.net/user/' . $user_username . '">
          <meta property="og:title" content="' . $user_username . '">
          <meta property="og:description" content="' . $user_description . '">
-         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:site_name" content="FiveMods">
          <meta property="og:image" content="' . $user_picture . '">
 
          <meta name="twitter:card" content="summary_large_image">

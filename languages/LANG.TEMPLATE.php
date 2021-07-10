@@ -1,6 +1,6 @@
 <?php
 	$lang = array(
-		"title" => "", // FiveMods.net - FiveM ready vehicles, mods, scripts, maps and more.
+		"title" => "", // FiveMods - FiveM ready vehicles, mods, scripts, maps and more.
 		"categories" => "", // Categories
         "partner-program" => "", // Partner Program
         "home" => "", // Home
@@ -35,7 +35,7 @@
         "legal-notice" => "", // Legal Notice
         "cookie-consent" => "", // Cookie Consent
         "status" => "", // Status
-        "footer-subtext" => "", //FiveMods.net is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved
+        "footer-subtext" => "", //FiveMods is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved
         "download" => "", // Download
         "download-now" => "", // Download now
         "submit" => "", // Submit
@@ -49,7 +49,7 @@
         "partner-text1" => "", //Easy application to get the partner access.
         "partner-text2" => "", //Check out our easy application and get verified to the partner program, make sure to read the conditions.
         "partner-text3" => "", //Do it like they did - Join Now
-        "partner-text4" => "", //To get part of the partner program you have to achieve the following condidtions on FiveMods.net:
+        "partner-text4" => "", //To get part of the partner program you have to achieve the following condidtions on FiveMods:
         "partner-button" => "", //Join Partnering
         "partner-question1" => "", //Full Name
         "partner-question2" => "", //Age
@@ -117,9 +117,9 @@
         "fivem-stuff" => "", //FiveM
         "corp-ident" => "", //Corporate Identity
         "about-text1" => "", //Welcome to FiveMods, your website for the brand newest mods, scripts, peds, vehicles and more.
-        "about-text2" => "", //FiveMods.net is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
-        "about-text3" => '', //FiveMods.net is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
-        "about-corp" => "", //Our Corporate Identity is an important part of FiveMods.net.
+        "about-text2" => "", //FiveMods is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
+        "about-text3" => '', //FiveMods is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
+        "about-corp" => "", //Our Corporate Identity is an important part of FiveMods.
         "about-legal" => "", //All legal and important information are found in the links below.
         "fivem-download" => "", //Download FiveM
         "fivem-txadmin" => "txAdmin", //txAdmin

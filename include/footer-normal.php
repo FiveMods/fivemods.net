@@ -113,7 +113,7 @@
             <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
                   <p class="mt-2  text-white"><?php echo $lang['copyright']; ?></p>
-                  <small class="fst"><?php echo $lang['footer-subtext']; ?>. FiveM&#174; is &copy; 2016-<?php echo date("Y"); ?> by Cfx.re. <br> FiveMods.net distances itself from fivemods.de and its activities! </small>
+                  <small class="fst"><?php echo $lang['footer-subtext']; ?>. FiveM&#174; is &copy; 2016-<?php echo date("Y"); ?> by Cfx.re. <br> FiveMods distances itself from fivemods.de and its activities! </small>
                </div>
                <div class="col-md-4 text-xs-center text-lg-right text-secondary my-1">
                   <div class="btn-container  mt-1 text-md-right text-sm-center">
@@ -168,7 +168,7 @@
                         </div>
 
                         <div class="vr" style="color:#605f62;background-color:#605f62;"></div>
-                        <span title="FiveMods.net is secured via TLS/SSL encryption." style="font-size: 20px;" class="text-success rounded m-2 ml-2">
+                        <span title="FiveMods is secured via TLS/SSL encryption." style="font-size: 20px;" class="text-success rounded m-2 ml-2">
                            <i class="fab fa-expeditedssl color-light" aria-hidden="true"></i>
                         </span>
                      </div>

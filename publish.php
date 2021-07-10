@@ -22,7 +22,7 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
     if ($case == "LondonStudios") {
         $pTime = "-";
         $pDate = "03/31/2021";
-        $pCase = "FiveMods.net reached out to the FiveM content creator Marcus, known as LondonStudios. We have contacted him to upload his free mods to FiveMods.net on request. With the requirement that the website is free and the mods are not sold, he gave us his consent, see attachment / proof.";
+        $pCase = "FiveMods reached out to the FiveM content creator Marcus, known as LondonStudios. We have contacted him to upload his free mods to FiveMods on request. With the requirement that the website is free and the mods are not sold, he gave us his consent, see attachment / proof.";
         $pProof = "https://cdn.discordapp.com/attachments/662762008504041522/845266910518050856/marcusproof.png";
         $pAcc = "FiveMods Management";
     }
@@ -58,15 +58,15 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
     <link rel="apple-touch-icon" sizes="144x144" href="https://img-cdn.fivemods.net/unsafe/144x144/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-144x144.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-152x152.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/apple-touch-icon/apple-touch-icon-180x180.png" />
-    <title>Publishing permission <?php echo $case; ?> - FiveMods.net</title>
+    <title>Publishing permission <?php echo $case; ?> - FiveMods</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Publishing permission <?php echo $case; ?> - FiveMods.net">
+    <meta name="description" content="Publishing permission <?php echo $case; ?> - FiveMods">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fivemods.net/publish/londonstudios">
-    <meta property="og:title" content="Publishing permission <?php echo $case; ?> - FiveMods.net">
-    <meta property="og:description" content="Publishing permission <?php echo $case; ?> - FiveMods.net">
-    <meta property="og:site_name" content="4Publishing permission <?php echo $case; ?> - FiveMods.net">
+    <meta property="og:title" content="Publishing permission <?php echo $case; ?> - FiveMods">
+    <meta property="og:description" content="Publishing permission <?php echo $case; ?> - FiveMods">
+    <meta property="og:site_name" content="4Publishing permission <?php echo $case; ?> - FiveMods">
     <meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_401.svg">
     <meta name="theme-color" content="#ff8637">
     <meta name="msapplication-navbutton-color" content="#ff8637">
