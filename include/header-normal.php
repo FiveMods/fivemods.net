@@ -16,14 +16,115 @@ $currentPage = $_GET['page'];
 ?>
 
 <header class="bg-dark">
-   <div class="header-left">
-      <a class="header-brand" href="/">
-         <div>
-            <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" loading="lazy" alt="FiveMods Logo">
-         </div>
-      </a>
+   <div class="container">
+      <div class="header-left">
+         <a class="header-brand" href="/">
+            <div>
+               <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" loading="lazy" alt="FiveMods Logo">
+            </div>
+         </a>
+         <nav class="nav-header">
+            <div class="header-nav-container">
+               <a href="" class="header-nav-title"><?php echo $lang['community'];?></a>
+               
+               <div class="header-nav-dropdown">
+                  <a href="/partner-program/" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['partner-program']; ?></h5>
+                        Join our partner program to benefit.
+                     </div>
+                  </a>
+
+                  <a href="/famous-creator/" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['famous-creator']; ?></h5>
+                        Check the popularist users and mods.
+                     </div>
+                  </a>
+
+                  <a href="/help-center/" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['help-center']; ?></h5>
+                        Any questions, visit the help center.
+                     </div>
+                  </a>
+
+                  <a href="/user/" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['all-user']; ?></h5>
+                        Interested in our community? Visit our users.
+                     </div>
+                  </a>
+
+                  <a href="/status/" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['status']; ?></h5>
+                        Check the FiveM and FiveMods status.
+                     </div>
+                  </a>
+               </div>
+            </div>
+
+            <div class="header-nav-container">
+               <a href="" class="header-nav-title"><?php echo $lang['fivem-stuff']; ?> Links</a>
+               
+               <div class="header-nav-dropdown">
+                  <a href="/ref/?rdc=https://fivem.net?trace=fivemods.net" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['fivem-official']; ?></h5>
+                        Download FiveM from the official website.
+                     </div>
+                  </a>
+
+                  <a href="/ref/?rdc=https://github.com/tabarra/txAdmin" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['fivem-txadmin']; ?></h5>
+                        The official txAdmin GitHub repositories.
+                     </div>
+                  </a>
+
+                  <a href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/?trace=fivemods.net" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['fivem-art-lin']; ?></h5>
+                        Download the official FiveM linux artifacts.
+                     </div>
+                  </a>
+
+                  <a href="/ref/?rdc=https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/?trace=fivemods.net" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['fivem-art-win']; ?></h5>
+                        Download the official FiveM windows artifacts.
+                     </div>
+                  </a>
+
+                  <a href="/ref/?rdc=https://keymaster.fivem.net/?trace=fivemods.net" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['fivem-keymaster']; ?></h5>
+                        Register an official FiveM keymaster.
+                     </div>
+                  </a>
+
+                  <a href="/ref/?rdc=https://www.fivem.net/?trace=fivemods.net" class="header-nav-dropdown-item">
+                     <div>
+                        <h5><?php echo $lang['fivem-website']; ?></h5>
+                        The official FiveM website.
+                     </div>
+                  </a>
+
+                  <a href="/ref/?rdc=https://discord.com/invite/fivem" class="header-nav-dropdown-item">
+                     <div>
+                        <h5>FiveM Discord</h5>
+                        The official FiveM discord.
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </nav>
+      </div>
+      <div class="header-right">
+         
+      </div>
    </div>
-   <div class="header-right"></div>
 </header>
 
 <!--
@@ -51,7 +152,7 @@ $currentPage = $_GET['page'];
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
          <span class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownLbl" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo $lang['community'];?> </a>
+               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownLbl" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php //echo $lang['community'];?> </a>
                <div class="dropdown-menu dropdown-menu-right w-auto shadow p-0" id="navbarDropdown" aria-labelledby="navbarDropdownLbl">
                   <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/partner-program/">
                      <div class="flex-shrink-1 text-center px-2"></div>

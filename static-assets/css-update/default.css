@@ -64,6 +64,30 @@ button, input[type="submit"], input[type="reset"] {
 	outline: inherit;
 }
 
+@media (min-width:576px) {
+    .container {
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+    .container {
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1140px
+    }
+}
+
 .bg {
     background: url('https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(100)/https://www.fivemods.net/static-assets/img/background/icon_bg_multi_lighter.png');
     background-repeat: repeat;
@@ -91,10 +115,38 @@ header {
     align-items: center;
 }
 
+.header-left, .header-right {
+    display: flex;
+    flex-direction: row;
+}
+
 .header-brand div{
     margin: .336rem 0;
 }
 
 .header-brand img {
     height: 40px;
+}
+
+.header-nav-dropdown {
+    display: none;
+}
+
+.header-nav-title {
+    text-decoration: none;
+    color: var(--color-white);
+    font-size: 1rem;
+    padding: 0 .5rem;
+    margin-right: .25rem;
+}
+
+.header-nav-title:hover {
+    color: var(--color-white);
+}
+
+.nav-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 1.5rem;
 }
