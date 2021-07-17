@@ -50,7 +50,7 @@ $('#submitUpload').on("click", function(evt) {
             $('#fmUpload').prop('disabled', false)
             stop = true;
         } else if(modExtensions.indexOf(file['name'].split(".")[file['name'].split(".").length - 1]) == -1) {
-            $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
+            $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close-svg\" data-dismiss=\"alert\"><img src=\"/static-assets/img/cross.svg\">" +
                                     "<strong>Error! </strong> Stop trying to break things!</div>");
             $('#submitUpload').prop('disabled', false)
             $('#fmUpload').prop('disabled', false)
