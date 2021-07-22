@@ -1,6 +1,6 @@
 <?php
 	$lang = array(
-		"title" => "FiveMods.net - FiveM 模组、载具、插件和地图的终极资源平台", // FiveMods.net - FiveM ready vehicles, mods, scripts, maps and more.
+		"title" => "FiveMods - FiveM 模组、载具、插件和地图的终极资源平台", // FiveMods - FiveM ready vehicles, mods, scripts, maps and more.
 		"categories" => "类别",
         "partner-program" => "合作伙伴计划",
         "home" => "主页",
@@ -40,7 +40,7 @@
         "legal-notice" => "法律资讯",
         "cookie-consent" => "Cookie 设定",
         "status" => "状态",
-        "footer-subtext" => "FiveMods.net 和 Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM 以及 the CitizenFX Collective没有任何的关联及附属关系。", //FiveMods.net is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved
+        "footer-subtext" => "FiveMods 和 Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM 以及 the CitizenFX Collective没有任何的关联及附属关系。", //FiveMods is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved
         "download" => "下载",
         "submit" => "提交",
         "see-benefits" => "查看待遇", //See Your Benefits
@@ -53,7 +53,7 @@
         "partner-text1" => "填写合作伙伴申请表格！", //Easy application to get the partner access.
         "partner-text2" => "在此可以填写合作伙伴申请表格。请谨记阅读条款！", //Check out our easy application and get verified to the partner program, make sure to read the conditions.
         "partner-text3" => "成为我们的下一个合作伙伴吧！", //Do it like they did - Join Now
-        "partner-text4" => "你需要达到以下要求方能申请成为合作伙伴", //To get part of the partner program you have to achieve the following condidtions on FiveMods.net:
+        "partner-text4" => "你需要达到以下要求方能申请成为合作伙伴", //To get part of the partner program you have to achieve the following condidtions on FiveMods:
         "partner-button" => "成为合作伙伴", //Join Partnering
         "partner-question1" => "你的全名", //Full Name
         "partner-question2" => "你的年龄", //Age
@@ -120,9 +120,9 @@
         "fivem-stuff" => "FiveM", //FiveM
         "corp-ident" => "品牌识别", //Corporate Identity
         "about-text1" => "欢迎来到FiveMods, 您专属的模组，插件，人物，载具和更多资源的平台。", //Welcome to FiveMods, your website for the brand newest mods, scripts, peds, vehicles and more.
-        "about-text2" => "FiveMods.net 与 Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective 并<b>没有任何连附</b>关系", //FiveMods.net is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
-        "about-text3" => 'FiveMods.net 与 <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> 或 <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a> <b>并非附属或关系</b>.', //FiveMods.net is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
-        "about-corp" => "品牌识别对于 FiveMods.net 非常重要。", //Our Corporate Identity is an important part of FiveMods.net.
+        "about-text2" => "FiveMods 与 Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective 并<b>没有任何连附</b>关系", //FiveMods is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
+        "about-text3" => 'FiveMods 与 <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> 或 <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a> <b>并非附属或关系</b>.', //FiveMods is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
+        "about-corp" => "品牌识别对于 FiveMods 非常重要。", //Our Corporate Identity is an important part of FiveMods.
         "about-legal" => "所有声明及重要资讯已在以下列出。", //All legal and important information are found in the links below.
         "fivem-download" => "下载FiveM", //Download FiveM
         "fivem-txadmin" => "txAdmin 管理员", //txAdmin

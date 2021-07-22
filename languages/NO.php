@@ -1,6 +1,6 @@
 <?php
 	$lang = array(
-		"title" => "FiveMods.net - FiveM klare kjøretøy, mods, skript, kart og mer.", // FiveMods.net - FiveM klare kjøretøy, mods, skript, kart og mer.
+		"title" => "FiveMods - FiveM klare kjøretøy, mods, skript, kart og mer.", // FiveMods - FiveM klare kjøretøy, mods, skript, kart og mer.
 		"categories" => "Kategorier", // Kategorier
         "partner-program" => "Partner Program", // Partner Program
         "home" => "Hjem", // Hjem
@@ -35,7 +35,7 @@
         "legal-notice" => "Juridisk merknad", // Juridisk merknad
         "cookie-consent" => "Informasjonskapsler", // Informasjonskapsler
         "status" => "Status", // Status
-        "footer-subtext" => "FiveMods.net er ikke tilknyttet Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM eller CitizenFX Collective. Juridisk informasjon er listet i Vilkår og betingelser og Juridisk bemerkning.<br>Alt av spillinnhold og varemerker er eiendom av de respektive eierene - alle rettigheter forbeholdes", //FiveMods.net er ikke tilknyttet Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM eller CitizenFX Collective. Juridisk informasjon er listet i Vilkår og betingelser og Juridisk bemerkning.<br>Alt av spillinnhold og varemerker er eiendom av de respektive eierene - alle rettigheter forbeholdes
+        "footer-subtext" => "FiveMods er ikke tilknyttet Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM eller CitizenFX Collective. Juridisk informasjon er listet i Vilkår og betingelser og Juridisk bemerkning.<br>Alt av spillinnhold og varemerker er eiendom av de respektive eierene - alle rettigheter forbeholdes", //FiveMods er ikke tilknyttet Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM eller CitizenFX Collective. Juridisk informasjon er listet i Vilkår og betingelser og Juridisk bemerkning.<br>Alt av spillinnhold og varemerker er eiendom av de respektive eierene - alle rettigheter forbeholdes
         "download" => "Last ned", // Last ned
         "download-now" => "Last ned nå", // Last ned nå
         "submit" => "Send inn", // Send inn
@@ -49,7 +49,7 @@
         "partner-text1" => "Enkel søknad for å få partner tilgang.", //Enkel søknad for å få partner tilgang.
         "partner-text2" => "Sjekk ut vår enkle søknad for å bli verifisert til Partner Programmet, husk å lese vilkårene.", //Sjekk ut vår enkle søknad for å bli verifisert til partner programmet, husk å lese vilkårene.
         "partner-text3" => "Gjør det som de gjorde - Bli med nå", //Gjør det som de gjorde - Bli med nå
-        "partner-text4" => "For å ta plass i Partner Programmet må du oppnå disse vilkårene på FiveMods.net:", // For å ta plass i partner programmet må du oppnå disse vilkårene på FiveMods.net:
+        "partner-text4" => "For å ta plass i Partner Programmet må du oppnå disse vilkårene på FiveMods:", // For å ta plass i partner programmet må du oppnå disse vilkårene på FiveMods:
         "partner-button" => "Bli en partner", //Bli en partner
         "partner-question1" => "Fullt navn", //Fult navn
         "partner-question2" => "Alder", //Alder
@@ -86,7 +86,7 @@
         "did-you-mean" => "Mente du:", //Mente du:
         "you-searched" => "Du søkte for:", //Du søkte for:
         "fivem-support-yes" => "Spørsmål? Spør!", //Spørsmål? Spør!
-        "fivem-support-subline" => "Søk etter spørsmålet ditt og vi vil se om vi kan finde et svar.", //Søk etter spørsmålet ditt og vi vill se om vi kan findet et svar.
+        "fivem-support-subline" => "Søk etter spørsmålet ditt og vi vil se om vi kan finne et svar.", //Søk etter spørsmålet ditt og vi vill se om vi kan findet et svar.
         "go" => "Gå", //Gå
         "faq" => "FAQ", //Ofte Stilte Spørsmål (FAQ)
         "upgrade-acc" => "Oppgrader kontoen med partner programmet.", //Oppgrader kontoen med partner programmet.
@@ -117,9 +117,9 @@
         "fivem-stuff" => "FiveM", //FiveM
         "corp-ident" => "Bedriftsidentitet", //Bedriftsidentitet
         "about-text1" => "Velkommen til FiveMods, din nettside for de nyeste modsene, skriptene, fotgjengerene, kjøretøyene og mer.", //Welcome to FiveMods, your website for the brand newest mods, scripts, peds, vehicles and more.
-        "about-text2" => "FiveMods.net er <b>ikke</b> tilknyttet Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM eller CitizenFX Collective.", //FiveMods.net is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
-        "about-text3" => 'FiveMods.net er <b>ikke</b> tilknyttet <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> eller <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.', //FiveMods.net is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
-        "about-corp" => "Bedriftsidentiteten vår er en viktig del av FiveMods.net.", //Our Corporate Identity is an important part of FiveMods.net.
+        "about-text2" => "FiveMods er <b>ikke</b> tilknyttet Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM eller CitizenFX Collective.", //FiveMods is <b>not</b> affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective.
+        "about-text3" => 'FiveMods er <b>ikke</b> tilknyttet <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> eller <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.', //FiveMods is <b>not</b> affiliated with <a href="https://fivemods.net/ref/?rdc=https://zap-hosting.com/">zap-hosting</a> or <a href="https://fivemods.net/ref/?rdc=https://www.tebex.io/">tebex.io</a>.
+        "about-corp" => "Bedriftsidentiteten vår er en viktig del av FiveMods.", //Our Corporate Identity is an important part of FiveMods.
         "about-legal" => "Alt av juridisk og viktig informasjon kan bli funnet i linkene nedenfor", //All legal and important information are found in the links below.
         "fivem-download" => "Last ned FiveM", //Download FiveM
         "fivem-txadmin" => "txAdmin", //txAdmin

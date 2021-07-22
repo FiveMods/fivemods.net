@@ -117,7 +117,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 <html lang="en" dir="<?php if ($_COOKIE['language_preference'] == "IL") { echo "rtl";} else { echo "ltr"; } ?>">
 
 <head>
-   <script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>
    <?php
 
    if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
@@ -127,6 +126,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    if ($_GET['pri'] == "all") {
       include('./include/gStatics.html'); 
       echo '<script>console.log("Pri: all");</script>';
+      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
+      echo '<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>';
    }
 
    ?>
@@ -167,12 +168,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
 
       echo '
-         <title>' . $m_name . ' - FiveMods.net</title>
+         <title>' . $m_name . ' - FiveMods</title>
          <meta property="og:type" content="website">
          <meta property="og:url" content="http://fivemods.net/product/' . $urlNumber1 . '">
          <meta property="og:title" content="' . $m_name . '">
          <meta property="og:description" content="' . $m_desc . '">
-         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:site_name" content="FiveMods">
          <meta property="og:image" content="' . $imgArray[0] . '">
       
          <meta name="twitter:card" content="summary_large_image">
@@ -186,7 +187,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    } elseif (strpos($actual_link, 'status') != FALSE) {
 
       echo '
-         <title>Statuspage - FiveMods.net</title>
+         <title>Statuspage - FiveMods</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -197,7 +198,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:url" content="https://fivemods.net/status/">
          <meta property="og:title" content="FiveM & FiveMods Service Status">
          <meta property="og:description" content="Your page for the current FiveM & FiveMods outages">
-         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:site_name" content="FiveMods">
 
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@FiveModsNET">
@@ -229,11 +230,11 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       echo '<script>console.log("User: ' . $urlName . '");</script>';
 
       if (empty($user_username)) {
-         echo '<title>User - FiveMods.net</title>';
+         echo '<title>User - FiveMods</title>';
       } else {
 
          echo '
-         <title>' . $user_username . ' - FiveMods.net</title>
+         <title>' . $user_username . ' - FiveMods</title>
          <meta name="msapplication-config" content="none">
          <meta name="theme-color" content="#FF8637">
          <meta name="msapplication-navbutton-color" content="#FF8637">
@@ -244,7 +245,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:url" content="https://fivemods.net/user/' . $user_username . '">
          <meta property="og:title" content="' . $user_username . '">
          <meta property="og:description" content="' . $user_description . '">
-         <meta property="og:site_name" content="FiveMods.net">
+         <meta property="og:site_name" content="FiveMods">
          <meta property="og:image" content="' . $user_picture . '">
 
          <meta name="twitter:card" content="summary_large_image">
@@ -329,6 +330,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+   <script type="text/javascript">
+      var infolinks_pid = 3332544;
+      var infolinks_wsid = 0;
+   </script>
+   
 
    <script type="text/javascript">
       window._mNHandle = window._mNHandle || {};
@@ -569,6 +576,23 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
       // add padding top to show content behind navbar
       $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
    </script>
+   <!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.fivemods.net/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//stats.fivemods.net/matomo.php?idsite=2&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Matomo Code -->
 
 </body>
 
