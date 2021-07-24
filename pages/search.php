@@ -218,7 +218,7 @@ include('./include/header-banner.php');
                      <h5 class="card-topic text text-primary"><?php echo $display_users['name']; ?></h5>
                      <small class="text text-light"><?php echo $premium; ?></small>
                      <!--</a>-->
-                     <p class="card-text"><?php echo $display_users['description']; ?></p>
+                     <p class="card-text"><?php echo htmlspecialchars($display_users['description']); ?></p>
                      <div class="d-flex justify-content-between align-items-center">
                         <a href="/user/<?php echo $display_users['name']; ?>/" class="btn btn-block btn-sm btn-outline-success"><?php echo $lang['to-profile']; ?></a>
                      </div>
