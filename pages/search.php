@@ -270,7 +270,7 @@ include('./include/header-banner.php');
                         <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
                            <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                         </a>
-                        <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
+                        <p class="card-text"><?php echo htmlspecialchars(str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "...")); ?></p>
                         <div class="d-flex justify-content-between align-items-center">
                            <?php
 
