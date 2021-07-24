@@ -227,11 +227,11 @@ if (isset($_SESSION['downloadMod'])) {
                                 <a href="/product/<?php echo $article['m_id']; ?>/" class="<?php echo $css_text ?>">
                                     <h5 class="card-topic"><?php echo $article['m_name']; ?></h5>
                                 </a>
-                                <p class="card-text"><?php echo str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "..."); ?></p>
+                                <p class="card-text"><?php echo htmlspecialchars(str_replace("<br />", " ", substr($article['m_description'], 0, 130) . "...")); ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <form action="/helper/manage.php?o=index&download=<?php echo $article['m_id']; ?>" method="post">
-                                            <button type="submit" class="btn btn-sm btn-outline-success"><?php echo $lang['download']; ?></button>
+                                            <button type="submit" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['download']; ?></button>
                                         </form>
                                         <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button>
                                     </div>

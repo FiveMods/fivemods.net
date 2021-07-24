@@ -581,6 +581,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
   var _paq = window._paq = window._paq || [];
   /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
   _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+  _paq.push(['setLinkClasses', "matomo_download"]);
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
