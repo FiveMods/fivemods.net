@@ -34,7 +34,7 @@ if (htmlspecialchars($_POST['contact'])) {
 } elseif (isset($_GET['purchase']) and isset($_GET['o'])) {
     purchaseMod($pdo, $pdoPayment, $uid);
 } else {
-    header('Location: ../error/400/403');
+    header('Location: ../error/400/403.html');
     exit();
     die();
 }
