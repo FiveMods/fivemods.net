@@ -120,13 +120,13 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <?php
 
    if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
-      include('./include/gStatics.html');  
+      include('./include/gStatics.html');
+      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
    }
 
    if ($_GET['pri'] == "all") {
       include('./include/gStatics.html'); 
       echo '<script>console.log("Pri: all");</script>';
-      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
       echo '<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>';
    }
 
