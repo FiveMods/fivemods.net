@@ -21,7 +21,7 @@ $passwordP = $mysqlPayment['password'];
 $dbnameP = $mysqlPayment['dbname'];
 
 // disabled cuz broken
-// $pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
+$pdoPayment = new PDO("mysql:host=$servernameP;dbname=$dbnameP", $usernameP, $passwordP);
 
 if (htmlspecialchars($_POST['contact'])) {
     contact($pdo, $uid);

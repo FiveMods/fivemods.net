@@ -409,4 +409,4 @@ include('./include/header-banner.php');
     });
 </script>
 
-<script src="https://fivemods.net/static-assets/js/upload.js"></script>
+<script src="/static-assets/js/upload.js?v=<?php echo time(); ?>"></script>
