@@ -10,7 +10,7 @@ if (!empty($_GET['directPage'])) {
 
 if ($_POST['prefCcGiven'] == 1) {
    echo '<script>console.log("prefCcGiven: 1")</script>';
-   header('location: /?cc=given&rdcURI=<?php echo $actual_link; ?>?prel=1');
+   header('location: /?cc=given&rdcURI=' . $actual_link . '?prel=1');
    $cookie_name = "CONSENT";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
@@ -120,13 +120,13 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <?php
 
    if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
-      include('./include/gStatics.html');  
+      include('./include/gStatics.html');
+      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
    }
 
    if ($_GET['pri'] == "all") {
       include('./include/gStatics.html'); 
       echo '<script>console.log("Pri: all");</script>';
-      echo '<script async src="https://arc.io/widget.min.js#6GVgVmiV" type="application/javascript"></script>';
       echo '<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>';
    }
 
