@@ -10,7 +10,7 @@ if (!empty($_GET['directPage'])) {
 
 if ($_POST['prefCcGiven'] == 1) {
    echo '<script>console.log("prefCcGiven: 1")</script>';
-   header('location: /?cc=given&rdcURI=<?php echo $actual_link; ?>?prel=1');
+   header('location: /?cc=given&rdcURI=' . $actual_link . '?prel=1');
    $cookie_name = "CONSENT";
    $cookie_value = "1";
    setcookie($cookie_name, $cookie_value, time() + (86400 * 30 * 365), "/"); // 86400 = 1 day
@@ -292,18 +292,18 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
    <?php
    if (!empty($_COOKIE['fm_design'])) {
       if ($_COOKIE['fm_design'] == "dark") {
-         echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css-dark/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css-dark/style.css">';
          $css_text = 'text text-muted';
          $darkmode = 'bg-dark';
       } elseif ($_COOKIE['fm_design'] == "normal") {
-         echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
          $css_text = 'text text-muted';
       } elseif (empty($_COOKIE['fm_design'])) {
-         echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">';
+         echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
          $css_text = 'text text-muted';
       }
    } else {
-      echo '<link rel="stylesheet" id="pagestyle" href="https://assets.fivemods.net/static-assets/css/style.css">';
+      echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css?v=' . time() . '">';
       $css_text = 'text text-muted';
    }
    ?>

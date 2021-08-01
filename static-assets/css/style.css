@@ -5242,8 +5242,9 @@ input[type=submit].btn-block {
 .alert {
     position: relative;
     padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent
+    margin: 1rem 0;
+    border-radius: 8px;
+    border: none;
 }
 
 .alert-heading {
@@ -5259,6 +5260,14 @@ input[type=submit].btn-block {
 }
 
 .alert-dismissible .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .75rem 1.25rem;
+    color: inherit
+}
+
+.alert-dismissible .close-svg {
     position: absolute;
     top: 0;
     right: 0;
@@ -5337,9 +5346,16 @@ input[type=submit].btn-block {
 }
 
 .alert-danger {
-    color: #831e1e;
-    background-color: #fed7d7;
-    border-color: #fec8c8
+    color: #9F2424 !important;
+    background-color: #FEC8C8 !important;
+}
+
+.alert-danger .close-svg #background-ellipse {
+    fill: #FFA8A8;
+}
+
+.alert-danger .close-svg main-cross {
+    fill: #CA3B3B;
 }
 
 .alert-danger hr {
@@ -5696,6 +5712,34 @@ button.close {
     -webkit-appearance: none
 }
 
+.close-svg {
+    float: right;
+    font-size: 1.3125rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5
+}
+
+.close-svg:not(:disabled):not(.disabled) {
+    cursor: pointer
+}
+
+.close-svg:not(:disabled):not(.disabled):focus,
+.close-svg:not(:disabled):not(.disabled):hover {
+    color: #000;
+    text-decoration: none;
+    opacity: .75
+}
+
+button.close-svg {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none
+}
+
 .modal-open {
     overflow: hidden
 }
@@ -5811,6 +5855,11 @@ button.close {
 }
 
 .modal-header .close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto
+}
+
+.modal-header .close-svg {
     padding: 1rem;
     margin: -1rem -1rem -1rem auto
 }
