@@ -371,7 +371,7 @@ include('./include/header-banner.php');
                                     </div>
                                 </div>
                                 <h6 class="text-center mb-4 pt-3 text-muted" style="font-size: 10px;">
-                                    With uploading an resource you agree to our <a href="/upload-policy/">Upload policy</a>.
+                                    With uploading a resource you agree to our <a href="/upload-policy/">Upload policy</a>.
                                     Failures can result in withdrawal of monitarization, a removal of the specific mod or your account.
                                 </h6>
                                 <div class="d-flex justify-content-center">

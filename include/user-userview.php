@@ -354,7 +354,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
             }
             echo '
             </div>
-            <p>' . $description . '</p></div>';
+            <p>'; str_replace("&amp;", "&", $description); echo '</p></div>';
             }
             ?>
       </div>
