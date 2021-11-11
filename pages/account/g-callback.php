@@ -59,6 +59,7 @@ if($userDB->rowCount() > 0) {
 
 	header("Location: /account/");
 } else {
+
 	$givenname = $userData['givenName'];
 	$name = $userData['name'];
 	$email = $userData['email'];
@@ -84,7 +85,7 @@ if($userDB->rowCount() > 0) {
 
   //Save the data using file_put_contents.
   $save = file_put_contents($fileName, $downloadedFileContents);
-
+	print_r($save);
   //Check to see if it failed to save or not.
   if ($save === false) {
       throw new Exception('Failed to save file to: ', $fileName);
@@ -101,7 +102,6 @@ if($userDB->rowCount() > 0) {
 
   setcookie("f_key", $sessionKey, time() + 3600 * 24 * 30, "/");
   setcookie("f_val", time (), time() + 3600 * 24 * 30, "/");
-  echo time();
 
   $sessionInsert = $pdo->prepare("INSERT INTO sessions (uuid, newid) VALUES (?, ?)");
   $sessionInsert->execute(array($v5uuid, $sessionKey));
@@ -118,7 +118,7 @@ if($userDB->rowCount() > 0) {
   $insertUser = $pdoPayment->prepare("INSERT INTO payment_user (oauth_provider, oauth_id, uuid, username, email, country_code) VALUES (:provider, :id, :uuid, :username, :email, :country)");
   $insertUser->execute(array('provider' => "Google", 'id' => $uid, 'uuid' => $v5uuid, 'username' => $uname, 'email' => $email, 'country' => $userData['locale']));
 
-  
+
   $_SESSION['username'] = $uname;
 
 	header("Location: /pages/account/helper/account.check.php");
