@@ -24,7 +24,7 @@
  */
 class Slimdown {
 	public static $rules = array (
-		'/(#+)(.*)/' => 'self::header',                           // headers
+		'/(##+)(.*)/' => 'self::header',                           // headers
         '/(^(?!\()|\s)((https?).*\.(jpe?g|bmp|png))/' => "<img src=\"https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">",
         '/(^(?!\()|\s)((https?).*\.(gif))/' => "<img src=\"$2\" loading=lazy alt=\"$2\" style=\"max-width: 100%;\">",
         '/(^(?!\()|\s)(https?:\/\/(?:www\.|(?!www))(youtube\.com\/watch\?v\=|youtu\.be\/))([A-Za-z0-9-_][^\s|<]{1,})/' => "<iframe id=\"ytplayer\" allowFullScreen=\"allowFullScreen\" type=\"text/html\" width=\"544\" height=\"306\" src=\"https://www.youtube.com/embed/$4\"></iframe>",
@@ -46,7 +46,7 @@ class Slimdown {
 	);
 
 	private static function para ($regs) {
-		
+
 		$line = $regs[1];
 		$trimmed = trim ($line);
 		if (preg_match ('/^<\/?(ul|ol|li|h|p|bl)/', $trimmed)) {
@@ -73,6 +73,7 @@ class Slimdown {
 	private static function header ($regs) {
 		list ($tmp, $chars, $header) = $regs;
 		$level = strlen ($chars);
+
 		return sprintf ('<h%d>%s</h%d>', $level, trim ($header), $level);
 	}
 
