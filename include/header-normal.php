@@ -105,7 +105,7 @@ $currentPage = $_GET['page'];
                         <h5 class="mb-0"><?php echo $lang['fivem-keymaster'] ?></h5> Register an official FiveM keymaster.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://www.fivem.net/?trace=fivemods.net">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/ref/?rdc=https://fivem.net/?trace=fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['fivem-website'] ?></h5> The official FiveM website.
