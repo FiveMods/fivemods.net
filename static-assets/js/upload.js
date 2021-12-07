@@ -117,7 +117,7 @@ $('#submitUpload').on("click", function(evt) {
                             $('#pills-modupload').tab("show")
                         }, 1000);
                     } else {
-                        alert("Something went wrong. If this message keeps occuring, please message our support team.")
+                        alert("Something went wrong. If this message keeps occuring, please message our support team. (ID: " + id + ")")
                         $('#submitUpload').prop('disabled', false)
                         $('#fmUpload').prop('disabled', false)
                     }
@@ -285,7 +285,7 @@ $('#form-upload').on("submit", function(evt) {
                 window.location.replace("https://fivemods.net/logout?url=invalid");
             } else if(res == "ERR_EMPTY") {
                 err = 1;
-                errtext = "Something went wrong, please try it again!";
+                errtext = "Something went wrong, please try it again! (ID: " + id + ")";
             }
             if(err == 1) {
                 $('#status-bar').html("  <div class=\"alert alert-danger\">" +
@@ -300,7 +300,7 @@ $('#form-upload').on("submit", function(evt) {
                     $('#pills-done').tab("show")
                 }, 1000);
             } else {
-                alert("Something went wrong. If this message keeps occuring, please message our support team.")
+                alert("Something went wrong. If this message keeps occuring, please message our support team. (ID: " + id + ")")
                 $('#submitBtn').prop('disabled', false)
             }
         }
