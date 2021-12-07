@@ -34,7 +34,7 @@ $('#submitUpload').on("click", function(evt) {
 
     const files = document.querySelector('#fmUpload[type=file]').files;
     const formData = new FormData();
-    
+
     if(uploadMod != null) {
         file = uploadMod;
     } else {
@@ -42,7 +42,7 @@ $('#submitUpload').on("click", function(evt) {
     }
 
     if(file != null) {
-        
+
         if(file['size'] > 100000000) {
             $('#status-bar').html("<div class=\"alert alert-danger\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\">x</button>" +
                                     "<strong>Error! </strong> Your file is too powerful (100MB upload limit reached)!</div>");
@@ -60,7 +60,7 @@ $('#submitUpload').on("click", function(evt) {
 
         formData.append('files[]', file)
         formData.append('id', id)
-        
+
         if(!stop) {
             $.ajax({
                 xhr: function() {
@@ -110,14 +110,14 @@ $('#submitUpload').on("click", function(evt) {
                                     "</div>");
                         $('#submitUpload').prop('disabled', false)
                         $('#fmUpload').prop('disabled', false)
-                    } else if (res == "SUCCESS"){
+                    } else if (res.includes("SUCCESS")){
                         setTimeout(() => {
                             $('#status-bar').html(" ");
                             $('#pills-home').hide("slow")
                             $('#pills-modupload').tab("show")
                         }, 1000);
                     } else {
-                        alert("Something went wrong. If this message keeps occuring, please message our support team. (ID: " + id + ")")
+                        alert("Something went wrong. If this message keeps occuring, please message our support team. (ID: " + id + " | Message: " + res + ")")
                         $('#submitUpload').prop('disabled', false)
                         $('#fmUpload').prop('disabled', false)
                     }
@@ -132,7 +132,7 @@ $('#submitUpload').on("click", function(evt) {
         $('#submitUpload').prop('disabled', false)
         $('#fmUpload').prop('disabled', false)
     }
-    
+
 });
 
 picExtensions = ["png", "jpg", "webp", "jpeg", "PNG", "JPG", "WEBP", "JPEG"];
@@ -147,7 +147,7 @@ $('#submitPictures').on("click", function(evt) {
     const formData = new FormData();
 
     if(files.length > 0) {
-        
+
         for (let i = 0; i < files.length; i++) {
             let file = files[i];
 
@@ -234,7 +234,7 @@ $('#submitPictures').on("click", function(evt) {
                             $('#pills-form').tab("show")
                         }, 1000);
                     }
-                    
+
                 }
             });
         }
@@ -259,7 +259,7 @@ $('#form-upload').on("submit", function(evt) {
     var category = $('#category').val();
     var tags = $('#choices-multiple-remove-button').val();
     var required = $('#required').val();
-    
+
     formData.append('id', id)
     formData.append('title', title)
     formData.append('description', description)
@@ -285,7 +285,7 @@ $('#form-upload').on("submit", function(evt) {
                 window.location.replace("https://fivemods.net/logout?url=invalid");
             } else if(res == "ERR_EMPTY") {
                 err = 1;
-                errtext = "Something went wrong, please try it again! (ID: " + id + ")";
+                errtext = "Something went wrong, please try it again! (ID: " + id + " | Message: " + res + ")";
             }
             if(err == 1) {
                 $('#status-bar').html("  <div class=\"alert alert-danger\">" +
@@ -293,19 +293,19 @@ $('#form-upload').on("submit", function(evt) {
                                 "<strong>Error! </strong>" + errtext +
                             "</div>");
                 $('#submitBtn').prop('disabled', false)
-            } else if (res == "SUCCESS"){
+            } else if (res.includes("SUCCESS")){
                 setTimeout(() => {
                     $('#status-bar').html(" ");
                     $('#pills-form').hide("slow")
                     $('#pills-done').tab("show")
                 }, 1000);
             } else {
-                alert("Something went wrong. If this message keeps occuring, please message our support team. (ID: " + id + ")")
+                alert("Something went wrong. If this message keeps occuring, please message our support team. (ID: " + id + " | Message: " + res + ")")
                 $('#submitBtn').prop('disabled', false)
             }
         }
     });
-            
+
 })
 
 
