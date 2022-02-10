@@ -233,7 +233,7 @@ if (isset($_SESSION['downloadMod'])) {
                                 <p class="card-text">SmartFires is a standalone Fire Script with a ton of features, including automatic fires and much more! Get it now.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <form action="/helper/manage.php?o=index&download=<?php echo $article['m_id']; ?>" method="post">
+                                        <form action="https://store.londonstudios.net/category/1704957/" method="post">
                                             <button type="submit" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></button>
                                         </form>
                                         <!-- <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button> -->
