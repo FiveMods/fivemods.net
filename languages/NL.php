@@ -220,5 +220,6 @@
         "no-income" => "Er is geen huidig inkomen.", // There is no current income.
         "purchased-items" => "Gekochte Items", // Purchased Items
         "my-uploads" => "Mijn Uploads", // My Uploads
+        "purchase" => "Aankoop", // Purchase
     );
 ?>

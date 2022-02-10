@@ -215,5 +215,6 @@
         "no-income" => "אין הכנסה", // There is no current income.
         "purchased-items" => "הקניות שלי'", // Purchased Items
         "my-uploads" => "העלאות שלי", // My Uploads
+        "purchase" => "קנה", // Purchase
     );
 ?>

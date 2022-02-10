@@ -213,5 +213,6 @@
         "no-income" => "Al momento non ci sono guadagni", // There is no current income.
         "purchased-items" => "Oggetti Comprati", // Purchased Items
         "my-uploads" => "I miei Upload", // My Uploads
+        "purchase" => "acquisto",
     );
 ?>
