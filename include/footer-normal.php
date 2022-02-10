@@ -27,7 +27,7 @@
                   <address class="color-light-20 mt-4">
                      <a href="mailto://contact@fivemods.net" style="color:lightgray;">contact@fivemods.net</a>
                   </address>
-                  <small style="color:#605f62;">live production <a href="/ref?rdc=https://github.com/FiveMods/fivemods.net/releases/tag/v1.2.65-stable">v1.2.65-stable</a></small>
+                  <small style="color:#605f62;">live production <span style="color: gray;">Running on v<?php echo shell_exec('cd /var/www/fivemods/html/ && git rev-list --count master') ?></span></small>
                </div>
                <div class="col-xs-6 col-sm-3">
                   <h4 class="my-2"><?php echo $lang['about-us']; ?></h4>
