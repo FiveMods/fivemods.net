@@ -7,15 +7,6 @@
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
-    <div id="684841532">
-        <script type="text/javascript">
-            try {
-                window._mNHandle.queue.push(function() {
-                    window._mNDetails.loadTag("684841532", "160x600", "684841532");
-                });
-            } catch (error) {}
-        </script>
-    </div>
 </div>
 <div class="rightBasedAds" style="right: 0px; position: fixed; text-align: center; top: 20%;margin-right:3%;">
 
