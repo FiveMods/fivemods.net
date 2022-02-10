@@ -220,5 +220,6 @@
         "no-income" => "There is no current income.", // There is no current income.
         "purchased-items" => "Purchased Items", // Purchased Items
         "my-uploads" => "My Uploads", // My Uploads
+        "purchase" => "Purchase", // Purchase
     );
 ?>

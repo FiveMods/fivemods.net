@@ -241,5 +241,6 @@
         "no-income" => "Keini Einkünfte", // There is no current income.
         "purchased-items" => "Kaufti Mods", // Purchased Items
         "my-uploads" => "Mini Mods", // My Uploads
+        "purchase" => "Kaufe", // Purchase
     );  
 ?>

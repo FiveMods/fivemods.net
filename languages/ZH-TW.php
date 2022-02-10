@@ -220,6 +220,7 @@
         "no-income" => "現在還沒有收入哦~", // There is no current income.
         "purchased-items" => "已購買項目", // Purchased Items
         "my-uploads" => "我的模組", // My Uploads
+        "purchase" => "購買", // Purchase
 
     );
 ?>

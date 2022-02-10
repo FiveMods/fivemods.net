@@ -214,5 +214,6 @@
         "no-income" => "Det er ingen nåværende inntekt.", // There is no current income.
         "purchased-items" => "Kjøpte gjenstander", // Purchased Items
         "my-uploads" => "Mine Opplastninger", // My Uploads
+        "purchase" => "kjøpe", // Purchase
     );
 ?>
