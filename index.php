@@ -61,8 +61,8 @@ function minifier($code)
     return $code;
 }
 
-include('./helper/lang-confg.php');
-
+//include('./helper/lang-confg.php');
+require_once "languages/US.php";
 // include('./helper/geo-vpn.sub.php');
 
 $favicon = 'https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
@@ -181,7 +181,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
          <meta property="og:description" content="' . $m_desc . '">
          <meta property="og:site_name" content="FiveMods">
          <meta property="og:image" content="' . $imgArray[0] . '">
-      
+
          <meta name="twitter:card" content="summary_large_image">
          <meta name="twitter:site" content="@FiveModsNET">
          <meta name="twitter:title" content="' . $m_name . '">
@@ -479,6 +479,15 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
             }
             ?>
         </div>
+        <div id="684841532">
+            <script type="text/javascript">
+                try {
+                    window._mNHandle.queue.push(function() {
+                        window._mNDetails.loadTag("684841532", "160x600", "684841532");
+                    });
+                } catch (error) {}
+            </script>
+        </div>
     </main>
 
     <?php
@@ -548,8 +557,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     if ($_GET['cc'] == "manage") {
         echo '<script>
       $(document).ready(function(){
-         jQuery.noConflict(); 
-         $(\'#cCM\').modal(\'show\'); 
+         jQuery.noConflict();
+         $(\'#cCM\').modal(\'show\');
       });
    </script>';
     }
