@@ -30,8 +30,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             START=`date +"%T"`
-            cd /var/www/fivemods/html
-            git pull https://${{ secrets.TOKEN }}@github.com/FiveMods/fivemods.net.git master
+            $echo ${{ secrets.T_PASSWORD }} | sudo -S cd /var/www/fivemods/html && git pull https://${{ secrets.TOKEN }}@github.com/FiveMods/fivemods.net.git master
             END=`date +"%T"`
             COMMIT=`git log -n 1 | grep -e "commit" | awk '{ print $2 }'`
             GHUSER=`git log -n 1 | grep -e "Author" | cut -d " " -f 2`
