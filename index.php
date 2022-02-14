@@ -146,6 +146,8 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
 
+    <meta name="csrfValidate" content="<?php echo $_SESSION['csrfValidate']; ?>">
+
 
     <?php
 

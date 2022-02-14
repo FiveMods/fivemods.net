@@ -50,6 +50,12 @@ if (isset($_SESSION['downloadMod'])) {
     unset($_SESSION['downloadMod']);
 }
 
+// Generate csrf token validation
+$csrfValidate = openssl_random_pseudo_bytes(24);
+$csrfValidate = bin2hex($csrfValidate);
+
+$_SESSION['csrfValidate'] = $csrfValidate;
+echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</script>';
 
 ?>
 <style>
@@ -222,23 +228,26 @@ if (isset($_SESSION['downloadMod'])) {
 
                     <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
-                            <a href="https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener">
+                            <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener">
                                 <img class="card-img-top img-fluid cover rounded" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-30,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://ext-cdn.fivemods.net/img/zUHbFwgS9Zv7PsAk.png" alt="Advert-Image">
 
                             </a>
                             <div class="card-body">
-                                <a href="https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener" class="<?php echo $css_text ?>">
+                                <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener" class="<?php echo $css_text ?>">
                                     <h5 class="card-topic">SmartFires - London Studios</h5>
                                 </a>
                                 <p class="card-text">SmartFires is a standalone Fire Script with a ton of features, including automatic fires and much more! Get it now.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <form action="https://store.londonstudios.net/fivemods" method="post">
+                                        <form action="/ref/" method="get">
+                                            <input type="hidden" name="csrfValidate" value="<?php echo $_SESSION['csrfValidate']; ?>">
+                                            <input type="hidden" name="add" value="track">
+                                            <input type="hidden" name="rel" value="<?php echo urlencode("https://store.londonstudios.net/fivemods"); ?>">
                                             <button type="submit" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></button>
                                         </form>
                                         <!-- <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button> -->
                                     </div>
-                                    <small class="text-muted">sponsored by <a href="https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener"><b>London Studios</b></a></small>
+                                    <small class="text-muted">sponsored by <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener"><b>London Studios</b></a></small>
                                 </div>
                             </div>
                         </div>
