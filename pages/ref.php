@@ -35,7 +35,7 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
 
         header('location: ' . $_GET['rel']);
     }
-} else {
+}
 
     if (isset($_GET['rdc'])) {
 
@@ -146,7 +146,6 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
         $array = explode(".", $host_with_subdomain);
         return (array_key_exists(count($array) - 2, $array) ? $array[count($array) - 2] : "") . "." . $array[count($array) - 1];
     }
-}
 
 
 ?>
