@@ -239,12 +239,7 @@ echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</scri
                                 <p class="card-text">Smart Defib is a realistic public defibrillator system that will enhance the revival system on your server. Get it now.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <form action="/ref/" method="get">
-                                            <input type="hidden" name="csrfValidate" value="<?php echo $_SESSION['csrfValidate']; ?>">
-                                            <input type="hidden" name="add" value="track">
-                                            <input type="hidden" name="rel" value="<?php echo urlencode("https://store.londonstudios.net/fivemods"); ?>">
-                                            <button type="submit" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></button>
-                                        </form>
+                                        <a href ="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" rel="noreferrer noopener" target="_blank" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></a>
                                         <!-- <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button> -->
                                     </div>
                                     <small class="text-muted">sponsored by <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener"><b>London Studios</b></a></small>
