@@ -148,7 +148,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
     <meta name="csrfValidate" content="<?php echo $_SESSION['csrfValidate']; ?>">
 
-
     <?php
 
     if (strpos($actual_link, 'product') != FALSE) {
@@ -290,7 +289,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     <meta name="apple-mobile-web-app-status-bar-style" content="#FF8637" />
 
     <meta name="stage" content="live" />
-    <meta name="version" content="v1.2.6.5-stable" />
+    <meta name="version" content="v<?php $version = 810 + shell_exec('cd /var/www/fivemods/html/ && git rev-list --count master'); $p1 = substr($version,-2); echo "1.6.".$p1; ?>-sr-php" />
 
     <meta name="DC.Language" content="en" />
     <meta name="DC.Creator" content="FiveMods" />
