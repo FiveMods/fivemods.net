@@ -25,9 +25,9 @@
                   </a>
                   <hr style="background-color:#605f62;margin-right:25%;margin-top:10%;">
                   <address class="color-light-20 mt-4">
-                     <a href="/contact/" style="color:lightgray;">Contact us.</a>
+                     <a href="/contact/" style="color:lightgray;">Contact us here</a>
                   </address>
-                  <small style="color:#605f62;">Live, <span style="color: gray;">running v<?php $version = 810 + shell_exec('cd /var/www/fivemods/html/ && git rev-list --count master'); $p1 = substr($version,0,strlen($version)-4); $p2 = substr($version,0,strlen($version)-3); $p3 = substr($version,-2); echo $p1.".".$p2.".".$p3; ?></span></small>
+                  <small style="color:#605f62;">Live, <span style="color: gray;">running v<?php $version = 810 + shell_exec('cd /var/www/fivemods/html/ && git rev-list --count master'); $p1 = substr($version,strlen($version)-4); $p2 = substr($version,strlen($version)-3); $p3 = substr($version,-2); echo $p1.".".$p2.".".$p3; ?></span></small>
                </div>
                <div class="col-xs-6 col-sm-3">
                   <h4 class="my-2"><?php echo $lang['about-us']; ?></h4>
