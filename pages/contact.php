@@ -25,13 +25,9 @@
             <p>
                <a href="mailto://contact@fivemods.net">contact@fivemods.net</a>
             </p>
-            <p><strong><?php echo $lang['complaint'];?>?</strong></p>
-            <p>
-               <a href="mailto://complaint@fivemods.net?subject=General%20or%20legal%20complaint%20%7C%20SID%3A%20<?php echo session_id();?>">complaint@fivemods.net</a>
-            </p>
             <p><strong><?php echo $lang['privacy-manager'];?>:</strong></p>
             <p>
-               <a href="mailto:privacy@fivemods.net?subject=General%20privacy%20issue%20%7C%20SID%3A<?php echo session_id();?>">privacy@fivemods.net</a>
+               <a href="mailto:data-protection@fivemods.net?subject=General%20privacy%20issue%20%7C%20SID%3A<?php echo session_id();?>">data-protection@fivemods.net</a>
             </p>
          </div>
          <?php
