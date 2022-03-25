@@ -229,14 +229,14 @@ echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</scri
                     <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
                             <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener">
-                                <img class="card-img-top img-fluid cover rounded" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-30,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://ext-cdn.fivemods.net/img/KtxfBW0FcXO8wgCH.png" alt="Advert-Image">
+                                <img class="card-img-top img-fluid cover rounded" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-30,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://ext-cdn.fivemods.net/img/InTpwfRBzkVScZWL.png" alt="Advert-Image">
 
                             </a>
                             <div class="card-body">
                                 <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener" class="<?php echo $css_text ?>">
-                                    <h5 class="card-topic">Smart Defib - London Studios</h5>
+                                    <h5 class="card-topic">SmartDrone - London Studios</h5>
                                 </a>
-                                <p class="card-text">Smart Defib is a realistic public defibrillator system that will enhance the revival system on your server. Get it now.</p>
+                                <p class="card-text">SmartDrone is a realistic drone resource with a live camera, search light & two drones included. Improve your roleplay, get it now.</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a href ="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" rel="noreferrer noopener" target="_blank" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></a>
