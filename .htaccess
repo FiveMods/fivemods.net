@@ -34,6 +34,31 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME}.php !-f
 
+RewriteCond %{HTTP_HOST} fivemods\.net$
+RewriteCond %{REQUEST_URI} ^\/legal\/$
+RewriteRule .* https://fivemods.org/legal/$1 [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/terms\-of\-service\/$
+RewriteRule .* https://fivemods.org/legal/terms-of-service/ [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/privacy\-policy\/$
+RewriteRule .* https://fivemods.org/legal/privacy-policy/ [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/legal\-notice\/$
+RewriteRule .* https://fivemods.org/legal/impressum/ [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/cookie\-consent\/$
+RewriteRule .* https://fivemods.org/legal/cookie-policy/ [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/upload\-policy\/$
+RewriteRule .* https://fivemods.org/legal/upload-policy/ [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/account\-policy\/$
+RewriteRule .* https://fivemods.org/legal/account-policy/ [NE,R=301,L]
+
+RewriteCond %{REQUEST_URI} ^\/legal\/payment\-agreement\/$
+RewriteRule .* https://fivemods.org/legal/payment-agreement/ [NE,R=301,L]
+
 # Account rdc. 
 RewriteRule ^(account*/)$ ./index.php?page=$1 [L,QSA]
 
