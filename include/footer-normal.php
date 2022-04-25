@@ -21,12 +21,10 @@
             <div class="row">
                <div class="col-xs-6 col-sm-3">
                   <a href="/">
-                     <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_white_280x100.svg" loading="lazy" alt="fivemods_brand_text_primary_white_280x100_footer_normal" width="112px" height="40px">
+                     <img src="https://s3.fivemods.net/assets/polarylabs/branding/polary_labs_main_brand_logo_light.svg" loading="lazy" alt="polarylabs branding" height="70px">
                   </a>
-                  <hr style="background-color:#605f62;margin-right:25%;margin-top:10%;">
-                  <address class="color-light-20 mt-4">
-                     <a href="/contact/" style="color:lightgray;">Contact us here</a>
-                  </address>
+                   <br>
+                   <br>
                   <small style="color:#605f62;">Live, <span style="color: gray;">running v<?php $version = 810 + shell_exec('cd /var/www/fivemods/html/ && git rev-list --count master'); $p1 = substr($version,-2); echo "1.6.".$p1; ?></span></small>
                </div>
                <div class="col-xs-6 col-sm-3">
