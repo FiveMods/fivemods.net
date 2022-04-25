@@ -20,7 +20,7 @@
          <div class="container">
             <div class="row">
                <div class="col-xs-6 col-sm-3">
-                  <a href="/">
+                  <a href="https://polarylabs.com">
                      <img src="https://s3.fivemods.net/assets/polarylabs/branding/polary_labs_main_brand_logo_light.svg" loading="lazy" alt="polarylabs branding" height="70px">
                   </a>
                    <br>
