@@ -40,7 +40,7 @@
         "legal-notice" => "Legal notice",
         "cookie-consent" => "Cookie consent",
         "status" => "Status",
-        "footer-subtext" => "FiveMods is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved",
+        "footer-subtext" => "FiveMods is part of Polary Labs. FiveMods is not affiliated with Rockstar Games, Rockstar North, GTA5, Take-Two Interactive, FiveM or the CitizenFX Collective. Legal information are listed in the Terms of Service and Legal Notice.<br>All gamecontent and trademarks are the property of their respective owners - all rights reserved",
         "download" => "Download",
         "download-now" => "Download now",
         "submit" => "Submit",
