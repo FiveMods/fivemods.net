@@ -4,6 +4,8 @@
 RedirectMatch 403 ^/config.php$
 RedirectMatch 403 ^/account/config.php$
 RedirectMatch 403 ^/pages/account/config.php$
+RedirectMatch 403 ^/.git/?$
+RedirectMatch 403 /\.git
 
 RewriteEngine on
 RewriteCond %{HTTP:VIA}                 !^$ [OR]
@@ -59,14 +61,14 @@ RewriteRule .* https://fivemods.org/legal/account-policy/ [NE,R=301,L]
 RewriteCond %{REQUEST_URI} ^\/legal\/payment\-agreement\/$
 RewriteRule .* https://fivemods.org/legal/payment-agreement/ [NE,R=301,L]
 
-# Account rdc. 
+# Account rdc.
 RewriteRule ^(account*/)$ ./index.php?page=$1 [L,QSA]
 
-# Account - Edit rdc. 
+# Account - Edit rdc.
 RewriteRule ^(account/edit*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/edit*)$ ./index.php?page=$1 [L,QSA]
 
-# Publish 
+# Publish
 RewriteRule ^(publish/([a-zA-Z0-9-/]+)/)$ ./publish.php?case=$1 [L,QSA]
 RewriteRule ^(publish/([a-zA-Z0-9-/]+))$ ./publish.php?case=$1 [L,QSA]
 
@@ -90,7 +92,7 @@ RewriteRule ^(account/check*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/factor-control*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/factor-control*)$ ./index.php?page=$1 [L,QSA]
 
-# Account - Sign In / Login rdc. 
+# Account - Sign In / Login rdc.
 RewriteRule ^(account/sign-in*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/sign-in*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/login*/)$ ./account/sign-in/ [L,QSA]
@@ -100,7 +102,7 @@ RewriteRule ^(sign-in*)$ ./account/sign-in [L,QSA]
 RewriteRule ^(login*/)$ ./account/sign-in/ [L,QSA]
 RewriteRule ^(login*)$ ./account/sign-in [L,QSA]
 
-# Account - Sign Up / Register rdc. 
+# Account - Sign Up / Register rdc.
 RewriteRule ^(account/sign-up*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/sign-up*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/register*/)$ ./account/sign-up/ [L,QSA]
@@ -110,35 +112,35 @@ RewriteRule ^(sign-up*)$ ./account/sign-up [L,QSA]
 RewriteRule ^(register*/)$ ./account/sign-up/ [L,QSA]
 RewriteRule ^(register*)$ ./account/sign-up [L,QSA]
 
-# Discord rdc. 
+# Discord rdc.
 RewriteRule ^(discord*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(discord*)$ ./index.php?page=$1 [L,QSA]
 
-# Account - Settings rdc. 
+# Account - Settings rdc.
 RewriteRule ^(account/settings*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/settings*)$ ./index.php?page=$1 [L,QSA]
 
-# Account - Delete rdc. 
+# Account - Delete rdc.
 RewriteRule ^(account/delete*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/delete*)$ ./index.php?page=$1 [L,QSA]
 
-# Account - 2FA rdc. 
+# Account - 2FA rdc.
 RewriteRule ^(account/two-factor-authentication*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(account/two-factor-authentication*)$ ./index.php?page=$1 [L,QSA]
 
-# Language rdc. 
+# Language rdc.
 RewriteRule ^(language*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(language*)$ ./index.php?page=$1 [L,QSA]
 
-# Impressum rdc. 
+# Impressum rdc.
 RewriteRule ^(impressum*/)$ /legal/imprint/ [L,QSA]
 RewriteRule ^(impressum*)$ /legal/imprint/ [L,QSA]
 
-# About rdc. 
+# About rdc.
 RewriteRule ^(about-us*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(about-us*)$ ./index.php?page=$1 [L,QSA]
 
-# Legal rdc. 
+# Legal rdc.
 RewriteRule ^(legal*/)$ ./index.php?page=$1 [L,QSA]
 
 # Legal Privacy rdc.
@@ -173,7 +175,7 @@ RewriteRule ^(legal/cookie-consent*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/terms-of-service*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(legal/terms-of-service*)$ ./index.php?page=$1 [L,QSA]
 
-# Payment rdc. 
+# Payment rdc.
 RewriteRule ^(payment*/)$ ./index.php?page=$1 [L,QSA]
 
 # Payment Missing Information rdc.
@@ -192,54 +194,54 @@ RewriteRule ^(payment/checkout*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/deposit*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(payment/deposit*)$ ./index.php?page=$1 [L,QSA]
 
-# Invite rdc. 
+# Invite rdc.
 RewriteRule ^(invite*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(invite*)$ ./index.php?page=$1 [L,QSA]
 
-# Logout rdc. 
+# Logout rdc.
 RewriteRule ^(logout*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(logout*)$ ./index.php?page=$1 [L,QSA]
 
-# Contact rdc. 
+# Contact rdc.
 RewriteRule ^(contact*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(contact*)$ ./index.php?page=$1 [L,QSA]
 
-# Cookie Consent rdc. 
+# Cookie Consent rdc.
 RewriteRule ^(cookie-consent*/)$ /legal/cookie-consent/ [L,QSA]
 RewriteRule ^(cookie-consent*)$ /legal/cookie-consent/ [L,QSA]
 
-# Famous Creator rdc. 
+# Famous Creator rdc.
 RewriteRule ^(famous-creator*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(famous-creator*)$ ./index.php?page=$1 [L,QSA]
 
-# Help Center rdc. 
+# Help Center rdc.
 RewriteRule ^(help-center*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(help-center*)$ ./index.php?page=$1 [L,QSA]
 
-# Payment Agreement rdc. 
+# Payment Agreement rdc.
 RewriteRule ^(payment-agreement*/)$ /legal/payment-agreement/ [L,QSA]
 RewriteRule ^(payment-agreement*)$ /legal/payment-agreement/ [L,QSA]
 
 RewriteRule ^(payment-policy*/)$ /legal/payment-agreement/ [L,QSA]
 RewriteRule ^(payment-policy*)$ /legal/payment-agreement/ [L,QSA]
 
-# Legal Notice rdc. 
+# Legal Notice rdc.
 RewriteRule ^(legal-notice*/)$ /legal/legal-notice/ [L,QSA]
 RewriteRule ^(legal-notice*)$ /legal/legal-notice/ [L,QSA]
 
-# Partner Program rdc. 
+# Partner Program rdc.
 RewriteRule ^(partner-program*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(partner-program*)$ ./index.php?page=$1 [L,QSA]
 
-# Privacy Policy rdc. 
+# Privacy Policy rdc.
 RewriteRule ^(privacy-policy*/)$ /legal/privacy-policy/ [L,QSA]
 RewriteRule ^(privacy-policy*)$ /legal/privacy-policy/ [L,QSA]
 
-# Upload Policy rdc. 
+# Upload Policy rdc.
 RewriteRule ^(upload-policy*/)$ /legal/upload-policy/ [L,QSA]
 RewriteRule ^(upload-policy*)$ /legal/upload-policy/ [L,QSA]
 
-# Account Policy rdc. 
+# Account Policy rdc.
 RewriteRule ^(account-policy*/)$ /legal/account-policy/ [L,QSA]
 RewriteRule ^(account-policy*)$ /legal/account-policy/ [L,QSA]
 
@@ -249,38 +251,38 @@ RewriteRule ^(product*)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(product*/([a-zA-Z0-9-/]+)/)$ ./index.php?page=$1&id=$2 [L,QSA]
 RewriteRule ^(product*/([a-zA-Z0-9-/]+))$ ./index.php?page=$1&id=$2 [L,QSA]
 
-# Ref rdc. 
+# Ref rdc.
 RewriteRule ^(ref*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(ref*)$ ./index.php?page=$1 [L,QSA]
 
-# Search rdc. 
+# Search rdc.
 RewriteRule ^(search*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(search*)$ ./index.php?page=$1 [L,QSA]
 
 RewriteRule ^(search*/([a-zA-Z0-9-/]+)/site*/([a-zA-Z0-9-/]+)/)$ ./index.php?page=$1&query=$2&site=$3&submit-search=$4 [L,QSA]
 RewriteRule ^(search*/([a-zA-Z0-9-/]+)/site*/([a-zA-Z0-9-/]+))$ ./index.php?page=$1&query=$2&site=$3&submit-search=$4 [L,QSA]
 
-# Status rdc. 
+# Status rdc.
 RewriteRule ^(status*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(status*)$ ./index.php?page=$1 [L,QSA]
 
-# Terms Of Service rdc. 
+# Terms Of Service rdc.
 RewriteRule ^(terms-of-service*/)$ /legal/terms-of-service/ [L,QSA]
 RewriteRule ^(terms-of-service*)$ /legal/terms-of-service/ [L,QSA]
 
-# Upload rdc. 
+# Upload rdc.
 RewriteRule ^(upload*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(upload*)$ ./index.php?page=$1 [L,QSA]
 
-# Upload2 rdc. 
+# Upload2 rdc.
 RewriteRule ^(upload2*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(upload2*)$ ./index.php?page=$1 [L,QSA]
 
-# Affiliate rdc. 
+# Affiliate rdc.
 RewriteRule ^(affiliate*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(affiliate*)$ ./index.php?page=$1 [L,QSA]
 
-# Advertisement rdc. 
+# Advertisement rdc.
 RewriteRule ^(advertisement*/)$ ./index.php?page=$1 [L,QSA]
 RewriteRule ^(advertisement*)$ ./index.php?page=$1 [L,QSA]
 
