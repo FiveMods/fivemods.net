@@ -329,7 +329,7 @@ $articles = $articles->fetchAll(PDO::FETCH_ASSOC);
          }
 
          if ($username == "LondonStudios") {
-            echo ' - <small><a href="/publish/'.$username.'" style="color: #444;" title="View publishing permission">View PA</a></small>';
+            echo ' - <small><a href="/publish/'.$username.'" style="color: #444;" title="View publishing permission">Publishing permission</a></small>';
          }
          
          if (!$blocked == 1) {

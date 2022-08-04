@@ -18,13 +18,14 @@ function minifier($code)
 }
 
 if (strpos($_GET['case'], "LondonStudios") !== false) {
-    $case = "LondonStudios";
-    if ($case == "LondonStudios") {
+    $case = "London Studios";
+    if ($case == "London Studios") {
         $pTime = "-";
         $pDate = "03/31/2021";
         $pCase = "FiveMods reached out to the FiveM content creator Marcus, known as LondonStudios. We have contacted him to upload his free mods to FiveMods on request. With the requirement that the website is free and the mods are not sold, he gave us his consent, see attachment / proof.";
         $pProof = "https://cdn.discordapp.com/attachments/662762008504041522/845266910518050856/marcusproof.png";
         $pAcc = "FiveMods Management";
+        $caseURI = "LondonStudios";
     }
 } else {
     header('location: /');
@@ -66,7 +67,7 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
     <meta property="og:url" content="https://fivemods.net/publish/londonstudios">
     <meta property="og:title" content="Publishing permission <?php echo $case; ?> - FiveMods">
     <meta property="og:description" content="Publishing permission <?php echo $case; ?> - FiveMods">
-    <meta property="og:site_name" content="4Publishing permission <?php echo $case; ?> - FiveMods">
+    <meta property="og:site_name" content="Publishing permission <?php echo $case; ?> - FiveMods">
     <meta property="og:image" content="https://assets.fivemods.net/static-assets/img/svg/error/fivemods_error_401.svg">
     <meta name="theme-color" content="#ff8637">
     <meta name="msapplication-navbutton-color" content="#ff8637">
@@ -304,7 +305,7 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
                     <p class="fmAdjP"><u>Additional information:</u><br>
                     Date: <?php echo $pDate; ?>
                     <br>
-                    Creator: <a href="/user/<?php echo $case; ?>"><?php echo $case; ?></a>
+                    Creator: <a href="/user/<?php echo $caseURI; ?>"><?php echo $caseURI; ?></a>
                     <br>
                     Account: <?php echo $pAcc; ?>
                     </p>

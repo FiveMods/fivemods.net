@@ -24,7 +24,7 @@ $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servernam
 
 // User input
 $site = (int)isset($_GET['site']) ? (int)$_GET['site'] : 1;
-$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
+$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 24;
 
 // Positioning
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
@@ -55,7 +55,7 @@ $csrfValidate = openssl_random_pseudo_bytes(24);
 $csrfValidate = bin2hex($csrfValidate);
 
 $_SESSION['csrfValidate'] = $csrfValidate;
-echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</script>';
+echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</script>';
 
 ?>
 <style>
@@ -160,6 +160,42 @@ echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</scri
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card container-img rounded shadow1">
+                                            <a href="https://store.londonstudios.net/fivemods">
+                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-140,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://i.ibb.co/4JRSY52/Copy-of-Base-Design.png">
+                                                <div class="text-block">
+                                                    <h4>London Studios</h4>
+                                                </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card container-img rounded shadow1">
+                                            <a href="/discord/">
+                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/https://www.techniknews.net/wp-content/uploads/2021/07/discord-logo-header.jpg">
+                                                <div class="text-block">
+                                                    <h4>Our Discord</h4>
+                                                </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card container-img rounded shadow1">
+                                            <a href="/upload/">
+                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/https://s3.fivemods.net/assets/upload_logo_primary.png">
+                                                <div class="text-block">
+                                                    <h4>Upload Mod</h4>
+                                                </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -195,10 +231,10 @@ echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</scri
                         <i class="fas fa-sort-numeric-down"></i>
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="?max=12">12</a>
-                        <a class="dropdown-item" href="?max=24">24</a>
-                        <a class="dropdown-item" href="?max=48">48</a>
-                        <a class="dropdown-item" href="?max=96">96</a>
+                        <a class="dropdown-item" href="?max=12">Show <b>12</b> entries</a>
+                        <a class="dropdown-item" href="?max=24">Show <b>24</b> entries</a>
+                        <a class="dropdown-item" href="?max=48">Show <b>48</b> entries</a>
+                        <a class="dropdown-item" href="?max=96">Show <b>96</b> entries</a>
                     </div>
                 </div>
             </div>
@@ -224,30 +260,30 @@ echo '<script>console.log("CSRF validate: '.$_SESSION['csrfValidate'].'");</scri
                     if ($article['m_approved'] != "0" || $article['m_blocked'] != "0") {
                         continue;
                     }
-                    if(($i % 6) == 0): ?>
+                    if (($i % 12) == 0) : ?>
 
-                    <div class="col-md-4 d-flex align-items-stretch">
-                        <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
-                            <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener">
-                                <img class="card-img-top img-fluid cover rounded" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-30,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://media.discordapp.net/attachments/826871170628452372/1001881485525135390/Star-Chase.png?width=1202&height=676" alt="Advert-Image">
+                        <div class="col-md-4 d-flex align-items-stretch">
+                            <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
+                                <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener">
+                                    <img class="card-img-top img-fluid cover rounded" loading="lazy" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-30,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://media.discordapp.net/attachments/826871170628452372/1001881485525135390/Star-Chase.png?width=1202&height=676" alt="Advert-Image">
 
-                            </a>
-                            <div class="card-body">
-                                <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener" class="<?php echo $css_text ?>">
-                                    <h5 class="card-topic">Star Chase - London Studios</h5>
                                 </a>
-                                <p class="card-text">Deploy GPS trackers onto target vehicles during high-speed pursuits. Bring your police department to the next level with Star Chase.</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a href ="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" rel="noreferrer noopener" target="_blank" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></a>
-                                        <!-- <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button> -->
+                                <div class="card-body">
+                                    <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener" class="<?php echo $css_text ?>">
+                                        <h5 class="card-topic">Star Chase - London Studios</h5>
+                                    </a>
+                                    <p class="card-text">Deploy GPS trackers onto target vehicles during high-speed pursuits. Bring your police department to the next level with Star Chase.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" rel="noreferrer noopener" target="_blank" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></a>
+                                            <!-- <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button> -->
+                                        </div>
+                                        <small class="text-muted">sponsored by <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener"><b>London Studios</b></a></small>
                                     </div>
-                                    <small class="text-muted">sponsored by <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener"><b>London Studios</b></a></small>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                  <?php endif; ?>
+                    <?php endif; ?>
                     <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
                             <a href="/product/<?php echo $article['m_id']; ?>/">

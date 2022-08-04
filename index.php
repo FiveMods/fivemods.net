@@ -61,7 +61,7 @@ function minifier($code)
     return $code;
 }
 
-//include('./helper/lang-confg.php');
+// include('./helper/lang-confg.php');
 require_once "languages/US.php";
 // include('./helper/geo-vpn.sub.php');
 
@@ -274,9 +274,9 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     <meta name="department" content="legal" />
     <meta name="audience" content="all" />
     <meta name="author" content="FiveMods" />
-    <meta name="publisher" content="FiveMods" />
-    <meta name="organisation" content="FiveMods" />
-    <meta name="copyright" content="Copyright (c) 2020-2021 FiveMods" />
+    <meta name="publisher" content="Polary Labs" />
+    <meta name="organisation" content="Polary Labs" />
+    <meta name="copyright" content="Copyright (c) 2020-<?php echo date('Y'); ?> FiveMods" />
     <meta name="generator" content="Atom, Visual Studio Code" />
     <meta name="coverage" content="Worldwide">
 
@@ -299,18 +299,18 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     <?php
     if (!empty($_COOKIE['fm_design'])) {
         if ($_COOKIE['fm_design'] == "dark") {
-            echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css-dark/style.css">';
+            echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css-dark/style.css?v=<?php echo time(); ?>">';
             $css_text = 'text text-muted';
             $darkmode = 'bg-dark';
         } elseif ($_COOKIE['fm_design'] == "normal") {
-            echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
+            echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css?v=<?php echo time(); ?>">';
             $css_text = 'text text-muted';
         } elseif (empty($_COOKIE['fm_design'])) {
-            echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css">';
+            echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css?v=<?php echo time(); ?>">';
             $css_text = 'text text-muted';
         }
     } else {
-        echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css?v=' . time() . '">';
+        echo '<link rel="stylesheet" id="pagestyle" href="/static-assets/css/style.css?v=<?php echo time(); ?>">';
         $css_text = 'text text-muted';
     }
     ?>
@@ -327,16 +327,18 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
     <link rel="apple-touch-icon" sizes="152x152" href="https://img-cdn.fivemods.net/unsafe/152x152/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="https://img-cdn.fivemods.net/unsafe/180x180/filters:format(webp):quality(95)/https://assets.fivemods.net/static-assets/img/svg/brand/png/fivemods_brand_icon_watermark_primary.png" />
 
-    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/style-adj.css">
-    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/logo-animation.css">
-    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/index.css">
+    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/style-adj.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/logo-animation.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="https://assets.fivemods.net/static-assets/css/index.css?v=<?php echo time(); ?>">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css?v=<?php echo time(); ?>">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/css/flag-icon.min.css?v=<?php echo time(); ?>" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.min.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css?v=<?php echo time(); ?>" integrity="sha512-Velp0ebMKjcd9RiCoaHhLXkR1sFoCCWXNp6w4zj1hfMifYB5441C+sKeBl/T/Ka6NjBiRfBBQRaQq65ekYz3UQ==" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 
     <script type="text/javascript">
         var infolinks_pid = 3332544;
@@ -367,14 +369,6 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
             api_host: 'https://app.posthog.com'
         })
     </script>
-
-
-    <script type="text/javascript">
-        window._mNHandle = window._mNHandle || {};
-        window._mNHandle.queue = window._mNHandle.queue || [];
-        medianet_versionId = "3121199";
-    </script>
-    <script src="https://contextual.media.net/dmedianet.js?cid=8CUTWJ28J" async="async"></script>
 
     <script>
         function swapStyleSheet(sheet) {

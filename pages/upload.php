@@ -17,6 +17,9 @@
 </div>
 <?php
 session_start();
+if (empty($_COOKIE['f_val']) || empty($_COOKIE['f_key'])) {
+    header("Location: /account/sign-in/");
+} 
 include('./include/header-banner.php');
 ?>
 <link rel="stylesheet" href="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569006288/BBBootstrap/choices.min.css?version=7.0.0">
