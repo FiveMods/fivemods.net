@@ -15,49 +15,69 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
         header('location: /');
         die("CSRF validation failed!");
         exit();
-
     } else {
 
-        $campaign = "London Studios";
+        if ($_GET['campaign'] == "LondonStudiosCategoryAdBanner") {
+            $campaign = "London Studios Category";
 
-        $select = $pdo->query("SELECT * FROM ad_tracking WHERE campaign = '$campaign'")->fetchAll();
-        foreach ($select as $row) {
-            $click = $row['click'];
+            $select = $pdo->query("SELECT * FROM ad_tracking WHERE campaign = '$campaign'")->fetchAll();
+            foreach ($select as $row) {
+                $click = $row['click'];
+            }
+            $select = null;
+
+            $click = $click + 1;
+
+
+            $insert = $pdo->prepare("UPDATE ad_tracking SET click=? WHERE campaign=?");
+            $insert->execute([$click, $campaign]);
+            $insert = null;
+
+            header('location: ' . $_GET['rel']);
+
+        } else {
+
+            $campaign = "London Studios";
+
+            $select = $pdo->query("SELECT * FROM ad_tracking WHERE campaign = '$campaign'")->fetchAll();
+            foreach ($select as $row) {
+                $click = $row['click'];
+            }
+            $select = null;
+
+            $click = $click + 1;
+
+
+            $insert = $pdo->prepare("UPDATE ad_tracking SET click=? WHERE campaign=?");
+            $insert->execute([$click, $campaign]);
+            $insert = null;
+
+            header('location: ' . $_GET['rel']);
         }
-        $select = null;
-
-        $click = $click + 1;
-
-
-        $insert = $pdo->prepare("UPDATE ad_tracking SET click=? WHERE campaign=?");
-        $insert->execute([$click, $campaign]);
-        $insert = null;
-
-        header('location: ' . $_GET['rel']);
     }
 }
 
-    if (isset($_GET['rdc'])) {
+if (isset($_GET['rdc'])) {
 
-        $ref = urldecode($_GET['rdc']);
+    $ref = urldecode($_GET['rdc']);
 
-        $suburl = getHost($ref);
-        $url = giveHost($suburl);
+    $suburl = getHost($ref);
+    $url = giveHost($suburl);
 
-        $stmt = $conn->prepare("SELECT marked_links FROM links WHERE marked_links LIKE ?");
-        $stmt->bind_param("s", $url);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    $stmt = $conn->prepare("SELECT marked_links FROM links WHERE marked_links LIKE ?");
+    $stmt->bind_param("s", $url);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while ($row = $result->fetch_assoc()) {
-                $link = $row['marked_links'];
-            }
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $link = $row['marked_links'];
+        }
 
-            $check = 1;
+        $check = 1;
 
-            $output1 = '<section class="pt-5 pb-5">
+        $output1 = '<section class="pt-5 pb-5">
         <div class="container">
             <div class="row d-flex justify-content-center">
             <div class="col-md-7">
@@ -74,25 +94,25 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
         </div>
         </section>';
 
-            include('./include/header-banner.php');
-            echo $output1;
+        include('./include/header-banner.php');
+        echo $output1;
+    } else {
+
+        if (strpos($ref, 'https://') !== false) {
+            $link = $ref;
         } else {
-
-            if (strpos($ref, 'https://') !== false) {
-                $link = $ref;
+            if (strpos($ref, 'http://') !== false) {
+                $strip = str_replace('http://', '', $ref);
+                $link = 'https://' . $strip;
             } else {
-                if (strpos($ref, 'http://') !== false) {
-                    $strip = str_replace('http://', '', $ref);
-                    $link = 'https://' . $strip;
-                } else {
-                    $link = 'https://' . $ref;
-                }
+                $link = 'https://' . $ref;
             }
+        }
 
 
-            $check = 0;
+        $check = 0;
 
-            $output1 = '<section class="pt-5 pb-5">
+        $output1 = '<section class="pt-5 pb-5">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                 <div class="col-md-7">
@@ -109,12 +129,12 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
             </div>
             </section>';
 
-            include('./include/header-banner.php');
-            echo $output1;
-        }
-    } else {
+        include('./include/header-banner.php');
+        echo $output1;
+    }
+} else {
 
-        $output1 = '<section class="pt-5 pb-5">
+    $output1 = '<section class="pt-5 pb-5">
         <div class="container">
             <div class="row d-flex justify-content-center">
             <div class="col-md-7">
@@ -131,21 +151,21 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
         </div>
         </section>';
 
-        include('./include/header-banner.php');
-        echo $output1;
-    }
+    include('./include/header-banner.php');
+    echo $output1;
+}
 
-    function getHost($Address)
-    {
-        $parseUrl = parse_url(trim($Address));
-        return trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2)));
-    }
+function getHost($Address)
+{
+    $parseUrl = parse_url(trim($Address));
+    return trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2)));
+}
 
-    function giveHost($host_with_subdomain)
-    {
-        $array = explode(".", $host_with_subdomain);
-        return (array_key_exists(count($array) - 2, $array) ? $array[count($array) - 2] : "") . "." . $array[count($array) - 1];
-    }
+function giveHost($host_with_subdomain)
+{
+    $array = explode(".", $host_with_subdomain);
+    return (array_key_exists(count($array) - 2, $array) ? $array[count($array) - 2] : "") . "." . $array[count($array) - 1];
+}
 
 
 ?>

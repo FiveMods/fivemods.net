@@ -115,13 +115,13 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                         </a>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <a href="/search/?query=Weapons&cat=1&submit-search=">
-                                            <div class="card container-img rounded shadow1">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['weapons']; ?>-348px-217px-cover" title="<?php echo $lang['weapons']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://img.gta5-mods.com/q95/images/real-weapons-v-animated/46f77a-20161130020713_1.jpg">
+                                        <div class="card container-img rounded shadow1">
+                                            <a href="/upload/">
+                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/https://s3.fivemods.net/assets/upload_logo_primary.png">
                                                 <div class="text-block">
-                                                    <h4><?php echo $lang['weapons']; ?></h4>
+                                                    <h4>Upload Mod</h4>
                                                 </div>
-                                            </div>
+                                        </div>
                                         </a>
                                     </div>
                                 </div>
@@ -150,10 +150,10 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
-                                            <a href="/search/?query=Scripts&cat=1&submit-search=">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['scripts']; ?>-348px-217px-cover" title="<?php echo $lang['scripts']; ?>" src="https://c4.wallpaperflare.com/wallpaper/579/458/496/computer-unixporn-unix-command-lines-wallpaper-preview.jpg">
+                                            <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&campaign=LondonStudiosCategoryAdBanner&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener">
+                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-140,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://i.ibb.co/4JRSY52/Copy-of-Base-Design.png">
                                                 <div class="text-block">
-                                                    <h4><?php echo $lang['scripts']; ?></h4>
+                                                    <h4>Premium Resources</h4>
                                                 </div>
                                         </div>
                                         </a>
@@ -165,12 +165,22 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
-                                            <a href="https://store.londonstudios.net/fivemods">
-                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:watermark(https://v2-assets.fivemods.net/xFRHEkdM2bvmSUVq.png,-140,40,0,14,50):format(webp):quality(95):sharpen(0.2,0.5,true)/https://i.ibb.co/4JRSY52/Copy-of-Base-Design.png">
+                                            <a href="/search/?query=Scripts&cat=1&submit-search=">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['scripts']; ?>-348px-217px-cover" title="<?php echo $lang['scripts']; ?>" src="https://c4.wallpaperflare.com/wallpaper/579/458/496/computer-unixporn-unix-command-lines-wallpaper-preview.jpg">
                                                 <div class="text-block">
-                                                    <h4>London Studios</h4>
+                                                    <h4><?php echo $lang['scripts']; ?></h4>
                                                 </div>
                                         </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <a href="/search/?query=Weapons&cat=1&submit-search=">
+                                            <div class="card container-img rounded shadow1">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['weapons']; ?>-348px-217px-cover" title="<?php echo $lang['weapons']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://img.gta5-mods.com/q95/images/real-weapons-v-animated/46f77a-20161130020713_1.jpg">
+                                                <div class="text-block">
+                                                    <h4><?php echo $lang['weapons']; ?></h4>
+                                                </div>
+                                            </div>
                                         </a>
                                     </div>
                                     <div class="col-md-4 mb-3">
@@ -179,16 +189,6 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                                 <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/https://www.techniknews.net/wp-content/uploads/2021/07/discord-logo-header.jpg">
                                                 <div class="text-block">
                                                     <h4>Our Discord</h4>
-                                                </div>
-                                        </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <div class="card container-img rounded shadow1">
-                                            <a href="/upload/">
-                                                <img class="img-fluid cover-cat rounded" alt="img_London Studios-348px-217px-cover" title="London Studios" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(95):sharpen(0.2,0.5,true)/https://s3.fivemods.net/assets/upload_logo_primary.png">
-                                                <div class="text-block">
-                                                    <h4>Upload Mod</h4>
                                                 </div>
                                         </div>
                                         </a>
