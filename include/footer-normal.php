@@ -43,7 +43,7 @@
                         <a href="/legal/"><?php echo $lang['legal-notice']; ?></a>
                      </li>
                      <li>
-                        <a href="/status/"><?php echo $lang['status']; ?></a>
+                        <a href="https://status.fivemods.net/"><?php echo $lang['status']; ?></a>
                      </li>
                      <li>
                         <a href="/advertisement/"><?php echo $lang['advertisement']; ?></a>

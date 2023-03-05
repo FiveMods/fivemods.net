@@ -22,7 +22,7 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
     if ($case == "London Studios") {
         $pTime = "-";
         $pDate = "03/31/2021";
-        $pCase = "FiveMods reached out to the FiveM content creator Marcus, known as LondonStudios. We have contacted him to upload his free mods to FiveMods on request. With the requirement that the website is free and the mods are not sold, he gave us his consent, see attachment / proof.";
+        $pCase = "FiveMods has recently made contact with Marcus, also known as LondonStudios, a content creator for FiveM. We reached out to him with the proposition of uploading his free mods to our platform. Marcus consented to our request, under the condition that our website is free and the mods are not sold for profit. We have attached proof of his agreement for your reference.";
         $pProof = "https://cdn.discordapp.com/attachments/662762008504041522/845266910518050856/marcusproof.png";
         $pAcc = "FiveMods Management";
         $caseURI = "LondonStudios";
@@ -300,7 +300,7 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
                 <div>
                     <div class="fmAdjHSP mb-4 pt-4" id="fmHSt"> <a class="navbar-brand mb-3" href="/"> <img src="https://fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_text_primary_gradient_281x100.svg" alt="FiveMods 403 Error Logo" style="height: 40px;"> </a> </div>
                     <h3 class="fmAdH3 mt-5 pt-4">Publishing permission <span style="font-weight: 400;"><?php echo $case; ?></span> </h3>
-                    <p class="fmAdjP"><u>Definition:</u> <br> A publishing permission is a permission between a publisher and a writer or author, to publish original content by the writer or author. This may involve a single written work, or a series of works. In the case of music publishing, the emphasis is not on printed or recorded works.</p>
+                    <p class="fmAdjP"><u>Definition:</u> <br> A publishing permission is an agreement between a publisher and a writer or author that allows for the publication of original content created by the writer or author. This agreement can involve a single piece of writing or a collection of works.</p>
                     <hr>
                     <p class="fmAdjP"><u>Additional information:</u><br>
                     Date: <?php echo $pDate; ?>
@@ -311,7 +311,7 @@ if (strpos($_GET['case'], "LondonStudios") !== false) {
                     </p>
                     <p class="fmAdjP"><u>Case:</u> <br><?php echo $pCase; ?></p>
                     <p class="fmAdjP"><u>Proof:</u> <br> <a href="<?php echo $pProof; ?>"><img src="<?php echo $pProof; ?>" class="img-fluid" width="700px" alt="<?php echo $pProof; ?>"></a> </p>
-                    <p class="fmAdjP"><u>Inquiry:</u> <br> Want to revoke your consent or have concerns? Write us an email to <a href="mailto:contact@fivemods.net">contact@fivemods.net</a> or create a ticket in our <a hreF="/discord">Discord</a>.</p>
+                    <p class="fmAdjP"><u>Inquiry:</u> <br> If you wish to revoke your consent or have any concerns regarding the uploading of your mods to FiveMods, please send us an email at <a href="mailto:contact@fivemods.net">contact@fivemods.net</a> or create a ticket on our <a href="/discord">Discord</a> platform. We are committed to addressing any issues or concerns you may have in a timely and professional manner.</p>
                 </div>
             </div>
             <div class="col-md-3"> </div>

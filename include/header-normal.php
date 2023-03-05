@@ -64,7 +64,7 @@ $currentPage = $_GET['page'];
                         <h5 class="mb-0"><?php echo $lang['all-user']; ?></h5> Interested in our community? Visit our users.
                      </div>
                   </a>
-                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="/status/">
+                  <a class="dropdown-item d-flex flex-nowrap align-items-center px-0 py-3" href="https://status.fivemods.net">
                      <div class="flex-shrink-1 text-center px-2"></div>
                      <div class="pl-0 pr-4">
                         <h5 class="mb-0"><?php echo $lang['status']; ?></h5> Check the FiveM and FiveMods status.

@@ -42,7 +42,7 @@ class geoPlugin {
 
 		global $_SERVER;
 
-		// $ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+		$ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
 
 		// if ($ip == '::1') {
 			// $ip = '85.214.73.93'; // 75.125.190.2 <- amerikanische IP zum Testen //103.246.208.0 Taiwan 

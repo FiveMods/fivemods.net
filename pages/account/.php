@@ -20,6 +20,7 @@
 
 require_once "./config.php";
 $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servername'] . '', '' . $mysql['username'] . '', '' . $mysql['password'] . '');
+$pdoPayment = new PDO('mysql:dbname=' . $mysqlPayment['dbname'] . ';host=' . $mysqlPayment['servername'] . '', '' . $mysqlPayment['username'] . '', '' . $mysqlPayment['password'] . '');
 
 $conn = new mysqli($mysql['servername'], $mysql['username'], $mysql['password'], $mysql['dbname']);
 if ($conn->connect_error) {
@@ -70,6 +71,14 @@ if ($vals['2fa'] == "1" && empty($_SESSION['control_2FA'])) {
 	header('location: /account/two-factor-authentication/');
 }
 
+// create a function that will collect the current balance of a user
+function getBalance($oauth_id, $pdoPayment) {
+	global $pdoPayment;
+	$selVals = $pdoPayment->prepare("SELECT * FROM payment_user WHERE oauth_id = ?");
+	$selVals->execute(array($oauth_id));
+	$vals = $selVals->fetch();
+	return $vals['balance'];
+}
 
 ?>
 <meta http-equiv="refresh" content="1440;url=/account/logout/?url=timeout" />
@@ -373,12 +382,12 @@ h6.mb-0.key:hover {
 						<form action="" method="post">
 							<div class="form-group mb-0">
 								<label class="d-block">Sessions</label>
-								<p class="font-size-sm text-secondary">This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.</p>
+								<p class="font-size-sm text-muted">This is a list of devices that have logged into your account. Revoke any sessions that you do not recognize.</p>
 								<ul class="list-group list-group-sm">
 									<li class="list-group-item has-icon">
 										<div>
-											<h6 class="mb-0 key"><?php echo $city; ?> | <?php echo $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?></h6>
-											<small class="text-muted">Your current session seen in <?php echo $countryName; ?>.</small>
+											<h6 class="mb-0 key"><?php echo $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']); ?></h6>
+											<small class="text-muted">Not you ? Report the issue on <a href="/discord">Discord</a> .</small>
 										</div>
 										<!-- <button class="btn btn-light btn-sm ml-auto" type="button">More info</button> -->
 									</li>
@@ -391,21 +400,25 @@ h6.mb-0.key:hover {
 						<h6><?php echo strtoupper($lang['billing-settings']); ?></h6>
 						<hr>
 						<?php
-						$ch = curl_init();
+						// $ch = curl_init();
 
-                  		$token = $apiToken;
+                  		// $token = $apiToken;
+						
+
+						// curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
+						// curl_setopt($ch, CURLOPT_POST, 1);
+						// curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
+						// curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+						// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						// $response = curl_exec($ch);
+						// curl_close($ch);
+
+						// select from payment db where $userid = $vals['oauth_uid'];
+
 						$userid = $vals['oauth_uid'];
-
-						curl_setopt($ch, CURLOPT_URL, "http://85.214.166.192:8081");
-						curl_setopt($ch, CURLOPT_POST, 1);
-						curl_setopt($ch, CURLOPT_POSTFIELDS, "action=reqBalance&token=$token&uid=$userid");
-						curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
-						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-						$response = curl_exec($ch);
-						curl_close($ch);
 						?>
 						<div class="form-group">
-							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo $response; ?>€</b></label>
+							<label class="d-block mb-0" style="font-size:29px;"><b><?php echo getBalance($userid, $pdoPayment); ?>€</b></label>
 							<div class="small text-muted mb-3"><?php echo $lang['balance-desc']; ?></div>
 						</div>
 						<!-- <label class="d-block mb-0">Payments</label>
@@ -414,9 +427,10 @@ h6.mb-0.key:hover {
 						<label class="d-block mb-0"><?php echo $lang['payout']; ?></label>
 						<small class="text-danger"><?php echo $lang['payout-desc']; ?></small>
 						<br>
+						<br>
 						<?php
-						if (floatval($response) > 10.00)
-							echo '<a href="/payment/payout" class="btn btn-info" type="button"><i class="fab fa-paypal"></i>  ' . $lang['req-payout'] . '</a>';
+						if (floatval(getBalance($userid, $pdoPayment)) > 100.00)
+							echo '<a href="/payment/payout" class="btn btn-info fmround" type="button"><i class="fab fa-paypal"></i>  ' . $lang['req-payout'] . '</a>';
 						else
 							echo '<button class="btn btn-info fmround" disabled><i class="fab fa-paypal"></i>  ' . $lang['req-payout'] . '</button>';
 						?>

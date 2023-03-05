@@ -61,8 +61,8 @@ function minifier($code)
     return $code;
 }
 
-// include('./helper/lang-confg.php');
-require_once "languages/US.php";
+include('./helper/lang-confg.php');
+// require_once "languages/US.php";
 // include('./helper/geo-vpn.sub.php');
 
 $favicon = 'https://assets.fivemods.net/static-assets/img/svg/brand/svg/fivemods_brand_icon_watermark_primary_1500x1500.svg';
@@ -123,6 +123,7 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
                         } ?>">
 
 <head>
+<script data-cfasync="false" src="//d20nuqz94uw3np.cloudfront.net/?zqund=979503"></script>
     <?php
 
     if (!empty($_COOKIE['CONSENT']) || $_COOKIE['statistical'] == 1) {
@@ -132,8 +133,12 @@ if (isset($_COOKIE['f_key']) || isset($_COOKIE['f_val'])) {
 
     if ($_GET['pri'] == "all") {
         include('./include/gStatics.html');
-        echo '<script>console.log("Pri: all");</script>';
+        echo '<script>console.log("Consent: all");</script>';
         echo '<script type="text/javascript" src="http://resources.infolinks.com/js/infolinks_main.js"></script>';
+    }
+
+    if ($_GET['showSession'] == "1") {
+        echo '<script>console.log("Consent: '.$_SESSION['selfselectlang'].'");</script>';
     }
 
     ?>

@@ -24,7 +24,7 @@ $pdo = new PDO('mysql:dbname=' . $mysql['dbname'] . ';host=' . $mysql['servernam
 
 // User input
 $site = (int)isset($_GET['site']) ? (int)$_GET['site'] : 1;
-$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 24;
+$perPage = (int)isset($_GET['max']) && $_GET['max'] <= 100 ? (int)$_GET['max'] : 12;
 
 // Positioning
 $start = ($site > 1) ? ($site * $perPage) - $perPage : 0;
@@ -114,6 +114,16 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                             </div>
                                         </a>
                                     </div>
+                                    <!-- <div class="col-md-4 mb-3">
+                                        <a href="/search/?query=Weapons&cat=1&submit-search=">
+                                            <div class="card container-img rounded shadow1">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['weapons']; ?>-348px-217px-cover" title="<?php echo $lang['weapons']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://img.gta5-mods.com/q95/images/real-weapons-v-animated/46f77a-20161130020713_1.jpg">
+                                                <div class="text-block">
+                                                    <h4><?php echo $lang['weapons']; ?></h4>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div> -->
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
                                             <a href="/upload/">
@@ -131,7 +141,7 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
                                             <a href="/search/?query=Peds&cat=1&submit-search=">
-                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['peds']; ?>-348px-217px-cover" title="<?php echo $lang['peds']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://libertycity.net/uploads/download/gta5_newskins/fulls/an4ttg7sk621gulo1957qdc9u0/15388334076961_32d199-grand-theft-auto-v-screenshot.jpg">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['peds']; ?>-348px-217px-cover" title="<?php echo $lang['peds']; ?>" src="https://img-cdn.fivemods.net/unsafe/filters:format(webp):quality(90):sharpen(1,0.3,true)/https://cdn.shopify.com/s/files/1/0507/3069/6884/articles/unnamed_86cb7024-f1b6-44ff-bfbb-e19d737951e3.jpg">
                                                 <div class="text-block">
                                                     <h4><?php echo $lang['peds']; ?></h4>
                                                 </div>
@@ -158,12 +168,7 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                         </div>
                                         </a>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
+                                    <!-- <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
                                             <a href="/search/?query=Scripts&cat=1&submit-search=">
                                                 <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['scripts']; ?>-348px-217px-cover" title="<?php echo $lang['scripts']; ?>" src="https://c4.wallpaperflare.com/wallpaper/579/458/496/computer-unixporn-unix-command-lines-wallpaper-preview.jpg">
@@ -172,7 +177,13 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                                 </div>
                                         </div>
                                         </a>
-                                    </div>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <div class="carousel-item">
+                                <div class="row">
+
                                     <div class="col-md-4 mb-3">
                                         <a href="/search/?query=Weapons&cat=1&submit-search=">
                                             <div class="card container-img rounded shadow1">
@@ -183,6 +194,18 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                             </div>
                                         </a>
                                     </div>
+
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card container-img rounded shadow1">
+                                            <a href="/search/?query=Scripts&cat=1&submit-search=">
+                                                <img class="img-fluid cover-cat rounded" alt="img_<?php echo $lang['scripts']; ?>-348px-217px-cover" title="<?php echo $lang['scripts']; ?>" src="https://c4.wallpaperflare.com/wallpaper/579/458/496/computer-unixporn-unix-command-lines-wallpaper-preview.jpg">
+                                                <div class="text-block">
+                                                    <h4><?php echo $lang['scripts']; ?></h4>
+                                                </div>
+                                        </div>
+                                        </a>
+                                    </div>
+
                                     <div class="col-md-4 mb-3">
                                         <div class="card container-img rounded shadow1">
                                             <a href="/discord/">
@@ -259,8 +282,9 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
 
                     if ($article['m_approved'] != "0" || $article['m_blocked'] != "0") {
                         continue;
-                    }
-                    if (($i % 12) == 0) : ?>
+                    } ?>
+
+                    <?php if (($i % 6) == 0) : ?>
 
                         <div class="col-md-4 d-flex align-items-stretch">
                             <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
@@ -276,7 +300,6 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" rel="noreferrer noopener" target="_blank" class="btn btn-sm btn-outline-success matomo_download"><?php echo $lang['purchase']; ?></a>
-                                            <!-- <button type="button" class="btn btn-sm btn-success" title="<?php echo number_format($article['m_downloads']); ?> downloads"><?php echo  $donwloads . $suffix; ?> <i class="fas fa-download"></i></button> -->
                                         </div>
                                         <small class="text-muted">sponsored by <a href="/ref/?csrf=<?php echo $_SESSION['csrfValidate']; ?>&add=track&rel=https://store.londonstudios.net/fivemods" target="_blank" rel="noreferrer noopener"><b>London Studios</b></a></small>
                                     </div>
@@ -284,6 +307,7 @@ echo '<script>console.log("CSRF validate: ' . $_SESSION['csrfValidate'] . '");</
                             </div>
                         </div>
                     <?php endif; ?>
+
                     <div class="col-md-4 d-flex align-items-stretch">
                         <div class="card mb-4 shadow-sm rounded shadow1 <?php echo $do; ?>">
                             <a href="/product/<?php echo $article['m_id']; ?>/">

@@ -7,7 +7,6 @@ ini_set('max_execution_time', 300);
 require_once('./config.php');
 
 // session_start();
-
 if (isset($_GET['csrf']) && $_GET['add'] == "track") {
 
     if ($_GET['csrf'] != $_SESSION['csrfValidate']) {
@@ -17,8 +16,14 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
         exit();
     } else {
 
+        $ip = $_SERVER['HTTP_CLIENT_IP'] ? $_SERVER['HTTP_CLIENT_IP'] : ($_SERVER['HTTP_X_FORWARDED_FOR'] ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR']);
+
         if ($_GET['campaign'] == "LondonStudiosCategoryAdBanner") {
             $campaign = "London Studios Category";
+
+            $insertAd = $pdo->prepare("INSERT INTO ads (user_uuid, ad_id, ad_category, ad_campaign, ip) VALUES (?, ?, ?, ?, ?)");
+            $insertAd->execute([$_SESSION['uuid'], rand(), 'TopCatBanner', $campaign, $ip]);
+            $insertAd = null;
 
             $select = $pdo->query("SELECT * FROM ad_tracking WHERE campaign = '$campaign'")->fetchAll();
             foreach ($select as $row) {
@@ -28,7 +33,6 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
 
             $click = $click + 1;
 
-
             $insert = $pdo->prepare("UPDATE ad_tracking SET click=? WHERE campaign=?");
             $insert->execute([$click, $campaign]);
             $insert = null;
@@ -36,8 +40,11 @@ if (isset($_GET['csrf']) && $_GET['add'] == "track") {
             header('location: ' . $_GET['rel']);
 
         } else {
-
             $campaign = "London Studios";
+
+            $insertAd = $pdo->prepare("INSERT INTO ads (user_uuid, ad_id, ad_category, ad_campaign, ip) VALUES (?, ?, ?, ?, ?)");
+            $insertAd->execute([$_SESSION['uuid'], rand(), 'Card', $campaign, $ip]);
+            $insertAd = null;
 
             $select = $pdo->query("SELECT * FROM ad_tracking WHERE campaign = '$campaign'")->fetchAll();
             foreach ($select as $row) {
